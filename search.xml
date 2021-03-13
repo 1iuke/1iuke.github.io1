@@ -41,20 +41,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>C指针</title>
-    <url>/2021/03/13/%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<ol>
-<li><p>*号标识该变量为指针类型，当定义多个指针变量时，在每个指针变量名前面均需要加一个 *，不能省略，否则为非指针变量。</p>
-</li>
-<li><p>在使用已定义好的指针变量时，在变量名前面不能加 *。</p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
     <title>论文&lt;基于脑电的脑机接口迁移学习&gt;</title>
     <url>/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/</url>
-    <content><![CDATA[<p>原文：Transfer Learning for EEG-Based Brain-Computer Interfaces: A Review of Progress Made Since 2016 <link> <a href="https://arxiv.org/abs/2004.06286v4">https://arxiv.org/abs/2004.06286v4</a> </link></p>
+    <content><![CDATA[<p>原文：Transfer Learning for EEG-Based Brain-Computer Interfaces: A Review of Progress Made Since 2016 <link> <a href="https://arxiv.org/abs/2004.06286v4">https://arxiv.org/abs/2004.06286v4</a> </p>
 <p><strong>脑机接口</strong>(BCI)使用户能够使用大脑信号直接与计算机通信。</p>
 <p><strong>脑电</strong>(EEG)是最常见的非侵入性脑机接口(BCI)，对噪声/伪影敏感，且存在受试者/受试者内部的非平稳性。很难建立一个通用的模式识别模型。</p>
 <p><strong>迁移学习</strong>用于减少校准工作量。</p>
@@ -63,7 +52,7 @@
 <h2 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I.Introduction"></a>I.Introduction</h2><p>脑机接口应用：游戏、情绪识别、精神疲劳评估、警觉评估。etc</p>
 <p>BCI类型：<strong>Non-invasive BCIs</strong>；Invasive BCIs；Partially invasive (semi-invasive) BCIs</p>
 <p>本文研究非侵入式BCIs，safety, low cost, and convenience. most popular</p>
-<p><img src="%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0.assets/image-20210215113147980.png" alt="image-20210215113147980"></p>
+<p><img src="/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/image-20210215113147980.png"></p>
 <ol>
 <li><p>Signal acquisition ： Used：wired connections and gel 。Currently, wireless connections and dry electrodes </p>
 </li>
@@ -85,6 +74,109 @@
 <p><strong>EEGNet</strong>。它可以应用于不同的脑机接口范例，用非常有限的数据进行训练，并产生神经生理学上可解释的特征。EEGNet在错误信息系统和事件相关事件的学科内和跨学科分类方面都取得了强劲的成果。</p>
 <h2 id="IV-TL-IN-ERP-BASED-BCIs"><a href="#IV-TL-IN-ERP-BASED-BCIs" class="headerlink" title="IV. TL IN ERP-BASED BCIs"></a>IV. TL IN ERP-BASED BCIs</h2><p>SAN  GAN</p>
 <p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>循环神经网络</title>
+    <url>/2021/03/13/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>线性表</title>
+    <url>/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="1-什么是线性表"><a href="#1-什么是线性表" class="headerlink" title="1.什么是线性表"></a>1.什么是线性表</h1><p>把所有数据用一根线儿串起来，再存储到物理空间中</p>
+<p>根据<strong>数据存储方式</strong>可分为</p>
+<ul>
+<li>顺序表</li>
+<li>链表</li>
+</ul>
+<p><strong>前驱和后继</strong></p>
+<p><img src="/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/hexo/source/_posts/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/%E5%89%8D%E9%A9%B1%E5%92%8C%E5%90%8E%E7%BB%A7.gif" alt="前驱和后继"></p>
+<h1 id="2-顺序表及初始化"><a href="#2-顺序表及初始化" class="headerlink" title="2 顺序表及初始化"></a>2 顺序表及初始化</h1><p>数组<img src="/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/hexo/source/_posts/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/%E9%A1%BA%E5%BA%8F%E8%A1%A8.gif" alt="顺序表"></p>
+<p><strong>顺序表的初始化</strong></p>
+<p>使用顺序表存储数据之前，除了要申请足够大小的物理空间之外，为了方便后期使用表中的数据，顺序表还需要实时记录以下 2 项数据：</p>
+<ol>
+<li>顺序表申请的存储容量</li>
+<li>顺序表的长度，元素个数</li>
+</ol>
+<p>自定义顺序表 代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Table</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> *head;<span class="comment">//声明一个名为head的长度不确定的数组，动态数组</span></span><br><span class="line">	<span class="keyword">int</span> length;<span class="comment">//记录当前顺序表的长度</span></span><br><span class="line">	<span class="keyword">int</span> size;<span class="comment">//记录顺序表分配的存储容量</span></span><br><span class="line">&#125;table;</span><br></pre></td></tr></table></figure>
+
+<p>接下来开始学习顺序表的初始化，也就是初步建立一个顺序表。建立顺序表需要做如下工作：</p>
+<ul>
+<li>给 head 动态数据申请足够大小的物理空间；</li>
+<li>给 size 和 length 赋初值；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Size 5<span class="comment">//申请空间大小</span></span></span><br><span class="line"><span class="function">table <span class="title">initTable</span><span class="params">()</span></span>&#123;</span><br><span class="line">    table t;</span><br><span class="line">    t.head=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(Size*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//构造一个空的顺序表，动态申请存储空间</span></span><br><span class="line">    <span class="keyword">if</span>(!t.head)<span class="comment">//如果申请失败，退出程序&#123;</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;初始化失败&quot;</span>)；</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	t.length=<span class="number">0</span>;<span class="comment">//空表长度为0；</span></span><br><span class="line">	t.size=Size;<span class="comment">//空表的初始存储空间为Size</span></span><br><span class="line">	<span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例程序</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Size 5</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Table</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> * head;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line">&#125;table;</span><br><span class="line"><span class="function">table <span class="title">initTable</span><span class="params">()</span></span>&#123;</span><br><span class="line">    table t;</span><br><span class="line">    t.head=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(Size*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!t.head)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;初始化失败&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    t.length=<span class="number">0</span>;</span><br><span class="line">    t.size=Size;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出顺序表中元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">displayTable</span><span class="params">(table t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;t.length;i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,t.head[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    table t=initTable();</span><br><span class="line">    <span class="comment">//向顺序表中添加元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=Size; i++) &#123;</span><br><span class="line">        t.head[i<span class="number">-1</span>]=i;</span><br><span class="line">        t.length++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;顺序表中存储的元素分别是：\n&quot;</span>);</span><br><span class="line">    displayTable(t);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>输出：</strong></p>
+<p>顺序表中存储的元素分别是：<br>        1 2 3 4 5</p>
+<h1 id="3-顺序表的基本操作"><a href="#3-顺序表的基本操作" class="headerlink" title="3.顺序表的基本操作"></a>3.顺序表的基本操作</h1><h2 id="3-1-插入元素"><a href="#3-1-插入元素" class="headerlink" title="3.1 插入元素"></a>3.1 插入元素</h2><p>根据插入位置不同：</p>
+<ol>
+<li>插入表头</li>
+<li>插入中间</li>
+<li>插入表位</li>
+</ol>
+<p>解决方法：</p>
+<ul>
+<li>将要插入位置元素以及后续的元素整体向后移动一个位置；</li>
+<li>将元素放到腾出来的位置上；</li>
+</ul>
+<p>例如：在{1 2 3 4 5}的第三个位置插入6</p>
+<ul>
+<li><img src="/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/hexo/source/_posts/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/%E6%89%BE%E5%88%B0%E7%9B%AE%E6%A0%87%E5%85%83%E7%B4%A0%E4%BD%8D%E7%BD%AE.gif" alt="找到目标元素位置"></li>
+<li><img src="/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/hexo/source/_posts/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/%E5%B0%86%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE%E8%85%BE%E5%87%BA.gif" alt="将插入位置腾出"></li>
+<li><img src="/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/hexo/source/_posts/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/%E6%8F%92%E5%85%A5%E7%9B%AE%E6%A0%87%E5%85%83%E7%B4%A0-1604587218577.gif" alt="插入目标元素"></li>
+</ul>
+<p>代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//插入函数，其中，elem为插入的元素，add为插入到顺序表的位置</span></span><br><span class="line"><span class="function">table <span class="title">addTable</span><span class="params">(table t,<span class="keyword">int</span> elem,<span class="keyword">int</span> add)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//判断插入本身是否存在问题（如果插入元素位置比整张表的长度+1还大（如果相等，是尾随的情况），或者插入的位置本身不存在，程序作为提示并自动退出）</span></span><br><span class="line">    <span class="keyword">if</span> (add&gt;t.length+<span class="number">1</span>||add&lt;<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;插入位置有问题\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//做插入操作时，首先需要看顺序表是否有多余的存储空间提供给插入的元素，如果没有，需要申请</span></span><br><span class="line">    <span class="keyword">if</span> (t.length==t.size) &#123;</span><br><span class="line">        t.head=(<span class="keyword">int</span> *)<span class="built_in">realloc</span>(t.head, (t.size+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">        <span class="keyword">if</span> (!t.head) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;存储分配失败\n&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> t;</span><br><span class="line">        &#125;</span><br><span class="line">        t.size+=<span class="number">1</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">//插入操作，需要将从插入位置开始的后续元素，逐个后移</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=t.length<span class="number">-1</span>; i&gt;=add<span class="number">-1</span>; i--) &#123;</span><br><span class="line">        t.head[i+<span class="number">1</span>]=t.head[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//后移完成后，直接将所需插入元素，添加到顺序表的相应位置</span></span><br><span class="line">    t.head[add<span class="number">-1</span>]=elem;</span><br><span class="line">    <span class="comment">//由于添加了元素，所以长度+1</span></span><br><span class="line">    t.length++;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，动态数组额外申请更多物理空间使用的是 realloc 函数。并且，在实现后续元素整体后移的过程，目标位置其实是有数据的，还是 3，只是下一步新插入元素时会把旧元素直接覆盖。</p>
+<h2 id="3-2-删除元素"><a href="#3-2-删除元素" class="headerlink" title="3.2 删除元素"></a>3.2 删除元素</h2><p>后续元素整体前移一个位置，会直接将目标元素删除，可间接实现删除元素的目的。</p>
+<p><img src="/2020/11/06/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/hexo/source/_posts/%E7%BA%BF%E6%80%A7%E8%A1%A8-1/%E5%90%8E%E7%BB%AD%E5%85%83%E7%B4%A0%E5%89%8D%E7%A7%BB.gif" alt="后续元素前移"></p>
+<p>实现代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">table <span class="title">delTable</span><span class="params">(table t,<span class="keyword">int</span> add)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (add&gt;t.length || add&lt;<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;被删除元素的位置有误\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//删除操作</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=add; i&lt;t.length; i++) &#123;</span><br><span class="line">        t.head[i<span class="number">-1</span>]=t.head[i];</span><br><span class="line">    &#125;</span><br><span class="line">    t.length--;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-查找元素"><a href="#3-3-查找元素" class="headerlink" title="3.3 查找元素"></a>3.3 查找元素</h2><p>顺序表中查找目标元素，可以使用多种查找算法实现，比如说<a href="http://c.biancheng.net/view/3428.html">二分查找算法</a>、插值查找算法等。</p>
+<p>这里，我们选择<a href="http://c.biancheng.net/view/3427.html">顺序查找算法</a>，具体实现代码为：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//查找函数，其中，elem表示要查找的数据元素的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">selectTable</span><span class="params">(table t,<span class="keyword">int</span> elem)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;t.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t.head[i]==elem) &#123;</span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">//如果查找失败，返回-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4-更改元素"><a href="#3-4-更改元素" class="headerlink" title="3.4 更改元素"></a>3.4 更改元素</h2><p>顺序表更改元素的实现过程是：</p>
+<ol>
+<li>找到目标元素；</li>
+<li>直接修改该元素的值；</li>
+</ol>
+<p>顺序表更改元素的 C 语言实现代码为：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更改函数，其中，elem为要更改的元素，newElem为新的数据元素</span></span><br><span class="line"><span class="function">table <span class="title">amendTable</span><span class="params">(table t,<span class="keyword">int</span> elem,<span class="keyword">int</span> newElem)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> add=selectTable(t, elem);</span><br><span class="line">    t.head[add<span class="number">-1</span>]=newElem;<span class="comment">//由于返回的是元素在顺序表中的位置，所以-1就是该元素在数组中的下标</span></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-实例"><a href="#3-5-实例" class="headerlink" title="3.5 实例"></a>3.5 实例</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Size 5</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Table</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> * head;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line">&#125;table;</span><br><span class="line"><span class="function">table <span class="title">initTable</span><span class="params">()</span></span>&#123;</span><br><span class="line">    table t;</span><br><span class="line">    t.head=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(Size*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!t.head)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;初始化失败\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    t.length=<span class="number">0</span>;</span><br><span class="line">    t.size=Size;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">table <span class="title">addTable</span><span class="params">(table t,<span class="keyword">int</span> elem,<span class="keyword">int</span> add)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (add&gt;t.length+<span class="number">1</span>||add&lt;<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;插入位置有问题\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (t.length&gt;=t.size) &#123;</span><br><span class="line">        t.head=(<span class="keyword">int</span> *)<span class="built_in">realloc</span>(t.head, (t.size+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">        <span class="keyword">if</span> (!t.head) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;存储分配失败\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        t.size+=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=t.length<span class="number">-1</span>; i&gt;=add<span class="number">-1</span>; i--) &#123;</span><br><span class="line">        t.head[i+<span class="number">1</span>]=t.head[i];</span><br><span class="line">    &#125;</span><br><span class="line">    t.head[add<span class="number">-1</span>]=elem;</span><br><span class="line">    t.length++;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">table <span class="title">delTable</span><span class="params">(table t,<span class="keyword">int</span> add)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (add&gt;t.length || add&lt;<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;被删除元素的位置有误\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=add; i&lt;t.length; i++) &#123;</span><br><span class="line">        t.head[i<span class="number">-1</span>]=t.head[i];</span><br><span class="line">    &#125;</span><br><span class="line">    t.length--;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">selectTable</span><span class="params">(table t,<span class="keyword">int</span> elem)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;t.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t.head[i]==elem) &#123;</span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">table <span class="title">amendTable</span><span class="params">(table t,<span class="keyword">int</span> elem,<span class="keyword">int</span> newElem)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> add=selectTable(t, elem);</span><br><span class="line">    t.head[add<span class="number">-1</span>]=newElem;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">displayTable</span><span class="params">(table t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;t.length;i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,t.head[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    table t1=initTable();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=Size; i++) &#123;</span><br><span class="line">        t1.head[i<span class="number">-1</span>]=i;</span><br><span class="line">        t1.length++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;原顺序表：\n&quot;</span>);</span><br><span class="line">    displayTable(t1);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;删除元素1:\n&quot;</span>);</span><br><span class="line">    t1=delTable(t1, <span class="number">1</span>);</span><br><span class="line">    displayTable(t1);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;在第2的位置插入元素5:\n&quot;</span>);</span><br><span class="line">    t1=addTable(t1, <span class="number">5</span>, <span class="number">2</span>);</span><br><span class="line">    displayTable(t1);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;查找元素3的位置:\n&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> add=selectTable(t1, <span class="number">3</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,add);</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;将元素3改为6:\n&quot;</span>);</span><br><span class="line">    t1=amendTable(t1, <span class="number">3</span>, <span class="number">6</span>);</span><br><span class="line">    displayTable(t1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">原顺序表：</span><br><span class="line">1 2 3 4 5</span><br><span class="line">删除元素1:</span><br><span class="line">2 3 4 5</span><br><span class="line">在第2的位置插入元素5:</span><br><span class="line">2 5 3 4 5</span><br><span class="line">查找元素3的位置:</span><br><span class="line">3</span><br><span class="line">将元素3改为6:</span><br><span class="line">2 5 6 4 5</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>C指针</title>
+    <url>/2021/03/13/%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<ol>
+<li><p>*号标识该变量为指针类型，当定义多个指针变量时，在每个指针变量名前面均需要加一个 *，不能省略，否则为非指针变量。</p>
+</li>
+<li><p>在使用已定义好的指针变量时，在变量名前面不能加 *。</p>
+</li>
+</ol>
 ]]></content>
   </entry>
 </search>
