@@ -215,10 +215,10 @@
 <p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
 ]]></content>
       <categories>
-        <category>脑机接口</category>
+        <category>论文</category>
       </categories>
       <tags>
-        <tag>迁移学习</tag>
+        <tag>脑电，迁移学习</tag>
       </tags>
   </entry>
 </search>
