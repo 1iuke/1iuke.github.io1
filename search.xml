@@ -143,4 +143,58 @@
 
 ]]></content>
   </entry>
+  <entry>
+    <title>卷积神经网络</title>
+    <url>/2021/03/13/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<hr>
+<h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1>]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>tensorflow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文&lt;基于脑电的脑机接口迁移学习&gt;</title>
+    <url>/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/</url>
+    <content><![CDATA[<p>原文：Transfer Learning for EEG-Based Brain-Computer Interfaces: A Review of Progress Made Since 2016 <link> <a href="https://arxiv.org/abs/2004.06286v4">https://arxiv.org/abs/2004.06286v4</a> </p>
+<p><strong>脑机接口</strong>(BCI)使用户能够使用大脑信号直接与计算机通信。</p>
+<p><strong>脑电</strong>(EEG)是最常见的非侵入性脑机接口(BCI)，对噪声/伪影敏感，且存在受试者/受试者内部的非平稳性。很难建立一个通用的模式识别模型。</p>
+<p><strong>迁移学习</strong>用于减少校准工作量。</p>
+<p>本文讨论了<strong>运动想象</strong>、<strong>事件相关电位</strong>、<strong>稳态视觉诱发电位</strong>、<strong>情感脑机接口</strong>、<strong>回归问题</strong>和<strong>对抗性攻击</strong>等六种范式及其应用。</p>
+<p>索引-<strong>脑机接口</strong>、<strong>脑电图</strong>、<strong>迁移学习</strong>、<strong>领域适应</strong>、<strong>情感脑机接口</strong>、<strong>对抗性攻击</strong></p>
+<h2 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I.Introduction"></a>I.Introduction</h2><p>脑机接口应用：游戏、情绪识别、精神疲劳评估、警觉评估。etc</p>
+<p>BCI类型：<strong>Non-invasive BCIs</strong>；Invasive BCIs；Partially invasive (semi-invasive) BCIs</p>
+<p>本文研究非侵入式BCIs，safety, low cost, and convenience. most popular</p>
+<p><img src="/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/image-20210215113147980.png"></p>
+<ol>
+<li><p>Signal acquisition ： Used：wired connections and gel 。Currently, wireless connections and dry electrodes </p>
+</li>
+<li><p>Signal processing ： temporal filtering and spatial filtering.</p>
+</li>
+</ol>
+<p>常用的空间滤波器包括公共空间模式(CSP)、独立分量分析(ICA)、盲源分离、xDAWN等。</p>
+<p>3）Feature extraction：时域、频域、时频域、黎曼空间和/或功能性大脑连通性特征</p>
+<ol start="4">
+<li><p>Pattern recognition：分类；回归</p>
+</li>
+<li><p>Controller：其输出命令以控制外部设备</p>
+</li>
+</ol>
+<p>当使用深度学习时，特征提取和模式识别可以集成到单个神经网络中，并且这两个组件同时自动优化。</p>
+<p>基于EEG的BCI中有三种经典的分类范型：Motor imagery (MI)；Event-related potentials (ERP)；Steady-state visual evoked potentials (SSVEP)</p>
+<h2 id="II-迁移学习概念和场景"><a href="#II-迁移学习概念和场景" class="headerlink" title="II.迁移学习概念和场景"></a>II.迁移学习概念和场景</h2><p>定义1：</p>
+<h2 id="III-TL-in-MI-Based-BCIs"><a href="#III-TL-in-MI-Based-BCIs" class="headerlink" title="III.TL in MI-Based BCIs"></a>III.TL in MI-Based BCIs</h2><p><strong>嵌入流形的知识转移</strong>(MEKT)方法:1.协方差矩阵质心对齐(CA)2.切线空间特征提取。3.映射矩阵识别。</p>
+<p><strong>EEGNet</strong>。它可以应用于不同的脑机接口范例，用非常有限的数据进行训练，并产生神经生理学上可解释的特征。EEGNet在错误信息系统和事件相关事件的学科内和跨学科分类方面都取得了强劲的成果。</p>
+<h2 id="IV-TL-IN-ERP-BASED-BCIs"><a href="#IV-TL-IN-ERP-BASED-BCIs" class="headerlink" title="IV. TL IN ERP-BASED BCIs"></a>IV. TL IN ERP-BASED BCIs</h2><p>SAN  GAN</p>
+<p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
+]]></content>
+      <categories>
+        <category>脑机接口</category>
+      </categories>
+      <tags>
+        <tag>迁移学习</tag>
+      </tags>
+  </entry>
 </search>
