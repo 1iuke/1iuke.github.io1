@@ -19,7 +19,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>Tensorflow 模型保存</title>
     <url>/2021/03/13/tf/</url>
     <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">!jupyter nbconvert lesson07.ipynb --to slides --post serve</span><br></pre></td></tr></table></figure>
 
@@ -41,7 +41,18 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
+    <title>C指针</title>
+    <url>/2021/03/13/%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<ol>
+<li><p>*号标识该变量为指针类型，当定义多个指针变量时，在每个指针变量名前面均需要加一个 *，不能省略，否则为非指针变量。</p>
+</li>
+<li><p>在使用已定义好的指针变量时，在变量名前面不能加 *。</p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>论文&lt;基于脑电的脑机接口迁移学习&gt;</title>
     <url>/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/</url>
     <content><![CDATA[<p>原文：Transfer Learning for EEG-Based Brain-Computer Interfaces: A Review of Progress Made Since 2016 <link> <a href="https://arxiv.org/abs/2004.06286v4">https://arxiv.org/abs/2004.06286v4</a> </link></p>
 <p><strong>脑机接口</strong>(BCI)使用户能够使用大脑信号直接与计算机通信。</p>
@@ -74,17 +85,6 @@
 <p><strong>EEGNet</strong>。它可以应用于不同的脑机接口范例，用非常有限的数据进行训练，并产生神经生理学上可解释的特征。EEGNet在错误信息系统和事件相关事件的学科内和跨学科分类方面都取得了强劲的成果。</p>
 <h2 id="IV-TL-IN-ERP-BASED-BCIs"><a href="#IV-TL-IN-ERP-BASED-BCIs" class="headerlink" title="IV. TL IN ERP-BASED BCIs"></a>IV. TL IN ERP-BASED BCIs</h2><p>SAN  GAN</p>
 <p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/03/13/%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<ol>
-<li><p>*号标识该变量为指针类型，当定义多个指针变量时，在每个指针变量名前面均需要加一个 *，不能省略，否则为非指针变量。</p>
-</li>
-<li><p>在使用已定义好的指针变量时，在变量名前面不能加 *。</p>
-</li>
-</ol>
 ]]></content>
   </entry>
 </search>
