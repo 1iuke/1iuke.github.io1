@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。 1.CCA概述在数理统计里面，假设有两组一维的数据集X和Y，则&#x3D;&#x3D;相关系数&#x3D;&#x3D;ρ的定义为:  \rho(X,Y) &#x3D; \frac{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="典型相关分析">
+<meta property="og:url" content="http://bloglk.gitee.io/2021/03/14/%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90(CCA)/index.html">
+<meta property="og:site_name" content="朝花夕拾">
+<meta property="og:description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。 1.CCA概述在数理统计里面，假设有两组一维的数据集X和Y，则&#x3D;&#x3D;相关系数&#x3D;&#x3D;ρ的定义为:  \rho(X,Y) &#x3D; \frac{">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-14T14:51:42.000Z">
+<meta property="article:modified_time" content="2021-03-15T02:58:43.327Z">
+<meta property="article:author" content="刘 可">
+<meta property="article:tag" content="降维">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://bloglk.gitee.io/2021/03/14/%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90(CCA)/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>典型相关分析 | 朝花夕拾</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="朝花夕拾" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">朝花夕拾</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-CCA%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.CCA概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-CCA%E7%9A%84%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">2.CCA的算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-CCA%E7%AE%97%E6%B3%95%E7%9A%84SVD%E6%B1%82%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">3.CCA算法的SVD求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-CCA%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E6%B1%82%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.CCA算法的特征分解求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-CCA%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">5.CCA算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-CCA%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">6.CCA算法小结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">刘 可</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bloglk.gitee.io/2021/03/14/%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90(CCA)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="刘 可">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          典型相关分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-14 22:51:42" itemprop="dateCreated datePublished" datetime="2021-03-14T22:51:42+08:00">2021-03-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-15 10:58:43" itemprop="dateModified" datetime="2021-03-15T10:58:43+08:00">2021-03-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。</p>
+<p>比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。</p>
+<h2 id="1-CCA概述"><a href="#1-CCA概述" class="headerlink" title="1.CCA概述"></a>1.CCA概述</h2><p>在数理统计里面，假设有两组一维的数据集X和Y，则==相关系数==ρ的定义为:</p>
+<script type="math/tex; mode=display">
+\rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}</script><p>​         其中$cov(X,Y)$ 是X，Y的协方差，$D(X),D(Y)$ 分别为$X,Y$ 的方差。相关系数$\rho$ 的取值为[-1,1]。$\rho$的绝对值越接近于1，则$X,Y$的线性相关性越高。越接近于0，则$X,Y$的线性相关性越低。</p>
+<p>​        虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？CCA给了我们变通的方法。</p>
+<p>​        CCA使用的方法是将多维的$X,Y$都用<strong>线性变换</strong>为1维的$X’,Y’$，然后再使用相关系数来看$X’,Y’$’的相关性。将数据从多维变到一维，也可以理解为CCA是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看CCA的算法思想。</p>
+<h2 id="2-CCA的算法思想"><a href="#2-CCA的算法思想" class="headerlink" title="2.CCA的算法思想"></a>2.CCA的算法思想</h2><p>​        降维的标准是如何选择的呢？回想下主成分分析PCA，降维的原则是投影方差最大；再回想下线性判别分析LDA，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的CCA，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
+<p>​        假设我们的数据集是$X,Y$，$X$为$n_1×m$的样本矩阵。$Y$为$n_2×m$的样本矩阵.其中$m$为样本个数，而$n1,n2$分别为$X,Y$的特征维度。</p>
+<p>​        对于X矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为a, 对于Y矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为b, 这样X ,Y投影后得到的一维向量分别为X’,Y’。我们有</p>
+<script type="math/tex; mode=display">
+X' = a^TX, Y'=b^TY</script><p>​        我们CCA的优化目标是最大化<script type="math/tex">ρ(X′,Y′)</script>得到对应的投影向量$a,b$，即</p>
+<script type="math/tex; mode=display">
+\underbrace{arg\;max}_{a,b}\frac{cov(X',Y')}{\sqrt{D(X')}\sqrt{D(Y')}}</script><p>　　在投影前，我们一般会把原始数据进行==标准化==，得到均值为0而方差为1的数据$X,Y$。这样我们有：</p>
+<script type="math/tex; mode=display">
+cov(X',Y') = cov(a^TX, b^TY) = E(<a^TX, b^TY>) = E((a^TX)(b^TY)^T) = a^TE(XY^T)b</script><script type="math/tex; mode=display">
+D(X') = D(a^TX) = a^TE(XX^T)a</script><script type="math/tex; mode=display">
+D(Y') = D(b^TY) = b^TE(YY^T)b</script><p>​        由于我们的<script type="math/tex">X，Y</script>的均值均为0，则</p>
+<script type="math/tex; mode=display">
+D(X) = cov(X,X) = E(XX^T), D(Y)= cov(Y,Y) = E(YY^T)</script><script type="math/tex; mode=display">
+cov(X,Y) = E(XY^T),  cov(Y,X) = E(YX^T)</script><p>​        令$cov(X,Y)=S_{XY}$,则优化目标可以转化为:</p>
+<script type="math/tex; mode=display">
+\underbrace{arg\;max}_{a,b}\frac{a^TS_{XY}b}{\sqrt{ a^TS_{XX}a}\sqrt{b^TS_{YY}b}}</script><p>　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和==SVM==类似的优化方法，固定分母，优化分子，具体的转化为：</p>
+<script type="math/tex; mode=display">
+\underbrace{arg\;max}_{a,b}\;\;{a^TS_{XY}b} \\ s.t. a^TS_{XX}a =1,\; b^TS_{YY}b =1</script><p>​        也就是说，我们的CCA算法的目标最终转化为一个==凸优化==过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的$a,b$则为降维时的投影向量，或者说线性系数。</p>
+<p>　　　　这个函数优化一般有两种方法，第一种是奇异值分解==SVD==，第二种是==特征分解==，两者得到的结果一样，下面我们分别讲解。</p>
+<h2 id="3-CCA算法的SVD求解"><a href="#3-CCA算法的SVD求解" class="headerlink" title="3.CCA算法的SVD求解"></a>3.CCA算法的SVD求解</h2><p>​        首先，令$a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$ ,则有：</p>
+<script type="math/tex; mode=display">
+a^TS_{XX}a =1 \Rightarrow u^TS_{XX}^{-1/2}S_{XX}S_{XX}^{-1/2}u =1  \Rightarrow  u^Tu=1</script><script type="math/tex; mode=display">
+b^TS_{YY}b =1 \Rightarrow v^TS_{YY}^{-1/2}S_{YY}S_{YY}^{-1/2}v=1  \Rightarrow  v^Tv=1</script><script type="math/tex; mode=display">
+a^TS_{XY}b = u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v</script><p>​        也就是说，我们的优化目标变成下式：</p>
+<script type="math/tex; mode=display">
+\underbrace{arg\;max}_{u,v}u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v\\
+s.t. u^Tu =1,\; v^Tv =1</script><p>​        将$u,v$看作矩阵  $M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}$ 的某一奇异值的左右奇异向量。得到$M=U\Sigma V^T$</p>
+<p>那么利用奇异值分解，我们可以得到$M=UΣV^T$其中$U,V$分别为M的左奇异向量和右奇异向量组成的矩阵，而<script type="math/tex">Σ</script>为M的奇异值组成的对角矩阵。由于<script type="math/tex">U,V</script>所有的列都为标准正交基，则<script type="math/tex">u^TU</script>和$V^Tv$得到一个只有一个标量值为1，其余标量值为0的向量。此时我们有</p>
+<script type="math/tex; mode=display">
+u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v = u^TU\Sigma V^Tv = \sigma_{uv}</script><p>​        也就是说我们最大化$u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v$,其实对应的最大值就是某一组左右奇异向量所对应的奇异值的最大值。也就是将M做了奇异值分解后，最大的奇异值就是我们优化目标的最大值，或者说我们的X和Y之间的最大相关系数。利用对应的左右奇异向量$u,v$我们也可以求出我们原始的X和Y的线性系数$a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$。</p>
+<p>　　　　可以看出，SVD的求解方式非常简洁方便。但是如果你不熟悉SVD的话，我们也可以用传统的拉格朗日函数加上特征分解来完成这个函数的优化。</p>
+<h2 id="4-CCA算法的特征分解求解"><a href="#4-CCA算法的特征分解求解" class="headerlink" title="4.CCA算法的特征分解求解"></a>4.CCA算法的特征分解求解</h2><p>​        利用拉格朗日函数，优化目标转化为最大化下式：</p>
+<script type="math/tex; mode=display">
+J(a,b) = a^TS_{XY}b -\frac{\lambda}{2}(a^TS_{XX}a-1)-\frac{\theta}{2}(b^TS_{YY}b-1)</script><p>​        分别对$a,b$求导并令结果为0，我们得到：</p>
+<script type="math/tex; mode=display">
+S_{XY}b-\lambda S_{XX}a=0\\
+S_{YX}a-\theta S_{YY}b=0</script><p>​        将上面第一个式子左乘$a^T$,第二个式子左乘$b^T$，并利用$a^TS_{XX}a =1,\; b^TS_{YY}b =1$，我们得到</p>
+<script type="math/tex; mode=display">
+\lambda = \theta = a^TS_{XY}b</script><p>​        也就是说我们的拉格朗日系数就是我们要优化的目标。我们继续将上面的(17)两个式子做整理，第一个式子左乘$S_{XX}^{-1}$,第二个式子左乘$S_{YY}^{-1}$，我们得到：</p>
+<script type="math/tex; mode=display">
+S_{XX}^{-1}S_{XY}b=\lambda a\\
+S_{YY}^{-1}S_{YX}a = \lambda b</script><p>由(19)得:</p>
+<script type="math/tex; mode=display">
+S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}a=\lambda^2a</script><p>​        这个式子就是特征分解！要求最大的相关系数λλ,我们只需要对矩阵$N=S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}$做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为X的线性系数a。</p>
+<p>同样：</p>
+<script type="math/tex; mode=display">
+S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b</script><p>​        对矩阵$N’=S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}$做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为Y的线性系数b。</p>
+<p>​        可以看出特征分解的方法要比SVD复杂，但是两者求得的结果其实是等价的，只要利用SVD和特征分解之间的关系就很容易发现两者最后的结果相同</p>
+<h2 id="5-CCA算法流程"><a href="#5-CCA算法流程" class="headerlink" title="5.CCA算法流程"></a>5.CCA算法流程</h2><p>​                以SVD方法为准。</p>
+<p>　　　　输入：各为$m$个的样本$X$和$Y$，$X$和$Y$的维度都大于1</p>
+<p>　　　　输出：X,Y的相关系数$ρ$,$X$和$Y$的线性系数向量$a$和$b$</p>
+<p>　　　　1）计算X的方差$S_{XX}$, Y的方差$S_{YY}$，X和Y的协方差$S_{XY}$, $Y$和$X$的协方差$S_{YX}=S_{XY}^T$</p>
+<p>　　　　2)  计算矩阵$M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}$</p>
+<p>　　　　3）对矩阵$M$进行奇异值分解，得到最大的奇异值$ρ$，和最大奇异值对应的左右奇异向量$u,v$</p>
+<p>　　　　4) 计算X和Y的线性系数向量a和b, $a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$</p>
+<p>　　　　</p>
+<h2 id="6-CCA算法小结"><a href="#6-CCA算法小结" class="headerlink" title="6.CCA算法小结"></a>6.CCA算法小结</h2><p>​        CCA算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，CCA就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用CCA的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为KCCA。</p>
+<p>　　此外，我们在算法里只找了相关度最大的奇异值或者特征值，作为数据的相关系数，实际上我们也可以像PCA一样找出第二大奇异值，第三大奇异值，。。。得到第二相关系数和第三相关系数。然后对数据做进一步的相关性分析。但是一般的应用来说，找出第一相关系数就可以了。</p>
+<p>　　有时候我们的矩阵$S_{XX},S_{YY}$不可逆，此时我们得不到对应的逆矩阵，一般遇到这种情况可以对$S_{XX},S_{YY}$进行正则化，将$S_{XX},S_{YY}$变化为$S_{XX}+\gamma I,S_{YY}+\gamma I$,然后继续求逆。其中$γ$为正则化系数。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%99%8D%E7%BB%B4/" rel="tag"># 降维</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/13/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/" rel="prev" title="Tensorflow 模型保存">
+                  <i class="fa fa-chevron-left"></i> Tensorflow 模型保存
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/15/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/" rel="next" title="基于黎曼几何的新一代脑机接口">
+                  基于黎曼几何的新一代脑机接口 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+<!--
+-->
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘 可</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d-widget-model-shizuku"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
