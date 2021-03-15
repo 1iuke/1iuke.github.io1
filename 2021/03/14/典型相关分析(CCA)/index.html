@@ -23,15 +23,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。 1.CCA概述在数理统计里面，假设有两组一维的数据集X和Y，则&#x3D;&#x3D;相关系数&#x3D;&#x3D;ρ的定义为:  \rho(X,Y) &#x3D; \frac{">
+<meta name="description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。 1.CCA概述 在数理统计里面，假设有两组一维的数据集X和Y，则&#x3D;&#x3D;相关系数&#x3D;&#x3D;ρ的定义为: \[ \rho(X,Y) &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="典型相关分析">
 <meta property="og:url" content="http://bloglk.gitee.io/2021/03/14/%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90(CCA)/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。 1.CCA概述在数理统计里面，假设有两组一维的数据集X和Y，则&#x3D;&#x3D;相关系数&#x3D;&#x3D;ρ的定义为:  \rho(X,Y) &#x3D; \frac{">
+<meta property="og:description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。 1.CCA概述 在数理统计里面，假设有两组一维的数据集X和Y，则&#x3D;&#x3D;相关系数&#x3D;&#x3D;ρ的定义为: \[ \rho(X,Y) &#x3D;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-14T14:51:42.000Z">
-<meta property="article:modified_time" content="2021-03-15T02:58:43.327Z">
+<meta property="article:modified_time" content="2021-03-15T03:22:31.244Z">
 <meta property="article:author" content="刘 可">
 <meta property="article:tag" content="降维">
 <meta name="twitter:card" content="summary">
@@ -188,7 +188,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-CCA%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.CCA概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-CCA%E7%9A%84%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">2.CCA的算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-CCA%E7%AE%97%E6%B3%95%E7%9A%84SVD%E6%B1%82%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">3.CCA算法的SVD求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-CCA%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E6%B1%82%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.CCA算法的特征分解求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-CCA%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">5.CCA算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-CCA%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">6.CCA算法小结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cca%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.CCA概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cca%E7%9A%84%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">2.CCA的算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cca%E7%AE%97%E6%B3%95%E7%9A%84svd%E6%B1%82%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">3.CCA算法的SVD求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cca%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E6%B1%82%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.CCA算法的特征分解求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cca%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">5.CCA算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cca%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">6.CCA算法小结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -285,7 +285,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-15 10:58:43" itemprop="dateModified" datetime="2021-03-15T10:58:43+08:00">2021-03-15</time>
+        <time title="修改时间：2021-03-15 11:22:31" itemprop="dateModified" datetime="2021-03-15T11:22:31+08:00">2021-03-15</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,70 +309,90 @@
     <div class="post-body" itemprop="articleBody">
         <p>典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。</p>
 <p>比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。</p>
-<h2 id="1-CCA概述"><a href="#1-CCA概述" class="headerlink" title="1.CCA概述"></a>1.CCA概述</h2><p>在数理统计里面，假设有两组一维的数据集X和Y，则==相关系数==ρ的定义为:</p>
-<script type="math/tex; mode=display">
-\rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}</script><p>​         其中$cov(X,Y)$ 是X，Y的协方差，$D(X),D(Y)$ 分别为$X,Y$ 的方差。相关系数$\rho$ 的取值为[-1,1]。$\rho$的绝对值越接近于1，则$X,Y$的线性相关性越高。越接近于0，则$X,Y$的线性相关性越低。</p>
-<p>​        虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？CCA给了我们变通的方法。</p>
-<p>​        CCA使用的方法是将多维的$X,Y$都用<strong>线性变换</strong>为1维的$X’,Y’$，然后再使用相关系数来看$X’,Y’$’的相关性。将数据从多维变到一维，也可以理解为CCA是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看CCA的算法思想。</p>
-<h2 id="2-CCA的算法思想"><a href="#2-CCA的算法思想" class="headerlink" title="2.CCA的算法思想"></a>2.CCA的算法思想</h2><p>​        降维的标准是如何选择的呢？回想下主成分分析PCA，降维的原则是投影方差最大；再回想下线性判别分析LDA，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的CCA，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
-<p>​        假设我们的数据集是$X,Y$，$X$为$n_1×m$的样本矩阵。$Y$为$n_2×m$的样本矩阵.其中$m$为样本个数，而$n1,n2$分别为$X,Y$的特征维度。</p>
-<p>​        对于X矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为a, 对于Y矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为b, 这样X ,Y投影后得到的一维向量分别为X’,Y’。我们有</p>
-<script type="math/tex; mode=display">
-X' = a^TX, Y'=b^TY</script><p>​        我们CCA的优化目标是最大化<script type="math/tex">ρ(X′,Y′)</script>得到对应的投影向量$a,b$，即</p>
-<script type="math/tex; mode=display">
-\underbrace{arg\;max}_{a,b}\frac{cov(X',Y')}{\sqrt{D(X')}\sqrt{D(Y')}}</script><p>　　在投影前，我们一般会把原始数据进行==标准化==，得到均值为0而方差为1的数据$X,Y$。这样我们有：</p>
-<script type="math/tex; mode=display">
-cov(X',Y') = cov(a^TX, b^TY) = E(<a^TX, b^TY>) = E((a^TX)(b^TY)^T) = a^TE(XY^T)b</script><script type="math/tex; mode=display">
-D(X') = D(a^TX) = a^TE(XX^T)a</script><script type="math/tex; mode=display">
-D(Y') = D(b^TY) = b^TE(YY^T)b</script><p>​        由于我们的<script type="math/tex">X，Y</script>的均值均为0，则</p>
-<script type="math/tex; mode=display">
-D(X) = cov(X,X) = E(XX^T), D(Y)= cov(Y,Y) = E(YY^T)</script><script type="math/tex; mode=display">
-cov(X,Y) = E(XY^T),  cov(Y,X) = E(YX^T)</script><p>​        令$cov(X,Y)=S_{XY}$,则优化目标可以转化为:</p>
-<script type="math/tex; mode=display">
-\underbrace{arg\;max}_{a,b}\frac{a^TS_{XY}b}{\sqrt{ a^TS_{XX}a}\sqrt{b^TS_{YY}b}}</script><p>　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和==SVM==类似的优化方法，固定分母，优化分子，具体的转化为：</p>
-<script type="math/tex; mode=display">
-\underbrace{arg\;max}_{a,b}\;\;{a^TS_{XY}b} \\ s.t. a^TS_{XX}a =1,\; b^TS_{YY}b =1</script><p>​        也就是说，我们的CCA算法的目标最终转化为一个==凸优化==过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的$a,b$则为降维时的投影向量，或者说线性系数。</p>
+<h2 id="cca概述">1.CCA概述</h2>
+<p>在数理统计里面，假设有两组一维的数据集X和Y，则==相关系数==ρ的定义为: <span class="math display">\[
+\rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}
+\]</span> ​ 其中<span class="math inline">\(cov(X,Y)\)</span> 是X，Y的协方差，<span class="math inline">\(D(X),D(Y)\)</span> 分别为<span class="math inline">\(X,Y\)</span> 的方差。相关系数<span class="math inline">\(\rho\)</span> 的取值为[-1,1]。<span class="math inline">\(\rho\)</span>的绝对值越接近于1，则<span class="math inline">\(X,Y\)</span>的线性相关性越高。越接近于0，则<span class="math inline">\(X,Y\)</span>的线性相关性越低。</p>
+<p>​ 虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？CCA给了我们变通的方法。</p>
+<p>​ CCA使用的方法是将多维的<span class="math inline">\(X,Y\)</span>都用<strong>线性变换</strong>为1维的<span class="math inline">\(X&#39;,Y&#39;\)</span>，然后再使用相关系数来看<span class="math inline">\(X&#39;,Y&#39;\)</span>'的相关性。将数据从多维变到一维，也可以理解为CCA是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看CCA的算法思想。</p>
+<h2 id="cca的算法思想">2.CCA的算法思想</h2>
+<p>​ 降维的标准是如何选择的呢？回想下主成分分析PCA，降维的原则是投影方差最大；再回想下线性判别分析LDA，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的CCA，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
+<p>​ 假设我们的数据集是<span class="math inline">\(X,Y\)</span>，<span class="math inline">\(X\)</span>为<span class="math inline">\(n_1×m\)</span>的样本矩阵。<span class="math inline">\(Y\)</span>为<span class="math inline">\(n_2×m\)</span>的样本矩阵.其中<span class="math inline">\(m\)</span>为样本个数，而<span class="math inline">\(n1,n2\)</span>分别为<span class="math inline">\(X,Y\)</span>的特征维度。</p>
+<p>​ 对于X矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为a, 对于Y矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为b, 这样X ,Y投影后得到的一维向量分别为X',Y'。我们有 <span class="math display">\[
+X&#39; = a^TX, Y&#39;=b^TY
+\]</span></p>
+<p>​ 我们CCA的优化目标是最大化<span class="math display">\[ρ(X′,Y′)\]</span>得到对应的投影向量<span class="math inline">\(a,b\)</span>，即 <span class="math display">\[
+\underbrace{arg\;max}_{a,b}\frac{cov(X&#39;,Y&#39;)}{\sqrt{D(X&#39;)}\sqrt{D(Y&#39;)}}
+\]</span> 　　在投影前，我们一般会把原始数据进行==标准化==，得到均值为0而方差为1的数据<span class="math inline">\(X,Y\)</span>。这样我们有： <span class="math display">\[
+cov(X&#39;,Y&#39;) = cov(a^TX, b^TY) = E(&lt;a^TX, b^TY&gt;) = E((a^TX)(b^TY)^T) = a^TE(XY^T)b
+\]</span></p>
+<p><span class="math display">\[
+D(X&#39;) = D(a^TX) = a^TE(XX^T)a
+\]</span></p>
+<p><span class="math display">\[
+D(Y&#39;) = D(b^TY) = b^TE(YY^T)b
+\]</span></p>
+<p>​ 由于我们的<span class="math display">\[X，Y\]</span>的均值均为0，则 <span class="math display">\[
+D(X) = cov(X,X) = E(XX^T), D(Y)= cov(Y,Y) = E(YY^T)
+\]</span></p>
+<p><span class="math display">\[
+cov(X,Y) = E(XY^T),  cov(Y,X) = E(YX^T)
+\]</span></p>
+<p>​ 令<span class="math inline">\(cov(X,Y)=S_{XY}\)</span>,则优化目标可以转化为: <span class="math display">\[
+\underbrace{arg\;max}_{a,b}\frac{a^TS_{XY}b}{\sqrt{ a^TS_{XX}a}\sqrt{b^TS_{YY}b}}
+\]</span> 　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和==SVM==类似的优化方法，固定分母，优化分子，具体的转化为： <span class="math display">\[
+\underbrace{arg\;max}_{a,b}\;\;{a^TS_{XY}b} \\ s.t. a^TS_{XX}a =1,\; b^TS_{YY}b =1
+\]</span> ​ 也就是说，我们的CCA算法的目标最终转化为一个==凸优化==过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的<span class="math inline">\(a,b\)</span>则为降维时的投影向量，或者说线性系数。</p>
 <p>　　　　这个函数优化一般有两种方法，第一种是奇异值分解==SVD==，第二种是==特征分解==，两者得到的结果一样，下面我们分别讲解。</p>
-<h2 id="3-CCA算法的SVD求解"><a href="#3-CCA算法的SVD求解" class="headerlink" title="3.CCA算法的SVD求解"></a>3.CCA算法的SVD求解</h2><p>​        首先，令$a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$ ,则有：</p>
-<script type="math/tex; mode=display">
-a^TS_{XX}a =1 \Rightarrow u^TS_{XX}^{-1/2}S_{XX}S_{XX}^{-1/2}u =1  \Rightarrow  u^Tu=1</script><script type="math/tex; mode=display">
-b^TS_{YY}b =1 \Rightarrow v^TS_{YY}^{-1/2}S_{YY}S_{YY}^{-1/2}v=1  \Rightarrow  v^Tv=1</script><script type="math/tex; mode=display">
-a^TS_{XY}b = u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v</script><p>​        也就是说，我们的优化目标变成下式：</p>
-<script type="math/tex; mode=display">
+<h2 id="cca算法的svd求解">3.CCA算法的SVD求解</h2>
+<p>​ 首先，令<span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span> ,则有： <span class="math display">\[
+a^TS_{XX}a =1 \Rightarrow u^TS_{XX}^{-1/2}S_{XX}S_{XX}^{-1/2}u =1  \Rightarrow  u^Tu=1
+\]</span></p>
+<p><span class="math display">\[
+b^TS_{YY}b =1 \Rightarrow v^TS_{YY}^{-1/2}S_{YY}S_{YY}^{-1/2}v=1  \Rightarrow  v^Tv=1
+\]</span></p>
+<p><span class="math display">\[
+a^TS_{XY}b = u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v
+\]</span></p>
+<p>​ 也就是说，我们的优化目标变成下式： <span class="math display">\[
 \underbrace{arg\;max}_{u,v}u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v\\
-s.t. u^Tu =1,\; v^Tv =1</script><p>​        将$u,v$看作矩阵  $M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}$ 的某一奇异值的左右奇异向量。得到$M=U\Sigma V^T$</p>
-<p>那么利用奇异值分解，我们可以得到$M=UΣV^T$其中$U,V$分别为M的左奇异向量和右奇异向量组成的矩阵，而<script type="math/tex">Σ</script>为M的奇异值组成的对角矩阵。由于<script type="math/tex">U,V</script>所有的列都为标准正交基，则<script type="math/tex">u^TU</script>和$V^Tv$得到一个只有一个标量值为1，其余标量值为0的向量。此时我们有</p>
-<script type="math/tex; mode=display">
-u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v = u^TU\Sigma V^Tv = \sigma_{uv}</script><p>​        也就是说我们最大化$u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v$,其实对应的最大值就是某一组左右奇异向量所对应的奇异值的最大值。也就是将M做了奇异值分解后，最大的奇异值就是我们优化目标的最大值，或者说我们的X和Y之间的最大相关系数。利用对应的左右奇异向量$u,v$我们也可以求出我们原始的X和Y的线性系数$a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$。</p>
+s.t. u^Tu =1,\; v^Tv =1
+\]</span> ​ 将<span class="math inline">\(u,v\)</span>看作矩阵 <span class="math inline">\(M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}\)</span> 的某一奇异值的左右奇异向量。得到<span class="math inline">\(M=U\Sigma V^T\)</span></p>
+<p>那么利用奇异值分解，我们可以得到<span class="math inline">\(M=UΣV^T\)</span>其中<span class="math inline">\(U,V\)</span>分别为M的左奇异向量和右奇异向量组成的矩阵，而<span class="math display">\[Σ\]</span>为M的奇异值组成的对角矩阵。由于<span class="math display">\[U,V\]</span>所有的列都为标准正交基，则<span class="math display">\[u^TU\]</span>和<span class="math inline">\(V^Tv\)</span>得到一个只有一个标量值为1，其余标量值为0的向量。此时我们有 <span class="math display">\[
+u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v = u^TU\Sigma V^Tv = \sigma_{uv}
+\]</span> ​ 也就是说我们最大化<span class="math inline">\(u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v\)</span>,其实对应的最大值就是某一组左右奇异向量所对应的奇异值的最大值。也就是将M做了奇异值分解后，最大的奇异值就是我们优化目标的最大值，或者说我们的X和Y之间的最大相关系数。利用对应的左右奇异向量<span class="math inline">\(u,v\)</span>我们也可以求出我们原始的X和Y的线性系数<span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span>。</p>
 <p>　　　　可以看出，SVD的求解方式非常简洁方便。但是如果你不熟悉SVD的话，我们也可以用传统的拉格朗日函数加上特征分解来完成这个函数的优化。</p>
-<h2 id="4-CCA算法的特征分解求解"><a href="#4-CCA算法的特征分解求解" class="headerlink" title="4.CCA算法的特征分解求解"></a>4.CCA算法的特征分解求解</h2><p>​        利用拉格朗日函数，优化目标转化为最大化下式：</p>
-<script type="math/tex; mode=display">
-J(a,b) = a^TS_{XY}b -\frac{\lambda}{2}(a^TS_{XX}a-1)-\frac{\theta}{2}(b^TS_{YY}b-1)</script><p>​        分别对$a,b$求导并令结果为0，我们得到：</p>
-<script type="math/tex; mode=display">
+<h2 id="cca算法的特征分解求解">4.CCA算法的特征分解求解</h2>
+<p>​ 利用拉格朗日函数，优化目标转化为最大化下式： <span class="math display">\[
+J(a,b) = a^TS_{XY}b -\frac{\lambda}{2}(a^TS_{XX}a-1)-\frac{\theta}{2}(b^TS_{YY}b-1)
+\]</span> ​ 分别对<span class="math inline">\(a,b\)</span>求导并令结果为0，我们得到： <span class="math display">\[
 S_{XY}b-\lambda S_{XX}a=0\\
-S_{YX}a-\theta S_{YY}b=0</script><p>​        将上面第一个式子左乘$a^T$,第二个式子左乘$b^T$，并利用$a^TS_{XX}a =1,\; b^TS_{YY}b =1$，我们得到</p>
-<script type="math/tex; mode=display">
-\lambda = \theta = a^TS_{XY}b</script><p>​        也就是说我们的拉格朗日系数就是我们要优化的目标。我们继续将上面的(17)两个式子做整理，第一个式子左乘$S_{XX}^{-1}$,第二个式子左乘$S_{YY}^{-1}$，我们得到：</p>
-<script type="math/tex; mode=display">
+S_{YX}a-\theta S_{YY}b=0
+\]</span> ​ 将上面第一个式子左乘<span class="math inline">\(a^T\)</span>,第二个式子左乘<span class="math inline">\(b^T\)</span>，并利用<span class="math inline">\(a^TS_{XX}a =1,\; b^TS_{YY}b =1\)</span>，我们得到 <span class="math display">\[
+\lambda = \theta = a^TS_{XY}b
+\]</span> ​ 也就是说我们的拉格朗日系数就是我们要优化的目标。我们继续将上面的(17)两个式子做整理，第一个式子左乘<span class="math inline">\(S_{XX}^{-1}\)</span>,第二个式子左乘<span class="math inline">\(S_{YY}^{-1}\)</span>，我们得到： <span class="math display">\[
 S_{XX}^{-1}S_{XY}b=\lambda a\\
-S_{YY}^{-1}S_{YX}a = \lambda b</script><p>由(19)得:</p>
-<script type="math/tex; mode=display">
-S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}a=\lambda^2a</script><p>​        这个式子就是特征分解！要求最大的相关系数λλ,我们只需要对矩阵$N=S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}$做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为X的线性系数a。</p>
-<p>同样：</p>
-<script type="math/tex; mode=display">
-S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b</script><p>​        对矩阵$N’=S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}$做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为Y的线性系数b。</p>
-<p>​        可以看出特征分解的方法要比SVD复杂，但是两者求得的结果其实是等价的，只要利用SVD和特征分解之间的关系就很容易发现两者最后的结果相同</p>
-<h2 id="5-CCA算法流程"><a href="#5-CCA算法流程" class="headerlink" title="5.CCA算法流程"></a>5.CCA算法流程</h2><p>​                以SVD方法为准。</p>
-<p>　　　　输入：各为$m$个的样本$X$和$Y$，$X$和$Y$的维度都大于1</p>
-<p>　　　　输出：X,Y的相关系数$ρ$,$X$和$Y$的线性系数向量$a$和$b$</p>
-<p>　　　　1）计算X的方差$S_{XX}$, Y的方差$S_{YY}$，X和Y的协方差$S_{XY}$, $Y$和$X$的协方差$S_{YX}=S_{XY}^T$</p>
-<p>　　　　2)  计算矩阵$M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}$</p>
-<p>　　　　3）对矩阵$M$进行奇异值分解，得到最大的奇异值$ρ$，和最大奇异值对应的左右奇异向量$u,v$</p>
-<p>　　　　4) 计算X和Y的线性系数向量a和b, $a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$</p>
+S_{YY}^{-1}S_{YX}a = \lambda b
+\]</span> 由(19)得: <span class="math display">\[
+S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}a=\lambda^2a
+\]</span> ​ 这个式子就是特征分解！要求最大的相关系数λλ,我们只需要对矩阵<span class="math inline">\(N=S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}\)</span>做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为X的线性系数a。</p>
+<p>同样： <span class="math display">\[
+S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b
+\]</span> ​ 对矩阵<span class="math inline">\(N’=S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}\)</span>做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为Y的线性系数b。</p>
+<p>​ 可以看出特征分解的方法要比SVD复杂，但是两者求得的结果其实是等价的，只要利用SVD和特征分解之间的关系就很容易发现两者最后的结果相同</p>
+<h2 id="cca算法流程">5.CCA算法流程</h2>
+<p>​ 以SVD方法为准。</p>
+<p>　　　　输入：各为<span class="math inline">\(m\)</span>个的样本<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>，<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的维度都大于1</p>
+<p>　　　　输出：X,Y的相关系数<span class="math inline">\(ρ\)</span>,<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的线性系数向量<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span></p>
+<p>　　　　1）计算X的方差<span class="math inline">\(S_{XX}\)</span>, Y的方差<span class="math inline">\(S_{YY}\)</span>，X和Y的协方差<span class="math inline">\(S_{XY}\)</span>, <span class="math inline">\(Y\)</span>和<span class="math inline">\(X\)</span>的协方差<span class="math inline">\(S_{YX}=S_{XY}^T\)</span></p>
+<p>　　　　2) 计算矩阵<span class="math inline">\(M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}\)</span></p>
+<p>　　　　3）对矩阵<span class="math inline">\(M\)</span>进行奇异值分解，得到最大的奇异值<span class="math inline">\(ρ\)</span>，和最大奇异值对应的左右奇异向量<span class="math inline">\(u,v\)</span></p>
+<p>　　　　4) 计算X和Y的线性系数向量a和b, <span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span></p>
 <p>　　　　</p>
-<h2 id="6-CCA算法小结"><a href="#6-CCA算法小结" class="headerlink" title="6.CCA算法小结"></a>6.CCA算法小结</h2><p>​        CCA算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，CCA就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用CCA的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为KCCA。</p>
+<h2 id="cca算法小结">6.CCA算法小结</h2>
+<p>​ CCA算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，CCA就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用CCA的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为KCCA。</p>
 <p>　　此外，我们在算法里只找了相关度最大的奇异值或者特征值，作为数据的相关系数，实际上我们也可以像PCA一样找出第二大奇异值，第三大奇异值，。。。得到第二相关系数和第三相关系数。然后对数据做进一步的相关性分析。但是一般的应用来说，找出第一相关系数就可以了。</p>
-<p>　　有时候我们的矩阵$S_{XX},S_{YY}$不可逆，此时我们得不到对应的逆矩阵，一般遇到这种情况可以对$S_{XX},S_{YY}$进行正则化，将$S_{XX},S_{YY}$变化为$S_{XX}+\gamma I,S_{YY}+\gamma I$,然后继续求逆。其中$γ$为正则化系数。</p>
+<p>　　有时候我们的矩阵<span class="math inline">\(S_{XX},S_{YY}\)</span>不可逆，此时我们得不到对应的逆矩阵，一般遇到这种情况可以对<span class="math inline">\(S_{XX},S_{YY}\)</span>进行正则化，将<span class="math inline">\(S_{XX},S_{YY}\)</span>变化为<span class="math inline">\(S_{XX}+\gamma I,S_{YY}+\gamma I\)</span>,然后继续求逆。其中<span class="math inline">\(γ\)</span>为正则化系数。</p>
 
     </div>
 
