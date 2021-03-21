@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Basic Knowledge电极数量&gt;18  Global Field Power (GFP): 某个时间点地形图所有电极电压值的标准差，用于描述某个地形图电场的强度   GFP &#x3D; \sqrt{\sum_{i&#x3D;1}^{N} (u_i - \hat{u})^2&#x2F;N}1234567891011121314% 计算ERP的GFP  由于相对单个被试而言，总平均的ERP波形信噪比高%故对总平均E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day5MicroState analysis">
+<meta property="og:url" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/index.html">
+<meta property="og:site_name" content="朝花夕拾">
+<meta property="og:description" content="Basic Knowledge电极数量&gt;18  Global Field Power (GFP): 某个时间点地形图所有电极电压值的标准差，用于描述某个地形图电场的强度   GFP &#x3D; \sqrt{\sum_{i&#x3D;1}^{N} (u_i - \hat{u})^2&#x2F;N}1234567891011121314% 计算ERP的GFP  由于相对单个被试而言，总平均的ERP波形信噪比高%故对总平均E">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/EEG_GFP.png">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/image-20210321095828890.png">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/image-20210321110743530.png">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/image-20210321113419585.png">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/image-20210321115239769.png">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/个体.png">
+<meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/组平均.png">
+<meta property="article:published_time" content="2021-03-21T01:09:27.000Z">
+<meta property="article:modified_time" content="2021-03-21T07:54:08.584Z">
+<meta property="article:author" content="刘 可">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/EEG_GFP.png">
+
+
+<link rel="canonical" href="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Day5MicroState analysis | 朝花夕拾</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="朝花夕拾" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">朝花夕拾</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Knowledge"><span class="nav-number">1.</span> <span class="nav-text">Basic Knowledge</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">刘 可</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bloglk.gitee.io/2021/03/21/Day5MicroState-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="刘 可">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day5MicroState analysis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-21 09:09:27 / 修改时间：15:54:08" itemprop="dateCreated datePublished" datetime="2021-03-21T09:09:27+08:00">2021-03-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Basic-Knowledge"><a href="#Basic-Knowledge" class="headerlink" title="Basic Knowledge"></a>Basic Knowledge</h1><p>电极数量&gt;18</p>
+<ol>
+<li>Global Field Power (GFP): 某个<strong>时间点</strong>地形图<strong>所有电极</strong>电压值的<strong>标准差</strong>，用于描述某个地形图电场的<strong>强度</strong></li>
+</ol>
+<script type="math/tex; mode=display">
+GFP = \sqrt{\sum_{i=1}^{N} (u_i - \hat{u})^2/N}</script><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 计算ERP的GFP  由于相对单个被试而言，总平均的ERP波形信噪比高</span></span><br><span class="line"><span class="comment">%故对总平均ERP波形计算GFP</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% step1 使用pop_loadset 载入所有20个数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% step2  使用Edit 》 Append dataset  拼接20 个数据</span></span><br><span class="line">  </span><br><span class="line">ERPdata = <span class="built_in">mean</span>(EEG.data,<span class="number">3</span>);  <span class="comment">%59  3000  </span></span><br><span class="line">GFPdata = std(ERPdata,<span class="number">1</span>,<span class="number">1</span>);  <span class="comment">%1   3000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 绘制</span></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">subplot(<span class="number">121</span>);<span class="built_in">plot</span>(EEG.times,ERPdata);</span><br><span class="line">subplot(<span class="number">122</span>);<span class="built_in">plot</span>(EEG.times,GFPdata);</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/03/21/Day5MicroState-analysis/EEG_GFP.png" alt="EEG_GFP"></p>
+<p>峰处  信噪比高</p>
+<p>谷处  信噪比低</p>
+<p><img src="/2021/03/21/Day5MicroState-analysis/image-20210321095828890.png" alt="image-20210321095828890"></p>
+<ul>
+<li>谷”意味着一种地形图向另一种地 形图过渡</li>
+<li>比较两个地形图相似度之前，将两个地形图分别除以其GFP， 得到<strong>标准化</strong>的地形图</li>
+</ul>
+<p><strong>K-mean</strong></p>
+<p><img src="/2021/03/21/Day5MicroState-analysis/image-20210321110743530.png" alt="image-20210321110743530"></p>
+<p><img src="/2021/03/21/Day5MicroState-analysis/image-20210321113419585.png" alt="image-20210321113419585"></p>
+<p><img src="/2021/03/21/Day5MicroState-analysis/image-20210321115239769.png" alt="image-20210321115239769"></p>
+<p>静息态EEG的Microstate分析与ERP的Microstate分析有哪些差异？ </p>
+<ol>
+<li>地形图的极性 </li>
+<li>选取所有时刻点的地形图？GFP峰处的地形图 </li>
+<li>Microstate class的数目及其意义 </li>
+<li>可提供的指标的差异</li>
+</ol>
+<p>EEG 微状态分析</p>
+<ol>
+<li>电极数目一样</li>
+<li>顺序一样</li>
+<li>对应空间坐标</li>
+<li>采样率一致</li>
+</ol>
+<p>静息态EEG分析：<br>示例数据为cleaned_rest_data<br>使用的Microstate0.3插件（仅适用于静息态微状态分析，不适用ERP微状态分析）<br>使用的脚本是EEG_microstate_analysis.m</p>
+<p>Microstate0.3插件的安装：将Microstate0.3文件夹复制到eeglab的plugins文件夹中，并通过set path加入路径</p>
+<p>在使用上述插件和脚本处理数据前：<br>（1）数据做好常规的预处理操作，分段不分段均可。在静息态EEG  microstate分析中，需要在做完常规的预处理后，进而两个额外的预处理操作：第一个是全脑平均参考；第二个是带通滤波1~40 Hz或 2~20 Hz（居多）。在脚本EEG_microstate_analysis.m中包括上述两个操作（全脑平均参考和2~20 Hz滤波），因此这两个操作你自己不需要去做；<br>（2）如示例数据那样组织好数据，每个条件或每个组别下的所有被试各一个文件夹   如group1和group2各一个文件夹<br>（3）反复检查预处理后的数据的质量，特别是不能有坏电极、将采集非脑信号的电极如眼电乳突删掉</p>
+<p><strong>运行步骤：</strong></p>
+<ol>
+<li><p>将EEG_microstate_analysis.m所在的路径设置为current folder</p>
+</li>
+<li><p>运行上述脚本  把该脚本拖进command window<br>窗口1：指定某个条件或组别的数据所在的文件夹  如group1<br>窗口2：该数据所属的条件名称  本例EC<br>窗口3：指定数据所属的组别 如group1<br>窗口4：microstate分析生成的结果保存的路径  注意：该路径不要与脑电数据的路径相同也就是不要与窗口1路径相同<br>窗口5：是否需要删掉某些电极 是1否0   输入1会后续要求你输入哪些电极   本例输入0</p>
+<p>窗口5后载入数据并进行额外处理：平均参考、带通滤波2~20 Hz</p>
+<p>窗口6：是否从GFP峰处选取原始图 是1否0  本例输入1（一般建议）<br>窗口7：是否忽略地形图极性 是1否0  本例输入1<br>窗口8：使用何种方法进行聚类 AAHC输入1 k-mean输入0  本例输入1<br>窗口9：选择k-means的话需要指定重新开始的数目，比如100   选择AAHC的话，这里输入1 </p>
+<p>microstate0.3插件默认分为4类</p>
+<p>​    窗口9后对group1下的15个人的数据进行聚类，弹出组平均水平的4个map，此处需要指定4个地形图的顺序<br>顺序需要跟经典文献里面的顺序相一致<br>点man. sort  输入顺序 比如3 1 2 4<br>调整好顺序后，点close<br>接着要求我们指定是不是按照上述地形图的顺序，对每个人的4个地形图也重新排序，点yes</p>
+<p>窗口10：判断每个时间点地形图属于哪一类的时候，是否是依据GFP峰处地形图还是每个时间点的地形图<br>一般是选择GFP峰处   本例可输入1</p>
+</li>
+</ol>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%绘制单个被试的4个map</span></span><br><span class="line">EEG = pop_loadset(<span class="string">&#x27;filename&#x27;</span>,<span class="string">&#x27;sub01.set&#x27;</span>,<span class="string">&#x27;filepath&#x27;</span>,<span class="string">&#x27;C:\Users\admin\Desktop\21EEG_day5\1EEGmicrostate\&#x27;);</span></span><br><span class="line"><span class="string">maps = EEG.msinfo.MSMaps(4).Maps;</span></span><br><span class="line"><span class="string">maps(3,:) = maps(3,:) * (-1); % 因为该被试map3的极性与经典文献里面的极性相反</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">figure;</span></span><br><span class="line"><span class="string">for i = 1:4</span></span><br><span class="line"><span class="string">    subplot(2,2,i);</span></span><br><span class="line"><span class="string">    topoplot(maps(i,:), EEG.chanlocs);</span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">%% 绘制组平均水平的4个 map</span></span><br><span class="line"><span class="string">EEG = pop_loadset(&#x27;</span>filename&#x27;,<span class="string">&#x27;GrandMeanECgroup1.set&#x27;</span>,<span class="string">&#x27;filepath&#x27;</span>,<span class="string">&#x27;C:\Users\admin\Desktop\24EEG_day5\1EEGmicrostate\&#x27;);</span></span><br><span class="line"><span class="string">maps_group = EEG.msinfo.MSMaps(4).Maps;</span></span><br><span class="line"><span class="string">maps_group(3,:) = maps_group(3,:) * (-1); % 因为组水平map3的极性与经典文献里面的极性相反</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">figure;</span></span><br><span class="line"><span class="string">for i = 1:4</span></span><br><span class="line"><span class="string">    subplot(2,2,i);</span></span><br><span class="line"><span class="string">    topoplot(maps_group(i,:), EEG.chanlocs);</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure>
+<p>个体</p>
+<p><img src="/2021/03/21/Day5MicroState-analysis/个体.png" alt="个体"></p>
+<p>组平均</p>
+<p><img src="/2021/03/21/Day5MicroState-analysis/组平均.png" alt="组平均"></p>
+<p><strong>文件</strong></p>
+<ul>
+<li><p>ResultsFromGrandGrandMeanTemplate.csv：判断每个时刻点地形图属于哪一类的时候，依据组平均水平的4个图</p>
+</li>
+<li><p>ResultsFromIndividualTemplates.csv：判断每个时刻点地形图属于哪一类的时候，依据单个被试的4个图</p>
+</li>
+</ul>
+<p>  上述两个文件中的内容，文章中均可以用  用一个就行</p>
+<p>  <strong>指标</strong></p>
+<ul>
+<li><p>ExpVar：将数据分为4类时，四类地形图解释的方差比例  一般应70%~80%左右‘’</p>
+</li>
+<li><p>Duration_1~Duration_4：四个微状态类别的平均持续时间  单位秒</p>
+</li>
+<li><p>MeanDuration：上述四个指标的平均数</p>
+</li>
+<li><p>Occurrence_1~Occurrence_4：四个微状态类别单位时间内出现的次数  单位：次/秒</p>
+</li>
+<li><p>MeanOccurrence：上述四个的加和</p>
+</li>
+<li><p>Contribution_1~Contribution_4：四个微状态类别涵盖的时间百分比</p>
+</li>
+<li><p>OrgTM:4个微状态类别之间相互转换的概率 12个概率值</p>
+</li>
+<li><p>DeltaTM: 消除了各个微状态类别Occurrence不一样 对转换概率的影响，等于OrgTM和ExpTM 的差值<br>统计分析中，OrgTM和ExpTM均可</p>
+</li>
+</ul>
+<p><strong>上述指标的统计分析思路：</strong></p>
+<ol>
+<li><p>ExpVar指标文章里面报告被试间的均值和标准差、取值范围即可  不需要统计</p>
+</li>
+<li><p>Duration_1— Duration_4、Occurrence_1— Occurrence_4、Contribution_1~Contribution_4<br>统计分析时，需要将微状态类别作为自变量（组内）<br>假如是单因素2水平的组间实验设计，进行2（组别，两组人）*4（微状态类别，4个类别）方差分析<br> MeanDuration、MeanOccurrence不需要进行统计分析</p>
+</li>
+<li><p>OrgTM 或 DeltaTM 12个概率<br>假如是单因素2水平的组间实验设计，进行12个独立样本 t 检验，接着需要使用FDR等方法进行多重比较校正</p>
+</li>
+</ol>
+<p>   <strong>ERP的微状态分析：</strong><br>   CARTOOL软件可对静息态EEG也可以对ERP进行微状态分析，且可鉴别最佳的类别数目<br>   上述eeglab插件仅适用于静息态EEG，且不能鉴别最佳类别数目（强制分为4类）</p>
+<p>   CARTOOL软件：不好用、难学、数据大一些会崩溃（降低采样率到125 Hz或250 Hz、电极数目降低）、运行慢</p>
+<p>   CARTOOL软件不能识别 eeglab格式的数据，需要把数据转存为brain vison(BP)格式<br>   File &gt;&gt; Export &gt;&gt; Write Brain Vis. exchange format file<br>   brain vison(BP)格式每个数据有三个文件：dat文件   vhdr文件和 vmrk文件</p>
+<p>   Cartool 软件：Tools &gt;&gt; EEG and tracks &gt;&gt; Segmentation of EEG files</p>
+<p>   ep文件为一个微状态类别数目*电极的二维矩阵，可用于绘制每个微状态类别的地形图（借助eeglab中的topoplot函数绘制）<br>   seg文件：第三列存储的是每个时间点属于什么微状态类别  0表示什么类别都不属于</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/21/Day4%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5/" rel="prev" title="Day4功能连接">
+                  <i class="fa fa-chevron-left"></i> Day4功能连接
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/21/Day5night/" rel="next" title="Day5night">
+                  Day5night <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+<!--
+-->
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘 可</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d-widget-model-shizuku"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
