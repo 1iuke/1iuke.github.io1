@@ -196,7 +196,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -247,6 +247,238 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://bloglk.gitee.io/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="刘 可">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Day3时频分析</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-19 18:21:23" itemprop="dateCreated datePublished" datetime="2021-03-19T18:21:23+08:00">2021-03-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-21 09:02:55" itemprop="dateModified" datetime="2021-03-21T09:02:55+08:00">2021-03-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%84%91%E7%94%B5/" itemprop="url" rel="index"><span itemprop="name">脑电</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<h1 id="时域vs频域">时域vs频域</h1>
+<ul>
+<li>时域分析： 脑电波幅随时间的变化（如 刺激后 - 刺激前）。 ERP</li>
+<li>频域分析：分析脑电信号各频段的频谱能量。
+<ul>
+<li>主要适用场景：静息态数据等。</li>
+<li>对各被试、各通道、各分段的脑电信号做傅里叶变换，得到各个频率点上的能量，再做统计分析。</li>
+<li>统计方式：
+<ul>
+<li>（1）沿着频率点统计：选择感兴趣的空间区域（通道），沿着频率点进行统计检验。</li>
+<li>（2）沿着通道统计：选择感兴趣的频段，沿着通道进行统计检验。</li>
+<li>（3）提取特定通道、特定频段的能量数值，进行统计检验。</li>
+</ul></li>
+</ul></li>
+<li>时频分析
+<ul>
+<li>既有时域信息 又有频域信息</li>
+</ul></li>
+</ul>
+<h1 id="频域分析code">频域分析code</h1>
+<p>两组被试静息态EEG数据：</p>
+<pre><code>    20个通道，采样率256Hz  ，2s一段</code></pre>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Specify Basic information of different groups</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 声明各组数据所在文件夹</span></span><br><span class="line">group1_dir = <span class="string">&#x27;D:\MyWorkSpace\Matlab\SiYingPeiXun\25EEG_day3\cleaned_rest_data\group1&#x27;</span>;</span><br><span class="line">group2_dir = <span class="string">&#x27;D:\MyWorkSpace\Matlab\SiYingPeiXun\25EEG_day3\cleaned_rest_data\group2&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%提取各组数据的文件名</span></span><br><span class="line">group1_files = dir([group1_dir, filesep, <span class="string">&#x27;*.set&#x27;</span>]);</span><br><span class="line">group2_files = dir([group2_dir, filesep, <span class="string">&#x27;*.set&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">% 频域分析设置</span></span><br><span class="line"><span class="comment">%采样率</span></span><br><span class="line">Fs = <span class="number">256</span>;</span><br><span class="line"><span class="comment">%分段的长度   256 * 2s</span></span><br><span class="line">L = <span class="number">512</span>;</span><br><span class="line"><span class="comment">% T = 1/Fs;</span></span><br><span class="line"><span class="comment">% t = (0:L-1) * T;</span></span><br><span class="line">NFFT = <span class="number">2</span>^<span class="built_in">nextpow2</span>(L);</span><br><span class="line"><span class="comment">% 创建频率列表f</span></span><br><span class="line">f = Fs/<span class="number">2</span> * <span class="built_in">linspace</span>(<span class="number">0</span>,<span class="number">1</span>,NFFT/<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line"><span class="comment">% f = linspace(0, Fs/2, NFFT/2 + 1);</span></span><br></pre></td></tr></table></figure>
+<h1 id="问题">问题：</h1>
+<h2 id="每组被试各频带的能量如何-组水平频谱图code">1. 每组被试各频带的能量如何？ （组水平频谱图）Code</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Load and perform FFT transform on data of different groups</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%对于组1的所有被试</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(group1_files)</span><br><span class="line">    <span class="comment">%提取当前被试数据文件名</span></span><br><span class="line">    subj_fn = group1_files(<span class="built_in">i</span>).name;</span><br><span class="line">    <span class="comment">% fprintf(2,&#x27;now is processing %s \n&#x27;,subj_fn);</span></span><br><span class="line">    <span class="comment">% 读取当前被试预处理后的数据</span></span><br><span class="line">    EEG = pop_loadset([group1_dir, filesep, subj_fn]);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">%对于所有通道</span></span><br><span class="line">    <span class="comment">%EEG.data  (chl,times,epochs)</span></span><br><span class="line">    <span class="keyword">for</span> ii=<span class="number">1</span>:<span class="built_in">size</span>(EEG.data,<span class="number">1</span>)</span><br><span class="line">        <span class="comment">%对于所有分段</span></span><br><span class="line">        <span class="keyword">for</span> jj=<span class="number">1</span>:<span class="built_in">size</span>(EEG.data,<span class="number">3</span>)</span><br><span class="line">            <span class="comment">%提取第ii个通道第jj个分段 所有时间点的数据</span></span><br><span class="line">            y = <span class="built_in">squeeze</span>(EEG.data(ii,:,jj));</span><br><span class="line">            <span class="comment">%做FFT变换，求真实幅值(uV）</span></span><br><span class="line">            </span><br><span class="line"><span class="comment">%             temp = fft(y,NFFT)/ L;</span></span><br><span class="line"><span class="comment">%             Y(jj,:) = 2*abs(temp(1:NFFT/2+1));</span></span><br><span class="line"><span class="comment">%             </span></span><br><span class="line"><span class="comment">%             % 做FFT变换，求功率（uV平方）</span></span><br><span class="line"><span class="comment">%             temp = 2 * abs(fft(y,NFFT)).^2/L;</span></span><br><span class="line"><span class="comment">%             Y(jj,:)  = temp(1:NFFT/2+1);</span></span><br><span class="line"><span class="comment">%           </span></span><br><span class="line">            <span class="comment">%做FFT变换，求功率谱密度（PSD）（单位 uV平方/Hz）</span></span><br><span class="line">            temp = <span class="number">2</span>*<span class="built_in">abs</span>(fft(y,NFFT)).^<span class="number">2</span>/L/Fs;</span><br><span class="line">            Y(jj,:) = temp(<span class="number">1</span>:NFFT/<span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line"><span class="comment">%             </span></span><br><span class="line"><span class="comment">%             % 做FFT变换，求功率谱密度（PSD）（单位 dB ）</span></span><br><span class="line"><span class="comment">%             temp = 2*abs(fft(y,NFFT)).^2/L/Fs;</span></span><br><span class="line"><span class="comment">%             Y(jj,:) = 10*log10(temp(1:NFFT/2+1));</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">% 数据汇总： 被试 * 通道 * 频率</span></span><br><span class="line">        group1_FFT_power(<span class="built_in">i</span>,ii,:) = <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(Y,<span class="number">1</span>)); clear Y;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    fprintf(<span class="number">2</span>,<span class="string">&#x27;%s done \n&#x27;</span>,subj_fn);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(group2_files)</span><br><span class="line">    subj_fn = group2_files(<span class="built_in">i</span>).name;</span><br><span class="line">    EEG = pop_loadset([group2_dir, filesep, subj_fn]);</span><br><span class="line">  <span class="comment">%  fprintf(&#x27;====now is processing %s --------\n&#x27;,subj_fn);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ii=<span class="number">1</span>:<span class="built_in">size</span>(EEG.data,<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> jj=<span class="number">1</span>:<span class="built_in">size</span>(EEG.data,<span class="number">3</span>)</span><br><span class="line">            y = <span class="built_in">squeeze</span>(EEG.data(ii,:,jj));</span><br><span class="line"><span class="comment">%             temp = fft(y,NFFT)/ L;</span></span><br><span class="line"><span class="comment">%             Y(jj,:) = 2*abs(temp(1:NFFT/2+1));</span></span><br><span class="line">            </span><br><span class="line">            temp = <span class="number">2</span>*<span class="built_in">abs</span>(fft(y,NFFT)).^<span class="number">2</span>/L/Fs;</span><br><span class="line">            Y(jj,:) = temp(<span class="number">1</span>:NFFT/<span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        group2_FFT_power(<span class="built_in">i</span>,ii,:) = <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(Y,<span class="number">1</span>)); clear Y;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    fprintf(<span class="number">2</span>,<span class="string">&#x27;%s done \n&#x27;</span>,subj_fn);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% plot power and scalp maps</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%找出小于30Hz的频率点的位置</span></span><br><span class="line">f_idx = <span class="built_in">find</span>(f &lt;= <span class="number">30</span>);</span><br><span class="line"><span class="comment">%提取小于30Hz的频率值</span></span><br><span class="line">f_plot = f(f_idx);</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">Cz = <span class="number">3</span>;</span><br><span class="line"><span class="comment">%提取所有被试Cz通道小于30Hz的power值、再做组平均，作为纵轴；f_plot作为横轴画图</span></span><br><span class="line"><span class="built_in">plot</span>(f_plot, <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(group1_FFT_power(:,Cz, f_idx),<span class="number">1</span>)),<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;linewidth&#x27;</span>,<span class="number">1.5</span>);</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"><span class="built_in">plot</span>(f_plot, <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(group2_FFT_power(:,Cz, f_idx),<span class="number">1</span>)),<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;linewidth&#x27;</span>,<span class="number">1.5</span>);</span><br><span class="line">title(<span class="string">&#x27;Group level FFT&#x27;</span>, <span class="string">&#x27;fontsize&#x27;</span>, <span class="number">16</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency&#x27;</span>);</span><br><span class="line"><span class="comment">% ylabel(&#x27;Amplitude&#x27;);</span></span><br><span class="line">ylabel(<span class="string">&#x27;PSD  (uV2/Hz)&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/1.png" alt="1"><figcaption aria-hidden="true">1</figcaption>
+</figure>
+<h2 id="每组被试alpha频段的能量在头皮都那些位置能量比较大-组水平地形图code">2. 每组被试Alpha频段的能量在头皮都那些位置能量比较大？ （组水平地形图）Code</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%定义感兴趣的频段（此处为alpha波段）</span></span><br><span class="line">alpha_idx = <span class="built_in">find</span>((f &gt;=<span class="number">8</span>) &amp; (f&lt;=<span class="number">12</span>));</span><br><span class="line"><span class="comment">% 提取各组的所有被试、所有通道、alpha波段的power值，并对被试、波段做平均</span></span><br><span class="line">group1_alpha_mag_avg = <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(group1_FFT_power(:,:,alpha_idx),<span class="number">3</span>),<span class="number">1</span>));</span><br><span class="line">group2_alpha_mag_avg = <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(group2_FFT_power(:,:,alpha_idx),<span class="number">3</span>),<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">subplot(<span class="number">121</span>); topoplot(group1_alpha_mag_avg, EEG.chanlocs,<span class="string">&#x27;maplimits&#x27;</span>,[<span class="number">0</span> <span class="number">4</span>]); title(<span class="string">&#x27;Group1&#x27;</span>, <span class="string">&#x27;fontsize&#x27;</span>, <span class="number">16</span>);</span><br><span class="line">subplot(<span class="number">122</span>); topoplot(group2_alpha_mag_avg, EEG.chanlocs,<span class="string">&#x27;maplimits&#x27;</span>,[<span class="number">0</span> <span class="number">4</span>]); title(<span class="string">&#x27;Group2&#x27;</span>, <span class="string">&#x27;fontsize&#x27;</span>, <span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/2.png" alt="2"><figcaption aria-hidden="true">2</figcaption>
+</figure>
+<h2 id="两组被试的频谱能量在那些频段存在显著差异code">3. 两组被试的频谱能量在那些频段存在显著差异？Code</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Specify (ROI) channels and compare across frequency points</span></span><br><span class="line"><span class="comment">%选定感兴趣的通道</span></span><br><span class="line">Pz = <span class="number">10</span>;</span><br><span class="line"><span class="comment">%挑选各组所有被试Pz通道所有频率点的power值</span></span><br><span class="line"><span class="comment">%被试 *  频率</span></span><br><span class="line">group1_data = <span class="built_in">squeeze</span>(group1_FFT_power(:,Pz,:));</span><br><span class="line">group2_data = <span class="built_in">squeeze</span>(group2_FFT_power(:,Pz,:));</span><br><span class="line"></span><br><span class="line"><span class="comment">%只分析30Hz以下的频段</span></span><br><span class="line">f_idx = <span class="built_in">find</span>(f&lt;=<span class="number">30</span>);</span><br><span class="line">f_band = f(f_idx);</span><br><span class="line"><span class="comment">%对于每一个频率点</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(f_band)</span><br><span class="line">    <span class="comment">%挑选第一(二）组所有被试在第i个频率点上的power值</span></span><br><span class="line">    data1 = group1_data(:,<span class="built_in">i</span>);</span><br><span class="line">    data2 = group2_data(:,<span class="built_in">i</span>);</span><br><span class="line">    <span class="comment">%做双样本T检验</span></span><br><span class="line">    [h,p,ci,stat] = ttest2(data1,data2);</span><br><span class="line">    <span class="comment">%存储p值、T值</span></span><br><span class="line">    pvals(<span class="built_in">i</span>) = p;</span><br><span class="line">    tvals(<span class="built_in">i</span>) = stat.tstat;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line"><span class="built_in">plot</span>(f_band, pvals);</span><br><span class="line">ylim([<span class="number">0</span> <span class="number">0.05</span>]);</span><br><span class="line">xlim([<span class="number">0</span> <span class="number">30</span>]);</span><br><span class="line">title(<span class="string">&#x27;P Values&#x27;</span>);</span><br><span class="line">xlabel(<span class="string">&#x27;Frequency&#x27;</span>);</span><br><span class="line">ylabel(<span class="string">&#x27;p&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/3.png" alt="3"><figcaption aria-hidden="true">3</figcaption>
+</figure>
+<h2 id="两组被试alpha频段能量在头皮的那些区域存在显著差异code">4. 两组被试Alpha频段能量在头皮的那些区域存在显著差异？Code</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Specify (ROI) frequency band and compare across channels</span></span><br><span class="line">clear pvals tvals;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 定义频域8 ~ 12Hz</span></span><br><span class="line">f_ROI = <span class="built_in">find</span>((f&gt;=<span class="number">8</span>) &amp; (f&lt;=<span class="number">12</span>));</span><br><span class="line"><span class="comment">%提取 各组 所有被试 所有通道 alpha频段的power， 对频段做平均</span></span><br><span class="line"><span class="comment">% 被试 * 通道</span></span><br><span class="line">group1_data = <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(group1_FFT_power(:,:,f_ROI),<span class="number">3</span>));</span><br><span class="line">group2_data = <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(group2_FFT_power(:,:,f_ROI),<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">%对于每一个通道</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:EEG.nbchan</span><br><span class="line">    <span class="comment">%提取组一(组二）当前通道的power</span></span><br><span class="line">    data1 = group1_data(:,<span class="built_in">i</span>);</span><br><span class="line">    data2 = group2_data(:,<span class="built_in">i</span>);</span><br><span class="line">    <span class="comment">% 双样本T检验</span></span><br><span class="line">    [h,p,ci,stat] = ttest2(data1,data2);</span><br><span class="line">    <span class="comment">% 存储p值、T值</span></span><br><span class="line">    pvals(<span class="built_in">i</span>) = p;</span><br><span class="line">    tvals(<span class="built_in">i</span>) = stat.tstat;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">topoplot(tvals, EEG.chanlocs,<span class="string">&#x27;maplimits&#x27;</span>,[<span class="number">0</span>,<span class="number">2</span>]); </span><br><span class="line">title(<span class="string">&#x27;Alpha Band&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">16</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/4-1616145095754.png" alt="4"><figcaption aria-hidden="true">4</figcaption>
+</figure>
+<h2 id="保存数据">保存数据</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% Save power of different frequency bands</span></span><br><span class="line">group1_alpha_mag = double(<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(group1_FFT_power(:,:,alpha_idx),<span class="number">3</span>)));</span><br><span class="line">group2_alpha_mag = double(<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(group2_FFT_power(:,:,alpha_idx),<span class="number">3</span>)));</span><br><span class="line"></span><br><span class="line">save(<span class="string">&#x27;alpha_power.mat&#x27;</span>,<span class="string">&#x27;group1_alpha_mag&#x27;</span>,<span class="string">&#x27;group2_alpha_mag&#x27;</span>);</span><br><span class="line">save(<span class="string">&#x27;group1_alpha.txt&#x27;</span>, <span class="string">&#x27;-ascii&#x27;</span>, <span class="string">&#x27;group1_alpha_mag&#x27;</span>);</span><br><span class="line">save(<span class="string">&#x27;group2_alpha.txt&#x27;</span>, <span class="string">&#x27;-ascii&#x27;</span>, <span class="string">&#x27;group2_alpha_mag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="参数检验正态分布效果好">参数检验（正态分布效果好）：</h1>
+<h2 id="t检验">T检验：</h2>
+<ol type="1">
+<li><p>单样本T检验： 一组被试数据 和 某个数值作比较 ttest</p></li>
+<li><p>配对T检验： 一组被试两种不同条件的数据作比较（刺激1 vs 刺激2；干预前 vs 干预后） ttest</p></li>
+<li><p>双样本T检验： 两个独立分组的被试的数据作比较 （实验组 vs 对照组） ttest2</p></li>
+</ol>
+<h1 id="方差分析">方差分析</h1>
+<h2 id="f检验">F检验</h2>
+<ol start="4" type="1">
+<li><p>单因素方差分析： 多个(&gt;=2) 独立分组的被试的数据的比较 （实验组1 vs 实验组2 vs 对照组） anova1</p></li>
+<li><p>单因素重复测量方差分析： 一组被试多种 (&gt;=2) 不同条件的数据的比较 （刺激1 vs 刺激2 vs 刺激3；前测 vs 中测 vs 后测）anova_rm</p></li>
+<li><p>两因素方差分析： （疾病：患者、对照； 性别：男、女 问题： 患者相对于对照的变化，是否会随着性别的改变而改变？）anova2</p></li>
+<li><p>两因素混合方差分析：（干预方式：干预组、对照组； 时间：前测、后测。 问题：后测相对于前测的差异 会不会 随着干预方式的改变而改变？） mixed_anova</p></li>
+</ol>
+<h1 id="非参数检验非正态分布效果好">非参数检验（非正态分布效果好）</h1>
+<ol start="8" type="1">
+<li>置换检验、BootStrap等</li>
+</ol>
+<h1 id="时频分析">时频分析</h1>
+<p>一组被试，四种条件的ER数据</p>
+<p>四种条件：L1,L2,L3,L4</p>
+<p>通道数量59个 ，采样率1000Hz，3s一段（-1s — 2s）</p>
+<h1 id="问题-1">问题：</h1>
+<h2 id="各频带能量随时间变化如何刺激后相对于刺激前各频带有无能量变化变高-or-变低在那个频带code">1 各频带能量随时间变化如何？刺激后相对于刺激前各频带有无能量变化？（变高 or 变低？在那个频带？）Code</h2>
+<p><strong>单个被试、单个通道时频变换结果的汇总</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 单个被试、单个通道时频变换结果的汇总</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">%导入一例被试的数据</span></span><br><span class="line">filename = <span class="string">&#x27;D:\MyWorkSpace\Matlab\SiYingPeiXun\25EEG_day3\Example_data\1_LH.set&#x27;</span>; </span><br><span class="line">EEG = pop_loadset(filename);</span><br><span class="line"></span><br><span class="line"><span class="comment">%提取某个通道的数据</span></span><br><span class="line"><span class="comment">%  x： 时间点*分段        （EEG.data  通道*时间点*分段）</span></span><br><span class="line">x = <span class="built_in">squeeze</span>(EEG.data(<span class="number">29</span>,:,:)); </span><br><span class="line"></span><br><span class="line"><span class="comment">%分段时间范围</span></span><br><span class="line">xtimes=EEG.times/<span class="number">1000</span>;  </span><br><span class="line"><span class="comment">%时频结果的  时间分辨率</span></span><br><span class="line">t=EEG.times/<span class="number">1000</span>;</span><br><span class="line"><span class="comment">%时频结果的  频域分辨率</span></span><br><span class="line">f=<span class="number">1</span>:<span class="number">1</span>:<span class="number">30</span>;  </span><br><span class="line"><span class="comment">%数据采样率</span></span><br><span class="line">Fs = EEG.srate;</span><br><span class="line"><span class="comment">%窗长   （如果分段时间较短，窗长可以适当缩短；</span></span><br><span class="line"><span class="comment">%在段的起始、结束处，时频变换的结果不是绝对精准的，因为做了补0操作）</span></span><br><span class="line">winsize = <span class="number">0.200</span>; </span><br><span class="line"><span class="comment">%时频变换 （短时傅里叶变换）</span></span><br><span class="line"><span class="comment">%P ， 频率 *  时间 * 分段  （Power）</span></span><br><span class="line">[S, P, F, U] = sub_stft(x, xtimes, t, f, Fs, winsize); </span><br><span class="line"><span class="comment">%P_data  分段平均后的结果   频率*时间</span></span><br><span class="line">P_data=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P,<span class="number">3</span>)); </span><br><span class="line"></span><br><span class="line"><span class="comment">%对时频结果，减基线（凸显ERD/ERS）  </span></span><br><span class="line"><span class="comment">% 刺激后能量-刺激前能量</span></span><br><span class="line"><span class="comment">%选择基线范围，刺激前0.8 ~0.2毫秒，避免了窗长问题</span></span><br><span class="line">t_pre_idx=<span class="built_in">find</span>((t&gt;=<span class="number">-0.8</span>)&amp;(t&lt;=<span class="number">-0.2</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">% 对于每一个频率点</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">1</span>)</span><br><span class="line">    <span class="comment">%提取该频率点所有时刻的power</span></span><br><span class="line">    temp_data=<span class="built_in">squeeze</span>(P_data(<span class="built_in">i</span>,:));</span><br><span class="line">    <span class="comment">%该频率点所有时刻的power  减去   基线时间段的power的均值</span></span><br><span class="line">    P_BC(<span class="built_in">i</span>,:)=temp_data-<span class="built_in">mean</span>(temp_data(t_pre_idx)); </span><br><span class="line">    <span class="comment">%P_BC，基线校正后的结果，频率*时间点</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;  </span><br><span class="line"><span class="comment">%绘制 未做基线校正的时频图</span></span><br><span class="line">subplot(<span class="number">211</span>); imagesc(t,f,P_data); axis xy; </span><br><span class="line"><span class="built_in">hold</span> on;  axis xy; colorbar;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ms)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); ylabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); </span><br><span class="line">title(<span class="string">&#x27;TFR (without baseline correction)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">15</span>);</span><br><span class="line"><span class="comment">%绘制基线校正后的时频图</span></span><br><span class="line">subplot(<span class="number">212</span>); imagesc(t,f,P_BC); axis xy; </span><br><span class="line"><span class="built_in">hold</span> on;  axis xy; colorbar; <span class="comment">%caxis([-0.8 2]);</span></span><br><span class="line">xlabel(<span class="string">&#x27;Time (ms)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); ylabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); </span><br><span class="line">title(<span class="string">&#x27;Baseline-corrected TFR&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">15</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/1-1616159128073.png" alt="1"><figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p><strong>单个被试、多个通道时频变换结果的汇总</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%  time-frequency of single subject at several electrodes</span></span><br><span class="line">clear;clc</span><br><span class="line"><span class="comment">%单个被试多个通道时频变换结果汇总</span></span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;D:\MyWorkSpace\Matlab\SiYingPeiXun\25EEG_day3\Example_data\1_LH.set&#x27;</span>; </span><br><span class="line">EEG = pop_loadset(filename);</span><br><span class="line"><span class="keyword">for</span> nchan=<span class="number">1</span>:EEG.nbchan</span><br><span class="line">    x = <span class="built_in">squeeze</span>(EEG.data(nchan,:,:)); <span class="comment">%3000*40</span></span><br><span class="line">    xtimes=EEG.times/<span class="number">1000</span>;  <span class="comment">%3000点</span></span><br><span class="line">    t=EEG.times/<span class="number">1000</span>;  <span class="comment">%时间3000点</span></span><br><span class="line">    f=<span class="number">1</span>:<span class="number">1</span>:<span class="number">30</span>;   <span class="comment">%频率30点</span></span><br><span class="line">    Fs = EEG.srate;  <span class="comment">%采样率</span></span><br><span class="line">    winsize = <span class="number">0.200</span>;   </span><br><span class="line">    [S, P, F, U] = sub_stft(x, xtimes, t, f, Fs, winsize); </span><br><span class="line">    <span class="comment">% 通道 *  频率 * 时间点</span></span><br><span class="line">    P_data(nchan,:,:)=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P,<span class="number">3</span>));   <span class="comment">%P (30  3000 40) ==&gt;  (30  3000)</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%对于每个通道、每个频率点  都做基线校正</span></span><br><span class="line">t_pre_idx=<span class="built_in">find</span>((t&gt;=<span class="number">-0.8</span>)&amp;(t&lt;=<span class="number">-0.2</span>));</span><br><span class="line"><span class="comment">%对于每一个通道</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">1</span>)</span><br><span class="line">    <span class="comment">%对于每一个频率点</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%减基线</span></span><br><span class="line">        temp_data=<span class="built_in">squeeze</span>(P_data(<span class="built_in">i</span>,<span class="built_in">j</span>,:));</span><br><span class="line">        P_BC(<span class="built_in">i</span>,<span class="built_in">j</span>,:)=temp_data-<span class="built_in">mean</span>(temp_data(t_pre_idx)); </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">channel_plot=<span class="number">29</span>; </span><br><span class="line"><span class="built_in">figure</span>;  </span><br><span class="line">subplot(<span class="number">211</span>); imagesc(t,f,<span class="built_in">squeeze</span>(P_data(channel_plot,:,:))); axis xy; </span><br><span class="line"><span class="built_in">hold</span> on;  axis xy; colorbar;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ms)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); ylabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); </span><br><span class="line">title(<span class="string">&#x27;TFR (without baseline correction)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">15</span>);</span><br><span class="line">subplot(<span class="number">212</span>); imagesc(t,f,<span class="built_in">squeeze</span>(P_BC(channel_plot,:,:))); axis xy; </span><br><span class="line"><span class="built_in">hold</span> on;  axis xy; colorbar; <span class="comment">%caxis([-0.8 2]);</span></span><br><span class="line">xlabel(<span class="string">&#x27;Time (ms)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); ylabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); </span><br><span class="line">title(<span class="string">&#x27;Baseline-corrected TFR&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">15</span>);</span><br><span class="line"></span><br><span class="line">ROI1_t=[<span class="number">-0.8</span> <span class="number">-0.2</span>]; ROI1_f=[<span class="number">8</span> <span class="number">13</span>];</span><br><span class="line">ROI1_t_idx=<span class="built_in">find</span>((t&gt;=ROI1_t(<span class="number">1</span>))&amp;(t&lt;=ROI1_t(<span class="number">2</span>)));</span><br><span class="line">ROI1_f_idx=<span class="built_in">find</span>((f&gt;=ROI1_f(<span class="number">1</span>))&amp;(f&lt;=ROI1_f(<span class="number">2</span>)));</span><br><span class="line">Pre_alpha=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_data(:,ROI1_f_idx,ROI1_t_idx),<span class="number">2</span>),<span class="number">3</span>)); </span><br><span class="line"></span><br><span class="line">ROI2_t=[<span class="number">1</span> <span class="number">1.5</span>];ROI2_f=[<span class="number">8</span> <span class="number">13</span>];</span><br><span class="line">ROI2_t_idx=<span class="built_in">find</span>((t&gt;=ROI2_t(<span class="number">1</span>))&amp;(t&lt;=ROI2_t(<span class="number">2</span>)));</span><br><span class="line">ROI2_f_idx=<span class="built_in">find</span>((f&gt;=ROI2_f(<span class="number">1</span>))&amp;(f&lt;=ROI2_f(<span class="number">2</span>)));</span><br><span class="line">Post_alpha=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_data(:,ROI2_f_idx,ROI2_t_idx),<span class="number">2</span>),<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>; </span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>);</span><br><span class="line">topoplot(Pre_alpha,EEG.chanlocs); </span><br><span class="line">title(<span class="string">&#x27;Prestimulus alpha&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>);</span><br><span class="line">topoplot(Post_alpha,EEG.chanlocs); </span><br><span class="line">title(<span class="string">&#x27;Postimulus alpha&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">topoplot(Post_alpha-Pre_alpha,EEG.chanlocs); </span><br><span class="line">title(<span class="string">&#x27;difference&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">10</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/2-1616159291022.png" alt="2"><figcaption aria-hidden="true">2</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/3-1616159296791.png" alt="3"><figcaption aria-hidden="true">3</figcaption>
+</figure>
+<p><strong>多个被试、多个通道时频变换结果的汇总</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% time-frequency analysis of several subjects</span></span><br><span class="line">clear;clc;</span><br><span class="line">Subj=[<span class="number">1</span>:<span class="number">10</span>];</span><br><span class="line"><span class="comment">% 对于每个被试</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(Subj)<span class="comment">%;length(Subj)</span></span><br><span class="line">    setname=strcat(num2str(<span class="built_in">i</span>),<span class="string">&#x27;_LH.set&#x27;</span>); </span><br><span class="line">    setpath=<span class="string">&#x27;D:\MyWorkSpace\Matlab\SiYingPeiXun\25EEG_day3\Example_data&#x27;</span>; </span><br><span class="line">    EEG = pop_loadset(<span class="string">&#x27;filename&#x27;</span>,setname,<span class="string">&#x27;filepath&#x27;</span>,setpath); </span><br><span class="line">    <span class="comment">% 对于每个通道</span></span><br><span class="line">    <span class="keyword">for</span> nchan=<span class="number">1</span>:EEG.nbchan; </span><br><span class="line">        x = <span class="built_in">squeeze</span>(EEG.data(nchan,:,:)); <span class="comment">%3000 * 40</span></span><br><span class="line">        xtimes=EEG.times/<span class="number">1000</span>;  </span><br><span class="line">        t=EEG.times/<span class="number">1000</span>;</span><br><span class="line">        f=<span class="number">1</span>:<span class="number">0.5</span>:<span class="number">30</span>;</span><br><span class="line">        Fs = EEG.srate;</span><br><span class="line">        winsize = <span class="number">0.200</span>; </span><br><span class="line">        [S, P, F, U] = sub_stft(x, xtimes, t, f, Fs, winsize); </span><br><span class="line">        <span class="comment">%  被试*通道*频率*时间点</span></span><br><span class="line">        P_data(<span class="built_in">i</span>,nchan,:,:)=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P,<span class="number">3</span>));   <span class="comment">%subs * chls * f * times</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 对于每个被试、每个通道、每个频率点，都做减基线的操作</span></span><br><span class="line">t_pre_idx=<span class="built_in">find</span>((t&gt;=<span class="number">-0.8</span>)&amp;(t&lt;=<span class="number">-0.2</span>));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">for</span> k=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">3</span>)</span><br><span class="line">            temp_data=<span class="built_in">squeeze</span>(P_data(<span class="built_in">i</span>,<span class="built_in">j</span>,k,:));</span><br><span class="line">            P_BC(<span class="built_in">i</span>,<span class="built_in">j</span>,k,:)=temp_data-<span class="built_in">mean</span>(temp_data(t_pre_idx)); </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">channel_plot=<span class="number">29</span>; </span><br><span class="line"><span class="built_in">figure</span>;  </span><br><span class="line"><span class="comment">% 对于多个被试汇总的结果，可以刻画组平均的时频图   第29通道的组平均（基线校正前）</span></span><br><span class="line">subplot(<span class="number">211</span>); imagesc(t,f,<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P_data(:,channel_plot,:,:),<span class="number">1</span>))); axis xy; </span><br><span class="line"><span class="built_in">hold</span> on;  axis xy; colorbar;</span><br><span class="line">xlabel(<span class="string">&#x27;Time (ms)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); ylabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); </span><br><span class="line">title(<span class="string">&#x27;TFR (without baseline correction)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">15</span>);</span><br><span class="line"><span class="comment">% 第29通道的组平均（基线校正后）</span></span><br><span class="line">subplot(<span class="number">212</span>); imagesc(t,f,<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P_BC(:,channel_plot,:,:),<span class="number">1</span>))); axis xy; </span><br><span class="line"><span class="built_in">hold</span> on;  axis xy; colorbar; <span class="comment">%caxis([-0.8 2]);</span></span><br><span class="line">xlabel(<span class="string">&#x27;Time (ms)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); ylabel(<span class="string">&#x27;Frequency (Hz)&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">12</span>); </span><br><span class="line">title(<span class="string">&#x27;Baseline-corrected TFR&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">15</span>);</span><br><span class="line"></span><br><span class="line">ROI1_t=[<span class="number">0.2</span> <span class="number">0.4</span>]; ROI1_f=[<span class="number">1</span> <span class="number">10</span>];</span><br><span class="line">ROI1_t_idx=<span class="built_in">find</span>((t&gt;=ROI1_t(<span class="number">1</span>))&amp;(t&lt;=ROI1_t(<span class="number">2</span>)));</span><br><span class="line">ROI1_f_idx=<span class="built_in">find</span>((f&gt;=ROI1_f(<span class="number">1</span>))&amp;(f&lt;=ROI1_f(<span class="number">2</span>)));</span><br><span class="line"><span class="comment">%多个被试结果汇总后，可以刻画 组平均地形图</span></span><br><span class="line">TFD_plot=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_BC(:,:,ROI1_f_idx,ROI1_t_idx),<span class="number">1</span>),<span class="number">3</span>),<span class="number">4</span>)); </span><br><span class="line"><span class="built_in">figure</span>; topoplot(TFD_plot,EEG.chanlocs); title(<span class="string">&#x27;ROI1 Magnitude&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">ROI2_t=[<span class="number">1.2</span> <span class="number">1.6</span>];ROI2_f=[<span class="number">8</span> <span class="number">13</span>];</span><br><span class="line">ROI2_t_idx=<span class="built_in">find</span>((t&gt;=ROI2_t(<span class="number">1</span>))&amp;(t&lt;=ROI2_t(<span class="number">2</span>)));</span><br><span class="line">ROI2_f_idx=<span class="built_in">find</span>((f&gt;=ROI2_f(<span class="number">1</span>))&amp;(f&lt;=ROI2_f(<span class="number">2</span>)));</span><br><span class="line">TFD_plot=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_BC(:,:,ROI2_f_idx,ROI2_t_idx),<span class="number">1</span>),<span class="number">3</span>),<span class="number">4</span>)); </span><br><span class="line"><span class="built_in">figure</span>; topoplot(TFD_plot,EEG.chanlocs); title(<span class="string">&#x27;ROI2 Magnitude&#x27;</span>,<span class="string">&#x27;fontsize&#x27;</span>,<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/3_1.png" alt="3_1"><figcaption aria-hidden="true">3_1</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/3_2.png" alt="3_2"><figcaption aria-hidden="true">3_2</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/3_3.png" alt="3_3"><figcaption aria-hidden="true">3_3</figcaption>
+</figure>
+<h2 id="不同条件的刺激-诱发的-能量的变化程度是否一致-code">2 不同条件的刺激 诱发的 能量的变化程度是否一致？ Code</h2>
+<p><strong>比较L3 L4</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% time-frequency analysis  of multiple subjects and conditions</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%对于每个被试</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">length</span>(Subj)</span><br><span class="line">    setname=strcat(num2str(<span class="built_in">i</span>),<span class="string">&#x27;_LH.set&#x27;</span>); </span><br><span class="line">    setpath=<span class="string">&#x27;D:\MyWorkSpace\Matlab\SiYingPeiXun\25EEG_day3\Example_data\&#x27;; </span></span><br><span class="line"><span class="string">    EEG= pop_loadset(&#x27;</span>filename&#x27;,setname,<span class="string">&#x27;filepath&#x27;</span>,setpath); </span><br><span class="line">    EEG= eeg_checkset( EEG );</span><br><span class="line">    <span class="comment">%对于每个条件</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">length</span>(Cond)</span><br><span class="line">        EEG_new = pop_epoch( EEG, Cond(<span class="built_in">j</span>), [<span class="number">-1</span>  <span class="number">2</span>], <span class="string">&#x27;newname&#x27;</span>, <span class="string">&#x27;Merged datasets pruned with ICA   epochs epochs&#x27;</span>, <span class="string">&#x27;epochinfo&#x27;</span>, <span class="string">&#x27;yes&#x27;</span>); </span><br><span class="line">        EEG_new = eeg_checkset( EEG_new );</span><br><span class="line">        EEG_new = pop_rmbase( EEG_new, [<span class="number">-1000</span>     <span class="number">0</span>]); </span><br><span class="line">        EEG_new = eeg_checkset( EEG_new );</span><br><span class="line">        <span class="comment">%对于每个通道</span></span><br><span class="line">        <span class="keyword">for</span> nchan=<span class="number">1</span>:<span class="built_in">size</span>(EEG_new.data,<span class="number">1</span>)</span><br><span class="line">            x = <span class="built_in">squeeze</span>(EEG_new.data(nchan,:,:)); </span><br><span class="line">            xtimes=EEG_new.times/<span class="number">1000</span>; </span><br><span class="line">            t=EEG_new.times/<span class="number">1000</span>;</span><br><span class="line">            f=<span class="number">1</span>:<span class="number">1</span>:<span class="number">30</span>; </span><br><span class="line">            Fs = EEG.srate;</span><br><span class="line">            winsize = <span class="number">0.200</span>; </span><br><span class="line">            [S, P, F, U] = sub_stft(x, xtimes, t, f, Fs, winsize); </span><br><span class="line">            <span class="comment">%被试 *  条件  *  通道 * 频率 * 时间</span></span><br><span class="line">            P_data(<span class="built_in">i</span>,<span class="built_in">j</span>,nchan,:,:)=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P,<span class="number">3</span>));</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">t_pre_idx=<span class="built_in">find</span>((t&gt;=<span class="number">-0.8</span>)&amp;(t&lt;=<span class="number">-0.2</span>));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">for</span> ii=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">3</span>)</span><br><span class="line">            <span class="keyword">for</span> jj=<span class="number">1</span>:<span class="built_in">size</span>(P_data,<span class="number">4</span>)</span><br><span class="line">                temp_data=<span class="built_in">squeeze</span>(P_data(<span class="built_in">i</span>,<span class="built_in">j</span>,ii,jj,:));</span><br><span class="line">                P_BC(<span class="built_in">i</span>,<span class="built_in">j</span>,ii,jj,:)=temp_data-<span class="built_in">mean</span>(temp_data(t_pre_idx));</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">imagesc(t,f, <span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P_data(:,<span class="number">3</span>,<span class="number">29</span>,:,:))));</span><br><span class="line">axis xy;</span><br><span class="line"><span class="built_in">figure</span>;s</span><br><span class="line">imagesc(t,f,<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(P_BC(:,<span class="number">3</span>,<span class="number">29</span>,:,:))));</span><br><span class="line">axis xy;</span><br><span class="line"></span><br><span class="line">t_idx = <span class="built_in">find</span>((t&gt;=<span class="number">1</span>) &amp; (t&lt;=<span class="number">1.5</span>));</span><br><span class="line">f_idx = <span class="built_in">find</span>((f&gt;=<span class="number">8</span>) &amp; (f&lt;=<span class="number">13</span>));</span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">topoplot(<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_BC(:,<span class="number">3</span>,:,f_idx,t_idx),<span class="number">1</span>),<span class="number">4</span>),<span class="number">5</span>)), EEG.chanlocs, <span class="string">&#x27;maplimits&#x27;</span>,[<span class="number">-1</span> <span class="number">0.5</span>]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>基线校正前</p>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/4_1-1616205411027.png" alt="4_1"><figcaption aria-hidden="true">4_1</figcaption>
+</figure>
+<p>基线校正后</p>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/4_2-1616205415448.png" alt="4_2"><figcaption aria-hidden="true">4_2</figcaption>
+</figure>
+<p>地形图</p>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/4_3-1616205418497.png" alt="4_3"><figcaption aria-hidden="true">4_3</figcaption>
+</figure>
+<p>T检验 anova</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% ttest for each time-frequency point</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% P_data: 被试 * 条件 * 通道 * 频率 * 时间点</span></span><br><span class="line"><span class="comment">% 提取所有被试、所有条件、13号通道（空间ROI、Cz）、所有频率、所有时间的power</span></span><br><span class="line"><span class="comment">%: data_test： 被试 *  条件 * 频率 *  时间点</span></span><br><span class="line">data_test=<span class="built_in">squeeze</span>(P_data(:,:,<span class="number">13</span>,:,:)); <span class="comment">%% select the data at Cz, data_test: subj*cond*frequency*time</span></span><br><span class="line"><span class="comment">%对于每一个频率点</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(data_test,<span class="number">3</span>)</span><br><span class="line">    <span class="comment">%对于每一个时间点</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">size</span>(data_test,<span class="number">4</span>)</span><br><span class="line">        <span class="comment">% 挑选第一种条件的数据</span></span><br><span class="line">        data_1=<span class="built_in">squeeze</span>(data_test(:,<span class="number">3</span>,<span class="built_in">i</span>,<span class="built_in">j</span>)); <span class="comment">%% select condition L3 for each time-frequency point</span></span><br><span class="line">        <span class="comment">%挑选第二种条件的数据</span></span><br><span class="line">        data_2=<span class="built_in">squeeze</span>(data_test(:,<span class="number">4</span>,<span class="built_in">i</span>,<span class="built_in">j</span>)); <span class="comment">%% select condition L4 for each time-frequency point</span></span><br><span class="line">        <span class="comment">% 配对T检验</span></span><br><span class="line">        [h,p,ci,stats]=ttest(data_1,data_2); <span class="comment">%% ttest comparison</span></span><br><span class="line">        <span class="comment">% 存储第i个频率点、第j个时间点的p值</span></span><br><span class="line">        P_ttest(<span class="built_in">i</span>,<span class="built_in">j</span>)=p; <span class="comment">%% save the p value from ttest</span></span><br><span class="line">        <span class="comment">%  存储T值</span></span><br><span class="line">        T_ttest(<span class="built_in">i</span>,<span class="built_in">j</span>)=stats.tstat; <span class="comment">%% save the t value from ttest</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%对于每一个时频点</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="built_in">size</span>(data_test,<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">size</span>(data_test,<span class="number">4</span>)</span><br><span class="line">        <span class="comment">% 挑选所有条件的数据</span></span><br><span class="line">        data_anova=<span class="built_in">squeeze</span>(data_test(:,:,<span class="built_in">i</span>,<span class="built_in">j</span>)); <span class="comment">%% select the data at time-frequency point</span></span><br><span class="line">        <span class="comment">%重复测量方差分析</span></span><br><span class="line">        [p, <span class="built_in">table</span>] = anova_rm(data_anova,<span class="string">&#x27;off&#x27;</span>);  <span class="comment">%% perform repeated measures ANOVA</span></span><br><span class="line">        <span class="comment">%存储各时频点的p值</span></span><br><span class="line">        P_anova(<span class="built_in">i</span>,<span class="built_in">j</span>)=p(<span class="number">1</span>); <span class="comment">%% save the data from ANOVA</span></span><br><span class="line">        <span class="comment">% 存储F值</span></span><br><span class="line">         F_anova(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="built_in">table</span>&#123;<span class="number">2</span>,<span class="number">5</span>&#125;; <span class="comment">%% F value from ANOVA</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% T检验</span></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">imagesc(t,f,<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_BC(:,:,<span class="number">13</span>,:,:),<span class="number">1</span>),<span class="number">2</span>)));</span><br><span class="line">axis xy; title(<span class="string">&#x27;Power Baseline Corrected&#x27;</span>); colorbar();</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">imagesc(t,f,P_ttest);</span><br><span class="line">axis xy; title(<span class="string">&#x27;P values&#x27;</span>);colorbar();</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">imagesc(t,f,T_ttest);</span><br><span class="line">axis xy; title(<span class="string">&#x27;T values&#x27;</span>);colorbar();</span><br><span class="line"></span><br><span class="line"><span class="comment">%% Visualization</span></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">imagesc(t,f,<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_BC(:,:,<span class="number">13</span>,:,:),<span class="number">1</span>),<span class="number">2</span>)));</span><br><span class="line">axis xy; title(<span class="string">&#x27;Power Baseline Corrected&#x27;</span>); colorbar();</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">imagesc(t,f,P_anova);</span><br><span class="line">axis xy; title(<span class="string">&#x27;P values&#x27;</span>);colorbar();</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">imagesc(t,f,F_anova);</span><br><span class="line">axis xy; title(<span class="string">&#x27;F values&#x27;</span>);colorbar();</span><br></pre></td></tr></table></figure>
+<p>ttest</p>
+<ol type="1">
+<li>刺激后相对于刺激前能量变化</li>
+<li>看显著差异</li>
+<li>L4 &gt; L3</li>
+</ol>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/5.png" alt="5"><figcaption aria-hidden="true">5</figcaption>
+</figure>
+<p>anova</p>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/6.png" alt="6"><figcaption aria-hidden="true">6</figcaption>
+</figure>
+<h2 id="如果不同条件诱发的-特定频段能量的变化程度-不一致那么这种不一致主要体现在头皮的哪些区域-code">3 如果不同条件诱发的 特定频段能量的变化程度 不一致，那么这种不一致主要体现在头皮的哪些区域？ Code</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%%  stastics across channels</span></span><br><span class="line">t_idx = <span class="built_in">find</span>((t&gt;=<span class="number">1</span>) &amp; (t&lt;=<span class="number">1.5</span>));</span><br><span class="line">f_idx = <span class="built_in">find</span>((f&gt;=<span class="number">8</span>) &amp; (f&lt;=<span class="number">13</span>));</span><br><span class="line">data_test=<span class="built_in">squeeze</span>(<span class="built_in">mean</span>(<span class="built_in">mean</span>(P_BC(:,:,:,f_idx,t_idx),<span class="number">4</span>),<span class="number">5</span>)); </span><br><span class="line"><span class="comment">% ttest</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:EEG.nbchan</span><br><span class="line">    data1 = data_test(:,<span class="number">3</span>,<span class="built_in">i</span>);</span><br><span class="line">    data2 = data_test(:,<span class="number">4</span>,<span class="built_in">i</span>);</span><br><span class="line">    [~,p,~,stat] = ttest(data1,data2);</span><br><span class="line">    Pvals_ch(<span class="built_in">i</span>) = p;</span><br><span class="line">    Tvals_ch(<span class="built_in">i</span>) = stat.tstat;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">topoplot(Tvals_ch, EEG.chanlocs);</span><br><span class="line"></span><br><span class="line"><span class="comment">% anova</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:EEG.nbchan</span><br><span class="line">    data_anova = data_test(:,:,<span class="built_in">i</span>);</span><br><span class="line">    [p, <span class="built_in">table</span>] = anova_rm(data_anova,<span class="string">&#x27;off&#x27;</span>);</span><br><span class="line">    Pvals_anova(<span class="built_in">i</span>) = p(<span class="number">1</span>);</span><br><span class="line">    Fvals_anova(<span class="built_in">i</span>) = <span class="built_in">table</span>&#123;<span class="number">2</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">figure</span>;</span><br><span class="line">topoplot(Fvals_anova, EEG.chanlocs);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/6_1.png" alt="6_1"><figcaption aria-hidden="true">6_1</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/6_2.png" alt="6_2"><figcaption aria-hidden="true">6_2</figcaption>
+</figure>
+<p>多重比较校正</p>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/image-20210320111644312.png" alt="image-20210320111644312"><figcaption aria-hidden="true">image-20210320111644312</figcaption>
+</figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% fdr correction to account for multiple comparisons</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%对配对T检验的结果 做FDR校正（p_fdr1 ： fdr显著性阈值； p_masked，表示p值是否通过校正</span></span><br><span class="line">[p_fdr1, p_masked] = fdr(P_ttest, <span class="number">0.05</span>); <span class="comment">%% fdr correction for p values from ttest</span></span><br><span class="line"><span class="comment">% 绘制p值图（时间横轴、频率为纵轴）； 只显示通过校正的结果</span></span><br><span class="line"><span class="built_in">figure</span>; imagesc(t,f,P_ttest); axis xy; caxis([<span class="number">0</span> p_fdr1]); </span><br><span class="line"></span><br><span class="line"><span class="comment">% 对方差分析的结果做FDR 校正</span></span><br><span class="line">[p_fdr2, p_masked] = fdr(P_anova, <span class="number">0.05</span>);<span class="comment">%% fdr correction for p values from ANOVA</span></span><br><span class="line"><span class="built_in">figure</span>; imagesc(t,f,P_anova); axis xy; caxis([<span class="number">0</span> p_fdr2]); <span class="comment">% 颜色限制caxis</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>fMRI dead fish</p>
+</blockquote>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/7_1.png" alt="7_1"><figcaption aria-hidden="true">7_1</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/19/Day3%E6%97%B6%E9%A2%91%E5%88%86%E6%9E%90/7_2.png" alt="7_2"><figcaption aria-hidden="true">7_2</figcaption>
+</figure>
+<h1 id="tips">Tips</h1>
+<p>振幅：<span class="math inline">\(\mu V\)</span></p>
+<p>功率：<span class="math inline">\({(\mu V )}^2\)</span> 时频分析</p>
+<p>功率谱密度(PSD): <span class="math inline">\({(\mu V )}^2 /Hz\)</span></p>
+<p>​ db: <span class="math inline">\(10log_{10}{PSD}\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://bloglk.gitee.io/T%E6%A3%80%E9%AA%8C">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -285,8 +517,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="什么是T检验？"><a href="#什么是T检验？" class="headerlink" title="什么是T检验？"></a>什么是T检验？</h2><p><link>(<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37777649/article/details/74937242">https://blog.csdn.net/m0_37777649/article/details/74937242</a>)</p>
-<p>T检验是假设检验的一种，又叫student t检验（Student’s t test），主要用于样本含量较小（例如n&lt;30），总体标准差σ未知的正态分布资料。<br>T检验用于检验两个总体的均值差异是否显著。</p>
+          <h2 id="什么是t检验">什么是T检验？</h2>
+<p><link>(https://blog.csdn.net/m0_37777649/article/details/74937242)</p>
+<p>T检验是假设检验的一种，又叫student t检验（Student’s t test），主要用于样本含量较小（例如n&lt;30），总体标准差σ未知的正态分布资料。 T检验用于检验两个总体的均值差异是否显著。</p>
 
       
     </div>
@@ -360,21 +593,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="0-Summary"><a href="#0-Summary" class="headerlink" title="0. Summary"></a>0. Summary</h2><p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
+          <h2 id="summary">0. Summary</h2>
+<p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
 <hr>
 <p>黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。</p>
-<h2 id="1-Research-Objective-s"><a href="#1-Research-Objective-s" class="headerlink" title="1. Research Objective(s)"></a>1. Research Objective(s)</h2><p>作者的研究目标是什么？</p>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>作者的研究目标是什么？</p>
 <hr>
 <p>比较黎曼几何与</p>
-<h2 id="2-Background-Problem-Statement"><a href="#2-Background-Problem-Statement" class="headerlink" title="2. Background / Problem Statement"></a>2. Background / Problem Statement</h2><p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
 <hr>
 <p>国际预测建模BCI数据竞赛中获得的优胜分数，引起关注</p>
 <p>黎曼几何的优点：simplicity,accuracy,robustness,transfer learning capabilities</p>
 <p>新一代BCI解码器的要求:</p>
-<ol>
+<ol type="1">
 <li>accuracy</li>
 <li>reliable</li>
-<li>initialized with generic parameters </li>
+<li>initialized with generic parameters</li>
 <li>quick learning</li>
 <li>universal</li>
 <li>algorithmically simple</li>
@@ -382,54 +618,60 @@
 <li>multi-user</li>
 </ol>
 <p>基于</p>
-<h2 id="3-Method-s"><a href="#3-Method-s" class="headerlink" title="3. Method(s)"></a>3. Method(s)</h2><p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
+<h2 id="methods">3. Method(s)</h2>
+<p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
 <hr>
 <p>传统解码器：预处理，特征提取，分类</p>
 <p>模式：MI，ERP，SSEP</p>
 <p>目前都有专门的预处理，信号处理和分类模块</p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>两大范式</th>
 <th>优点</th>
 <th>缺点</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>hard machine learning</td>
 <td>泛化性能好</td>
 <td>需要大量数据，计算密集型</td>
 </tr>
-<tr>
+<tr class="even">
 <td>利用信号处理提高信噪比，然后分类（空间滤波等）</td>
 <td>快速训练，成本低</td>
 <td>泛化差</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>黎曼分类：</p>
-<p>MDM(Minimum  Distance  to  Mean)：到平均数的最小距离</p>
-<h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4. Evaluation"></a>4. Evaluation</h2><p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
-<p><img src="/2021/03/15/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png" alt="image-20210311103033549" title="算术均值与几何均值比较"></p>
-<p><img src="/2021/03/15/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png" alt="image-20210311103013598" title="黎曼MDM分类与传统CSP分类的迁移学习比较"></p>
+<p>MDM(Minimum Distance to Mean)：到平均数的最小距离</p>
+<h2 id="evaluation">4. Evaluation</h2>
+<p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
+<figure>
+<img src="/2021/03/15/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png" title="算术均值与几何均值比较" alt="image-20210311103033549"><figcaption aria-hidden="true">image-20210311103033549</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/15/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png" title="黎曼MDM分类与传统CSP分类的迁移学习比较" alt="image-20210311103013598"><figcaption aria-hidden="true">image-20210311103013598</figcaption>
+</figure>
 <p>LDA 线性判别分析</p>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
 <hr>
-<ol>
+<ol type="1">
 <li>提供了一个更简单的黎曼分类方法，</li>
 <li>最小距离到平均数（MDM）的初步介绍，我们主要依靠直观的（几何）解释。Riemannian MDM方法完全基于两个简单的概念：两个数据点之间的距离和其中若干点的平均值。</li>
 <li>黎曼几何学提供了处理对称正定矩阵的天然框架，许多种类的结构协方差矩阵都是这种类型。不管协方差矩阵是如何定义的，MDM黎曼分类器对于所有三种BCI模式，即运动想象、事件相关电位和稳态诱发电位都是一样的。</li>
 <li>基于切线空间映射的黎曼方法的总体性能优于MDM方法，而且性能明显优于最新的技术水平，但由于分类器继承了算法复杂度的增加和可能需要高强度的学习，它们不太适合在线操作</li>
 <li>空间滤波器的改进只能为分类目的带来适度的改进，而且这种改进并不容易转化为可靠性和鲁棒性的显著提高。</li>
 </ol>
-<h2 id="6-Notes"><a href="#6-Notes" class="headerlink" title="6. Notes"></a>6. Notes</h2><p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
+<h2 id="notes">6. Notes</h2>
+<p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
 <hr>
 <p>附录1中给出了三种主要BCI模式的正式定义。 这些定义还可以改进，并期待对这一课题的进一步研究。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
-<p>[C:\Users\阿武\Desktop\论文笔记\2.基于编码调制VEP的高速BCI]:</p>
+<h2 id="references">References</h2>
+<p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
 
       
     </div>
@@ -503,26 +745,34 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="0-Summary"><a href="#0-Summary" class="headerlink" title="0. Summary"></a>0. Summary</h2><p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
-<h2 id="1-Research-Objective-s"><a href="#1-Research-Objective-s" class="headerlink" title="1. Research Objective(s)"></a>1. Research Objective(s)</h2><p>作者的研究目标是什么？</p>
+          <h2 id="summary">0. Summary</h2>
+<p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>作者的研究目标是什么？</p>
 <p>本文提出了一种在线多信道SSVEP BCI系统，采用典型相关分析（CCA）方法提取与SSVEP相关的频率信息。利用离线数据对系统的关键参数信道位置、窗长和谐波数进行了研究，为在线系统的设计提供了依据。</p>
-<h2 id="2-Background-Problem-Statement"><a href="#2-Background-Problem-Statement" class="headerlink" title="2. Background / Problem Statement"></a>2. Background / Problem Statement</h2><p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
 <ul>
 <li>不同的SSVEP可以通过将我们的兴趣或注意力转移到其中一个频率编码的刺激上而产生</li>
 <li>SSVEP的BCI有更高的信噪比（SNR）和信息传输率（ITR）</li>
 </ul>
-<h2 id="3-Method-s"><a href="#3-Method-s" class="headerlink" title="3. Method(s)"></a>3. Method(s)</h2><p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
+<h2 id="methods">3. Method(s)</h2>
+<p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
 <ul>
-<li>MEC(minium energy method)    检测精度高, 无需校准数据</li>
-<li><a href="./典型相关分析(CCA">CCA</a>.md)</li>
+<li>MEC(minium energy method) 检测精度高, 无需校准数据</li>
+<li><a href="./典型相关分析(CCA).md">CCA</a></li>
 </ul>
-<h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4. Evaluation"></a>4. Evaluation</h2><p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
+<h2 id="evaluation">4. Evaluation</h2>
+<p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
 <ul>
 <li>结果:来自30个BCI命令的正确计数的平均值为28.6。 BCI系统的平均ITR为58±9.6位min-1。</li>
 </ul>
-<h2 id="6-Notes"><a href="#6-Notes" class="headerlink" title="6. Notes"></a>6. Notes</h2><p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
+<h2 id="notes">6. Notes</h2>
+<p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
+<h2 id="references">References</h2>
+<p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
 
       
     </div>
@@ -596,47 +846,68 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="sum-rule"><a href="#sum-rule" class="headerlink" title="sum rule"></a>sum rule</h2><script type="math/tex; mode=display">
-p(X) = \sum_{Y}{}p(X,Y)</script><h2 id="product-rule"><a href="#product-rule" class="headerlink" title="product rule"></a>product rule</h2><script type="math/tex; mode=display">
-p(X,Y) = p(Y|X)p(X)</script><h2 id="对称性"><a href="#对称性" class="headerlink" title="对称性"></a>对称性</h2><script type="math/tex; mode=display">
-p(X,Y) = p(Y,X)</script><h2 id="Bayes’-theorem"><a href="#Bayes’-theorem" class="headerlink" title="Bayes’ theorem"></a>Bayes’ theorem</h2><script type="math/tex; mode=display">
+          <h2 id="sum-rule">sum rule</h2>
+<p><span class="math display">\[
+p(X) = \sum_{Y}{}p(X,Y)
+\]</span></p>
+<h2 id="product-rule">product rule</h2>
+<p><span class="math display">\[
+p(X,Y) = p(Y|X)p(X)
+\]</span></p>
+<h2 id="对称性">对称性</h2>
+<p><span class="math display">\[
+p(X,Y) = p(Y,X)
+\]</span> ## Bayes’ theorem</p>
+<p><span class="math display">\[
 p(Y|X) = \frac{p(X,Y)}{p(X)}\\
         =\frac{p(X|Y)p(X)}{p(X)}\\
         =\frac{p(X|Y)p(X)}{\sum_{Y}{}p(X,Y)}\\
-        =\frac{p(X|Y)p(X)}{\sum_{Y}{}p(X|Y)p(Y)}</script><p>贝叶斯定理的分母$p(X)=\sum_{Y}{}p(X|Y)p(Y)$看做归⼀化常数，⽤来确保公式（4）左侧的条件概率对于所有的Y 的取值之和为1。</p>
+        =\frac{p(X|Y)p(X)}{\sum_{Y}{}p(X|Y)p(Y)}
+\]</span> 贝叶斯定理的分母<span class="math inline">\(p(X)=\sum_{Y}{}p(X|Y)p(Y)\)</span>看做归⼀化常数，⽤来确保公式（4）左侧的条件概率对于所有的Y 的取值之和为1。</p>
 <hr>
-<h2 id="概率密度probability-density"><a href="#概率密度probability-density" class="headerlink" title="概率密度probability density"></a>概率密度probability density</h2><p><img src="/2021/03/15/%E6%A6%82%E7%8E%87%E8%AE%BA/image-20210310210259698.png" alt="image-20210310210259698"></p>
-<script type="math/tex; mode=display">
+<h2 id="概率密度probability-density">概率密度probability density</h2>
+<p><img src="/2021/03/15/%E6%A6%82%E7%8E%87%E8%AE%BA/image-20210310210259698.png" alt="image-20210310210259698"> <span class="math display">\[
 p(x\in(a,b)) = \int_{a}^{b}p(x) dx\\
 p(x) \leq 0\\
-\int_{-\infty}^{\infty}p(x)dx = 1</script><p>==概率密度–&gt;概率–&gt;累积分布==</p>
-<p>考虑    变换$x=g(y)$   区间$(x,x+\delta_x)$ 变为 $(y,y+\delta_y)$     则有$p_{x}{}(x) \delta_x \backsimeq p_{y}{}(y) \delta_y$</p>
-<script type="math/tex; mode=display">
-p_y(y) = p_x(x)|\frac{dx}{dy}| = p_x(g(y))|g'(y)|</script><p><strong>结论</strong>： 概率密度最⼤值的概念取决于变量的选择</p>
-<h2 id="累积分布函数"><a href="#累积分布函数" class="headerlink" title="累积分布函数"></a>累积分布函数</h2><script type="math/tex; mode=display">
-P(z) = \int_{-\infty}^{z} p(x)dx</script><p>满足 $P’(x)=p(x)$</p>
-<p>概率的<strong>加和规则</strong>和<strong>乘积规则</strong>以及<strong>贝叶斯规则</strong>，同样可以应⽤于<strong>概率密度函数</strong>的情形，也可以<br>应⽤于<strong>离散变量与连续变量相结合</strong>的情形</p>
+\int_{-\infty}^{\infty}p(x)dx = 1
+\]</span> ==概率密度–&gt;概率–&gt;累积分布==</p>
+<p>考虑 变换<span class="math inline">\(x=g(y)\)</span> 区间<span class="math inline">\((x,x+\delta_x)\)</span> 变为 <span class="math inline">\((y,y+\delta_y)\)</span> 则有<span class="math inline">\(p_{x}{}(x) \delta_x \backsimeq p_{y}{}(y) \delta_y\)</span> <span class="math display">\[
+p_y(y) = p_x(x)|\frac{dx}{dy}| = p_x(g(y))|g&#39;(y)|
+\]</span> <strong>结论</strong>： 概率密度最⼤值的概念取决于变量的选择</p>
+<h2 id="累积分布函数">累积分布函数</h2>
+<p><span class="math display">\[
+P(z) = \int_{-\infty}^{z} p(x)dx
+\]</span> 满足 <span class="math inline">\(P&#39;(x)=p(x)\)</span></p>
+<p>概率的<strong>加和规则</strong>和<strong>乘积规则</strong>以及<strong>贝叶斯规则</strong>，同样可以应⽤于<strong>概率密度函数</strong>的情形，也可以 应⽤于<strong>离散变量与连续变量相结合</strong>的情形</p>
 <hr>
-<h2 id="期望和协方差"><a href="#期望和协方差" class="headerlink" title="期望和协方差"></a>期望和协方差</h2><p>期望：(加权平均值)</p>
+<h2 id="期望和协方差">期望和协方差</h2>
+<p>期望：(加权平均值)</p>
 <p>单变量</p>
-<p>离散</p>
-<script type="math/tex; mode=display">
-E[f]=\sum_x p(x)f(x)</script><p>连续</p>
-<script type="math/tex; mode=display">
-E[f]=\int p(x)f(x) dx</script><p>估计</p>
-<script type="math/tex; mode=display">
-E[f]\backsimeq \frac{1}{N}\sum_{n=1}^{N}f(x_n)</script><p>方差:度 量 了$f(x)$在 均 值$E[f(x)]$附 近 变 化 性 的 ⼤ ⼩</p>
-<script type="math/tex; mode=display">
+<p>离散 <span class="math display">\[
+E[f]=\sum_x p(x)f(x)
+\]</span> 连续 <span class="math display">\[
+E[f]=\int p(x)f(x) dx
+\]</span> 估计 <span class="math display">\[
+E[f]\backsimeq \frac{1}{N}\sum_{n=1}^{N}f(x_n)
+\]</span></p>
+<p>方差:度 量 了<span class="math inline">\(f(x)\)</span>在 均 值<span class="math inline">\(E[f(x)]\)</span>附 近 变 化 性 的 ⼤ ⼩ <span class="math display">\[
 var[f] = E[(f(x)-E[f(x)])^2]\\
-=E[f(x)^2]-E[f(x)]^2</script><p>协方差：(两个随机变量)</p>
-<script type="math/tex; mode=display">
-cov[x,y]=E_{x,y}[ ( x-E[x])(y-E[y])] = E_{x,y}[xy]-E[x]E[y]</script><p>​                (两个随机向量)</p>
-<script type="math/tex; mode=display">
-cov[x,y]=E_{x,y}[ ( x-E[x])(y^T-E[y^T])] = E_{x,y}[xy^T]-E[x]E[y^T]</script><h2 id="贝叶斯概率"><a href="#贝叶斯概率" class="headerlink" title="贝叶斯概率"></a>贝叶斯概率</h2><p>后验$\backsimeq$似然x先验</p>
-<script type="math/tex; mode=display">
-p(w|D) = \frac{p(D|w)p(w)}{p(D)}</script><p>后验概率$ p(w|D)$  似然函数 $p(D|w)$  先验概率$p(w)$  归一化常数$p(D)=\int p(D|w)p(w)dw$</p>
+=E[f(x)^2]-E[f(x)]^2
+\]</span> 协方差：(两个随机变量) <span class="math display">\[
+cov[x,y]=E_{x,y}[ ( x-E[x])(y-E[y])] = E_{x,y}[xy]-E[x]E[y]
+\]</span> ​ (两个随机向量) <span class="math display">\[
+cov[x,y]=E_{x,y}[ ( x-E[x])(y^T-E[y^T])] = E_{x,y}[xy^T]-E[x]E[y^T]
+\]</span></p>
+<h2 id="贝叶斯概率">贝叶斯概率</h2>
+<p>后验<span class="math inline">\(\backsimeq\)</span>似然x先验 <span class="math display">\[
+p(w|D) = \frac{p(D|w)p(w)}{p(D)}
+\]</span></p>
+<p>后验概率$ p(w|D)$ 似然函数 <span class="math inline">\(p(D|w)\)</span> 先验概率<span class="math inline">\(p(w)\)</span> 归一化常数<span class="math inline">\(p(D)=\int p(D|w)p(w)dw\)</span></p>
 <p>似然函数不是w的概率分布，并且它关于w的积分并不（⼀定）等于1.</p>
-<h2 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h2><p><img src="/2021/03/15/%E6%A6%82%E7%8E%87%E8%AE%BA/image-20210311174121534.png" alt="image-20210311174121534"></p>
+<h2 id="高斯分布">高斯分布</h2>
+<figure>
+<img src="/2021/03/15/%E6%A6%82%E7%8E%87%E8%AE%BA/image-20210311174121534.png" alt="image-20210311174121534"><figcaption aria-hidden="true">image-20210311174121534</figcaption>
+</figure>
 
       
     </div>
@@ -710,31 +981,39 @@ p(w|D) = \frac{p(D|w)p(w)}{p(D)}</script><p>后验概率$ p(w|D)$  似然函数 
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="0-Summary"><a href="#0-Summary" class="headerlink" title="0. Summary"></a>0. Summary</h2><p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
+          <h2 id="summary">0. Summary</h2>
+<p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
 <p>通过编码调制与多通道处理提高ITR</p>
-<h2 id="1-Research-Objective-s"><a href="#1-Research-Objective-s" class="headerlink" title="1. Research Objective(s)"></a>1. Research Objective(s)</h2><p>作者的研究目标是什么？</p>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>作者的研究目标是什么？</p>
 <p>提高ITR</p>
-<h2 id="2-Background-Problem-Statement"><a href="#2-Background-Problem-Statement" class="headerlink" title="2. Background / Problem Statement"></a>2. Background / Problem Statement</h2><p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
 <p>BCI 通信系统传输速率低，提高ITR(信息传输率)</p>
-<h2 id="3-Method-s"><a href="#3-Method-s" class="headerlink" title="3. Method(s)"></a>3. Method(s)</h2><p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
+<h2 id="methods">3. Method(s)</h2>
+<p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
 <ul>
-<li><p>提出了基于c-VEP的调制系统，其中二进制伪随机码被用来调制不同的视觉刺激</p>
-</li>
-<li><p>提出了一种提高识别精度的多通道检测方法</p>
-</li>
+<li><p>提出了基于c-VEP的调制系统，其中二进制伪随机码被用来调制不同的视觉刺激</p></li>
+<li><p>提出了一种提高识别精度的多通道检测方法</p></li>
 </ul>
-<h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4. Evaluation"></a>4. Evaluation</h2><p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
-<p><img src="/2021/03/15/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png" alt="image-20210311110254896"></p>
-<ol>
+<h2 id="evaluation">4. Evaluation</h2>
+<p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
+<figure>
+<img src="/2021/03/15/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png" alt="image-20210311110254896"><figcaption aria-hidden="true">image-20210311110254896</figcaption>
+</figure>
+<ol type="1">
 <li>该系统由一个脑电图放大器和一台带CRT显示器的个人电脑（PC）组成。</li>
-<li>不同目标的反应之间的圆移关系是目标识别的基础，一旦获得了T0的模板，其他目标的模板可以很容易地获得<img src="/2021/03/15/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png" alt="image-20210311110915610" title="园移   Principle of equivalent neighbors"></li>
+<li>不同目标的反应之间的圆移关系是目标识别的基础，一旦获得了T0的模板，其他目标的模板可以很容易地获得<img src="/2021/03/15/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png" title="园移 Principle of equivalent neighbors" alt="image-20210311110915610"></li>
 <li>在获得所有目标的模板后，可以采用模板匹配的方法进行目标识别，通过选择相关系数最大的目标来确定固定目标</li>
 <li>多通道处理，由于双极通道。实验分为训练阶段和测试阶段。在训练阶段，要求被试者固定在参考目标上约200个刺激周期。训练阶段的数据用于离线分析，以计算空间滤波权重和在线使用的参考模板.在测试阶段，每个受试者被要求输入一个64个字符的序列。 在测试阶段，每个受试者都被要求输入64个字符序列，在线准确率和相应的ITR用于评估系统性能。 在计算ITR时，每次选择的时间成本为2.1s(包括两个刺激期，一个用于数据采集，一个用于目标识别、反馈展示和凝视)。</li>
 </ol>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
-<p>本文对高速c-VEP BCI系统的基本原理和实现方法进行了详细的介绍,提出的c-VEP BCI具有108±12.0比特/分钟-1的高ITR,超过了以往基于脑电图的BCI的记录。 </p>
-<h2 id="6-Notes"><a href="#6-Notes" class="headerlink" title="6. Notes"></a>6. Notes</h2><p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
+<p>本文对高速c-VEP BCI系统的基本原理和实现方法进行了详细的介绍,提出的c-VEP BCI具有108±12.0比特/分钟-1的高ITR,超过了以往基于脑电图的BCI的记录。</p>
+<h2 id="notes">6. Notes</h2>
+<p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
+<h2 id="references">References</h2>
+<p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
 
       
     </div>
@@ -808,14 +1087,22 @@ p(w|D) = \frac{p(D|w)p(w)}{p(D)}</script><p>后验概率$ p(w|D)$  似然函数 
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="0-Summary"><a href="#0-Summary" class="headerlink" title="0. Summary"></a>0. Summary</h2><p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
-<h2 id="1-Research-Objective-s"><a href="#1-Research-Objective-s" class="headerlink" title="1. Research Objective(s)"></a>1. Research Objective(s)</h2><p>作者的研究目标是什么？</p>
-<h2 id="2-Background-Problem-Statement"><a href="#2-Background-Problem-Statement" class="headerlink" title="2. Background / Problem Statement"></a>2. Background / Problem Statement</h2><p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
-<h2 id="3-Method-s"><a href="#3-Method-s" class="headerlink" title="3. Method(s)"></a>3. Method(s)</h2><p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
-<h2 id="4-Evaluation"><a href="#4-Evaluation" class="headerlink" title="4. Evaluation"></a>4. Evaluation</h2><p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
-<h2 id="6-Notes"><a href="#6-Notes" class="headerlink" title="6. Notes"></a>6. Notes</h2><p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
+          <h2 id="summary">0. Summary</h2>
+<p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>作者的研究目标是什么？</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
+<h2 id="methods">3. Method(s)</h2>
+<p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
+<h2 id="evaluation">4. Evaluation</h2>
+<p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
+<h2 id="notes">6. Notes</h2>
+<p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
+<h2 id="references">References</h2>
+<p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
 
       
     </div>
@@ -897,70 +1184,90 @@ p(w|D) = \frac{p(D|w)p(w)}{p(D)}</script><p>后验概率$ p(w|D)$  似然函数 
     <div class="post-body" itemprop="articleBody">
           <p>典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。</p>
 <p>比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。</p>
-<h2 id="1-CCA概述"><a href="#1-CCA概述" class="headerlink" title="1.CCA概述"></a>1.CCA概述</h2><p>在数理统计里面，假设有两组一维的数据集X和Y，则==相关系数==ρ的定义为:</p>
-<script type="math/tex; mode=display">
-\rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}</script><p>​         其中$cov(X,Y)$ 是X，Y的协方差，$D(X),D(Y)$ 分别为$X,Y$ 的方差。相关系数$\rho$ 的取值为[-1,1]。$\rho$的绝对值越接近于1，则$X,Y$的线性相关性越高。越接近于0，则$X,Y$的线性相关性越低。</p>
-<p>​        虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？CCA给了我们变通的方法。</p>
-<p>​        CCA使用的方法是将多维的$X,Y$都用<strong>线性变换</strong>为1维的$X’,Y’$，然后再使用相关系数来看$X’,Y’$’的相关性。将数据从多维变到一维，也可以理解为CCA是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看CCA的算法思想。</p>
-<h2 id="2-CCA的算法思想"><a href="#2-CCA的算法思想" class="headerlink" title="2.CCA的算法思想"></a>2.CCA的算法思想</h2><p>​        降维的标准是如何选择的呢？回想下主成分分析PCA，降维的原则是投影方差最大；再回想下线性判别分析LDA，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的CCA，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
-<p>​        假设我们的数据集是$X,Y$，$X$为$n_1×m$的样本矩阵。$Y$为$n_2×m$的样本矩阵.其中$m$为样本个数，而$n1,n2$分别为$X,Y$的特征维度。</p>
-<p>​        对于X矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为a, 对于Y矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为b, 这样X ,Y投影后得到的一维向量分别为X’,Y’。我们有</p>
-<script type="math/tex; mode=display">
-X' = a^TX, Y'=b^TY</script><p>​        我们CCA的优化目标是最大化<script type="math/tex">ρ(X′,Y′)</script>得到对应的投影向量$a,b$，即</p>
-<script type="math/tex; mode=display">
-\underbrace{arg\;max}_{a,b}\frac{cov(X',Y')}{\sqrt{D(X')}\sqrt{D(Y')}}</script><p>　　在投影前，我们一般会把原始数据进行==标准化==，得到均值为0而方差为1的数据$X,Y$。这样我们有：</p>
-<script type="math/tex; mode=display">
-cov(X',Y') = cov(a^TX, b^TY) = E(<a^TX, b^TY>) = E((a^TX)(b^TY)^T) = a^TE(XY^T)b</script><script type="math/tex; mode=display">
-D(X') = D(a^TX) = a^TE(XX^T)a</script><script type="math/tex; mode=display">
-D(Y') = D(b^TY) = b^TE(YY^T)b</script><p>​        由于我们的<script type="math/tex">X，Y</script>的均值均为0，则</p>
-<script type="math/tex; mode=display">
-D(X) = cov(X,X) = E(XX^T), D(Y)= cov(Y,Y) = E(YY^T)</script><script type="math/tex; mode=display">
-cov(X,Y) = E(XY^T),  cov(Y,X) = E(YX^T)</script><p>​        令$cov(X,Y)=S_{XY}$,则优化目标可以转化为:</p>
-<script type="math/tex; mode=display">
-\underbrace{arg\;max}_{a,b}\frac{a^TS_{XY}b}{\sqrt{ a^TS_{XX}a}\sqrt{b^TS_{YY}b}}</script><p>　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和==SVM==类似的优化方法，固定分母，优化分子，具体的转化为：</p>
-<script type="math/tex; mode=display">
-\underbrace{arg\;max}_{a,b}\;\;{a^TS_{XY}b} \\ s.t. a^TS_{XX}a =1,\; b^TS_{YY}b =1</script><p>​        也就是说，我们的CCA算法的目标最终转化为一个==凸优化==过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的$a,b$则为降维时的投影向量，或者说线性系数。</p>
+<h2 id="cca概述">1.CCA概述</h2>
+<p>在数理统计里面，假设有两组一维的数据集X和Y，则==相关系数==ρ的定义为: <span class="math display">\[
+\rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}
+\]</span> ​ 其中<span class="math inline">\(cov(X,Y)\)</span> 是X，Y的协方差，<span class="math inline">\(D(X),D(Y)\)</span> 分别为<span class="math inline">\(X,Y\)</span> 的方差。相关系数<span class="math inline">\(\rho\)</span> 的取值为[-1,1]。<span class="math inline">\(\rho\)</span>的绝对值越接近于1，则<span class="math inline">\(X,Y\)</span>的线性相关性越高。越接近于0，则<span class="math inline">\(X,Y\)</span>的线性相关性越低。</p>
+<p>​ 虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？CCA给了我们变通的方法。</p>
+<p>​ CCA使用的方法是将多维的<span class="math inline">\(X,Y\)</span>都用<strong>线性变换</strong>为1维的<span class="math inline">\(X&#39;,Y&#39;\)</span>，然后再使用相关系数来看<span class="math inline">\(X&#39;,Y&#39;\)</span>'的相关性。将数据从多维变到一维，也可以理解为CCA是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看CCA的算法思想。</p>
+<h2 id="cca的算法思想">2.CCA的算法思想</h2>
+<p>​ 降维的标准是如何选择的呢？回想下主成分分析PCA，降维的原则是投影方差最大；再回想下线性判别分析LDA，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的CCA，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
+<p>​ 假设我们的数据集是<span class="math inline">\(X,Y\)</span>，<span class="math inline">\(X\)</span>为<span class="math inline">\(n_1×m\)</span>的样本矩阵。<span class="math inline">\(Y\)</span>为<span class="math inline">\(n_2×m\)</span>的样本矩阵.其中<span class="math inline">\(m\)</span>为样本个数，而<span class="math inline">\(n1,n2\)</span>分别为<span class="math inline">\(X,Y\)</span>的特征维度。</p>
+<p>​ 对于X矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为a, 对于Y矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为b, 这样X ,Y投影后得到的一维向量分别为X',Y'。我们有 <span class="math display">\[
+X&#39; = a^TX, Y&#39;=b^TY
+\]</span></p>
+<p>​ 我们CCA的优化目标是最大化<span class="math display">\[ρ(X′,Y′)\]</span>得到对应的投影向量<span class="math inline">\(a,b\)</span>，即 <span class="math display">\[
+\underbrace{arg\;max}_{a,b}\frac{cov(X&#39;,Y&#39;)}{\sqrt{D(X&#39;)}\sqrt{D(Y&#39;)}}
+\]</span> 　　在投影前，我们一般会把原始数据进行==标准化==，得到均值为0而方差为1的数据<span class="math inline">\(X,Y\)</span>。这样我们有： <span class="math display">\[
+cov(X&#39;,Y&#39;) = cov(a^TX, b^TY) = E(&lt;a^TX, b^TY&gt;) = E((a^TX)(b^TY)^T) = a^TE(XY^T)b
+\]</span></p>
+<p><span class="math display">\[
+D(X&#39;) = D(a^TX) = a^TE(XX^T)a
+\]</span></p>
+<p><span class="math display">\[
+D(Y&#39;) = D(b^TY) = b^TE(YY^T)b
+\]</span></p>
+<p>​ 由于我们的<span class="math display">\[X，Y\]</span>的均值均为0，则 <span class="math display">\[
+D(X) = cov(X,X) = E(XX^T), D(Y)= cov(Y,Y) = E(YY^T)
+\]</span></p>
+<p><span class="math display">\[
+cov(X,Y) = E(XY^T),  cov(Y,X) = E(YX^T)
+\]</span></p>
+<p>​ 令<span class="math inline">\(cov(X,Y)=S_{XY}\)</span>,则优化目标可以转化为: <span class="math display">\[
+\underbrace{arg\;max}_{a,b}\frac{a^TS_{XY}b}{\sqrt{ a^TS_{XX}a}\sqrt{b^TS_{YY}b}}
+\]</span> 　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和==SVM==类似的优化方法，固定分母，优化分子，具体的转化为： <span class="math display">\[
+\underbrace{arg\;max}_{a,b}\;\;{a^TS_{XY}b} \\ s.t. a^TS_{XX}a =1,\; b^TS_{YY}b =1
+\]</span> ​ 也就是说，我们的CCA算法的目标最终转化为一个==凸优化==过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的<span class="math inline">\(a,b\)</span>则为降维时的投影向量，或者说线性系数。</p>
 <p>　　　　这个函数优化一般有两种方法，第一种是奇异值分解==SVD==，第二种是==特征分解==，两者得到的结果一样，下面我们分别讲解。</p>
-<h2 id="3-CCA算法的SVD求解"><a href="#3-CCA算法的SVD求解" class="headerlink" title="3.CCA算法的SVD求解"></a>3.CCA算法的SVD求解</h2><p>​        首先，令$a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$ ,则有：</p>
-<script type="math/tex; mode=display">
-a^TS_{XX}a =1 \Rightarrow u^TS_{XX}^{-1/2}S_{XX}S_{XX}^{-1/2}u =1  \Rightarrow  u^Tu=1</script><script type="math/tex; mode=display">
-b^TS_{YY}b =1 \Rightarrow v^TS_{YY}^{-1/2}S_{YY}S_{YY}^{-1/2}v=1  \Rightarrow  v^Tv=1</script><script type="math/tex; mode=display">
-a^TS_{XY}b = u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v</script><p>​        也就是说，我们的优化目标变成下式：</p>
-<script type="math/tex; mode=display">
+<h2 id="cca算法的svd求解">3.CCA算法的SVD求解</h2>
+<p>​ 首先，令<span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span> ,则有： <span class="math display">\[
+a^TS_{XX}a =1 \Rightarrow u^TS_{XX}^{-1/2}S_{XX}S_{XX}^{-1/2}u =1  \Rightarrow  u^Tu=1
+\]</span></p>
+<p><span class="math display">\[
+b^TS_{YY}b =1 \Rightarrow v^TS_{YY}^{-1/2}S_{YY}S_{YY}^{-1/2}v=1  \Rightarrow  v^Tv=1
+\]</span></p>
+<p><span class="math display">\[
+a^TS_{XY}b = u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v
+\]</span></p>
+<p>​ 也就是说，我们的优化目标变成下式： <span class="math display">\[
 \underbrace{arg\;max}_{u,v}u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v\\
-s.t. u^Tu =1,\; v^Tv =1</script><p>​        将$u,v$看作矩阵  $M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}$ 的某一奇异值的左右奇异向量。得到$M=U\Sigma V^T$</p>
-<p>那么利用奇异值分解，我们可以得到$M=UΣV^T$其中$U,V$分别为M的左奇异向量和右奇异向量组成的矩阵，而<script type="math/tex">Σ</script>为M的奇异值组成的对角矩阵。由于<script type="math/tex">U,V</script>所有的列都为标准正交基，则<script type="math/tex">u^TU</script>和$V^Tv$得到一个只有一个标量值为1，其余标量值为0的向量。此时我们有</p>
-<script type="math/tex; mode=display">
-u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v = u^TU\Sigma V^Tv = \sigma_{uv}</script><p>​        也就是说我们最大化$u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v$,其实对应的最大值就是某一组左右奇异向量所对应的奇异值的最大值。也就是将M做了奇异值分解后，最大的奇异值就是我们优化目标的最大值，或者说我们的X和Y之间的最大相关系数。利用对应的左右奇异向量$u,v$我们也可以求出我们原始的X和Y的线性系数$a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$。</p>
+s.t. u^Tu =1,\; v^Tv =1
+\]</span> ​ 将<span class="math inline">\(u,v\)</span>看作矩阵 <span class="math inline">\(M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}\)</span> 的某一奇异值的左右奇异向量。得到<span class="math inline">\(M=U\Sigma V^T\)</span></p>
+<p>那么利用奇异值分解，我们可以得到<span class="math inline">\(M=UΣV^T\)</span>其中<span class="math inline">\(U,V\)</span>分别为M的左奇异向量和右奇异向量组成的矩阵，而<span class="math display">\[Σ\]</span>为M的奇异值组成的对角矩阵。由于<span class="math display">\[U,V\]</span>所有的列都为标准正交基，则<span class="math display">\[u^TU\]</span>和<span class="math inline">\(V^Tv\)</span>得到一个只有一个标量值为1，其余标量值为0的向量。此时我们有 <span class="math display">\[
+u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v = u^TU\Sigma V^Tv = \sigma_{uv}
+\]</span> ​ 也就是说我们最大化<span class="math inline">\(u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v\)</span>,其实对应的最大值就是某一组左右奇异向量所对应的奇异值的最大值。也就是将M做了奇异值分解后，最大的奇异值就是我们优化目标的最大值，或者说我们的X和Y之间的最大相关系数。利用对应的左右奇异向量<span class="math inline">\(u,v\)</span>我们也可以求出我们原始的X和Y的线性系数<span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span>。</p>
 <p>　　　　可以看出，SVD的求解方式非常简洁方便。但是如果你不熟悉SVD的话，我们也可以用传统的拉格朗日函数加上特征分解来完成这个函数的优化。</p>
-<h2 id="4-CCA算法的特征分解求解"><a href="#4-CCA算法的特征分解求解" class="headerlink" title="4.CCA算法的特征分解求解"></a>4.CCA算法的特征分解求解</h2><p>​        利用拉格朗日函数，优化目标转化为最大化下式：</p>
-<script type="math/tex; mode=display">
-J(a,b) = a^TS_{XY}b -\frac{\lambda}{2}(a^TS_{XX}a-1)-\frac{\theta}{2}(b^TS_{YY}b-1)</script><p>​        分别对$a,b$求导并令结果为0，我们得到：</p>
-<script type="math/tex; mode=display">
+<h2 id="cca算法的特征分解求解">4.CCA算法的特征分解求解</h2>
+<p>​ 利用拉格朗日函数，优化目标转化为最大化下式： <span class="math display">\[
+J(a,b) = a^TS_{XY}b -\frac{\lambda}{2}(a^TS_{XX}a-1)-\frac{\theta}{2}(b^TS_{YY}b-1)
+\]</span> ​ 分别对<span class="math inline">\(a,b\)</span>求导并令结果为0，我们得到： <span class="math display">\[
 S_{XY}b-\lambda S_{XX}a=0\\
-S_{YX}a-\theta S_{YY}b=0</script><p>​        将上面第一个式子左乘$a^T$,第二个式子左乘$b^T$，并利用$a^TS_{XX}a =1,\; b^TS_{YY}b =1$，我们得到</p>
-<script type="math/tex; mode=display">
-\lambda = \theta = a^TS_{XY}b</script><p>​        也就是说我们的拉格朗日系数就是我们要优化的目标。我们继续将上面的(17)两个式子做整理，第一个式子左乘$S_{XX}^{-1}$,第二个式子左乘$S_{YY}^{-1}$，我们得到：</p>
-<script type="math/tex; mode=display">
+S_{YX}a-\theta S_{YY}b=0
+\]</span> ​ 将上面第一个式子左乘<span class="math inline">\(a^T\)</span>,第二个式子左乘<span class="math inline">\(b^T\)</span>，并利用<span class="math inline">\(a^TS_{XX}a =1,\; b^TS_{YY}b =1\)</span>，我们得到 <span class="math display">\[
+\lambda = \theta = a^TS_{XY}b
+\]</span> ​ 也就是说我们的拉格朗日系数就是我们要优化的目标。我们继续将上面的(17)两个式子做整理，第一个式子左乘<span class="math inline">\(S_{XX}^{-1}\)</span>,第二个式子左乘<span class="math inline">\(S_{YY}^{-1}\)</span>，我们得到： <span class="math display">\[
 S_{XX}^{-1}S_{XY}b=\lambda a\\
-S_{YY}^{-1}S_{YX}a = \lambda b</script><p>由(19)得:</p>
-<script type="math/tex; mode=display">
-S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}a=\lambda^2a</script><p>​        这个式子就是特征分解！要求最大的相关系数λλ,我们只需要对矩阵$N=S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}$做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为X的线性系数a。</p>
-<p>同样：</p>
-<script type="math/tex; mode=display">
-S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b</script><p>​        对矩阵$N’=S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}$做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为Y的线性系数b。</p>
-<p>​        可以看出特征分解的方法要比SVD复杂，但是两者求得的结果其实是等价的，只要利用SVD和特征分解之间的关系就很容易发现两者最后的结果相同</p>
-<h2 id="5-CCA算法流程"><a href="#5-CCA算法流程" class="headerlink" title="5.CCA算法流程"></a>5.CCA算法流程</h2><p>​                以SVD方法为准。</p>
-<p>　　　　输入：各为$m$个的样本$X$和$Y$，$X$和$Y$的维度都大于1</p>
-<p>　　　　输出：X,Y的相关系数$ρ$,$X$和$Y$的线性系数向量$a$和$b$</p>
-<p>　　　　1）计算X的方差$S_{XX}$, Y的方差$S_{YY}$，X和Y的协方差$S_{XY}$, $Y$和$X$的协方差$S_{YX}=S_{XY}^T$</p>
-<p>　　　　2)  计算矩阵$M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}$</p>
-<p>　　　　3）对矩阵$M$进行奇异值分解，得到最大的奇异值$ρ$，和最大奇异值对应的左右奇异向量$u,v$</p>
-<p>　　　　4) 计算X和Y的线性系数向量a和b, $a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v$</p>
+S_{YY}^{-1}S_{YX}a = \lambda b
+\]</span> 由(19)得: <span class="math display">\[
+S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}a=\lambda^2a
+\]</span> ​ 这个式子就是特征分解！要求最大的相关系数λλ,我们只需要对矩阵<span class="math inline">\(N=S_{XX}^{-1}S_{XY}S_{YY}^{-1}S_{YX}\)</span>做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为X的线性系数a。</p>
+<p>同样： <span class="math display">\[
+S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b
+\]</span> ​ 对矩阵<span class="math inline">\(N’=S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}\)</span>做特征分解，找出最大的特征值取平方根即可，此时最大特征值对应的特征向量即为Y的线性系数b。</p>
+<p>​ 可以看出特征分解的方法要比SVD复杂，但是两者求得的结果其实是等价的，只要利用SVD和特征分解之间的关系就很容易发现两者最后的结果相同</p>
+<h2 id="cca算法流程">5.CCA算法流程</h2>
+<p>​ 以SVD方法为准。</p>
+<p>　　　　输入：各为<span class="math inline">\(m\)</span>个的样本<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>，<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的维度都大于1</p>
+<p>　　　　输出：X,Y的相关系数<span class="math inline">\(ρ\)</span>,<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的线性系数向量<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span></p>
+<p>　　　　1）计算X的方差<span class="math inline">\(S_{XX}\)</span>, Y的方差<span class="math inline">\(S_{YY}\)</span>，X和Y的协方差<span class="math inline">\(S_{XY}\)</span>, <span class="math inline">\(Y\)</span>和<span class="math inline">\(X\)</span>的协方差<span class="math inline">\(S_{YX}=S_{XY}^T\)</span></p>
+<p>　　　　2) 计算矩阵<span class="math inline">\(M=S_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}\)</span></p>
+<p>　　　　3）对矩阵<span class="math inline">\(M\)</span>进行奇异值分解，得到最大的奇异值<span class="math inline">\(ρ\)</span>，和最大奇异值对应的左右奇异向量<span class="math inline">\(u,v\)</span></p>
+<p>　　　　4) 计算X和Y的线性系数向量a和b, <span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span></p>
 <p>　　　　</p>
-<h2 id="6-CCA算法小结"><a href="#6-CCA算法小结" class="headerlink" title="6.CCA算法小结"></a>6.CCA算法小结</h2><p>​        CCA算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，CCA就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用CCA的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为KCCA。</p>
+<h2 id="cca算法小结">6.CCA算法小结</h2>
+<p>​ CCA算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，CCA就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用CCA的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为KCCA。</p>
 <p>　　此外，我们在算法里只找了相关度最大的奇异值或者特征值，作为数据的相关系数，实际上我们也可以像PCA一样找出第二大奇异值，第三大奇异值，。。。得到第二相关系数和第三相关系数。然后对数据做进一步的相关性分析。但是一般的应用来说，找出第一相关系数就可以了。</p>
-<p>　　有时候我们的矩阵$S_{XX},S_{YY}$不可逆，此时我们得不到对应的逆矩阵，一般遇到这种情况可以对$S_{XX},S_{YY}$进行正则化，将$S_{XX},S_{YY}$变化为$S_{XX}+\gamma I,S_{YY}+\gamma I$,然后继续求逆。其中$γ$为正则化系数。</p>
+<p>　　有时候我们的矩阵<span class="math inline">\(S_{XX},S_{YY}\)</span>不可逆，此时我们得不到对应的逆矩阵，一般遇到这种情况可以对<span class="math inline">\(S_{XX},S_{YY}\)</span>进行正则化，将<span class="math inline">\(S_{XX},S_{YY}\)</span>变化为<span class="math inline">\(S_{XX}+\gamma I,S_{YY}+\gamma I\)</span>,然后继续求逆。其中<span class="math inline">\(γ\)</span>为正则化系数。</p>
 
       
     </div>
@@ -1035,13 +1342,22 @@ S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b</script><p>​        对矩阵$N
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!jupyter nbconvert lesson07.ipynb --to slides --post serve</span><br></pre></td></tr></table></figure>
-<h2 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a>模型保存</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.save(<span class="string">&#x27;model.h5&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;saved total model.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="权值保存"><a href="#权值保存" class="headerlink" title="权值保存"></a>权值保存</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.save_weights(<span class="string">&#x27;weights.ckpt&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;saved weights.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="模型加载"><a href="#模型加载" class="headerlink" title="模型加载"></a>模型加载</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network = tf.keras.models.load_model(<span class="string">&#x27;model.h5&#x27;</span>, <span class="built_in">compile</span>=<span class="literal">False</span>)</span><br><span class="line">print(<span class="string">&#x27;loaded model from file.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="权值加载"><a href="#权值加载" class="headerlink" title="权值加载"></a>权值加载</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.load_weights(<span class="string">&#x27;weights.ckpt&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;loaded weights!&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="TensorBoard"><a href="#TensorBoard" class="headerlink" title="TensorBoard"></a>TensorBoard</h2><h3 id="在Model-fit-中使用TensorBoard"><a href="#在Model-fit-中使用TensorBoard" class="headerlink" title="在Model.fit()中使用TensorBoard"></a>在Model.fit()中使用TensorBoard</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义日志目录，必须是启动web应用时指定目录的子目录，建议使用日期时间作为子目录名</span></span><br><span class="line">log_dir=<span class="string">&quot;logs/&quot;</span> + datetime.datetime.now().strftime(<span class="string">&quot;%Y%m%d-%H%M%S&quot;</span>)</span><br><span class="line"></span><br><span class="line">tensorboard_callback = tf.keras.callbacks.TensorBoard(</span><br><span class="line">    log_dir=<span class="string">&#x27;logs&#x27;</span>,</span><br><span class="line">    histogram_freq=<span class="number">1</span>, profile_batch=<span class="number">2</span>,</span><br><span class="line">    write_graph=<span class="literal">True</span>,write_images=<span class="literal">True</span>,</span><br><span class="line">    embeddings_freq=<span class="number">0</span>, embeddings_layer_names=<span class="literal">None</span>,</span><br><span class="line">    embeddings_metadata=<span class="literal">None</span>, embeddings_data=<span class="literal">None</span>, update_freq=<span class="number">500</span></span><br><span class="line">) <span class="comment"># 定义TensorBoard对象</span></span><br><span class="line"></span><br><span class="line">model.fit(x=x_train, </span><br><span class="line">          y=y_train, </span><br><span class="line">          epochs=<span class="number">5</span>, </span><br><span class="line">          validation_data=(x_test, y_test), </span><br><span class="line">          callbacks=[tensorboard_callback])  <span class="comment"># 将定义好的TensorBoard对象作为回调传给fit方法，这样就将TensorBoard嵌入了模型训练过程</span></span><br></pre></td></tr></table></figure>
-<h3 id="在其他功能函数中嵌入TensorBoard"><a href="#在其他功能函数中嵌入TensorBoard" class="headerlink" title="在其他功能函数中嵌入TensorBoard"></a>在其他功能函数中嵌入TensorBoard</h3><h4 id="tf-summary的基本步骤"><a href="#tf-summary的基本步骤" class="headerlink" title="tf.summary的基本步骤"></a>tf.summary的基本步骤</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （1）创建一个 SummaryWriter 对象，生成的日志将储存到 &quot;./mylogs&quot; 路径中</span></span><br><span class="line">writer = tf.summary.create_file_writer(<span class="string">&quot;./logs&quot;</span>)  <span class="comment">#</span></span><br><span class="line"><span class="comment"># （2）使用 writer_1 记录with包裹的context中，进行 summary 写入的操作</span></span><br><span class="line"><span class="keyword">with</span> writer.as_default():  </span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):    </span><br><span class="line">        <span class="comment"># other model code would go here    </span></span><br><span class="line">        <span class="comment"># （3）将scalar(&quot;loss&quot;, loss, step)写入 summary </span></span><br><span class="line">        tf.summary.scalar(<span class="string">&quot;loss&quot;</span>, loss, step=step)      </span><br><span class="line">        <span class="comment"># （4）强制 SummaryWriter 将缓存中的数据写入到日志</span></span><br><span class="line">        writer.flush()  </span><br></pre></td></tr></table></figure>
-<h4 id="查看Graph和Profile信息"><a href="#查看Graph和Profile信息" class="headerlink" title="查看Graph和Profile信息"></a>查看Graph和Profile信息</h4><p>由于tensorflow2.0取消了sess和初始静态图，所以无法使用像1.x版本，直接将sess.graph添加进tensorboard，所以需要使用trace_on进行记录。</p>
+<h2 id="模型保存">模型保存</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.save(<span class="string">&#x27;model.h5&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;saved total model.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="权值保存">权值保存</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.save_weights(<span class="string">&#x27;weights.ckpt&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;saved weights.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="模型加载">模型加载</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network = tf.keras.models.load_model(<span class="string">&#x27;model.h5&#x27;</span>, <span class="built_in">compile</span>=<span class="literal">False</span>)</span><br><span class="line">print(<span class="string">&#x27;loaded model from file.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="权值加载">权值加载</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.load_weights(<span class="string">&#x27;weights.ckpt&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;loaded weights!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="tensorboard">TensorBoard</h2>
+<h3 id="在model.fit中使用tensorboard">在Model.fit()中使用TensorBoard</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义日志目录，必须是启动web应用时指定目录的子目录，建议使用日期时间作为子目录名</span></span><br><span class="line">log_dir=<span class="string">&quot;logs/&quot;</span> + datetime.datetime.now().strftime(<span class="string">&quot;%Y%m%d-%H%M%S&quot;</span>)</span><br><span class="line"></span><br><span class="line">tensorboard_callback = tf.keras.callbacks.TensorBoard(</span><br><span class="line">    log_dir=<span class="string">&#x27;logs&#x27;</span>,</span><br><span class="line">    histogram_freq=<span class="number">1</span>, profile_batch=<span class="number">2</span>,</span><br><span class="line">    write_graph=<span class="literal">True</span>,write_images=<span class="literal">True</span>,</span><br><span class="line">    embeddings_freq=<span class="number">0</span>, embeddings_layer_names=<span class="literal">None</span>,</span><br><span class="line">    embeddings_metadata=<span class="literal">None</span>, embeddings_data=<span class="literal">None</span>, update_freq=<span class="number">500</span></span><br><span class="line">) <span class="comment"># 定义TensorBoard对象</span></span><br><span class="line"></span><br><span class="line">model.fit(x=x_train, </span><br><span class="line">          y=y_train, </span><br><span class="line">          epochs=<span class="number">5</span>, </span><br><span class="line">          validation_data=(x_test, y_test), </span><br><span class="line">          callbacks=[tensorboard_callback])  <span class="comment"># 将定义好的TensorBoard对象作为回调传给fit方法，这样就将TensorBoard嵌入了模型训练过程</span></span><br></pre></td></tr></table></figure>
+<h3 id="在其他功能函数中嵌入tensorboard">在其他功能函数中嵌入TensorBoard</h3>
+<h4 id="tf.summary的基本步骤">tf.summary的基本步骤</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （1）创建一个 SummaryWriter 对象，生成的日志将储存到 &quot;./mylogs&quot; 路径中</span></span><br><span class="line">writer = tf.summary.create_file_writer(<span class="string">&quot;./logs&quot;</span>)  <span class="comment">#</span></span><br><span class="line"><span class="comment"># （2）使用 writer_1 记录with包裹的context中，进行 summary 写入的操作</span></span><br><span class="line"><span class="keyword">with</span> writer.as_default():  </span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):    </span><br><span class="line">        <span class="comment"># other model code would go here    </span></span><br><span class="line">        <span class="comment"># （3）将scalar(&quot;loss&quot;, loss, step)写入 summary </span></span><br><span class="line">        tf.summary.scalar(<span class="string">&quot;loss&quot;</span>, loss, step=step)      </span><br><span class="line">        <span class="comment"># （4）强制 SummaryWriter 将缓存中的数据写入到日志</span></span><br><span class="line">        writer.flush()  </span><br></pre></td></tr></table></figure>
+<h4 id="查看graph和profile信息">查看Graph和Profile信息</h4>
+<p>由于tensorflow2.0取消了sess和初始静态图，所以无法使用像1.x版本，直接将sess.graph添加进tensorboard，所以需要使用trace_on进行记录。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">writer = tf.summary.create_file_writer(log_dir)</span><br><span class="line">tf.summary.trace_on(graph=<span class="literal">True</span>, profiler=<span class="literal">True</span>)  <span class="comment"># 开启Trace，可以记录图结构和profile信息</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">进行训练</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 最后将统计信息写入日志</span></span><br><span class="line"><span class="keyword">with</span> writer.as_default():</span><br><span class="line">    tf.summary.trace_export(name=<span class="string">&quot;model_trace&quot;</span>, step=<span class="number">0</span>, profiler_outdir=log_dir)    <span class="comment"># 保存Trace信息到文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
@@ -1117,102 +1433,7 @@ S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b</script><p>​        对矩阵$N
     
     <div class="post-body" itemprop="articleBody">
           <hr>
-<h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://bloglk.gitee.io/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="刘 可">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="朝花夕拾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/" class="post-title-link" itemprop="url">论文<基于脑电的脑机接口迁移学习></a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-03-13 22:51:42 / 修改时间：23:15:24" itemprop="dateCreated datePublished" datetime="2021-03-13T22:51:42+08:00">2021-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">论文</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>原文：Transfer Learning for EEG-Based Brain-Computer Interfaces: A Review of Progress Made Since 2016 <link> https://arxiv.org/abs/2004.06286v4 </p>
-<p><strong>脑机接口</strong>(BCI)使用户能够使用大脑信号直接与计算机通信。</p>
-<p><strong>脑电</strong>(EEG)是最常见的非侵入性脑机接口(BCI)，对噪声/伪影敏感，且存在受试者/受试者内部的非平稳性。很难建立一个通用的模式识别模型。</p>
-<p><strong>迁移学习</strong>用于减少校准工作量。</p>
-<p>本文讨论了<strong>运动想象</strong>、<strong>事件相关电位</strong>、<strong>稳态视觉诱发电位</strong>、<strong>情感脑机接口</strong>、<strong>回归问题</strong>和<strong>对抗性攻击</strong>等六种范式及其应用。</p>
-<p>索引-<strong>脑机接口</strong>、<strong>脑电图</strong>、<strong>迁移学习</strong>、<strong>领域适应</strong>、<strong>情感脑机接口</strong>、<strong>对抗性攻击</strong></p>
-<h2 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I.Introduction"></a>I.Introduction</h2><p>脑机接口应用：游戏、情绪识别、精神疲劳评估、警觉评估。etc</p>
-<p>BCI类型：<strong>Non-invasive BCIs</strong>；Invasive BCIs；Partially invasive (semi-invasive) BCIs</p>
-<p>本文研究非侵入式BCIs，safety, low cost, and convenience. most popular</p>
-<p><img src="/2021/03/13/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/image-20210215113147980.png" alt></p>
-<p>1) Signal acquisition ： Used：wired connections and gel 。Currently, wireless connections and dry electrodes </p>
-<p>2) Signal processing ： temporal filtering and spatial filtering.</p>
-<p>常用的空间滤波器包括公共空间模式(CSP)、独立分量分析(ICA)、盲源分离、xDAWN等。</p>
-<p>3）Feature extraction：时域、频域、时频域、黎曼空间和/或功能性大脑连通性特征</p>
-<p>4) Pattern recognition：分类；回归</p>
-<p>5) Controller：其输出命令以控制外部设备</p>
-<p>当使用深度学习时，特征提取和模式识别可以集成到单个神经网络中，并且这两个组件同时自动优化。</p>
-<p>基于EEG的BCI中有三种经典的分类范型：Motor imagery (MI)；Event-related potentials (ERP)；Steady-state visual evoked potentials (SSVEP)</p>
-<h2 id="II-迁移学习概念和场景"><a href="#II-迁移学习概念和场景" class="headerlink" title="II.迁移学习概念和场景"></a>II.迁移学习概念和场景</h2><p>定义1：</p>
-<h2 id="III-TL-in-MI-Based-BCIs"><a href="#III-TL-in-MI-Based-BCIs" class="headerlink" title="III.TL in MI-Based BCIs"></a>III.TL in MI-Based BCIs</h2><p><strong>嵌入流形的知识转移</strong>(MEKT)方法:1.协方差矩阵质心对齐(CA)2.切线空间特征提取。3.映射矩阵识别。</p>
-<p><strong>EEGNet</strong>。它可以应用于不同的脑机接口范例，用非常有限的数据进行训练，并产生神经生理学上可解释的特征。EEGNet在错误信息系统和事件相关事件的学科内和跨学科分类方面都取得了强劲的成果。</p>
-<h2 id="IV-TL-IN-ERP-BASED-BCIs"><a href="#IV-TL-IN-ERP-BASED-BCIs" class="headerlink" title="IV. TL IN ERP-BASED BCIs"></a>IV. TL IN ERP-BASED BCIs</h2><p>SAN  GAN</p>
-<p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
+<h1 id="卷积神经网络">卷积神经网络</h1>
 
       
     </div>

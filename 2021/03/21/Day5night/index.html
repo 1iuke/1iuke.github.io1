@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="小波变换 傅里叶变化 Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。   短时傅里叶变换     加窗   得到时频图 窄窗口时间分辨率高、频率分辨率低， 宽窗口时间分辨率低、频率分辨率高。  对于时变的非稳态信号，高频适合小窗口，低频适合大窗口。 然而STFT的窗口是固定的，在一次STFT中宽 度不会变化，所以STFT还是无法满足非稳态信号">
+<meta name="description" content="小波变换  傅里叶变化 Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。  image-20210321184038242  短时傅里叶变换  image-20210321184229922  加窗 得到时频图 窄窗口时间分辨率高、频率分辨率低， 宽窗口时间分辨率低、频率分辨率高。 对于时变的非稳态信号，高频适合小窗">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day5night">
 <meta property="og:url" content="http://bloglk.gitee.io/2021/03/21/Day5night/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="小波变换 傅里叶变化 Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。   短时傅里叶变换     加窗   得到时频图 窄窗口时间分辨率高、频率分辨率低， 宽窗口时间分辨率低、频率分辨率高。  对于时变的非稳态信号，高频适合小窗口，低频适合大窗口。 然而STFT的窗口是固定的，在一次STFT中宽 度不会变化，所以STFT还是无法满足非稳态信号">
+<meta property="og:description" content="小波变换  傅里叶变化 Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。  image-20210321184038242  短时傅里叶变换  image-20210321184229922  加窗 得到时频图 窄窗口时间分辨率高、频率分辨率低， 宽窗口时间分辨率低、频率分辨率高。 对于时变的非稳态信号，高频适合小窗">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5night/image-20210321184038242.png">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/Day5night/image-20210321184229922.png">
@@ -195,7 +195,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">小波变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BrainStorm3"><span class="nav-number">2.</span> <span class="nav-text">BrainStorm3</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2"><span class="nav-number">1.</span> <span class="nav-text">小波变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#brainstorm3"><span class="nav-number">2.</span> <span class="nav-text">BrainStorm3</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,7 +209,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -308,34 +308,45 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="小波变换"><a href="#小波变换" class="headerlink" title="小波变换"></a>小波变换</h1><ul>
+        <h1 id="小波变换">小波变换</h1>
+<ul>
 <li><p>傅里叶变化</p>
 <p>Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。</p>
-<p><img src="/2021/03/21/Day5night/image-20210321184038242.png" alt="image-20210321184038242"></p>
-</li>
-<li><p>短时傅里叶变换   </p>
-<p><img src="/2021/03/21/Day5night/image-20210321184229922.png" alt="image-20210321184229922"></p>
-<p>加窗   得到时频图</p>
+<figure>
+<img src="/2021/03/21/Day5night/image-20210321184038242.png" alt="image-20210321184038242"><figcaption aria-hidden="true">image-20210321184038242</figcaption>
+</figure></li>
+<li><p>短时傅里叶变换</p>
+<figure>
+<img src="/2021/03/21/Day5night/image-20210321184229922.png" alt="image-20210321184229922"><figcaption aria-hidden="true">image-20210321184229922</figcaption>
+</figure>
+<p>加窗 得到时频图</p>
 <p>窄窗口时间分辨率高、频率分辨率低，</p>
-<p>宽窗口时间分辨率低、频率分辨率高。 </p>
+<p>宽窗口时间分辨率低、频率分辨率高。</p>
 <p>对于时变的非稳态信号，高频适合小窗口，低频适合大窗口。</p>
-<p>然而STFT的窗口是固定的，在一次STFT中宽 度不会变化，所以STFT还是无法满足非稳态信号变化的频率的需求。</p>
-</li>
+<p>然而STFT的窗口是固定的，在一次STFT中宽 度不会变化，所以STFT还是无法满足非稳态信号变化的频率的需求。</p></li>
 <li><p>小波变换</p>
-<p><img src="/2021/03/21/Day5night/image-20210321185809723.png" alt="image-20210321185809723"></p>
-</li>
-</ul>
-<p>  a  越大 ，小波越长， 频率越低</p>
-<p>  自适应性：  低频  宽窗     /   高频   窄窗</p>
-<p>  <img src="/2021/03/21/Day5night/image-20210321185640847.png" alt="image-20210321185640847"></p>
-<ol>
-<li>小波系数不仅像傅里叶系数那样，是随频率不同而变化的，而且对于同一个频率指标，在不同时刻，小波系数也是不同的。 </li>
-<li>求各频率水平不同时刻的小波系数时，只用到该时刻附近的局部信息 </li>
-<li>小波做到了‘时间—频率窗’宽度可变，检测高频信号时宽度变窄，低频信号时变宽</li>
+<figure>
+<img src="/2021/03/21/Day5night/image-20210321185809723.png" alt="image-20210321185809723"><figcaption aria-hidden="true">image-20210321185809723</figcaption>
+</figure>
+<p>a 越大 ，小波越长， 频率越低</p>
+<p>自适应性： 低频 宽窗 / 高频 窄窗</p>
+<figure>
+<img src="/2021/03/21/Day5night/image-20210321185640847.png" alt="image-20210321185640847"><figcaption aria-hidden="true">image-20210321185640847</figcaption>
+</figure>
+<ol type="1">
+<li>小波系数不仅像傅里叶系数那样，是随频率不同而变化的，而且对于同一个频率指标，在不同时刻，小波系数也是不同的。</li>
+<li>求各频率水平不同时刻的小波系数时，只用到该时刻附近的局部信息</li>
+<li>小波做到了‘时间--频率窗’宽度可变，检测高频信号时宽度变窄，低频信号时变宽</li>
 </ol>
-<p>  <img src="/2021/03/21/Day5night/image-20210321190059990.png" alt="image-20210321190059990"></p>
-<p>  时频信息</p>
-<h1 id="BrainStorm3"><a href="#BrainStorm3" class="headerlink" title="BrainStorm3"></a>BrainStorm3</h1><p>  <img src="/2021/03/21/Day5night/image-20210321191405236.png" alt="image-20210321191405236"></p>
+<figure>
+<img src="/2021/03/21/Day5night/image-20210321190059990.png" alt="image-20210321190059990"><figcaption aria-hidden="true">image-20210321190059990</figcaption>
+</figure>
+<p>时频信息</p>
+<h1 id="brainstorm3">BrainStorm3</h1>
+<figure>
+<img src="/2021/03/21/Day5night/image-20210321191405236.png" alt="image-20210321191405236"><figcaption aria-hidden="true">image-20210321191405236</figcaption>
+</figure></li>
+</ul>
 
     </div>
 
