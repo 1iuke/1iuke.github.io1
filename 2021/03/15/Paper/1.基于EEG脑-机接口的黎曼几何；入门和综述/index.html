@@ -17,23 +17,22 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","Livere":null,"livere_uid":"MTAyMC81MzExOC8yOTU5NA==","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="0. Summary 写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。  黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。  1. Research Objective(s) 作者的研究目标是什么？  比较黎曼几何与  2. Background &#x2F; Problem Stat">
+<meta name="description" content="0. Summary 写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。  黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于EEG脑-机接口的黎曼几何；入门和综述">
 <meta property="og:url" content="http://bloglk.gitee.io/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/index.html">
 <meta property="og:site_name" content="Mr.Liu">
-<meta property="og:description" content="0. Summary 写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。  黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。  1. Research Objective(s) 作者的研究目标是什么？  比较黎曼几何与  2. Background &#x2F; Problem Stat">
+<meta property="og:description" content="0. Summary 写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。  黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png">
 <meta property="article:published_time" content="2021-03-15T14:51:42.000Z">
-<meta property="article:modified_time" content="2021-03-28T14:23:13.072Z">
+<meta property="article:modified_time" content="2021-03-31T10:56:56.992Z">
 <meta property="article:author" content="刘 可">
 <meta property="article:tag" content="黎曼几何">
 <meta name="twitter:card" content="summary">
@@ -96,7 +95,7 @@
 <link rel="alternate" href="/atom.xml" title="Mr.Liu" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+<body itemscope itemtype="http://schema.org/WebPage">
   <div class="headband"></div>
 
   <main class="main">
@@ -191,7 +190,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-summary"><span class="nav-number">1.</span> <span class="nav-text"> 0. Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-research-objectives"><span class="nav-number">2.</span> <span class="nav-text"> 1. Research Objective(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-background-problem-statement"><span class="nav-number">3.</span> <span class="nav-text"> 2. Background &#x2F; Problem Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-methods"><span class="nav-number">4.</span> <span class="nav-text"> 3. Method(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-evaluation"><span class="nav-number">5.</span> <span class="nav-text"> 4. Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-conclusion"><span class="nav-number">6.</span> <span class="nav-text"> 5. Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-notes"><span class="nav-number">7.</span> <span class="nav-text"> 6. Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">8.</span> <span class="nav-text"> References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-text">0. Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#research-objectives"><span class="nav-text">1. Research Objective(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-problem-statement"><span class="nav-text">2. Background &#x2F; Problem Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#methods"><span class="nav-text">3. Method(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluation"><span class="nav-text">4. Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-text">5. Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notes"><span class="nav-text">6. Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -288,7 +287,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-28 22:23:13" itemprop="dateModified" datetime="2021-03-28T22:23:13+08:00">2021-03-28</time>
+        <time title="修改时间：2021-03-31 18:56:56" itemprop="dateModified" datetime="2021-03-31T18:56:56+08:00">2021-03-31</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,6 +300,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -310,21 +316,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="0-summary"><a class="markdownIt-Anchor" href="#0-summary"></a> 0. Summary</h2>
+        <h2 id="summary">0. Summary</h2>
 <p>写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。注：写文章summary切记需要通过自己的思考，用自己的语言描述。忌讳直接Ctrl + c原文。</p>
 <hr>
 <p>黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。</p>
-<h2 id="1-research-objectives"><a class="markdownIt-Anchor" href="#1-research-objectives"></a> 1. Research Objective(s)</h2>
+<span id="more"></span>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
 <p>作者的研究目标是什么？</p>
 <hr>
 <p>比较黎曼几何与</p>
-<h2 id="2-background-problem-statement"><a class="markdownIt-Anchor" href="#2-background-problem-statement"></a> 2. Background / Problem Statement</h2>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
 <p>研究的背景以及问题陈述：作者需要解决的问题是什么？</p>
 <hr>
 <p>国际预测建模BCI数据竞赛中获得的优胜分数，引起关注</p>
 <p>黎曼几何的优点：simplicity,accuracy,robustness,transfer learning capabilities</p>
 <p>新一代BCI解码器的要求:</p>
-<ol>
+<ol type="1">
 <li>accuracy</li>
 <li>reliable</li>
 <li>initialized with generic parameters</li>
@@ -335,7 +342,7 @@
 <li>multi-user</li>
 </ol>
 <p>基于</p>
-<h2 id="3-methods"><a class="markdownIt-Anchor" href="#3-methods"></a> 3. Method(s)</h2>
+<h2 id="methods">3. Method(s)</h2>
 <p>作者解决问题的方法/算法是什么？是否基于前人的方法？基于了哪些？</p>
 <hr>
 <p>传统解码器：预处理，特征提取，分类</p>
@@ -343,19 +350,19 @@
 <p>目前都有专门的预处理，信号处理和分类模块</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>两大范式</th>
 <th>优点</th>
 <th>缺点</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>hard machine learning</td>
 <td>泛化性能好</td>
 <td>需要大量数据，计算密集型</td>
 </tr>
-<tr>
+<tr class="even">
 <td>利用信号处理提高信噪比，然后分类（空间滤波等）</td>
 <td>快速训练，成本低</td>
 <td>泛化差</td>
@@ -363,27 +370,31 @@
 </tbody>
 </table>
 <p>黎曼分类：</p>
-<p>MDM(Minimum  Distance  to  Mean)：到平均数的最小距离</p>
-<h2 id="4-evaluation"><a class="markdownIt-Anchor" href="#4-evaluation"></a> 4. Evaluation</h2>
+<p>MDM(Minimum Distance to Mean)：到平均数的最小距离</p>
+<h2 id="evaluation">4. Evaluation</h2>
 <p>作者如何评估自己的方法？实验的setup是什么样的？感兴趣实验数据和结果有哪些？有没有问题或者可以借鉴的地方？</p>
-<p><img src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png" alt="image-20210311103033549" title="算术均值与几何均值比较"></p>
-<p><img src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png" alt="image-20210311103013598" title="黎曼MDM分类与传统CSP分类的迁移学习比较"></p>
+<figure>
+<img src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png" title="算术均值与几何均值比较" alt="image-20210311103033549"><figcaption aria-hidden="true">image-20210311103033549</figcaption>
+</figure>
+<figure>
+<img src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png" title="黎曼MDM分类与传统CSP分类的迁移学习比较" alt="image-20210311103013598"><figcaption aria-hidden="true">image-20210311103013598</figcaption>
+</figure>
 <p>LDA 线性判别分析</p>
-<h2 id="5-conclusion"><a class="markdownIt-Anchor" href="#5-conclusion"></a> 5. Conclusion</h2>
+<h2 id="conclusion">5. Conclusion</h2>
 <p>作者给出了哪些结论？哪些是strong conclusions, 哪些又是weak的conclusions（即作者并没有通过实验提供evidence，只在discussion中提到；或实验的数据并没有给出充分的evidence）?</p>
 <hr>
-<ol>
+<ol type="1">
 <li>提供了一个更简单的黎曼分类方法，</li>
 <li>最小距离到平均数（MDM）的初步介绍，我们主要依靠直观的（几何）解释。Riemannian MDM方法完全基于两个简单的概念：两个数据点之间的距离和其中若干点的平均值。</li>
 <li>黎曼几何学提供了处理对称正定矩阵的天然框架，许多种类的结构协方差矩阵都是这种类型。不管协方差矩阵是如何定义的，MDM黎曼分类器对于所有三种BCI模式，即运动想象、事件相关电位和稳态诱发电位都是一样的。</li>
 <li>基于切线空间映射的黎曼方法的总体性能优于MDM方法，而且性能明显优于最新的技术水平，但由于分类器继承了算法复杂度的增加和可能需要高强度的学习，它们不太适合在线操作</li>
 <li>空间滤波器的改进只能为分类目的带来适度的改进，而且这种改进并不容易转化为可靠性和鲁棒性的显著提高。</li>
 </ol>
-<h2 id="6-notes"><a class="markdownIt-Anchor" href="#6-notes"></a> 6. Notes</h2>
+<h2 id="notes">6. Notes</h2>
 <p>(optional) 不在以上列表中，但需要特别记录的笔记。</p>
 <hr>
 <p>附录1中给出了三种主要BCI模式的正式定义。 这些定义还可以改进，并期待对这一课题的进一步研究。</p>
-<h2 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h2>
+<h2 id="references">References</h2>
 <p>(optional) 列出相关性高的文献，以便之后可以继续track下去。</p>
 
     </div>
@@ -454,12 +465,28 @@
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class=""></i>
   </span>
   <span class="author" itemprop="copyrightHolder">刘 可</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
     </div>
   </footer>
@@ -467,7 +494,7 @@
   
   <script size="300" alpha="0.1" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
 <script src="/js/local-search.js"></script>
@@ -478,6 +505,7 @@
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -485,5 +513,5 @@
   
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"live2d-widget-model-shizuku"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haru01.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
 </html>
