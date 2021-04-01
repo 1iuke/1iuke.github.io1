@@ -221,14 +221,14 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</loc>
+    <loc>http://bloglk.gitee.io/tags/%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95/</loc>
+    <loc>http://bloglk.gitee.io/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -256,34 +256,6 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/EEGLAB/</loc>
-    <lastmod>2021-04-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bloglk.gitee.io/tags/MicroState-analysis/</loc>
-    <lastmod>2021-04-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bloglk.gitee.io/tags/%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2/</loc>
-    <lastmod>2021-04-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bloglk.gitee.io/tags/source-analysis/</loc>
-    <lastmod>2021-04-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://bloglk.gitee.io/tags/tensorflow/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
@@ -305,6 +277,13 @@
   </url>
   
   <url>
+    <loc>http://bloglk.gitee.io/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://bloglk.gitee.io/tags/%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
@@ -312,7 +291,28 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/</loc>
+    <loc>http://bloglk.gitee.io/tags/EEGLAB/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bloglk.gitee.io/tags/MicroState-analysis/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bloglk.gitee.io/tags/source-analysis/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bloglk.gitee.io/tags/%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -328,13 +328,6 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2021-04-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://bloglk.gitee.io/categories/%E8%AE%BA%E6%96%87/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
@@ -342,7 +335,7 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/categories/%E8%84%91%E7%94%B5/</loc>
+    <loc>http://bloglk.gitee.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -364,6 +357,13 @@
   
   <url>
     <loc>http://bloglk.gitee.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bloglk.gitee.io/categories/%E8%84%91%E7%94%B5/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
