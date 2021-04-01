@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="小波变换  傅里叶变化 Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。">
+<meta name="description" content="关于傅里叶变换，短时傅里叶变换，小波变换的优缺点及应用， 以及BrainStorm3在EEGLAB的使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day5night">
 <meta property="og:url" content="http://bloglk.gitee.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/index.html">
 <meta property="og:site_name" content="Mr.Liu">
-<meta property="og:description" content="小波变换  傅里叶变化 Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。">
+<meta property="og:description" content="关于傅里叶变换，短时傅里叶变换，小波变换的优缺点及应用， 以及BrainStorm3在EEGLAB的使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321184038242.png">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321184229922.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321190059990.png">
 <meta property="og:image" content="http://bloglk.gitee.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321191405236.png">
 <meta property="article:published_time" content="2021-03-21T10:33:06.000Z">
-<meta property="article:modified_time" content="2021-03-31T11:01:10.114Z">
+<meta property="article:modified_time" content="2021-04-01T04:26:19.417Z">
 <meta property="article:author" content="刘 可">
 <meta property="article:tag" content="小波变换">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2"><span class="nav-text">小波变换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#brainstorm3"><span class="nav-text">BrainStorm3</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="nav-text">1傅里叶变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="nav-text">2 短时傅里叶变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2"><span class="nav-text">3 小波变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brainstorm3"><span class="nav-text">4 BrainStorm3</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,13 +220,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -303,7 +303,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-31 19:01:10" itemprop="dateModified" datetime="2021-03-31T19:01:10+08:00">2021-03-31</time>
+        <time title="修改时间：2021-04-01 12:26:19" itemprop="dateModified" datetime="2021-04-01T12:26:19+08:00">2021-04-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -330,7 +330,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>496</span>
+      <span>547</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -348,15 +348,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="小波变换">小波变换</h1>
-<ul>
-<li><p>傅里叶变化</p>
-<p>Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。</p>
+        <p>关于傅里叶变换，短时傅里叶变换，小波变换的优缺点及应用，</p>
+<p>以及BrainStorm3在EEGLAB的使用</p>
 <span id="more"></span>
+<h2 id="傅里叶变换">1傅里叶变换</h2>
+<p>Fourier变换作为一种全局性的变化，有一定的局限性，如不具备局部化分析能力、不能分析非平稳信号等。</p>
 <figure>
 <img src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321184038242.png" alt="image-20210321184038242"><figcaption aria-hidden="true">image-20210321184038242</figcaption>
-</figure></li>
-<li><p>短时傅里叶变换</p>
+</figure>
+<h2 id="短时傅里叶变换">2 短时傅里叶变换</h2>
 <figure>
 <img src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321184229922.png" alt="image-20210321184229922"><figcaption aria-hidden="true">image-20210321184229922</figcaption>
 </figure>
@@ -364,8 +364,8 @@
 <p>窄窗口时间分辨率高、频率分辨率低，</p>
 <p>宽窗口时间分辨率低、频率分辨率高。</p>
 <p>对于时变的非稳态信号，高频适合小窗口，低频适合大窗口。</p>
-<p>然而STFT的窗口是固定的，在一次STFT中宽 度不会变化，所以STFT还是无法满足非稳态信号变化的频率的需求。</p></li>
-<li><p>小波变换</p>
+<p>然而STFT的窗口是固定的，在一次STFT中宽 度不会变化，所以STFT还是无法满足非稳态信号变化的频率的需求。</p>
+<h2 id="小波变换">3 小波变换</h2>
 <figure>
 <img src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321185809723.png" alt="image-20210321185809723"><figcaption aria-hidden="true">image-20210321185809723</figcaption>
 </figure>
@@ -383,11 +383,10 @@
 <img src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321190059990.png" alt="image-20210321190059990"><figcaption aria-hidden="true">image-20210321190059990</figcaption>
 </figure>
 <p>时频信息</p>
-<h1 id="brainstorm3">BrainStorm3</h1>
+<h2 id="brainstorm3">4 BrainStorm3</h2>
 <figure>
 <img src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/image-20210321191405236.png" alt="image-20210321191405236"><figcaption aria-hidden="true">image-20210321191405236</figcaption>
-</figure></li>
-</ul>
+</figure>
 
     </div>
 
@@ -468,14 +467,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">293k</span>
+    <span title="站点总字数">292k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:27</span>
+    <span title="站点阅读时长">4:25</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -548,5 +547,5 @@ NexT.utils.loadComments('#lv-container', () => {
 });
 </script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haru01.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</body>
 </html>

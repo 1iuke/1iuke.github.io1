@@ -31,7 +31,7 @@
 <meta property="og:description" content="典型相关分析(Canonical Correction Analysis)是最常用的数据挖掘关联算法之一。 比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-14T14:51:42.000Z">
-<meta property="article:modified_time" content="2021-03-31T10:58:18.386Z">
+<meta property="article:modified_time" content="2021-04-01T04:29:44.453Z">
 <meta property="article:author" content="刘 可">
 <meta property="article:tag" content="降维">
 <meta name="twitter:card" content="summary">
@@ -213,13 +213,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,7 +296,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-31 18:58:18" itemprop="dateModified" datetime="2021-03-31T18:58:18+08:00">2021-03-31</time>
+        <time title="修改时间：2021-04-01 12:29:44" itemprop="dateModified" datetime="2021-04-01T12:29:44+08:00">2021-04-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -345,20 +345,20 @@
 <p>比如我们拿到两组数据，第一组是人身高和体重的数据，第二组是对应的跑步能力和跳远能力的数据。那么我们能不能说这两组数据是相关的呢？CCA可以帮助我们分析这个问题。</p>
 <span id="more"></span>
 <h2 id="cca概述">1.CCA概述</h2>
-<p>在数理统计里面，假设有两组一维的数据集X和Y，则==相关系数==ρ的定义为: <span class="math display">\[
+<p>在数理统计里面，假设有两组一维的数据集X和Y，则<code>相关系数ρ</code>的定义为: <span class="math display">\[
 \rho(X,Y) = \frac{cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}
 \]</span> ​ 其中<span class="math inline">\(cov(X,Y)\)</span> 是X，Y的协方差，<span class="math inline">\(D(X),D(Y)\)</span> 分别为<span class="math inline">\(X,Y\)</span> 的方差。相关系数<span class="math inline">\(\rho\)</span> 的取值为[-1,1]。<span class="math inline">\(\rho\)</span>的绝对值越接近于1，则<span class="math inline">\(X,Y\)</span>的线性相关性越高。越接近于0，则<span class="math inline">\(X,Y\)</span>的线性相关性越低。</p>
-<p>​ 虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？CCA给了我们变通的方法。</p>
-<p>​ CCA使用的方法是将多维的<span class="math inline">\(X,Y\)</span>都用<strong>线性变换</strong>为1维的<span class="math inline">\(X&#39;,Y&#39;\)</span>，然后再使用相关系数来看<span class="math inline">\(X&#39;,Y&#39;\)</span>'的相关性。将数据从多维变到一维，也可以理解为CCA是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看CCA的算法思想。</p>
+<p>​ 虽然相关系数可以很好的帮我们分析一维数据的相关性，但是对于高维数据就不能直接使用了。拿上面我们提到的，如果X是包括人身高和体重两个维度的数据，而Y是包括跑步能力和跳远能力两个维度的数据，就不能直接使用相关系数的方法。那我们能不能变通一下呢？<span class="math inline">\(CCA\)</span>给了我们变通的方法。</p>
+<p>​ <span class="math inline">\(CCA\)</span>使用的方法是将多维的<span class="math inline">\(X,Y\)</span>都用<strong>线性变换</strong>为1维的<span class="math inline">\(X&#39;,Y&#39;\)</span>，然后再使用相关系数来看<span class="math inline">\(X&#39;,Y&#39;\)</span>'的相关性。将数据从多维变到一维，也可以理解为<span class="math inline">\(CCA\)</span>是在进行<strong>降维</strong>，将高维数据降到一维，然后再用相关系数进行相关性的分析。下面我们看看<span class="math inline">\(CCA\)</span>的算法思想。</p>
 <h2 id="cca的算法思想">2.CCA的算法思想</h2>
-<p>​ 降维的标准是如何选择的呢？回想下主成分分析PCA，降维的原则是投影方差最大；再回想下线性判别分析LDA，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的CCA，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
+<p>​ 降维的标准是如何选择的呢？回想下主成分分析<span class="math inline">\(PCA\)</span>，降维的原则是投影方差最大；再回想下线性判别分析<span class="math inline">\(LDA\)</span>，降维的原则是同类的投影方差小，异类间的投影方差大。对于我们的<span class="math inline">\(CCA\)</span>，它选择的投影标准是降维到1维后，两组数据的相关系数最大。</p>
 <p>​ 假设我们的数据集是<span class="math inline">\(X,Y\)</span>，<span class="math inline">\(X\)</span>为<span class="math inline">\(n_1×m\)</span>的样本矩阵。<span class="math inline">\(Y\)</span>为<span class="math inline">\(n_2×m\)</span>的样本矩阵.其中<span class="math inline">\(m\)</span>为样本个数，而<span class="math inline">\(n1,n2\)</span>分别为<span class="math inline">\(X,Y\)</span>的特征维度。</p>
 <p>​ 对于X矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为a, 对于Y矩阵，我们将其投影到1维，或者说进行线性表示，对应的投影向量或者说线性系数向量为b, 这样X ,Y投影后得到的一维向量分别为X',Y'。我们有 <span class="math display">\[
 X&#39; = a^TX, Y&#39;=b^TY
 \]</span></p>
-<p>​ 我们CCA的优化目标是最大化<span class="math display">\[ρ(X′,Y′)\]</span>得到对应的投影向量<span class="math inline">\(a,b\)</span>，即 <span class="math display">\[
+<p>​ 我们<span class="math inline">\(CCA\)</span>的优化目标是最大化<span class="math display">\[ρ(X′,Y′)\]</span>得到对应的投影向量<span class="math inline">\(a,b\)</span>，即 <span class="math display">\[
 \underbrace{arg\;max}_{a,b}\frac{cov(X&#39;,Y&#39;)}{\sqrt{D(X&#39;)}\sqrt{D(Y&#39;)}}
-\]</span> 　　在投影前，我们一般会把原始数据进行==标准化==，得到均值为0而方差为1的数据<span class="math inline">\(X,Y\)</span>。这样我们有： <span class="math display">\[
+\]</span> 　　在投影前，我们一般会把原始数据进行<code>标准化</code>，得到均值为0而方差为1的数据<span class="math inline">\(X,Y\)</span>。这样我们有： <span class="math display">\[
 cov(X&#39;,Y&#39;) = cov(a^TX, b^TY) = E(&lt;a^TX, b^TY&gt;) = E((a^TX)(b^TY)^T) = a^TE(XY^T)b
 \]</span></p>
 <p><span class="math display">\[
@@ -375,10 +375,10 @@ cov(X,Y) = E(XY^T),  cov(Y,X) = E(YX^T)
 \]</span></p>
 <p>​ 令<span class="math inline">\(cov(X,Y)=S_{XY}\)</span>,则优化目标可以转化为: <span class="math display">\[
 \underbrace{arg\;max}_{a,b}\frac{a^TS_{XY}b}{\sqrt{ a^TS_{XX}a}\sqrt{b^TS_{YY}b}}
-\]</span> 　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和==SVM==类似的优化方法，固定分母，优化分子，具体的转化为： <span class="math display">\[
+\]</span> 　　由于分子分母增大相同的倍数，优化目标结果不变，我们可以采用和<code>SVM</code>类似的优化方法，固定分母，优化分子，具体的转化为： <span class="math display">\[
 \underbrace{arg\;max}_{a,b}\;\;{a^TS_{XY}b} \\ s.t. a^TS_{XX}a =1,\; b^TS_{YY}b =1
-\]</span> ​ 也就是说，我们的CCA算法的目标最终转化为一个==凸优化==过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的<span class="math inline">\(a,b\)</span>则为降维时的投影向量，或者说线性系数。</p>
-<p>　　　　这个函数优化一般有两种方法，第一种是奇异值分解==SVD==，第二种是==特征分解==，两者得到的结果一样，下面我们分别讲解。</p>
+\]</span> ​ 也就是说，我们的<span class="math inline">\(CCA\)</span>算法的目标最终转化为一个<code>凸优化</code>过程，只要我们求出了这个优化目标的最大值，就是我们前面提到的多维X和Y的相关性度量，而对应的<span class="math inline">\(a,b\)</span>则为降维时的投影向量，或者说线性系数。</p>
+<p>　　　　这个函数优化一般有两种方法，第一种是奇异值分解<span class="math inline">\(SVD\)</span>，第二种是<code>特征分解</code>，两者得到的结果一样，下面我们分别讲解。</p>
 <h2 id="cca算法的svd求解">3.CCA算法的SVD求解</h2>
 <p>​ 首先，令<span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span> ,则有： <span class="math display">\[
 a^TS_{XX}a =1 \Rightarrow u^TS_{XX}^{-1/2}S_{XX}S_{XX}^{-1/2}u =1  \Rightarrow  u^Tu=1
@@ -396,7 +396,7 @@ s.t. u^Tu =1,\; v^Tv =1
 <p>那么利用奇异值分解，我们可以得到<span class="math inline">\(M=UΣV^T\)</span>其中<span class="math inline">\(U,V\)</span>分别为M的左奇异向量和右奇异向量组成的矩阵，而<span class="math display">\[Σ\]</span>为M的奇异值组成的对角矩阵。由于<span class="math display">\[U,V\]</span>所有的列都为标准正交基，则<span class="math display">\[u^TU\]</span>和<span class="math inline">\(V^Tv\)</span>得到一个只有一个标量值为1，其余标量值为0的向量。此时我们有 <span class="math display">\[
 u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v = u^TU\Sigma V^Tv = \sigma_{uv}
 \]</span> ​ 也就是说我们最大化<span class="math inline">\(u^TS_{XX}^{-1/2}S_{XY}S_{YY}^{-1/2}v\)</span>,其实对应的最大值就是某一组左右奇异向量所对应的奇异值的最大值。也就是将M做了奇异值分解后，最大的奇异值就是我们优化目标的最大值，或者说我们的X和Y之间的最大相关系数。利用对应的左右奇异向量<span class="math inline">\(u,v\)</span>我们也可以求出我们原始的X和Y的线性系数<span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span>。</p>
-<p>　　　　可以看出，SVD的求解方式非常简洁方便。但是如果你不熟悉SVD的话，我们也可以用传统的拉格朗日函数加上特征分解来完成这个函数的优化。</p>
+<p>　　　　可以看出，<span class="math inline">\(SVD\)</span>的求解方式非常简洁方便。但是如果你不熟悉SVD的话，我们也可以用传统的拉格朗日函数加上特征分解来完成这个函数的优化。</p>
 <h2 id="cca算法的特征分解求解">4.CCA算法的特征分解求解</h2>
 <p>​ 利用拉格朗日函数，优化目标转化为最大化下式： <span class="math display">\[
 J(a,b) = a^TS_{XY}b -\frac{\lambda}{2}(a^TS_{XX}a-1)-\frac{\theta}{2}(b^TS_{YY}b-1)
@@ -425,8 +425,8 @@ S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b
 <p>　　　　4) 计算X和Y的线性系数向量a和b, <span class="math inline">\(a=S_{XX}^{-1/2}u, b=S_{YY}^{-1/2}v\)</span></p>
 <p>　　　　</p>
 <h2 id="cca算法小结">6.CCA算法小结</h2>
-<p>​ CCA算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，CCA就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用CCA的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为KCCA。</p>
-<p>　　此外，我们在算法里只找了相关度最大的奇异值或者特征值，作为数据的相关系数，实际上我们也可以像PCA一样找出第二大奇异值，第三大奇异值，。。。得到第二相关系数和第三相关系数。然后对数据做进一步的相关性分析。但是一般的应用来说，找出第一相关系数就可以了。</p>
+<p>​ <span class="math inline">\(CCA\)</span>算法广泛的应用于数据相关度的分析，同时还是偏最小二乘法的基础。但是由于它依赖于数据的线性表示，当我们的数据无法线性表示时，<span class="math inline">\(CCA\)</span>就无法使用，此时我们可以利用核函数的思想，将数据映射到高维后，再利用<span class="math inline">\(CCA\)</span>的思想降维到1维，求对应的相关系数和线性关系，这个算法一般称为<span class="math inline">\(KCCA\)</span>。</p>
+<p>　　此外，我们在算法里只找了相关度最大的奇异值或者特征值，作为数据的相关系数，实际上我们也可以像<span class="math inline">\(PCA\)</span>一样找出第二大奇异值，第三大奇异值，。。。得到第二相关系数和第三相关系数。然后对数据做进一步的相关性分析。但是一般的应用来说，找出第一相关系数就可以了。</p>
 <p>　　有时候我们的矩阵<span class="math inline">\(S_{XX},S_{YY}\)</span>不可逆，此时我们得不到对应的逆矩阵，一般遇到这种情况可以对<span class="math inline">\(S_{XX},S_{YY}\)</span>进行正则化，将<span class="math inline">\(S_{XX},S_{YY}\)</span>变化为<span class="math inline">\(S_{XX}+\gamma I,S_{YY}+\gamma I\)</span>,然后继续求逆。其中<span class="math inline">\(γ\)</span>为正则化系数。</p>
 
     </div>
@@ -508,14 +508,14 @@ S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">293k</span>
+    <span title="站点总字数">292k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:27</span>
+    <span title="站点阅读时长">4:25</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -619,5 +619,5 @@ NexT.utils.loadComments('#lv-container', () => {
 });
 </script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haru01.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</body>
 </html>
