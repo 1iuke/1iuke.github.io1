@@ -235,13 +235,6 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/VEP/</loc>
-    <lastmod>2021-04-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://bloglk.gitee.io/tags/SSVEP/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
@@ -249,7 +242,7 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/EEGLAB/</loc>
+    <loc>http://bloglk.gitee.io/tags/VEP/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -257,6 +250,13 @@
   
   <url>
     <loc>http://bloglk.gitee.io/tags/%E8%84%91%E7%94%B5%EF%BC%8C%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bloglk.gitee.io/tags/EEGLAB/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -277,14 +277,14 @@
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/source-analysis/</loc>
+    <loc>http://bloglk.gitee.io/tags/tensorflow/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://bloglk.gitee.io/tags/tensorflow/</loc>
+    <loc>http://bloglk.gitee.io/tags/source-analysis/</loc>
     <lastmod>2021-04-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
