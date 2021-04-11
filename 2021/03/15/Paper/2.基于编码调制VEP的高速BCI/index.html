@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"lk11223.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="0. Summary 通过编码调制与多通道处理提高ITR">
+<meta name="description" content="0. Summary 通过编码调制与多通道处理提高ITR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于编码调制VEP的高速BCI">
 <meta property="og:url" content="https://lk11223.github.io/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/index.html">
 <meta property="og:site_name" content="Mr.Liu">
-<meta property="og:description" content="0. Summary 通过编码调制与多通道处理提高ITR">
+<meta property="og:description" content="0. Summary 通过编码调制与多通道处理提高ITR">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lk11223.github.io/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png">
 <meta property="og:image" content="https://lk11223.github.io/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png">
@@ -193,7 +193,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-summary"><span class="nav-text"> 0. Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-research-objectives"><span class="nav-text"> 1. Research Objective(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-background-problem-statement"><span class="nav-text"> 2. Background &#x2F; Problem Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-methods"><span class="nav-text"> 3. Method(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-evaluation"><span class="nav-text"> 4. Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-conclusion"><span class="nav-text"> 5. Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-notes"><span class="nav-text"> 6. Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-text"> References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-text">0. Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#research-objectives"><span class="nav-text">1. Research Objective(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-problem-statement"><span class="nav-text">2. Background &#x2F; Problem Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#methods"><span class="nav-text">3. Method(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluation"><span class="nav-text">4. Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-text">5. Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notes"><span class="nav-text">6. Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -326,7 +326,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>655</span>
+      <span>678</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -344,30 +344,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="0-summary"><a class="markdownIt-Anchor" href="#0-summary"></a> 0. Summary</h2>
+        <h2 id="summary">0. Summary</h2>
 <p>通过编码调制与多通道处理提高ITR</p>
 <span id="more"></span>
-<h2 id="1-research-objectives"><a class="markdownIt-Anchor" href="#1-research-objectives"></a> 1. Research Objective(s)</h2>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
 <p>提高ITR</p>
-<h2 id="2-background-problem-statement"><a class="markdownIt-Anchor" href="#2-background-problem-statement"></a> 2. Background / Problem Statement</h2>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
 <p>BCI 通信系统传输速率低，提高ITR(信息传输率)</p>
-<h2 id="3-methods"><a class="markdownIt-Anchor" href="#3-methods"></a> 3. Method(s)</h2>
+<h2 id="methods">3. Method(s)</h2>
 <ul>
 <li>提出了基于c-VEP的调制系统，其中二进制伪随机码被用来调制不同的视觉刺激</li>
 <li>提出了一种提高识别精度的多通道检测方法</li>
 </ul>
-<h2 id="4-evaluation"><a class="markdownIt-Anchor" href="#4-evaluation"></a> 4. Evaluation</h2>
-<p><img src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png" alt="image-20210311110254896"></p>
-<ol>
+<h2 id="evaluation">4. Evaluation</h2>
+<figure>
+<img src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png" alt="image-20210311110254896"><figcaption aria-hidden="true">image-20210311110254896</figcaption>
+</figure>
+<ol type="1">
 <li>该系统由一个脑电图放大器和一台带CRT显示器的个人电脑（PC）组成。</li>
-<li>不同目标的反应之间的圆移关系是目标识别的基础，一旦获得了T0的模板，其他目标的模板可以很容易地获得<img src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png" alt="image-20210311110915610" title="园移   Principle of equivalent neighbors"></li>
+<li>不同目标的反应之间的圆移关系是目标识别的基础，一旦获得了T0的模板，其他目标的模板可以很容易地获得<img src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png" title="园移 Principle of equivalent neighbors" alt="image-20210311110915610"></li>
 <li>在获得所有目标的模板后，可以采用模板匹配的方法进行目标识别，通过选择相关系数最大的目标来确定固定目标</li>
 <li>多通道处理，由于双极通道。实验分为训练阶段和测试阶段。在训练阶段，要求被试者固定在参考目标上约200个刺激周期。训练阶段的数据用于离线分析，以计算空间滤波权重和在线使用的参考模板.在测试阶段，每个受试者被要求输入一个64个字符的序列。 在测试阶段，每个受试者都被要求输入64个字符序列，在线准确率和相应的ITR用于评估系统性能。 在计算ITR时，每次选择的时间成本为2.1s(包括两个刺激期，一个用于数据采集，一个用于目标识别、反馈展示和凝视)。</li>
 </ol>
-<h2 id="5-conclusion"><a class="markdownIt-Anchor" href="#5-conclusion"></a> 5. Conclusion</h2>
+<h2 id="conclusion">5. Conclusion</h2>
 <p>本文对高速c-VEP BCI系统的基本原理和实现方法进行了详细的介绍,提出的c-VEP BCI具有108±12.0比特/分钟-1的高ITR,超过了以往基于脑电图的BCI的记录。</p>
-<h2 id="6-notes"><a class="markdownIt-Anchor" href="#6-notes"></a> 6. Notes</h2>
-<h2 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h2>
+<h2 id="notes">6. Notes</h2>
+<h2 id="references">References</h2>
 
     </div>
 
@@ -448,14 +450,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">307k</span>
+    <span title="站点总字数">305k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:39</span>
+    <span title="站点阅读时长">4:38</span>
   </span>
 </div>
 <div class="busuanzi-count">

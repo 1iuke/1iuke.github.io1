@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"lk11223.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="许多算法，无论是有监督的还是无监督的，都使用距离度量。这些度量（例如欧几里得距离或余弦相似度）通常可以在算法中找到，例如k-NN，UMAP，HDBSCAN等。  知道何时使用哪种距离量度可以帮助您从分类不正确的模型转变为准确的模型">
+<meta name="description" content="许多算法，无论是有监督的还是无监督的，都使用距离度量。这些度量（例如欧几里得距离或余弦相似度）通常可以在算法中找到，例如k-NN，UMAP，HDBSCAN等。  知道何时使用哪种距离量度可以帮助您从分类不正确的模型转变为准确的模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据科学中的距离度量">
 <meta property="og:url" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/index.html">
 <meta property="og:site_name" content="Mr.Liu">
-<meta property="og:description" content="许多算法，无论是有监督的还是无监督的，都使用距离度量。这些度量（例如欧几里得距离或余弦相似度）通常可以在算法中找到，例如k-NN，UMAP，HDBSCAN等。  知道何时使用哪种距离量度可以帮助您从分类不正确的模型转变为准确的模型">
+<meta property="og:description" content="许多算法，无论是有监督的还是无监督的，都使用距离度量。这些度量（例如欧几里得距离或余弦相似度）通常可以在算法中找到，例如k-NN，UMAP，HDBSCAN等。  知道何时使用哪种距离量度可以帮助您从分类不正确的模型转变为准确的模型">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325154539773.png">
 <meta property="og:image" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325154734583.png">
@@ -43,6 +43,7 @@
 <meta property="og:image" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161300349.png">
 <meta property="og:image" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_ZZCAEu9KsHOfl0Kr.gif">
 <meta property="og:image" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161655486.png">
+<meta property="og:image" content="https://lk11223.github.io/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_N5xU3llTz-MKt9E8%20(1).gif">
 <meta property="article:published_time" content="2021-03-25T07:43:28.000Z">
 <meta property="article:modified_time" content="2021-04-01T04:30:06.673Z">
 <meta property="article:author" content="刘 可">
@@ -204,7 +205,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%AC%A7%E6%B0%8F%E8%B7%9D%E7%A6%BB"><span class="nav-text"> 1 欧氏距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-text"> 概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-text"> 缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B"><span class="nav-text"> 用例：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6"><span class="nav-text"> 2 余弦相似度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text"> 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-2"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%B5%B7%E6%98%8E%E8%B7%9D%E7%A6%BB"><span class="nav-text"> 3 海明距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="nav-text"> 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-3"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-3"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%9B%BC%E5%93%88%E9%A1%BF%E8%B7%9D%E7%A6%BB"><span class="nav-text"> 4 曼哈顿距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-4"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-4"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB"><span class="nav-text"> 5 切比雪夫距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="nav-text"> 定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-5"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-5"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E9%97%B5%E5%8F%AF%E5%A4%AB%E6%96%AF%E5%9F%BA"><span class="nav-text"> 6 闵可夫斯基</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-4"><span class="nav-text"> 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-6"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-6"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E8%B4%BE%E5%8D%A1%E5%BE%B7%E6%8C%87%E6%95%B0"><span class="nav-text"> 7 贾卡德指数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-7"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-7"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-haversine"><span class="nav-text"> 8 Haversine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-8"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-8"><span class="nav-text"> 用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-s%C3%B8rensen-dice-index"><span class="nav-text"> 9 Sørensen-Dice Index</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-9"><span class="nav-text"> 缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-9"><span class="nav-text"> 用例</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%B0%8F%E8%B7%9D%E7%A6%BB"><span class="nav-text">1 欧氏距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-text">缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B"><span class="nav-text">用例：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6"><span class="nav-text">2 余弦相似度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-1"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%B7%E6%98%8E%E8%B7%9D%E7%A6%BB"><span class="nav-text">3 海明距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-2"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%BC%E5%93%88%E9%A1%BF%E8%B7%9D%E7%A6%BB"><span class="nav-text">4 曼哈顿距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-3"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-3"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E8%B7%9D%E7%A6%BB"><span class="nav-text">5 切比雪夫距离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-4"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-4"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%B5%E5%8F%AF%E5%A4%AB%E6%96%AF%E5%9F%BA"><span class="nav-text">6 闵可夫斯基</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-5"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-5"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%BE%E5%8D%A1%E5%BE%B7%E6%8C%87%E6%95%B0"><span class="nav-text">7 贾卡德指数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-6"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-6"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#haversine"><span class="nav-text">8 Haversine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-7"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-7"><span class="nav-text">用例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#s%C3%B8rensen-dice-index"><span class="nav-text">9 Sørensen-Dice Index</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-8"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B-8"><span class="nav-text">用例</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -337,7 +338,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>3.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -360,66 +361,78 @@
 <p><strong>知道何时使用哪种距离量度可以帮助您从分类不正确的模型转变为准确的模型</strong></p>
 </blockquote>
 <span id="more"></span>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325154539773.png" alt="image-20210325154539773"></p>
-<h1 id="1-欧氏距离"><a class="markdownIt-Anchor" href="#1-欧氏距离"></a> 1 欧氏距离</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325154734583.png" alt="image-20210325154734583"></p>
-<h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念：</h2>
-<p>使用勾股定理从这些点的笛卡尔坐标计算出距离。</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><msqrt><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">D(x,y)  = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.1568160000000005em;vertical-align:-1.277669em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8791470000000006em;"><span class="svg-align" style="top:-5.116816em;"><span class="pstrut" style="height:5.116816em;"></span><span class="mord" style="padding-left:1.056em;"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.8391470000000005em;"><span class="pstrut" style="height:5.116816em;"></span><span class="hide-tail" style="min-width:0.742em;height:3.196816em;"><svg width="400em" height="3.196816em" viewbox="0 0 400000 3196" preserveaspectratio="xMinYMin slice"><path d="M702 80H400000v40H742v3062l-4 4-4 4c-.667.7
--2 1.5-4 2.5s-4.167 1.833-6.5 2.5-5.5 1-9.5 1h-12l-28-84c-16.667-52-96.667
--294.333-240-727l-212 -643 -85 170c-4-3.333-8.333-7.667-13 -13l-13-13l77-155
- 77-156c66 199.333 139 419.667 219 661 l218 661zM702 80H400000v40H742z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span></span></span></span></span></p>
-<h2 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点：</h2>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325154539773.png" alt="image-20210325154539773"><figcaption aria-hidden="true">image-20210325154539773</figcaption>
+</figure>
+<h1 id="欧氏距离">1 欧氏距离</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325154734583.png" alt="image-20210325154734583"><figcaption aria-hidden="true">image-20210325154734583</figcaption>
+</figure>
+<h2 id="概念">概念：</h2>
+<p>使用勾股定理从这些点的笛卡尔坐标计算出距离。 <span class="math display">\[
+D(x,y)  = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}
+\]</span></p>
+<h2 id="缺点">缺点：</h2>
 <p>尽管这是一种常用的距离度量，但欧几里得距离并不是比例不变的，这意味着所计算的距离可能会根据要素的单位而发生偏斜。通常，在使用此距离度量之前，需要对数据进行<strong>归一化</strong>。</p>
 <p>此外，随着数据维数的增加，欧几里得距离的用处也越来越小。这与维数的诅咒有关，维数的诅咒与高维空间不能像我们直观地期望的二维或3维空间那样起作用。</p>
-<h2 id="用例"><a class="markdownIt-Anchor" href="#用例"></a> 用例：</h2>
+<h2 id="用例">用例：</h2>
 <p>当您拥有低维数据并且向量的大小非常重要时，欧几里得距离的效果非常好。如果在低维数据上使用欧几里得距离，则kNN和HDBSCAN之类的方法将显示出出色的结果。</p>
 <p>尽管已开发出许多其他措施来解决欧几里得距离的缺点，但出于充分的原因，它仍然是最常用的距离措施之一。它使用起来非常直观，易于实现，并且在许多用例中都显示出了极好的效果。</p>
-<h1 id="2-余弦相似度"><a class="markdownIt-Anchor" href="#2-余弦相似度"></a> 2 余弦相似度</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325155301128.png" alt="image-20210325155301128"></p>
-<h2 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h2>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>x</mi><mi mathvariant="normal">.</mi><mi>y</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mtext> </mtext><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>y</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">D(x,y) = cos(\theta) = \frac{x . y}{||x|| \ ||y||}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.04356em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1075599999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord">∣</span><span class="mspace"> </span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord">∣</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="mord">.</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h1 id="余弦相似度">2 余弦相似度</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325155301128.png" alt="image-20210325155301128"><figcaption aria-hidden="true">image-20210325155301128</figcaption>
+</figure>
+<h2 id="定义">定义</h2>
+<p><span class="math display">\[
+D(x,y) = cos(\theta) = \frac{x . y}{||x|| \ ||y||}
+\]</span></p>
 <p>方向完全相同的两个向量的余弦相似度为1，而两个彼此相对的向量的相似度为-1。注意，它们的大小并不重要，因为这是方向的度量。</p>
-<h2 id="缺点-2"><a class="markdownIt-Anchor" href="#缺点-2"></a> 缺点</h2>
+<h2 id="缺点-1">缺点</h2>
 <p>余弦相似度的主要缺点之一是<strong>不考虑向量的大小，仅考虑其方向</strong>。实际上，这意味着没有充分考虑值的差异。例如，如果使用推荐系统，则余弦相似度不会考虑不同用户之间的评分等级差异。</p>
-<h2 id="用例-2"><a class="markdownIt-Anchor" href="#用例-2"></a> 用例</h2>
-<p>**当我们拥有高维数据并且向量的大小不重要时，通常会使用余弦相似度。**对于文本分析，当数据由字数表示时，此度量非常常用。例如，当一个单词在一个文档中比另一个单词更频繁出现时，这并不一定意味着一个文档与该单词更相关。可能是文件长度不均匀，计数的重要性不太重要。然后，我们最好使用忽略幅度的余弦相似度。</p>
-<h1 id="3-海明距离"><a class="markdownIt-Anchor" href="#3-海明距离"></a> 3 海明距离</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325155646742.png" alt="image-20210325155646742"></p>
-<h2 id="定义-2"><a class="markdownIt-Anchor" href="#定义-2"></a> 定义</h2>
+<h2 id="用例-1">用例</h2>
+<p><strong>当我们拥有高维数据并且向量的大小不重要时，通常会使用余弦相似度。</strong>对于文本分析，当数据由字数表示时，此度量非常常用。例如，当一个单词在一个文档中比另一个单词更频繁出现时，这并不一定意味着一个文档与该单词更相关。可能是文件长度不均匀，计数的重要性不太重要。然后，我们最好使用忽略幅度的余弦相似度。</p>
+<h1 id="海明距离">3 海明距离</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325155646742.png" alt="image-20210325155646742"><figcaption aria-hidden="true">image-20210325155646742</figcaption>
+</figure>
+<h2 id="定义-1">定义</h2>
 <p>汉明距离是两个向量之间不同的值的数量。它通常用于比较两个相等长度的二进制字符串。它也可以用于字符串，通过计算彼此不同的字符数来比较它们彼此之间的相似程度。</p>
-<h2 id="缺点-3"><a class="markdownIt-Anchor" href="#缺点-3"></a> 缺点</h2>
+<h2 id="缺点-2">缺点</h2>
 <p>当两个向量的长度不相等时，很难使用汉明距离。</p>
 <p>当幅度是重要指标时，建议不要使用此距离指标。</p>
-<h2 id="用例-3"><a class="markdownIt-Anchor" href="#用例-3"></a> 用例</h2>
+<h2 id="用例-2">用例</h2>
 <p>典型的用例包括通过计算机网络传输数据时的错误纠正/检测。它可以用来确定二进制字中失真比特的数量，以作为估计误差的一种方法。</p>
 <p>此外，可以使用汉明距离来<strong>测量分类变量之间的距离</strong>。</p>
-<h1 id="4-曼哈顿距离"><a class="markdownIt-Anchor" href="#4-曼哈顿距离"></a> 4 曼哈顿距离</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325155834358.png" alt="image-20210325155834358"></p>
+<h1 id="曼哈顿距离">4 曼哈顿距离</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325155834358.png" alt="image-20210325155834358"><figcaption aria-hidden="true">image-20210325155834358</figcaption>
+</figure>
 <p>定义</p>
-<p>曼哈顿距离（通常称为的士距离或城市街区距离）计算实值向量之间的距离。想象一下在统一的网格上描述对象的矢量，例如棋盘。然后，曼哈顿距离是指两个向量只能以<strong>直角移动时的距离</strong>。计算距离时不涉及对角线运动。</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">D(x,y) =\sum_{i=1}^{k}|x_i-y_i|
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.1137820000000005em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8361130000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span></span></p>
-<h2 id="缺点-4"><a class="markdownIt-Anchor" href="#缺点-4"></a> 缺点</h2>
+<p>曼哈顿距离（通常称为的士距离或城市街区距离）计算实值向量之间的距离。想象一下在统一的网格上描述对象的矢量，例如棋盘。然后，曼哈顿距离是指两个向量只能以<strong>直角移动时的距离</strong>。计算距离时不涉及对角线运动。 <span class="math display">\[
+D(x,y) =\sum_{i=1}^{k}|x_i-y_i|
+\]</span></p>
+<h2 id="缺点-3">缺点</h2>
 <p>尽管曼哈顿距离对于<a target="_blank" rel="noopener" href="https://www.quora.com/What-is-the-difference-between-Manhattan-and-Euclidean-distance-measures">高维数据</a>似乎还可以，但是它比欧几里德距离直观的程度要差一些，特别是在使用高维数据时。</p>
 <p>此外，由于它不是最短的路径，因此比欧几里得距离更有可能提供更高的距离值。这不一定会带来问题，但是您应该考虑这一点。</p>
-<h2 id="用例-4"><a class="markdownIt-Anchor" href="#用例-4"></a> 用例</h2>
+<h2 id="用例-3">用例</h2>
 <p>当您的数据集具有离散和/或二进制属性时，Manhattan似乎工作得很好，因为它考虑了可以在这些属性的值内实际采用的路径。以欧几里得距离为例，实际上可能不可能在两个向量之间创建一条直线。</p>
-<h1 id="5-切比雪夫距离"><a class="markdownIt-Anchor" href="#5-切比雪夫距离"></a> 5 切比雪夫距离</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325160127526.png" alt="image-20210325160127526"></p>
-<h2 id="定义-3"><a class="markdownIt-Anchor" href="#定义-3"></a> 定义：</h2>
-<p>切比雪夫距离定义为沿着任何坐标维度的两个向量之间的最大差值。换句话说，它只是<strong>一个轴上的最大距离</strong>。由于其性质，通常将其称为棋盘距离，因为国王从一个方格到另一个方格所需的最小移动次数等于切比雪夫距离。</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo><mi>max</mi><mo>⁡</mo></mo><mi>i</mi></munder><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(x,y) = \max_i(|x_i-y_i|)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.477664em;vertical-align:-0.7276640000000001em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.43055999999999983em;"><span style="top:-2.072336em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">max</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7276640000000001em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mclose">)</span></span></span></span></span></p>
-<h2 id="缺点-5"><a class="markdownIt-Anchor" href="#缺点-5"></a> 缺点</h2>
+<h1 id="切比雪夫距离">5 切比雪夫距离</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325160127526.png" alt="image-20210325160127526"><figcaption aria-hidden="true">image-20210325160127526</figcaption>
+</figure>
+<h2 id="定义-2">定义：</h2>
+<p>切比雪夫距离定义为沿着任何坐标维度的两个向量之间的最大差值。换句话说，它只是<strong>一个轴上的最大距离</strong>。由于其性质，通常将其称为棋盘距离，因为国王从一个方格到另一个方格所需的最小移动次数等于切比雪夫距离。 <span class="math display">\[
+D(x,y) = \max_i(|x_i-y_i|)
+\]</span></p>
+<h2 id="缺点-4">缺点</h2>
 <p>切比雪夫（Chebyshev）通常用于非常特殊的用例，这使得很难用作通用距离度量标准，例如欧几里得距离或余弦相似度。因此，建议仅在绝对确定它适合您的用例时才使用它。</p>
-<h2 id="用例-5"><a class="markdownIt-Anchor" href="#用例-5"></a> 用例</h2>
+<h2 id="用例-4">用例</h2>
 <p>如前所述，切比雪夫距离可用于提取从一个正方形移动到另一个正方形所需的最小移动次数。此外，在允许无限制八向移动的游戏中，这可能是一种有用的措施。</p>
-<h1 id="6-闵可夫斯基"><a class="markdownIt-Anchor" href="#6-闵可夫斯基"></a> 6 闵可夫斯基</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325160639097.png" alt="image-20210325160639097"></p>
-<h2 id="定义-4"><a class="markdownIt-Anchor" href="#定义-4"></a> 定义</h2>
+<h1 id="闵可夫斯基">6 闵可夫斯基</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325160639097.png" alt="image-20210325160639097"><figcaption aria-hidden="true">image-20210325160639097</figcaption>
+</figure>
+<h2 id="定义-3">定义</h2>
 <p>Minkowski距离比大多数距离更复杂。它是在范数向量空间（n维实数空间）中使用的度量，这意味着它可以在距离可以表示为具有长度的向量的空间中使用。</p>
 <p>该措施具有三个要求：</p>
 <ul>
@@ -428,45 +441,59 @@
 <li><strong>三角形不等式</strong>—两点之间的最短距离是一条直线。</li>
 </ul>
 <p>Minkowski距离的公式如下所示：</p>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_UbbyH2MUPb5ZBa64.gif" alt="0_UbbyH2MUPb5ZBa64"></p>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_UbbyH2MUPb5ZBa64.gif" alt="0_UbbyH2MUPb5ZBa64"><figcaption aria-hidden="true">0_UbbyH2MUPb5ZBa64</figcaption>
+</figure>
 <p>关于此距离度量最有趣的是使用参数 <strong>p</strong>。我们可以使用此参数来操纵距离度量，使其与其他度量极为相似。</p>
 <p>常见值的<code>p</code>是：</p>
 <ul>
 <li>p = 1 —曼哈顿距离</li>
 <li>p = 2 —欧几里德距离</li>
-<li>p = *∞—*切比雪夫距离</li>
+<li>p = <em>∞—</em>切比雪夫距离</li>
 </ul>
-<h2 id="缺点-6"><a class="markdownIt-Anchor" href="#缺点-6"></a> 缺点</h2>
+<h2 id="缺点-5">缺点</h2>
 <p>Minkowski与它们所代表的距离度量具有相同的缺点，因此对曼哈顿，欧几里得和契比雪夫距离等度量的良好理解非常重要。</p>
 <p>此外，该参数<code>p</code>实际上可能很麻烦，因为根据您的用例，找到正确的值在计算上可能是非常低效的。</p>
-<h2 id="用例-6"><a class="markdownIt-Anchor" href="#用例-6"></a> 用例</h2>
+<h2 id="用例-5">用例</h2>
 <p>好处<code>p</code>是可以对其进行迭代并找到最适合您的用例的距离度量。它为您的距离度量提供了极大的灵活性，如果您熟悉<code>p</code>并且有很多距离度量，那么这将是一个巨大的好处。</p>
-<h1 id="7-贾卡德指数"><a class="markdownIt-Anchor" href="#7-贾卡德指数"></a> 7 贾卡德指数</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161025734.png" alt="image-20210325161025734"></p>
+<h1 id="贾卡德指数">7 贾卡德指数</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161025734.png" alt="image-20210325161025734"><figcaption aria-hidden="true">image-20210325161025734</figcaption>
+</figure>
 <p>Jaccard索引（或“联合上的交集”）是用于计算样本集的相似性和多样性的度量。它是交集的大小除以样本集并集的大小。</p>
 <p>实际上，它是集合之间<strong>相似实体的总数除以实体的总数</strong>。例如，如果两个集合共有1个相同的实体，并且总共有5个不同的实体，则Jaccard指数将为1/5 = 0.2。</p>
 <p>要计算Jaccard距离，我们只需从1中减去Jaccard指数：</p>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_3fcCoSZUOxa7vzon.gif" alt="0_3fcCoSZUOxa7vzon"></p>
-<h2 id="缺点-7"><a class="markdownIt-Anchor" href="#缺点-7"></a> 缺点</h2>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_3fcCoSZUOxa7vzon.gif" alt="0_3fcCoSZUOxa7vzon"><figcaption aria-hidden="true">0_3fcCoSZUOxa7vzon</figcaption>
+</figure>
+<h2 id="缺点-6">缺点</h2>
 <p>Jaccard索引的主要缺点是它受数据大小的很大影响。大型数据集可能会对索引产生很大影响，因为它可以显着增加联合并同时保持相交相似。</p>
-<h2 id="用例-7"><a class="markdownIt-Anchor" href="#用例-7"></a> 用例</h2>
+<h2 id="用例-6">用例</h2>
 <p>Jaccard索引通常用于使用二进制或二进制数据的应用程序中。当您拥有一个预测图像片段（例如汽车）的深度学习模型时，可以使用Jaccard索引来计算给定真实标签的预测片段的准确性。</p>
 <p>类似地，它可以用于文本相似性分析中，以测量文档之间有多少单词选择重叠。因此，它可以用来比较模式集。</p>
-<h1 id="8-haversine"><a class="markdownIt-Anchor" href="#8-haversine"></a> 8 Haversine</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161300349.png" alt="image-20210325161300349"></p>
+<h1 id="haversine">8 Haversine</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161300349.png" alt="image-20210325161300349"><figcaption aria-hidden="true">image-20210325161300349</figcaption>
+</figure>
 <p>Haversine距离是指球面上两个点之间的经度和纬度。它与欧几里得距离非常相似，因为它可以计算两点之间的最短线。主要区别在于不可能有直线，因为这里的假设是两个点都在一个球面上。</p>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_ZZCAEu9KsHOfl0Kr.gif" alt="0_ZZCAEu9KsHOfl0Kr"></p>
-<h2 id="缺点-8"><a class="markdownIt-Anchor" href="#缺点-8"></a> 缺点</h2>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_ZZCAEu9KsHOfl0Kr.gif" alt="0_ZZCAEu9KsHOfl0Kr"><figcaption aria-hidden="true">0_ZZCAEu9KsHOfl0Kr</figcaption>
+</figure>
+<h2 id="缺点-7">缺点</h2>
 <p>这种距离测量的一个缺点是，假定这些点位于一个<strong>球体上</strong>。实际上，这种情况很少出现，例如，地球不是完美的圆形，在某些情况下可能会使计算变得困难。取而代之的是，将目光转向假定椭圆形的<strong>Vincenty距离</strong>。</p>
-<h2 id="用例-8"><a class="markdownIt-Anchor" href="#用例-8"></a> 用例</h2>
+<h2 id="用例-7">用例</h2>
 <p>如您所料，Haversine距离通常用于导航。例如，您可以使用它来计算两个国家之间的飞行距离。请注意，如果距离本身不那么大，则不太适合。曲率不会产生太大的影响。</p>
-<h1 id="9-sørensen-dice-index"><a class="markdownIt-Anchor" href="#9-sørensen-dice-index"></a> 9 Sørensen-Dice Index</h1>
-<p><img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161655486.png" alt="image-20210325161655486"></p>
+<h1 id="sørensen-dice-index">9 Sørensen-Dice Index</h1>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/image-20210325161655486.png" alt="image-20210325161655486"><figcaption aria-hidden="true">image-20210325161655486</figcaption>
+</figure>
 <p>Sørensen-Dice索引与Jaccard索引非常相似，因为它可以测量样本集的相似性和多样性。尽管它们的计算方式相似，但索伦森-迪斯指数却更直观一些，因为可以将其视为两组之间重叠的百分比，该值介于0和1之间：</p>
-<p>![0_N5xU3llTz-MKt9E8 (1)](数据科学中的距离度量/0_N5xU3llTz-MKt9E8 (1).gif)</p>
-<h2 id="缺点-9"><a class="markdownIt-Anchor" href="#缺点-9"></a> 缺点</h2>
+<figure>
+<img src="/2021/03/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F/0_N5xU3llTz-MKt9E8%20(1).gif" alt="0_N5xU3llTz-MKt9E8 (1)"><figcaption aria-hidden="true">0_N5xU3llTz-MKt9E8 (1)</figcaption>
+</figure>
+<h2 id="缺点-8">缺点</h2>
 <p>像Jaccard索引一样，它们都夸大了几乎没有或没有地面真理肯定集的集合的重要性。结果，它可以支配多组平均得分。它按与相关集合的大小成反比的方式对每个项目加权，而不是平等地对待它们。</p>
-<h2 id="用例-9"><a class="markdownIt-Anchor" href="#用例-9"></a> 用例</h2>
+<h2 id="用例-8">用例</h2>
 <p>用例与Jaccard索引相似（如果不同）。您会发现它通常用于图像分割任务或文本相似性分析中。</p>
 
     </div>
@@ -548,14 +575,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">307k</span>
+    <span title="站点总字数">305k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:39</span>
+    <span title="站点阅读时长">4:38</span>
   </span>
 </div>
 <div class="busuanzi-count">
