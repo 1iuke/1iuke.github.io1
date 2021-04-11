@@ -21,12 +21,12 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bloglk.gitee.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"lk11223.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="关于tensorflow使用的一些代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensorflow 模型保存">
-<meta property="og:url" content="http://bloglk.gitee.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/index.html">
+<meta property="og:url" content="https://lk11223.github.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/index.html">
 <meta property="og:site_name" content="Mr.Liu">
 <meta property="og:description" content="关于tensorflow使用的一些代码">
 <meta property="og:locale" content="zh_CN">
@@ -37,7 +37,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://bloglk.gitee.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/">
+<link rel="canonical" href="https://lk11223.github.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/">
 
 
 <script class="page-configurations">
@@ -190,7 +190,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ipynb%E8%BD%AC%E6%8D%A2slides"><span class="nav-text">1. ipynb转换slides</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98"><span class="nav-text">2. 模型保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E5%80%BC%E4%BF%9D%E5%AD%98"><span class="nav-text">3. 权值保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD"><span class="nav-text">4. 模型加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E5%80%BC%E5%8A%A0%E8%BD%BD"><span class="nav-text">5. 权值加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorboard"><span class="nav-text">6. TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8model.fit%E4%B8%AD%E4%BD%BF%E7%94%A8tensorboard"><span class="nav-text">在Model.fit()中使用TensorBoard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD%E5%87%BD%E6%95%B0%E4%B8%AD%E5%B5%8C%E5%85%A5tensorboard"><span class="nav-text">在其他功能函数中嵌入TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tf.summary%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-text">tf.summary的基本步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bgraph%E5%92%8Cprofile%E4%BF%A1%E6%81%AF"><span class="nav-text">查看Graph和Profile信息</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ipynb%E8%BD%AC%E6%8D%A2slides"><span class="nav-text"> 1. ipynb转换slides</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98"><span class="nav-text"> 2. 模型保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9D%83%E5%80%BC%E4%BF%9D%E5%AD%98"><span class="nav-text"> 3. 权值保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD"><span class="nav-text"> 4. 模型加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%9D%83%E5%80%BC%E5%8A%A0%E8%BD%BD"><span class="nav-text"> 5. 权值加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-tensorboard"><span class="nav-text"> 6. TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8modelfit%E4%B8%AD%E4%BD%BF%E7%94%A8tensorboard"><span class="nav-text"> 在Model.fit()中使用TensorBoard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD%E5%87%BD%E6%95%B0%E4%B8%AD%E5%B5%8C%E5%85%A5tensorboard"><span class="nav-text"> 在其他功能函数中嵌入TensorBoard</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tfsummary%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-text"> tf.summary的基本步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bgraph%E5%92%8Cprofile%E4%BF%A1%E6%81%AF"><span class="nav-text"> 查看Graph和Profile信息</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -206,7 +206,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -265,7 +265,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bloglk.gitee.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/">
+    <link itemprop="mainEntityOfPage" href="https://lk11223.github.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -343,23 +343,23 @@
     <div class="post-body" itemprop="articleBody">
         <p>关于tensorflow使用的一些代码</p>
 <span id="more"></span>
-<h2 id="ipynb转换slides">1. ipynb转换slides</h2>
+<h2 id="1-ipynb转换slides"><a class="markdownIt-Anchor" href="#1-ipynb转换slides"></a> 1. ipynb转换slides</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!jupyter nbconvert lesson07.ipynb --to slides --post serve</span><br></pre></td></tr></table></figure>
-<h2 id="模型保存">2. 模型保存</h2>
+<h2 id="2-模型保存"><a class="markdownIt-Anchor" href="#2-模型保存"></a> 2. 模型保存</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.save(<span class="string">&#x27;model.h5&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;saved total model.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="权值保存">3. 权值保存</h2>
+<h2 id="3-权值保存"><a class="markdownIt-Anchor" href="#3-权值保存"></a> 3. 权值保存</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.save_weights(<span class="string">&#x27;weights.ckpt&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;saved weights.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="模型加载">4. 模型加载</h2>
+<h2 id="4-模型加载"><a class="markdownIt-Anchor" href="#4-模型加载"></a> 4. 模型加载</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network = tf.keras.models.load_model(<span class="string">&#x27;model.h5&#x27;</span>, <span class="built_in">compile</span>=<span class="literal">False</span>)</span><br><span class="line">print(<span class="string">&#x27;loaded model from file.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="权值加载">5. 权值加载</h2>
+<h2 id="5-权值加载"><a class="markdownIt-Anchor" href="#5-权值加载"></a> 5. 权值加载</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.load_weights(<span class="string">&#x27;weights.ckpt&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;loaded weights!&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="tensorboard">6. TensorBoard</h2>
-<h3 id="在model.fit中使用tensorboard">在Model.fit()中使用TensorBoard</h3>
+<h2 id="6-tensorboard"><a class="markdownIt-Anchor" href="#6-tensorboard"></a> 6. TensorBoard</h2>
+<h3 id="在modelfit中使用tensorboard"><a class="markdownIt-Anchor" href="#在modelfit中使用tensorboard"></a> 在Model.fit()中使用TensorBoard</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义日志目录，必须是启动web应用时指定目录的子目录，建议使用日期时间作为子目录名</span></span><br><span class="line">log_dir=<span class="string">&quot;logs/&quot;</span> + datetime.datetime.now().strftime(<span class="string">&quot;%Y%m%d-%H%M%S&quot;</span>)</span><br><span class="line"></span><br><span class="line">tensorboard_callback = tf.keras.callbacks.TensorBoard(</span><br><span class="line">    log_dir=<span class="string">&#x27;logs&#x27;</span>,</span><br><span class="line">    histogram_freq=<span class="number">1</span>, profile_batch=<span class="number">2</span>,</span><br><span class="line">    write_graph=<span class="literal">True</span>,write_images=<span class="literal">True</span>,</span><br><span class="line">    embeddings_freq=<span class="number">0</span>, embeddings_layer_names=<span class="literal">None</span>,</span><br><span class="line">    embeddings_metadata=<span class="literal">None</span>, embeddings_data=<span class="literal">None</span>, update_freq=<span class="number">500</span></span><br><span class="line">) <span class="comment"># 定义TensorBoard对象</span></span><br><span class="line"></span><br><span class="line">model.fit(x=x_train, </span><br><span class="line">          y=y_train, </span><br><span class="line">          epochs=<span class="number">5</span>, </span><br><span class="line">          validation_data=(x_test, y_test), </span><br><span class="line">          callbacks=[tensorboard_callback])  <span class="comment"># 将定义好的TensorBoard对象作为回调传给fit方法，这样就将TensorBoard嵌入了模型训练过程</span></span><br></pre></td></tr></table></figure>
-<h3 id="在其他功能函数中嵌入tensorboard">在其他功能函数中嵌入TensorBoard</h3>
-<h4 id="tf.summary的基本步骤">tf.summary的基本步骤</h4>
+<h3 id="在其他功能函数中嵌入tensorboard"><a class="markdownIt-Anchor" href="#在其他功能函数中嵌入tensorboard"></a> 在其他功能函数中嵌入TensorBoard</h3>
+<h4 id="tfsummary的基本步骤"><a class="markdownIt-Anchor" href="#tfsummary的基本步骤"></a> tf.summary的基本步骤</h4>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （1）创建一个 SummaryWriter 对象，生成的日志将储存到 &quot;./mylogs&quot; 路径中</span></span><br><span class="line">writer = tf.summary.create_file_writer(<span class="string">&quot;./logs&quot;</span>)  <span class="comment">#</span></span><br><span class="line"><span class="comment"># （2）使用 writer_1 记录with包裹的context中，进行 summary 写入的操作</span></span><br><span class="line"><span class="keyword">with</span> writer.as_default():  </span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):    </span><br><span class="line">        <span class="comment"># other model code would go here    </span></span><br><span class="line">        <span class="comment"># （3）将scalar(&quot;loss&quot;, loss, step)写入 summary </span></span><br><span class="line">        tf.summary.scalar(<span class="string">&quot;loss&quot;</span>, loss, step=step)      </span><br><span class="line">        <span class="comment"># （4）强制 SummaryWriter 将缓存中的数据写入到日志</span></span><br><span class="line">        writer.flush()  </span><br></pre></td></tr></table></figure>
-<h4 id="查看graph和profile信息">查看Graph和Profile信息</h4>
+<h4 id="查看graph和profile信息"><a class="markdownIt-Anchor" href="#查看graph和profile信息"></a> 查看Graph和Profile信息</h4>
 <p>由于tensorflow2.0取消了sess和初始静态图，所以无法使用像1.x版本，直接将sess.graph添加进tensorboard，所以需要使用trace_on进行记录。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">writer = tf.summary.create_file_writer(log_dir)</span><br><span class="line">tf.summary.trace_on(graph=<span class="literal">True</span>, profiler=<span class="literal">True</span>)  <span class="comment"># 开启Trace，可以记录图结构和profile信息</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">进行训练</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 最后将统计信息写入日志</span></span><br><span class="line"><span class="keyword">with</span> writer.as_default():</span><br><span class="line">    tf.summary.trace_export(name=<span class="string">&quot;model_trace&quot;</span>, step=<span class="number">0</span>, profiler_outdir=log_dir)    <span class="comment"># 保存Trace信息到文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -442,14 +442,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">301k</span>
+    <span title="站点总字数">307k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:34</span>
+    <span title="站点阅读时长">4:39</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -501,7 +501,7 @@
       quicklink.listen({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://bloglk.gitee.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://lk11223.github.io/2021/03/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Tensorflow%20%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98/',]
       });
       });
   </script>
