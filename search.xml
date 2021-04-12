@@ -595,7 +595,7 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
 </figure>
 <p>下面讨论几种从多通道脑电信号中提取SSVEP信息的空间滤波方法。图1说明了这些方法的SSVEP检测过程，它们都采用SSVEP模型。每种特征提取方法的目的都是为了找到最佳的特征值<span class="math inline">\(Ψ(Y，X_F)\)</span>，以优化目标刺激频率的预测精度。</p>
 <h4 id="最小能量组合mec和最大对比度组合mcc">1.最小能量组合(MEC)和最大对比度组合(MCC)</h4>
-<p><code>未完</code></p>
+<p>==未完==</p>
 <p>这两种方法不需要训练数据来进行特征选择或噪声估计。都找到了一种组合多电极信号的最优空间滤波器来增强脑电信号中的SSVEP信息。具体地说，由s表示的信道数据矢量被定义为<span class="math inline">\(Y_n\)</span>的线性组合，如下所示： <span class="math display">\[
 \mathbf{s}=\sum_{n=1}^Nw_n\mathbf{y}_n=\mathbf{Yw}
 \]</span> 多个通道S表示为： <span class="math display">\[
@@ -616,17 +616,69 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
 <h4 id="多变量同步指数msi">3.多变量同步指数(MSI)</h4>
 <p>多通道EEG信号与由刺激频率定义的一组参考信号之间的同步估计被用作用于检测目标频率的指标。所使用的同步指标，称为<code>S-估计器</code>，是基于多变量信号的相关矩阵的归一化特征值的熵的非线性同步度量。该方法要求目标刺激的参考信号与混合脑电记录同步。最大的同步索引表示具有最高相关性的两组信号。然后，选择产生该相关性的参考信号的刺激频率作为目标刺激。</p>
 <p>首先将EEG信号<span class="math inline">\(Y\)</span>和参考信号<span class="math inline">\(X_f\)</span>的矩阵归一化为具有零均值和单位方差，并且相关矩阵估计如下</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411131845938.png" alt="image-20210411131845938"><figcaption aria-hidden="true">image-20210411131845938</figcaption>
-</figure>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411131845938.png"></p>
+<p>其中<span class="math inline">\(C_{YY}=\frac{1}{T}YY^T\)</span>,<span class="math inline">\(C_{X_fX_f}=\frac{1}{T}X_fX_f^T\)</span>,<span class="math inline">\(C_{YX_f}=C_{X_fY}=\frac{1}{T}YX_f^T\)</span>.</p>
+<p>为了减小自相关对同步度量的影响，应用了以下线性变换</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412111947874.png"></p>
+<p>抵消自相关后，变换后的相关矩阵由下式给出：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412112037070.png"></p>
+<p>设<span class="math inline">\(\lambda_1,\lambda_2,...\lambda_P\)</span> 为矩阵<span class="math inline">\(C_{}^{&#39;}\)</span> 的特征值</p>
+<p>计算两组信号之间的同步指数SI为：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412112537599.png"></p>
+<p><span class="math inline">\(\lambda_i&#39;\)</span>的<span class="math inline">\(C&#39;\)</span>第i个归一化特征值。对于两组不相关的信号，<span class="math inline">\(C_{YX_f}=C_{X_fY}=0\)</span>，当两组信号完全相关时，SI=1，因为<span class="math inline">\(C’\)</span>在主对角线上会有1，在其他地方会有0。对于后一种情况，只有一个归一化特征值是1，而其他特征值是零。估计来自多个脑电信号Y的信号与每个参考信号<span class="math inline">\(X_f\)</span>之间的同步指数，并将其用于计算图1中的SSVEP特征<span class="math inline">\(Ψ(Y，X_f)\)</span>。</p>
+<h4 id="似然比检验lrt">4.似然比检验(LRT)</h4>
+<p>LRT方法找出两组多元变量的独立性。</p>
+<h4 id="双偏最小二乘法d-pls">5.双偏最小二乘法(D-PLS)</h4>
+<p>偏最小二乘(PLS)是一种用于SSVEP检测的多元线性回归方法，它直接计算多维因变量对多维自变量的回归。该模型估计了两个信号之间复杂的因果关系，并在非正态分布和小样本条件下提取相关性最大的潜在变量。</p>
+<h2 id="关于免训法的探讨">3.3 关于免训法的探讨</h2>
+<h3 id="基于单通道的免培训方法">1.基于单通道的免培训方法</h3>
+<p>基于PSDA的最简单的检测方法操作在单个EEG通道的组合上，这些通道必须事先选择和配置。在几项研究中发现，由于消除了常见的滋扰信号，双极方法在两个脑电图电极上取得了不同的效果。这是可行的，因为设计BCI只需要两个电极，但是不同用户的最佳配对可能不同。此外，在实践中，同一用户的电极的确切位置在不同的会话中也可能略有不同。因此，所有用户的固定双极组合可能会显著影响PSDA的性能，因此可能缺乏稳健性。这些单通道方法对噪声敏感，可能需要更多的数据用于SSVEP识别，并且计算时间较长，特别是在HHT的情况下，这可能限制基于SSVEP的BCI的实时性能。</p>
+<h3 id="多通道免培训方式">2.多通道免培训方式</h3>
+<p>多通道检测方法受益于多个信号的优化组合，从而克服了这些限制。对于这些方法，不需要信道选择过程，并且实现了对噪声的更强的鲁棒性</p>
+<h3 id="两种免训方法的比较">3.两种免训方法的比较</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412115210598.png"></p>
+<h2 id="针对特定被试的培训方法">3.4 针对特定被试的培训方法</h2>
+<p>介绍需要特定用户培训数据的SSVEP检测最常用的技术</p>
+<h3 id="平均最大对比度组合amcc">1.平均最大对比度组合(AMCC)</h3>
+<h3 id="cca扩展">2.CCA扩展</h3>
+<h4 id="相位约束典型相关分析p-cca">2.1 相位约束典型相关分析(p-CCA)</h4>
+<h4 id="基于个体模板的典型相关分析it-cca">2.2 基于个体模板的典型相关分析(IT-CCA)</h4>
+<h4 id="组合典型相关分析combinedcca">2.3 组合典型相关分析(CombinedCCA)</h4>
+<h4 id="多向典型相关分析mwaycca和l1正则化多向典型相关分析l1-mcca">2.4 多向典型相关分析(MwayCCA)和L1正则化多向典型相关分析(L1-MCCA)</h4>
+<h4 id="多集典型相关分析msetcca">2.5 多集典型相关分析(MsetCCA)</h4>
+<h4 id="多层相关最大化mcm">2.6 多层相关最大化(MCM)</h4>
+<h3 id="公共特征分析cfa">3.公共特征分析(CFA)</h3>
+<h3 id="多元线性回归mlr">4.多元线性回归(MLR)</h3>
+<h3 id="公共空间模式分析acsp">5.公共空间模式分析(ACSP)</h3>
+<h3 id="task相关成分分析trca">6.TASK相关成分分析(TRCA)</h3>
+<h3 id="关于特定用户训练方法的探讨">7.关于特定用户训练方法的探讨</h3>
+<h4 id="特定用户的训练时间">7.1 特定用户的训练时间</h4>
+<h4 id="针对分类的特定用户训练">7.2 针对分类的特定用户训练</h4>
+<h4 id="特征提取的特定用户训练cca扩展">7.3 特征提取的特定用户训练：CCA扩展</h4>
+<h4 id="特征提取的特定用户训练其他方法">7.4 特征提取的特定用户训练：其他方法</h4>
+<h4 id="特定用户训练方法的比较">7.5 特定用户训练方法的比较</h4>
+<h2 id="独立于用户的培训方法">3.5 独立于用户的培训方法</h2>
+<h3 id="最小绝对收缩和选择操作lasso">5.1 最小绝对收缩和选择操作(LASSO)</h3>
+<h3 id="滤波器组典型相关分析fbcca">5.2 滤波器组典型相关分析(FBCCA)</h3>
+<h3 id="基于转移模板的典型相关分析tt-cca和基于转移的组合典型相关分析combated-tcca">5.3 基于转移模板的典型相关分析(TT-CCA)和基于转移的组合典型相关分析(Combated-TCCA)</h3>
+<h3 id="关于独立用户训练方法的探讨">5.4 关于独立用户训练方法的探讨</h3>
+<h4 id="模型参数由独立于对象的训练数据定义">1 模型参数由独立于对象的训练数据定义。</h4>
+<h4 id="迁移学习方法">2 迁移学习方法</h4>
+<h4 id="独立用户训练方法的比较">3 独立用户训练方法的比较</h4>
 <h2 id="评估实验">4. 评估，实验</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412121019420.png"></p>
 <h2 id="结论">5. 结论</h2>
+<p>本文为基于SSVEP的脑机接口中使用的特征提取算法的基本概念和训练要求提供了参考。很明显，就BCI的实用性而言，不需要个人用户进行任何培训的方法是最好的选择。然而，就BCI性能而言，包含训练数据的特征提取方法的性能优于无训练的方法。</p>
 <h2 id="笔记">6. 笔记</h2>
 <h2 id="参考文献">参考文献</h2>
 ]]></content>
       <categories>
         <category>论文</category>
       </categories>
+      <tags>
+        <tag>SSVEP</tag>
+        <tag>特征提取</tag>
+      </tags>
   </entry>
   <entry>
     <title>选择脑电图独立成分进行矫正的实用指南</title>
