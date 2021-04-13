@@ -6,7 +6,7 @@
   <link href="https://1iuke.github.io/atom.xml" rel="self"/>
   
   <link href="https://1iuke.github.io/"/>
-  <updated>2021-04-11T12:46:23.022Z</updated>
+  <updated>2021-04-13T12:15:43.168Z</updated>
   <id>https://1iuke.github.io/</id>
   
   <author>
@@ -17,13 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>视觉和听觉-脑机接口</title>
+    <link href="https://1iuke.github.io/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/"/>
+    <id>https://1iuke.github.io/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</id>
+    <published>2021-04-13T02:15:55.000Z</published>
+    <updated>2021-04-13T12:15:43.168Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2><h2 id="研究目标">1. 研究目标</h2><p>本文涉及的v-BCI和a-BCI系统仅包括基于大脑对<code>外源性</code>视觉或听觉刺激的反应的BCI[例如稳态视觉诱发电位(SSVEP)和听觉稳态反应(ASSR)]以及与视觉或听觉刺激相关的内源性电位(例如视觉和听觉P300事件相关电位(ERPs))。</p><h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2><p>V-BCI和a-BCI可分为凝视依赖系统和凝视非依赖系统。视线相关的v-BCI系统利用了脑电记录的高信噪比(SNR)和高信息传输率(ITR)。不依赖凝视的v-BCI和a-BCI系统可以为不能使用凝视依赖的BCI的闭锁患者提供相对较高的系统性能。由于高BCI性能依赖于可靠、可重复和可区分的脑信号，因此v-BCI和a-BCI系统可以提供稳健的系统性能。</p><p>当前的v-BCI和a-BCI系统缺乏统一的系统框架，部分原因是它们从概念开始就被分开研究。</p><p>本综述将集中于v-BCI和a-BCI系统的现状和未来挑战。为了将各种v-BCI和a-BCI系统统一在一个框架内，我们从电信系统中借用了<code>信号调制和多址</code>(MA)方法的概念</p><h2 id="脑信号">2.1 脑信号</h2><p>大脑信号可以受到外源性刺激或内源性心理活动的调节。如图1所示，v-BCI和a-BCI系统中的外源性刺激是视觉和听觉刺激，而内源性刺激可能是由用户的隐性注意或心理任务引起的。这些大脑反应可能发生在感觉、感知或认知层面。感觉是感觉系统对外界刺激信号的处理。视觉和听觉刺激产生的诱发电位(EP)反映了典型的感觉过程。知觉涉及到感官信息的组织、识别和解释。意识水平的感官知觉使个体能够感觉到他们周围的环境。认知过程包括注意、学习、推理、决策等。在脑-机接口系统中，上述三个阶段的大脑反应可以通过被试的自愿注意进行调制，从而可以对所传达的信息进行编码。调制的脑信号中的特征可以在时域、频域或空间域中提取。不同领域的特征组合可以显著提高分类精度，从而提高BCI性能。</p><h2 id="v-bci和a-bci的脑信号">2.2 V-BCI和a-BCI的脑信号</h2><h3 id="受外部刺激调制的大脑信号">1 受外部刺激调制的大脑信号：</h3><p>a)视觉诱发电位，VEP(瞬时VEP，SSVEP，运动VEP，编码调制VEP)；</p><p>b)听觉稳态反应(ASSR)</p><p>视觉诱发电位是大脑对视觉刺激的反应，可以在头皮的枕部区域以最大幅度记录下来</p><h3 id="内源性调制的大脑信号">2 内源性调制的大脑信号：</h3><p>​ a) response to oddball stimulus (auditory mismatch negativ-ity (MMN) [42], N200 and P300 [43]);</p><p>​ b) response to mental tasks [late positive components (LPC)];</p><p>​ c) response inhibition (No-Go N2) [45];</p><p>​ d) semantic processing (N400) [46];</p><p>​ e) attention-modulated brain signals (SSVEP , ASSR)</p><h2 id="研究方法">3. 研究方法</h2><h2 id="v-bci和a-bci中的多目标编码">3.1 V-BCI和A-BCI中的多目标编码</h2><h3 id="v-bci和a-bci中的信息流">1 V-BCI和a-BCI中的信息流</h3><p><code>通信系统</code>中的技术可以启发脑机接口设计的新思路。从本质上讲，BCI中的信息流与电信系统非常相似。为了表达不同的意图，大脑信号必须以某种方式进行调制，以便将意图嵌入的EEG信号解调成原始信息。同时，为了避免相互<code>干扰</code>，不同意图的调制脑信号应相互<code>正交</code>或接近正交。为此，调制的大脑信号可以按<code>时间/频率/代码/空间</code>分区排列。该策略类似于在电信系统中允许多个用户以最小的性能降级同时<code>共享带宽</code>的MA技术</p><p>有四种基本的移动接入方案：时分多址(TDMA)、频分多址(FDMA)、码分多址(CDMA)和空分多址(SDMA)。</p><p>在TDMA中，用户被分配到不同的时隙，在此期间他们拥有整个信道带宽。</p><p>在FDMA中，整个带宽被分成多个部分频带，并在用户之间分配。</p><p>在CDMA中，用户被分配单独的代码来调制他们的信号，这使得他们彼此不同。</p><p>SDMA将地理空间划分为更小的空间，并根据用户的空间位置区分用户。</p><figure><img src= "/img/loading.gif" data-lazy-src="/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210413145334099.png" alt="image-20210413145334099"><figcaption aria-hidden="true">image-20210413145334099</figcaption></figure><p>表I描述了BCI中使用的多目标接入方法的基本原理。在大多数基于ERP的BCI中，遵循TDMA原则，多个目标出现在不同的时隙。基于SSVEP的脑机接口是一种典型的<code>频分多址</code>系统，每个目标占用自己的频带，没有重叠。基于伪随机码调制的VEP的BCI以类似于CDMA方法的方式工作。SDMA方法已被应用于v-BCI的设计中，在v-BCI中，脑电信号被视场中的不同目标位置调制。此外，混合多址(HMA)方法最近被用于v-BCI研究以提高系统性能。</p><h3 id="v-bci和a-bci的分类">2 V-BCI和a-BCI的分类</h3><p>对所有v-BCI和a-BCI系统进行全面系统的分类(见表一)</p><p>v-BCI和a-BCI系统可以分为以下五组：</p><ol type="1"><li><p>TDMA、</p></li><li><p>FDMA、</p></li><li><p>CDMA、</p></li><li><p>SDMA</p></li><li><p>HMA</p></li></ol><p>优点：</p><ol type="1"><li>这种分类有三个主要优点。首先，它简化了对v-BCI和a-BCI系统设计和实现的理解，使BCI研究人员更容易将传统通信中的现有技术融入到这些系统中。</li><li>便于在v-BCI和a-BCI之间以及在使用不同EEG信号的系统之间进行比较</li><li>帮助转移通信系统中的现有方法和技术，以提高当前v-BCI和a-BCI系统的系统性能</li></ol><h2 id="挑战">4. 挑战</h2><p><strong>nonlinearity</strong> and <strong>nonstationarity</strong> 带来的影响</p><h2 id="解决脑机接口相关的电生理问题">4.1 解决脑机接口相关的电生理问题</h2><h3 id="脑电中的非线性">1 脑电中的非线性</h3><p>大脑是一个非线性系统，在这个系统中可以观察到神经集合的群体动力学。它的活动，如脑电信号，可以用非线性动态方法比线性方法更好地描述。</p><h3 id="脑电中的非平稳性">2 脑电中的非平稳性</h3><p>随着时间的推移，与不同精神和行为状态相关的大脑活动的非平稳性持续发生.</p><p>为了解决这个问题，已经开发了能够在在线BCI操作期间自动更新分类器的自适应分类方法。</p><p>零训练方法旨在通过整合多个会话或主题的信息来解决特征提取和分类中的非平稳性问题。</p><p>在较小的时间尺度内的另一个挑战是EEG信号的试验间非平稳性。试验之间的可变性可能导致单次试验EEG信号的SNR变化</p><p>使用先进的数据分析方法可以缓解非平稳问题。</p><h2 id="提高itr">4.2 提高ITR</h2><p>发展v-bci和a-bci技术的主要挑战之一是<code>性能瓶颈</code>，这在很大程度上归因于脑电信号的低信噪比(<span class="math inline">\(SNR\)</span>)。</p><p>度量（metric）：</p><p><img src= "/img/loading.gif" data-lazy-src="/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210413172426338.png"></p><p>M是选择的数量，P是目标检测的准确性，T(秒/选择)是选择的平均时间。</p><p>提高ITR的方法可以分别考虑M、P和T。</p><h3 id="提高目标检测精度">1.提高目标检测精度</h3><p>a 提高任务相关脑电信号的信噪比</p><p>b 最大化多个类的可分性。</p><p>为实现这些目标，应增加任务相关EEG信号中的特征的<code>幅度</code>和<code>维数</code>。</p><p>此外，先进的数据分析技术，如信号处理和机器学习方法，也被广泛应用于当前的脑-机接口系统中</p><h4 id="信噪比">1.1.信噪比</h4><p>a 先进的信号处理方法</p><p>b 空间滤波可以将多通道脑电信号投影到低维空间子空间，消除任务无关成分，提高任务相关脑电信号的信噪比 <span class="math inline">\(CCA\)</span>最大化SSVEP信号和预定义参考信号之间的相关性 <span class="math inline">\(ICA\)</span>将与任务相关的EEG分量与与任务无关的EEG分量和伪像分量分开</p><p>c 通过激发增强任务相关的EEG信号，在刺激设计中可以采用认知任务来产生更强的ERP信号</p><h4 id="多类的可分性">1.2 多类的可分性</h4><p>目标检测精度取决于多类的可分性。</p><p>在脑-机接口系统中，<code>机器学习技术</code>已被广泛用于提高目标检测精度。当前BCI中使用的技术包括用于<code>特征选择</code>、<code>特征组合</code>和<code>分类</code>的各种方法。在系统设计中，可以通过增加任务相关脑电信号中信息<code>特征的维数</code>来提高多类的可分性。</p><p>另一种有效的方法是在系统设计中采用<code>码分多址</code>(<span class="math inline">\(CDMA\)</span>)技术等复合编码方法。基于编码调制的视觉诱发电位的脑-机接口使用正交序列来产生可以通过互相关分析容易区分的视觉诱发电位信号</p><h3 id="增加分类数量">2.增加分类数量</h3><p>ITR高的BCI有大量的类，与其他BCI相比，v-BCI和a-BCI系统更能提供大量的类来实现复杂的应用</p><p>P300脑机接口系统通常使用TDMA方法对目标刺激进行编码</p><p>基于视觉诱发电位的脑机接口系统采用了频分多址(FDMA)和码分多址(CDMA)等多种激励编码方法</p><p>频率编码是SSVEP脑机接口中应用最广泛的方法。还使用多频编码方法来增加类别的数量</p><h3 id="缩短目标检测时间">3.缩短目标检测时间</h3><p>减少目标检测时间：</p><p>1 单次试验分类比试验平均效率高得多 （基于机器学习的单次试验分析）</p><p>2 自适应方法可以减少目标检测时间</p><p>3 优化的刺激呈现可以减少目标检测时间</p><p>​ 一种直接的方法是减少刺激呈现中两次闪光之间的ISI持续时间</p><p>​ 另一种方法是优化刺激编码方法</p><h2 id="实际应用">4.3 实际应用</h2><p>在实际的脑-机接口系统中需要解决以下问题：</p><ol type="1"><li>易用性</li><li>低成本的硬件和软件</li><li>稳健的系统性能</li></ol><p>与其他不需要外界刺激的脑机接口相比，v-BCI和a-BCI系统在系统设计和实现方面提出了更大的挑战。</p><ol type="1"><li><p>移动BCI平台的开发；</p></li><li><p>减少疲劳的方法；</p></li><li><p>异步系统控制的设计。</p></li></ol><p>总结了v-BCI和a-BCI系统的潜在应用。</p><h3 id="移动系统设计">1 移动系统设计</h3><p>移动脑-机接口平台技术可以在现实环境中实现和促进大量的脑-机接口应用。</p><p>三个主要挑战：</p><ol type="1"><li>移动脑机接口需要针对脑电设备、数据处理平台和刺激设备的移动硬件解决方案</li><li>减少电极的数量</li><li>系统需要能够解决EEG信号中的伪影问题 （新兴的移动脑成像(MOBI)技术可以帮助解决这个问题。）</li></ol><h3 id="减少疲劳">2 减少疲劳</h3><p><code>精神疲劳</code>指的是由于长时间的认知活动而导致的暂时无法保持最佳认知表现。精神疲劳会导致不适和注意力下降，从而降低脑电信号的幅度</p><p>目前，视觉疲劳是v-BCI系统的最大缺点之一，严重阻碍了其在现实生活中的应用。例如，已经提出了不同类型的刺激模式，例如高频刺激、高占空比刺激和基于图像的刺激，用于在基于SSVEP的BCI中保持稳健性能的同时减少视觉疲劳</p><p>在另一项研究中，Honget 分别使用<span class="math inline">\(N200\)</span>(即运动开始VEP)和视觉<span class="math inline">\(P300\)</span>研究了两种v-BCI系统的疲劳效应。研究发现，<span class="math inline">\(N200\)</span>对重复试验引起的疲劳不敏感，而视觉<span class="math inline">\(P300\)</span>则表现出与视觉疲劳相关的显著波幅降低</p><h3 id="异步系统设计">3 异步系统设计</h3><p>大多数当前的<span class="math inline">\(v-BCI\)</span>和<span class="math inline">\(a-BCI\)</span>使用同步控制协议，其中控制周期由系统启动。然而，异步控制协议(其中用户对何时开始或停止使用系统做出自定进度的决定)更加灵活和自然.</p><p>异步控制中的一个重要问题是检测空闲状态。解决方法：</p><p>​ 首先，通过在刺激设计中加入额外的EEG特征，可以改善对空闲状态的检测。</p><p>​ 然后 可以用于有效地检测非控制状态</p><p>​ 其次，通过开发有效的计算方法来区分空闲和控制状态下的EEG信号，也可以改进空闲状态检测</p><h3 id="临床应用">4 临床应用</h3><p>由于具有ITR高、用户培训少等优点，v-BCI和a-BCI系统已被应用于许多临床应用，以帮助运动障碍患者与他们的环境进行沟通</p><p>在系统使用过程中，大多数v-BCI系统依靠眼睛的肌肉控制来凝视目标。对于能够移动眼睛的患者(例如，脊髓损伤患者)，这些依赖凝视的系统为传统辅助设备(如眼球跟踪系统)提供了另一种解决方案。尽管目前依赖凝视的BCI显示出比眼球跟踪系统更低的通信速度，但它们有一些独特的特性，使它们对用户具有吸引力。<code>例如</code>，基于SSVEP的BCI可以有大量的类别，可以完全免校准</p><p>对于完全闭锁的患者，只有独立的脑机接口系统才能满足他们的需求。典型的独立<span class="math inline">\(v-BCI\)</span>和<span class="math inline">\(a-BCI\)</span>系统包括使用选择性视觉注意的<span class="math inline">\(v-BCI\)</span>系统和使用选择性收听的<span class="math inline">\(a-BCI\)</span>系统。</p><p>目前，有几个原因限制了v-BCI和a-BCI在临床上的应用。首先，传统的辅助技术，如眼球跟踪系统，可以提供比视线相关的BCI更有效的控制。第二，基于SCP和运动图像的与凝视无关的脑机接口为闭锁患者提供了另一种脑机接口解决方案。第三，完全闭锁的患者通常在学习如何使用脑机接口系统方面有困难。研究人员和临床医生需要共同努力，以促进v-BCI和a-BCI的发展，使其更适用于临床。</p><h3 id="其它应用">5 其它应用</h3><p>V-BCI和a-BCI系统在许多非临床应用中也有潜力。最近，几项研究证明了利用脑-机接口来改善人类行为的概念。</p><p>例如，使用快速串行视觉呈现(RSVP)范式的P300BCI被用来改善人类在目标检测中的表现。其他非临床应用包括精神状态监测和视频游戏。通过解决上述挑战，v-BCI和a-BCI技术可以使更多的人群受益，无论他们是不是残疾患者。</p><h2 id="结论">5. 结论</h2><p>在建立和研究脑-机接口技术时，缺乏对潜在神经机制的知识仍然是一个挑战。</p><p>在BCI技术能够有效、可靠和负担得起，使大量的人在日常生活中受益之前，还有很长的路要走。</p><h2 id="笔记">6. 笔记</h2><h2 id="参考文献">参考文献</h2>]]></content>
+    
+    
+    <summary type="html">本综述旨在为探索新的范式和方法以改进当前的视觉和听觉脑-机接口技术提供有用的指导。</summary>
+    
+    
+    
+    <category term="论文" scheme="https://1iuke.github.io/categories/%E8%AE%BA%E6%96%87/"/>
+    
+    
+    <category term="综述" scheme="https://1iuke.github.io/tags/%E7%BB%BC%E8%BF%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++输入输出</title>
     <link href="https://1iuke.github.io/2021/04/11/C++/C-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
     <id>https://1iuke.github.io/2021/04/11/C++/C-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</id>
     <published>2021-04-11T12:38:43.000Z</published>
-    <updated>2021-04-11T12:46:23.022Z</updated>
+    <updated>2021-04-12T12:29:14.127Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>C++ 有许多输入输出函数</p><h2 id="c语言的-printf-scanf">1 C语言的 printf() scanf()</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, i);  <span class="hljs-comment">// i为整型变量，正确，输出i的值</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, f);  <span class="hljs-comment">// f为单精度变量，输出f变量中前两个字节的内容</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, <span class="hljs-string">&quot;C++&quot;</span>);  <span class="hljs-comment">//输出宇符串&quot;C++&quot;的地址</span><br><br><span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;i);  <span class="hljs-comment">//正确，输入一个整数，赋给整型变量i</span><br><span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, i);  <span class="hljs-comment">//漏写&amp;  </span><br></code></pre></td></tr></table></figure><p>C++为了与C兼容，保留了用printf和scanf进行输出和输人的方法，但是不能保证所输入输出的数据是可靠的安全的。</p><h2 id="c通过io类库">2 C++通过I/O类库</h2><p><code>在C++中，输入输出流被定义为类。C++的I/O库中的类称为流类(stream class)。 用流类定义的对象称为流对象。</code></p><figure><img src= "/img/loading.gif" data-lazy-src="/2021/04/11/C++/C-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/image-20210412202220305.png" alt="image-20210412202220305"><figcaption aria-hidden="true">image-20210412202220305</figcaption></figure><h2 id="与iostream类库有关的头文件">3 与iostream类库有关的头文件</h2>]]></content>
     
     
     <summary type="html">C++各种输入输出函数总结</summary>
@@ -438,27 +459,6 @@ GFP = \sqrt{\sum_{i=1}^{N} (u_i - \hat{u})^2/N}
     
     
     <category term="黎曼几何" scheme="https://1iuke.github.io/tags/%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基于典型相关分析方法的在线多通道SSVEP脑机接口</title>
-    <link href="https://1iuke.github.io/2021/03/15/Paper/3.%E5%9F%BA%E4%BA%8E%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%A8%E7%BA%BF%E5%A4%9A%E9%80%9A%E9%81%93SSVEP%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/"/>
-    <id>https://1iuke.github.io/2021/03/15/Paper/3.%E5%9F%BA%E4%BA%8E%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%A8%E7%BA%BF%E5%A4%9A%E9%80%9A%E9%81%93SSVEP%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</id>
-    <published>2021-03-15T14:51:42.000Z</published>
-    <updated>2021-04-11T03:23:03.789Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="summary">0. Summary</h2><span id="more"></span><h2 id="research-objectives">1. Research Objective(s)</h2><p>本文提出了一种在线多信道SSVEP BCI系统，采用典型相关分析（CCA）方法提取与SSVEP相关的频率信息。利用离线数据对系统的关键参数信道位置、窗长和谐波数进行了研究，为在线系统的设计提供了依据。</p><h2 id="background-problem-statement">2. Background / Problem Statement</h2><ul><li>不同的SSVEP可以通过将我们的兴趣或注意力转移到其中一个频率编码的刺激上而产生</li><li>SSVEP的BCI有更高的信噪比（SNR）和信息传输率（ITR）</li><li></li></ul><h2 id="methods">3. Method(s)</h2><ul><li>MEC(minium energy method) 检测精度高, 无需校准数据</li><li><a href="./典型相关分析(CCA).md">CCA</a></li></ul><h2 id="evaluation">4. Evaluation</h2><h2 id="conclusion">5. Conclusion</h2><ul><li>结果:来自30个BCI命令的正确计数的平均值为28.6。 BCI系统的平均ITR为58±9.6位min-1。</li><li></li></ul><h2 id="notes">6. Notes</h2><h2 id="references">References</h2>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;summary&quot;&gt;0. Summary&lt;/h2&gt;</summary>
-    
-    
-    
-    <category term="论文" scheme="https://1iuke.github.io/categories/%E8%AE%BA%E6%96%87/"/>
-    
-    
-    <category term="SSVEP" scheme="https://1iuke.github.io/tags/SSVEP/"/>
     
   </entry>
   
