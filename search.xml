@@ -1,453 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>基于EEG脑-机接口的黎曼几何；入门和综述</title>
-    <url>/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
-<hr>
-<p>黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。</p>
-<span id="more"></span>
-<h2 id="研究目的">1. 研究目的</h2>
-<p>对黎曼几何在脑-机接口中的应用进行了综述，并对基于黎曼几何的分类框架进行了初步探讨。</p>
-<p>提高脑-机接口的稳健性。</p>
-<h2 id="背景与问题陈述">2. 背景与问题陈述</h2>
-<hr>
-<p>解码器传统上被认为由三个独立的模块组成：预处理、特征提取和分类 。目前三种主要的BCI模式(即基于运动/心理图像(MI)、事件相关电位(ERP)和稳态诱发电位(SSEP))中的每一种都被专用的预处理、信号处理和分类模块所处理。解码策略分为两类：一类遵循硬机器学习方法，另一类使用信号处理来提高信噪比，然后使用简单的分类算法。一些硬机器学习类型的算法在不同会话和不同主题之间具有相当好的通用性，但需要大量的训练数据。此外，它们通常是计算密集型的。空间滤波的情况正好相反，其糟糕的泛化能力被快速的训练和较低的计算成本所弥补。在实际操作中，危及BCI解码器操作的主要因素是主体间的生理变异性和真实世界环境条件的巨大变异性。三个相互关联的研究领域正在努力克服这些限制，共同解决改善BCI可用性和健壮性的问题。</p>
-<p>实现所需的可用性和健壮性的途径不是通过提高系统的复杂性，而是“我们需要在技术进步和现实世界的实际使用之间取得平衡”。将预处理、特征提取和分类不作为独立的过程，而是作为一个整体。</p>
-<h2 id="黎曼分类框架入门">3.1 黎曼分类框架入门</h2>
-<p>对称正定(SPD)矩阵(以下称为正矩阵)可以被认为是多维平方实数的推广。特别地，一维随机变量的方差是正数(平方和)，而N维随机变量的方差是正矩阵，通常称为协方差矩阵。</p>
-<p>为实现到均值的最小距离(MDM)，需要一个合适的距离函数(度量)和相应的均值函数。</p>
-<p>度量(距离):</p>
-<ul>
-<li>非负的</li>
-<li>只有当两个元素相等时它才等于零</li>
-<li>对称的</li>
-<li>服从三角不等式。</li>
-</ul>
-<p>度量空间（S，d)</p>
-<h2 id="methods">3. Method(s)</h2>
-<hr>
-<p>传统解码器：预处理，特征提取，分类</p>
-<p>模式：MI，ERP，SSEP</p>
-<p>目前都有专门的预处理，信号处理和分类模块</p>
-<table>
-<thead>
-<tr class="header">
-<th>两大范式</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>hard machine learning</td>
-<td>泛化性能好</td>
-<td>需要大量数据，计算密集型</td>
-</tr>
-<tr class="even">
-<td>利用信号处理提高信噪比，然后分类（空间滤波等）</td>
-<td>快速训练，成本低</td>
-<td>泛化差</td>
-</tr>
-</tbody>
-</table>
-<p>黎曼分类：</p>
-<p>MDM(Minimum Distance to Mean)：到平均数的最小距离</p>
-<h2 id="evaluation">4. Evaluation</h2>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png" title="算术均值与几何均值比较" alt="image-20210311103033549"><figcaption aria-hidden="true">image-20210311103033549</figcaption>
-</figure>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png" title="黎曼MDM分类与传统CSP分类的迁移学习比较" alt="image-20210311103013598"><figcaption aria-hidden="true">image-20210311103013598</figcaption>
-</figure>
-<p>LDA 线性判别分析</p>
-<h2 id="conclusion">5. Conclusion</h2>
-<hr>
-<ol type="1">
-<li>提供了一个更简单的黎曼分类方法，</li>
-<li>最小距离到平均数（MDM）的初步介绍，我们主要依靠直观的（几何）解释。Riemannian MDM方法完全基于两个简单的概念：两个数据点之间的距离和其中若干点的平均值。</li>
-<li>黎曼几何学提供了处理对称正定矩阵的天然框架，许多种类的结构协方差矩阵都是这种类型。不管协方差矩阵是如何定义的，MDM黎曼分类器对于所有三种BCI模式，即运动想象、事件相关电位和稳态诱发电位都是一样的。</li>
-<li>基于切线空间映射的黎曼方法的总体性能优于MDM方法，而且性能明显优于最新的技术水平，但由于分类器继承了算法复杂度的增加和可能需要高强度的学习，它们不太适合在线操作</li>
-<li>空间滤波器的改进只能为分类目的带来适度的改进，而且这种改进并不容易转化为可靠性和鲁棒性的显著提高。</li>
-</ol>
-<h2 id="notes">6. Notes</h2>
-<hr>
-<p>附录1中给出了三种主要BCI模式的正式定义。 这些定义还可以改进，并期待对这一课题的进一步研究。</p>
-<h2 id="references">References</h2>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>黎曼几何</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于编码调制VEP的高速BCI</title>
-    <url>/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="summary">0. Summary</h2>
-<p>通过编码调制与多通道处理提高ITR</p>
-<span id="more"></span>
-<h2 id="research-objectives">1. Research Objective(s)</h2>
-<p>提高ITR</p>
-<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
-<p>BCI 通信系统传输速率低，提高ITR(信息传输率)</p>
-<h2 id="methods">3. Method(s)</h2>
-<ul>
-<li>提出了基于c-VEP的调制系统，其中二进制伪随机码被用来调制不同的视觉刺激</li>
-<li>提出了一种提高识别精度的多通道检测方法</li>
-</ul>
-<h2 id="evaluation">4. Evaluation</h2>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png" alt="image-20210311110254896"><figcaption aria-hidden="true">image-20210311110254896</figcaption>
-</figure>
-<ol type="1">
-<li>该系统由一个脑电图放大器和一台带CRT显示器的个人电脑（PC）组成。</li>
-<li>不同目标的反应之间的圆移关系是目标识别的基础，一旦获得了T0的模板，其他目标的模板可以很容易地获得<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png" title="园移 Principle of equivalent neighbors" alt="image-20210311110915610"></li>
-<li>在获得所有目标的模板后，可以采用模板匹配的方法进行目标识别，通过选择相关系数最大的目标来确定固定目标</li>
-<li>多通道处理，由于双极通道。实验分为训练阶段和测试阶段。在训练阶段，要求被试者固定在参考目标上约200个刺激周期。训练阶段的数据用于离线分析，以计算空间滤波权重和在线使用的参考模板.在测试阶段，每个受试者被要求输入一个64个字符的序列。 在测试阶段，每个受试者都被要求输入64个字符序列，在线准确率和相应的ITR用于评估系统性能。 在计算ITR时，每次选择的时间成本为2.1s(包括两个刺激期，一个用于数据采集，一个用于目标识别、反馈展示和凝视)。</li>
-</ol>
-<h2 id="conclusion">5. Conclusion</h2>
-<p>本文对高速c-VEP BCI系统的基本原理和实现方法进行了详细的介绍,提出的c-VEP BCI具有108±12.0比特/分钟-1的高ITR,超过了以往基于脑电图的BCI的记录。</p>
-<h2 id="notes">6. Notes</h2>
-<h2 id="references">References</h2>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>VEP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于典型相关分析方法的在线多通道SSVEP脑机接口</title>
-    <url>/2021/03/15/Paper/3.%E5%9F%BA%E4%BA%8E%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%A8%E7%BA%BF%E5%A4%9A%E9%80%9A%E9%81%93SSVEP%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="summary">0. Summary</h2>
-<span id="more"></span>
-<h2 id="research-objectives">1. Research Objective(s)</h2>
-<p>本文提出了一种在线多信道SSVEP BCI系统，采用典型相关分析（CCA）方法提取与SSVEP相关的频率信息。利用离线数据对系统的关键参数信道位置、窗长和谐波数进行了研究，为在线系统的设计提供了依据。</p>
-<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
-<ul>
-<li>不同的SSVEP可以通过将我们的兴趣或注意力转移到其中一个频率编码的刺激上而产生</li>
-<li>SSVEP的BCI有更高的信噪比（SNR）和信息传输率（ITR）</li>
-<li></li>
-</ul>
-<h2 id="methods">3. Method(s)</h2>
-<ul>
-<li>MEC(minium energy method) 检测精度高, 无需校准数据</li>
-<li><a href="./典型相关分析(CCA).md">CCA</a></li>
-</ul>
-<h2 id="evaluation">4. Evaluation</h2>
-<h2 id="conclusion">5. Conclusion</h2>
-<ul>
-<li>结果:来自30个BCI命令的正确计数的平均值为28.6。 BCI系统的平均ITR为58±9.6位min-1。</li>
-<li></li>
-</ul>
-<h2 id="notes">6. Notes</h2>
-<h2 id="references">References</h2>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>SSVEP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>视觉和听觉-脑机接口</title>
-    <url>/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
-<h2 id="研究目标">1. 研究目标</h2>
-<p>本文涉及的v-BCI和a-BCI系统仅包括基于大脑对<code>外源性</code>视觉或听觉刺激的反应的BCI[例如稳态视觉诱发电位(SSVEP)和听觉稳态反应(ASSR)]以及与视觉或听觉刺激相关的内源性电位(例如视觉和听觉P300事件相关电位(ERPs))。</p>
-<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
-<p>V-BCI和a-BCI可分为凝视依赖系统和凝视非依赖系统。视线相关的v-BCI系统利用了脑电记录的高信噪比(SNR)和高信息传输率(ITR)。不依赖凝视的v-BCI和a-BCI系统可以为不能使用凝视依赖的BCI的闭锁患者提供相对较高的系统性能。由于高BCI性能依赖于可靠、可重复和可区分的脑信号，因此v-BCI和a-BCI系统可以提供稳健的系统性能。</p>
-<p>当前的v-BCI和a-BCI系统缺乏统一的系统框架，部分原因是它们从概念开始就被分开研究。</p>
-<p>本综述将集中于v-BCI和a-BCI系统的现状和未来挑战。为了将各种v-BCI和a-BCI系统统一在一个框架内，我们从电信系统中借用了<code>信号调制和多址</code>(MA)方法的概念</p>
-<h2 id="脑信号">2.1 脑信号</h2>
-<p>大脑信号可以受到外源性刺激或内源性心理活动的调节。如图1所示，v-BCI和a-BCI系统中的外源性刺激是视觉和听觉刺激，而内源性刺激可能是由用户的隐性注意或心理任务引起的。这些大脑反应可能发生在感觉、感知或认知层面。感觉是感觉系统对外界刺激信号的处理。视觉和听觉刺激产生的诱发电位(EP)反映了典型的感觉过程。知觉涉及到感官信息的组织、识别和解释。意识水平的感官知觉使个体能够感觉到他们周围的环境。认知过程包括注意、学习、推理、决策等。在脑-机接口系统中，上述三个阶段的大脑反应可以通过被试的自愿注意进行调制，从而可以对所传达的信息进行编码。调制的脑信号中的特征可以在时域、频域或空间域中提取。不同领域的特征组合可以显著提高分类精度，从而提高BCI性能。</p>
-<h2 id="v-bci和a-bci的脑信号">2.2 V-BCI和a-BCI的脑信号</h2>
-<h3 id="受外部刺激调制的大脑信号">1 受外部刺激调制的大脑信号：</h3>
-<p>a)视觉诱发电位，VEP(瞬时VEP，SSVEP，运动VEP，编码调制VEP)；</p>
-<p>b)听觉稳态反应(ASSR)</p>
-<p>视觉诱发电位是大脑对视觉刺激的反应，可以在头皮的枕部区域以最大幅度记录下来</p>
-<h3 id="内源性调制的大脑信号">2 内源性调制的大脑信号：</h3>
-<p>​ a) response to oddball stimulus (auditory mismatch negativ-ity (MMN) [42], N200 and P300 [43]);</p>
-<p>​ b) response to mental tasks [late positive components (LPC)];</p>
-<p>​ c) response inhibition (No-Go N2) [45];</p>
-<p>​ d) semantic processing (N400) [46];</p>
-<p>​ e) attention-modulated brain signals (SSVEP , ASSR)</p>
-<h2 id="研究方法">3. 研究方法</h2>
-<h2 id="v-bci和a-bci中的多目标编码">3.1 V-BCI和A-BCI中的多目标编码</h2>
-<h3 id="v-bci和a-bci中的信息流">1 V-BCI和a-BCI中的信息流</h3>
-<p><code>通信系统</code>中的技术可以启发脑机接口设计的新思路。从本质上讲，BCI中的信息流与电信系统非常相似。为了表达不同的意图，大脑信号必须以某种方式进行调制，以便将意图嵌入的EEG信号解调成原始信息。同时，为了避免相互<code>干扰</code>，不同意图的调制脑信号应相互<code>正交</code>或接近正交。为此，调制的大脑信号可以按<code>时间/频率/代码/空间</code>分区排列。该策略类似于在电信系统中允许多个用户以最小的性能降级同时<code>共享带宽</code>的MA技术</p>
-<p>有四种基本的移动接入方案：时分多址(TDMA)、频分多址(FDMA)、码分多址(CDMA)和空分多址(SDMA)。</p>
-<p>在TDMA中，用户被分配到不同的时隙，在此期间他们拥有整个信道带宽。</p>
-<p>在FDMA中，整个带宽被分成多个部分频带，并在用户之间分配。</p>
-<p>在CDMA中，用户被分配单独的代码来调制他们的信号，这使得他们彼此不同。</p>
-<p>SDMA将地理空间划分为更小的空间，并根据用户的空间位置区分用户。</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210413145334099.png" alt="image-20210413145334099"><figcaption aria-hidden="true">image-20210413145334099</figcaption>
-</figure>
-<p>表I描述了BCI中使用的多目标接入方法的基本原理。在大多数基于ERP的BCI中，遵循TDMA原则，多个目标出现在不同的时隙。基于SSVEP的脑机接口是一种典型的<code>频分多址</code>系统，每个目标占用自己的频带，没有重叠。基于伪随机码调制的VEP的BCI以类似于CDMA方法的方式工作。SDMA方法已被应用于v-BCI的设计中，在v-BCI中，脑电信号被视场中的不同目标位置调制。此外，混合多址(HMA)方法最近被用于v-BCI研究以提高系统性能。</p>
-<h3 id="v-bci和a-bci的分类">2 V-BCI和a-BCI的分类</h3>
-<p>对所有v-BCI和a-BCI系统进行全面系统的分类(见表一)</p>
-<p>v-BCI和a-BCI系统可以分为以下五组：</p>
-<ol type="1">
-<li><p>TDMA、</p></li>
-<li><p>FDMA、</p></li>
-<li><p>CDMA、</p></li>
-<li><p>SDMA</p></li>
-<li><p>HMA</p></li>
-</ol>
-<p>优点：</p>
-<ol type="1">
-<li>这种分类有三个主要优点。首先，它简化了对v-BCI和a-BCI系统设计和实现的理解，使BCI研究人员更容易将传统通信中的现有技术融入到这些系统中。</li>
-<li>便于在v-BCI和a-BCI之间以及在使用不同EEG信号的系统之间进行比较</li>
-<li>帮助转移通信系统中的现有方法和技术，以提高当前v-BCI和a-BCI系统的系统性能</li>
-</ol>
-<h2 id="挑战">4. 挑战</h2>
-<p><strong>nonlinearity</strong> and <strong>nonstationarity</strong> 带来的影响</p>
-<h2 id="解决脑机接口相关的电生理问题">4.1 解决脑机接口相关的电生理问题</h2>
-<h3 id="脑电中的非线性">1 脑电中的非线性</h3>
-<p>大脑是一个非线性系统，在这个系统中可以观察到神经集合的群体动力学。它的活动，如脑电信号，可以用非线性动态方法比线性方法更好地描述。</p>
-<h3 id="脑电中的非平稳性">2 脑电中的非平稳性</h3>
-<p>随着时间的推移，与不同精神和行为状态相关的大脑活动的非平稳性持续发生.</p>
-<p>为了解决这个问题，已经开发了能够在在线BCI操作期间自动更新分类器的自适应分类方法。</p>
-<p>零训练方法旨在通过整合多个会话或主题的信息来解决特征提取和分类中的非平稳性问题。</p>
-<p>在较小的时间尺度内的另一个挑战是EEG信号的试验间非平稳性。试验之间的可变性可能导致单次试验EEG信号的SNR变化</p>
-<p>使用先进的数据分析方法可以缓解非平稳问题。</p>
-<h2 id="提高itr">4.2 提高ITR</h2>
-<p>发展v-bci和a-bci技术的主要挑战之一是<code>性能瓶颈</code>，这在很大程度上归因于脑电信号的低信噪比(<span class="math inline">\(SNR\)</span>)。</p>
-<p>度量（metric）：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210413172426338.png"></p>
-<p>M是选择的数量，P是目标检测的准确性，T(秒/选择)是选择的平均时间。</p>
-<p>提高ITR的方法可以分别考虑M、P和T。</p>
-<h3 id="提高目标检测精度">1.提高目标检测精度</h3>
-<p>a 提高任务相关脑电信号的信噪比</p>
-<p>b 最大化多个类的可分性。</p>
-<p>为实现这些目标，应增加任务相关EEG信号中的特征的<code>幅度</code>和<code>维数</code>。</p>
-<p>此外，先进的数据分析技术，如信号处理和机器学习方法，也被广泛应用于当前的脑-机接口系统中</p>
-<h4 id="信噪比">1.1.信噪比</h4>
-<p>a 先进的信号处理方法</p>
-<p>b 空间滤波可以将多通道脑电信号投影到低维空间子空间，消除任务无关成分，提高任务相关脑电信号的信噪比 <span class="math inline">\(CCA\)</span>最大化SSVEP信号和预定义参考信号之间的相关性 <span class="math inline">\(ICA\)</span>将与任务相关的EEG分量与与任务无关的EEG分量和伪像分量分开</p>
-<p>c 通过激发增强任务相关的EEG信号，在刺激设计中可以采用认知任务来产生更强的ERP信号</p>
-<h4 id="多类的可分性">1.2 多类的可分性</h4>
-<p>目标检测精度取决于多类的可分性。</p>
-<p>在脑-机接口系统中，<code>机器学习技术</code>已被广泛用于提高目标检测精度。当前BCI中使用的技术包括用于<code>特征选择</code>、<code>特征组合</code>和<code>分类</code>的各种方法。在系统设计中，可以通过增加任务相关脑电信号中信息<code>特征的维数</code>来提高多类的可分性。</p>
-<p>另一种有效的方法是在系统设计中采用<code>码分多址</code>(<span class="math inline">\(CDMA\)</span>)技术等复合编码方法。基于编码调制的视觉诱发电位的脑-机接口使用正交序列来产生可以通过互相关分析容易区分的视觉诱发电位信号</p>
-<h3 id="增加分类数量">2.增加分类数量</h3>
-<p>ITR高的BCI有大量的类，与其他BCI相比，v-BCI和a-BCI系统更能提供大量的类来实现复杂的应用</p>
-<p>P300脑机接口系统通常使用TDMA方法对目标刺激进行编码</p>
-<p>基于视觉诱发电位的脑机接口系统采用了频分多址(FDMA)和码分多址(CDMA)等多种激励编码方法</p>
-<p>频率编码是SSVEP脑机接口中应用最广泛的方法。还使用多频编码方法来增加类别的数量</p>
-<h3 id="缩短目标检测时间">3.缩短目标检测时间</h3>
-<p>减少目标检测时间：</p>
-<p>1 单次试验分类比试验平均效率高得多 （基于机器学习的单次试验分析）</p>
-<p>2 自适应方法可以减少目标检测时间</p>
-<p>3 优化的刺激呈现可以减少目标检测时间</p>
-<p>​ 一种直接的方法是减少刺激呈现中两次闪光之间的ISI持续时间</p>
-<p>​ 另一种方法是优化刺激编码方法</p>
-<h2 id="实际应用">4.3 实际应用</h2>
-<p>在实际的脑-机接口系统中需要解决以下问题：</p>
-<ol type="1">
-<li>易用性</li>
-<li>低成本的硬件和软件</li>
-<li>稳健的系统性能</li>
-</ol>
-<p>与其他不需要外界刺激的脑机接口相比，v-BCI和a-BCI系统在系统设计和实现方面提出了更大的挑战。</p>
-<ol type="1">
-<li><p>移动BCI平台的开发；</p></li>
-<li><p>减少疲劳的方法；</p></li>
-<li><p>异步系统控制的设计。</p></li>
-</ol>
-<p>总结了v-BCI和a-BCI系统的潜在应用。</p>
-<h3 id="移动系统设计">1 移动系统设计</h3>
-<p>移动脑-机接口平台技术可以在现实环境中实现和促进大量的脑-机接口应用。</p>
-<p>三个主要挑战：</p>
-<ol type="1">
-<li>移动脑机接口需要针对脑电设备、数据处理平台和刺激设备的移动硬件解决方案</li>
-<li>减少电极的数量</li>
-<li>系统需要能够解决EEG信号中的伪影问题 （新兴的移动脑成像(MOBI)技术可以帮助解决这个问题。）</li>
-</ol>
-<h3 id="减少疲劳">2 减少疲劳</h3>
-<p><code>精神疲劳</code>指的是由于长时间的认知活动而导致的暂时无法保持最佳认知表现。精神疲劳会导致不适和注意力下降，从而降低脑电信号的幅度</p>
-<p>目前，视觉疲劳是v-BCI系统的最大缺点之一，严重阻碍了其在现实生活中的应用。例如，已经提出了不同类型的刺激模式，例如高频刺激、高占空比刺激和基于图像的刺激，用于在基于SSVEP的BCI中保持稳健性能的同时减少视觉疲劳</p>
-<p>在另一项研究中，Honget 分别使用<span class="math inline">\(N200\)</span>(即运动开始VEP)和视觉<span class="math inline">\(P300\)</span>研究了两种v-BCI系统的疲劳效应。研究发现，<span class="math inline">\(N200\)</span>对重复试验引起的疲劳不敏感，而视觉<span class="math inline">\(P300\)</span>则表现出与视觉疲劳相关的显著波幅降低</p>
-<h3 id="异步系统设计">3 异步系统设计</h3>
-<p>大多数当前的<span class="math inline">\(v-BCI\)</span>和<span class="math inline">\(a-BCI\)</span>使用同步控制协议，其中控制周期由系统启动。然而，异步控制协议(其中用户对何时开始或停止使用系统做出自定进度的决定)更加灵活和自然.</p>
-<p>异步控制中的一个重要问题是检测空闲状态。解决方法：</p>
-<p>​ 首先，通过在刺激设计中加入额外的EEG特征，可以改善对空闲状态的检测。</p>
-<p>​ 然后 可以用于有效地检测非控制状态</p>
-<p>​ 其次，通过开发有效的计算方法来区分空闲和控制状态下的EEG信号，也可以改进空闲状态检测</p>
-<h3 id="临床应用">4 临床应用</h3>
-<p>由于具有ITR高、用户培训少等优点，v-BCI和a-BCI系统已被应用于许多临床应用，以帮助运动障碍患者与他们的环境进行沟通</p>
-<p>在系统使用过程中，大多数v-BCI系统依靠眼睛的肌肉控制来凝视目标。对于能够移动眼睛的患者(例如，脊髓损伤患者)，这些依赖凝视的系统为传统辅助设备(如眼球跟踪系统)提供了另一种解决方案。尽管目前依赖凝视的BCI显示出比眼球跟踪系统更低的通信速度，但它们有一些独特的特性，使它们对用户具有吸引力。<code>例如</code>，基于SSVEP的BCI可以有大量的类别，可以完全免校准</p>
-<p>对于完全闭锁的患者，只有独立的脑机接口系统才能满足他们的需求。典型的独立<span class="math inline">\(v-BCI\)</span>和<span class="math inline">\(a-BCI\)</span>系统包括使用选择性视觉注意的<span class="math inline">\(v-BCI\)</span>系统和使用选择性收听的<span class="math inline">\(a-BCI\)</span>系统。</p>
-<p>目前，有几个原因限制了v-BCI和a-BCI在临床上的应用。首先，传统的辅助技术，如眼球跟踪系统，可以提供比视线相关的BCI更有效的控制。第二，基于SCP和运动图像的与凝视无关的脑机接口为闭锁患者提供了另一种脑机接口解决方案。第三，完全闭锁的患者通常在学习如何使用脑机接口系统方面有困难。研究人员和临床医生需要共同努力，以促进v-BCI和a-BCI的发展，使其更适用于临床。</p>
-<h3 id="其它应用">5 其它应用</h3>
-<p>V-BCI和a-BCI系统在许多非临床应用中也有潜力。最近，几项研究证明了利用脑-机接口来改善人类行为的概念。</p>
-<p>例如，使用快速串行视觉呈现(RSVP)范式的P300BCI被用来改善人类在目标检测中的表现。其他非临床应用包括精神状态监测和视频游戏。通过解决上述挑战，v-BCI和a-BCI技术可以使更多的人群受益，无论他们是不是残疾患者。</p>
-<h2 id="结论">5. 结论</h2>
-<p>在建立和研究脑-机接口技术时，缺乏对潜在神经机制的知识仍然是一个挑战。</p>
-<p>在BCI技术能够有效、可靠和负担得起，使大量的人在日常生活中受益之前，还有很长的路要走。</p>
-<h2 id="笔记">6. 笔记</h2>
-<h2 id="参考文献">参考文献</h2>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>综述</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>论文&lt;基于脑电的脑机接口迁移学习&gt;</title>
-    <url>/2021/03/13/Paper/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>原文：Transfer Learning for EEG-Based Brain-Computer Interfaces: A Review of Progress Made Since 2016 <link> https://arxiv.org/abs/2004.06286v4 </p>
-<span id="more"></span>
-<p><strong>脑机接口</strong>(BCI)使用户能够使用大脑信号直接与计算机通信。</p>
-<p><strong>脑电</strong>(EEG)是最常见的非侵入性脑机接口(BCI)，对噪声/伪影敏感，且存在受试者/受试者内部的非平稳性。很难建立一个通用的模式识别模型。</p>
-<p><strong>迁移学习</strong>用于减少校准工作量。</p>
-<p>本文讨论了<strong>运动想象</strong>、<strong>事件相关电位</strong>、<strong>稳态视觉诱发电位</strong>、<strong>情感脑机接口</strong>、<strong>回归问题</strong>和<strong>对抗性攻击</strong>等六种范式及其应用。</p>
-<p>索引-<strong>脑机接口</strong>、<strong>脑电图</strong>、<strong>迁移学习</strong>、<strong>领域适应</strong>、<strong>情感脑机接口</strong>、<strong>对抗性攻击</strong></p>
-<h2 id="i.introduction">I.Introduction</h2>
-<p>脑机接口应用：游戏、情绪识别、精神疲劳评估、警觉评估。etc</p>
-<p>BCI类型：<strong>Non-invasive BCIs</strong>；Invasive BCIs；Partially invasive (semi-invasive) BCIs</p>
-<p>本文研究非侵入式BCIs，safety, low cost, and convenience. most popular</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/13/Paper/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/image-20210215113147980.png"></p>
-<ol type="1">
-<li><p>Signal acquisition ： Used：wired connections and gel 。Currently, wireless connections and dry electrodes</p></li>
-<li><p>Signal processing ： temporal filtering and spatial filtering.</p></li>
-</ol>
-<p>常用的空间滤波器包括公共空间模式(CSP)、独立分量分析(ICA)、盲源分离、xDAWN等。</p>
-<p>3）Feature extraction：时域、频域、时频域、黎曼空间和/或功能性大脑连通性特征</p>
-<ol start="4" type="1">
-<li><p>Pattern recognition：分类；回归</p></li>
-<li><p>Controller：其输出命令以控制外部设备</p></li>
-</ol>
-<p>当使用深度学习时，特征提取和模式识别可以集成到单个神经网络中，并且这两个组件同时自动优化。</p>
-<p>基于EEG的BCI中有三种经典的分类范型：Motor imagery (MI)；Event-related potentials (ERP)；Steady-state visual evoked potentials (SSVEP)</p>
-<h2 id="ii.迁移学习概念和场景">II.迁移学习概念和场景</h2>
-<p>定义1：</p>
-<h2 id="iii.tl-in-mi-based-bcis">III.TL in MI-Based BCIs</h2>
-<p><strong>嵌入流形的知识转移</strong>(MEKT)方法:1.协方差矩阵质心对齐(CA)2.切线空间特征提取。3.映射矩阵识别。</p>
-<p><strong>EEGNet</strong>。它可以应用于不同的脑机接口范例，用非常有限的数据进行训练，并产生神经生理学上可解释的特征。EEGNet在错误信息系统和事件相关事件的学科内和跨学科分类方面都取得了强劲的成果。</p>
-<h2 id="iv.-tl-in-erp-based-bcis">IV. TL IN ERP-BASED BCIs</h2>
-<p>SAN GAN</p>
-<p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>脑电，迁移学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>选择脑电图独立成分进行矫正的实用指南</title>
-    <url>/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.researchgate.net/publication/273779893_A_Practical_Guide_to_the_Selection_of_Independent_Components_of_the_Electroencephalogram_for_Artifact_Correction">论文链接</a></p>
-<h2 id="summary">0. Summary</h2>
-<p>本文综述了<span class="math inline">\(ICA\)</span>分离出的五种典型的脑电伪影(眨眼、眼跳、肌肉噪声、不良通道和罕见事件)，以及目前自动化方法提供的几种检测这些伪影的方法。</p>
-<span id="more"></span>
-<h2 id="research-objectives">1. Research Objective(s)</h2>
-<p>脑电信号中独立成分的选择；</p>
-<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
-<h3 id="方法">2.1 方法</h3>
-<p>用 ICA 分离和减去独立的成分；这种分量减法被广泛用于从EEG记录中去除诸如眨眼或肌肉活动之类的伪影</p>
-<h3 id="常见伪影特征的特征说明">2.2 常见伪影特征的特征说明；</h3>
-<ol type="1">
-<li><p><strong>眼睛成分</strong></p>
-<p>特点：</p>
-<ol type="1">
-<li>最容易识别</li>
-<li>地形基本上平坦</li>
-<li>排在前十几成分中</li>
-</ol>
-<p><code>眨眼</code></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330101333947.png" alt="image-20210330101333947"></p>
-<p><code>水平眼动</code></p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330105247161.png" alt="image-20210330105247161"><figcaption aria-hidden="true">image-20210330105247161</figcaption>
-</figure>
-<p><code>误认眼动</code></p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330105259247.png" alt="image-20210330105259247"><figcaption aria-hidden="true">image-20210330105259247</figcaption>
-</figure></li>
-<li><p><strong>肌肉成分</strong></p>
-<p>​ 来自颈部、颌部和面部肌肉的强直性肌肉活动在电极帽边缘的电极上产生一种固定的活动。虽然受试者通常被要求坐着不动放松，但由于打哈欠或吞咽等原因导致的无法控制的姿势活动以及肌肉活动可能会发生，并被记录在脑电图中。</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330110627420.png" alt="image-20210330110627420"><figcaption aria-hidden="true">image-20210330110627420</figcaption>
-</figure></li>
-<li><p><strong>坏通道</strong></p></li>
-</ol>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330110923783.png" alt="image-20210330110923783"><figcaption aria-hidden="true">image-20210330110923783</figcaption>
-</figure>
-<ol start="4" type="1">
-<li><p><strong>罕见事件</strong></p>
-<p>B：事件发生在单个电极上</p>
-<p>C: 事件发生在多个电极上</p></li>
-</ol>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330120331346.png" alt="image-20210330120331346"><figcaption aria-hidden="true">image-20210330120331346</figcaption>
-</figure>
-<ol start="5" type="1">
-<li><strong>模棱两可的成分</strong></li>
-</ol>
-<p>有的成分不能明确区分，反映信号的混合，应小心处理。见1-3最后图像。</p>
-<h3 id="sasica插件">2.3 SASICA插件</h3>
-<p><a href="https://github.com/dnacombo/SASICA">插件地址</a></p>
-<p>用于伪像校正的脑电图独立分量的半自动选择</p>
-<p><a href="https://sccn.ucsd.edu/wiki/EEGLAB_Plugins">使用说明</a></p>
-<h3 id="其他插件">2.4 其他插件</h3>
-<ol type="1">
-<li>FETHER(全自动统计阈值脑电伪影剔除）</li>
-<li>ADJUST(基于时空特征联合使用的脑电伪迹自动检测）</li>
-<li>MARA(多重伪像去除算法)</li>
-<li>CORRMAP：专门设计用于通过使用IC地图和用户选择的模板地图之间的相关程度来检测眼睛和心脏伪影的工具</li>
-</ol>
-<h2 id="methods">3. Method(s)</h2>
-<h3 id="数据集预处理程序">3.1 数据集预处理程序：</h3>
-<ol type="1">
-<li>目测原始信号以排除数据的不良部分，</li>
-<li>如表2所述的重新参考、下采样和滤波，</li>
-<li>历元，</li>
-<li>前刺激基线去除，</li>
-<li>使用扩展Infomax算法(来自EEGLAB)的ICA。</li>
-</ol>
-<h3 id="任务和测量">3.2 任务和测量</h3>
-<ul>
-<li><p>Tools&gt;Select Components by MAP</p></li>
-<li><p>检查每个组件以决定是否应该拒绝它</p></li>
-<li><p>丢弃给定组件的“理由”：</p>
-<p>“眨眼”、“扫视”、“肌肉”、“孤立通道”、“少数试验”(用于识别罕见事件)或“其他”中的任何一个。</p></li>
-<li><p>三个专家们独立对所有训练数据集进行评级后，一起修改评级，直到达成共识。无法达成共识的组成部分被归类为“其他”。</p></li>
-<li><p>两位专家(包括作者MC)使用相同的程序检查了13个测试数据集的920个组成部分，并一致将其分类</p></li>
-</ul>
-<h2 id="evaluation">4. Evaluation</h2>
-<h2 id="conclusion">5. Conclusion</h2>
-<p>到目前为止，ICA并不是唯一可用于校正伪迹的方法。许多其他方法允许在丢弃伪迹的同时潜在地保留神经信号。这些方法包括<code>低通滤波</code>、<code>回归方法</code>、<code>主成分分析</code>(Ille等人，2002；McMenamin等人，2009；Wallstrom等人，2004)、<code>信号空间投影</code>(Uusitalo和Ilmoniemi，1997)或<code>典型相关分析</code>(Clercq等人，2006)。但是ICA是一种强大的方法，它允许同时校正几种类型的伪迹。它用于去除EEG中的伪影，也用于去除脑磁图(MEG)数据中的伪影(Barbati等人，2004年；Parra等人，2005年)，以及伴随的功能性磁共振成像在EEG中产生的强伪影(Mantini等人，2007年)。</p>
-<p>事实证明，它在矫正<code>眼部</code>(Jung等人，2000b)、<code>心脏</code>(Campos Viola等人，2009年)、<code>肌肉</code>(Creso-Garcia等人，2008年；McMenamin等人，2010年；Olbrich等人，2011年)或<code>发作性伪影</code>(Urrestarazu等人，2004年)方面是有用的。</p>
-<p>ICA的也有缺陷。因此，如何正确地对伪迹进行分类是很重要的。</p>
-<h2 id="notes">6. Notes</h2>
-<ol type="1">
-<li>EEG信号伪迹去除时发生的 I型和II型错误
-<ul>
-<li>I 丢失待检测的伪迹</li>
-<li>II 错误分类非伪迹成分</li>
-</ul></li>
-</ol>
-<h2 id="references">References</h2>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>伪迹</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++输入输出</title>
     <url>/2021/04/11/C++/C-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>C++ 有许多输入输出函数</p>
@@ -780,6 +333,656 @@
       </categories>
       <tags>
         <tag>线性表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Riemannian geometry for EEG-based brain computer interfaces ;a primer and a review</title>
+    <url>/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<hr>
+<p>黎曼几何在脑机接口的应用，简述了黎曼分类的原理，优缺点。</p>
+<span id="more"></span>
+<h2 id="研究目的">1. 研究目的</h2>
+<p>对黎曼几何在脑-机接口中的应用进行了综述，并对基于黎曼几何的分类框架进行了初步探讨。</p>
+<p>提高脑-机接口的稳健性。</p>
+<h2 id="背景与问题陈述">2. 背景与问题陈述</h2>
+<hr>
+<p>解码器传统上被认为由三个独立的模块组成：预处理、特征提取和分类 。目前三种主要的BCI模式(即基于运动/心理图像(MI)、事件相关电位(ERP)和稳态诱发电位(SSEP))中的每一种都被专用的预处理、信号处理和分类模块所处理。解码策略分为两类：一类遵循硬机器学习方法，另一类使用信号处理来提高信噪比，然后使用简单的分类算法。一些硬机器学习类型的算法在不同会话和不同主题之间具有相当好的通用性，但需要大量的训练数据。此外，它们通常是计算密集型的。空间滤波的情况正好相反，其糟糕的泛化能力被快速的训练和较低的计算成本所弥补。在实际操作中，危及BCI解码器操作的主要因素是主体间的生理变异性和真实世界环境条件的巨大变异性。三个相互关联的研究领域正在努力克服这些限制，共同解决改善BCI可用性和健壮性的问题。</p>
+<p>实现所需的可用性和健壮性的途径不是通过提高系统的复杂性，而是“我们需要在技术进步和现实世界的实际使用之间取得平衡”。将预处理、特征提取和分类不作为独立的过程，而是作为一个整体。</p>
+<h2 id="黎曼分类框架入门">3.1 黎曼分类框架入门</h2>
+<p>对称正定(SPD)矩阵(以下称为正矩阵)可以被认为是多维平方实数的推广。特别地，一维随机变量的方差是正数(平方和)，而N维随机变量的方差是正矩阵，通常称为协方差矩阵。</p>
+<p>为实现到均值的最小距离(MDM)，需要一个合适的距离函数(度量)和相应的均值函数。</p>
+<p>度量(距离):</p>
+<ul>
+<li>非负的</li>
+<li>只有当两个元素相等时它才等于零</li>
+<li>对称的</li>
+<li>服从三角不等式。</li>
+</ul>
+<p>度量空间（S，d)</p>
+<h2 id="methods">3. Method(s)</h2>
+<hr>
+<p>传统解码器：预处理，特征提取，分类</p>
+<p>模式：MI，ERP，SSEP</p>
+<p>目前都有专门的预处理，信号处理和分类模块</p>
+<table>
+<thead>
+<tr class="header">
+<th>两大范式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hard machine learning</td>
+<td>泛化性能好</td>
+<td>需要大量数据，计算密集型</td>
+</tr>
+<tr class="even">
+<td>利用信号处理提高信噪比，然后分类（空间滤波等）</td>
+<td>快速训练，成本低</td>
+<td>泛化差</td>
+</tr>
+</tbody>
+</table>
+<p>黎曼分类：</p>
+<p>MDM(Minimum Distance to Mean)：到平均数的最小距离</p>
+<h2 id="evaluation">4. Evaluation</h2>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103033549.png" title="算术均值与几何均值比较" alt="image-20210311103033549"><figcaption aria-hidden="true">image-20210311103033549</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/1.%E5%9F%BA%E4%BA%8EEEG%E8%84%91-%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%EF%BC%9B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BB%BC%E8%BF%B0/image-20210311103013598.png" title="黎曼MDM分类与传统CSP分类的迁移学习比较" alt="image-20210311103013598"><figcaption aria-hidden="true">image-20210311103013598</figcaption>
+</figure>
+<p>LDA 线性判别分析</p>
+<h2 id="conclusion">5. Conclusion</h2>
+<hr>
+<ol type="1">
+<li>提供了一个更简单的黎曼分类方法，</li>
+<li>最小距离到平均数（MDM）的初步介绍，我们主要依靠直观的（几何）解释。Riemannian MDM方法完全基于两个简单的概念：两个数据点之间的距离和其中若干点的平均值。</li>
+<li>黎曼几何学提供了处理对称正定矩阵的天然框架，许多种类的结构协方差矩阵都是这种类型。不管协方差矩阵是如何定义的，MDM黎曼分类器对于所有三种BCI模式，即运动想象、事件相关电位和稳态诱发电位都是一样的。</li>
+<li>基于切线空间映射的黎曼方法的总体性能优于MDM方法，而且性能明显优于最新的技术水平，但由于分类器继承了算法复杂度的增加和可能需要高强度的学习，它们不太适合在线操作</li>
+<li>空间滤波器的改进只能为分类目的带来适度的改进，而且这种改进并不容易转化为可靠性和鲁棒性的显著提高。</li>
+</ol>
+<h2 id="notes">6. Notes</h2>
+<hr>
+<p>附录1中给出了三种主要BCI模式的正式定义。 这些定义还可以改进，并期待对这一课题的进一步研究。</p>
+<h2 id="references">References</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>黎曼几何</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>An online multi-channel SSVEP-based brain–computer interface using a canonical correlation analysis method</title>
+    <url>/2021/03/15/Paper/3.%E5%9F%BA%E4%BA%8E%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%A8%E7%BA%BF%E5%A4%9A%E9%80%9A%E9%81%93SSVEP%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="summary">0. Summary</h2>
+<span id="more"></span>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>本文提出了一种在线多信道SSVEP BCI系统，采用典型相关分析（CCA）方法提取与SSVEP相关的频率信息。利用离线数据对系统的关键参数信道位置、窗长和谐波数进行了研究，为在线系统的设计提供了依据。</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<ul>
+<li>不同的SSVEP可以通过将我们的兴趣或注意力转移到其中一个频率编码的刺激上而产生</li>
+<li>SSVEP的BCI有更高的信噪比（SNR）和信息传输率（ITR）</li>
+<li></li>
+</ul>
+<h2 id="methods">3. Method(s)</h2>
+<ul>
+<li>MEC(minium energy method) 检测精度高, 无需校准数据</li>
+<li><a href="./典型相关分析(CCA).md">CCA</a></li>
+</ul>
+<h2 id="evaluation">4. Evaluation</h2>
+<h2 id="conclusion">5. Conclusion</h2>
+<ul>
+<li>结果:来自30个BCI命令的正确计数的平均值为28.6。 BCI系统的平均ITR为58±9.6位min-1。</li>
+<li></li>
+</ul>
+<h2 id="notes">6. Notes</h2>
+<h2 id="references">References</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>SSVEP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A high-speed BCI based on code modulation VEP</title>
+    <url>/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="summary">0. Summary</h2>
+<p>通过编码调制与多通道处理提高ITR</p>
+<span id="more"></span>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>提高ITR</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<p>BCI 通信系统传输速率低，提高ITR(信息传输率)</p>
+<h2 id="methods">3. Method(s)</h2>
+<ul>
+<li>提出了基于c-VEP的调制系统，其中二进制伪随机码被用来调制不同的视觉刺激</li>
+<li>提出了一种提高识别精度的多通道检测方法</li>
+</ul>
+<h2 id="evaluation">4. Evaluation</h2>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110254896.png" alt="image-20210311110254896"><figcaption aria-hidden="true">image-20210311110254896</figcaption>
+</figure>
+<ol type="1">
+<li>该系统由一个脑电图放大器和一台带CRT显示器的个人电脑（PC）组成。</li>
+<li>不同目标的反应之间的圆移关系是目标识别的基础，一旦获得了T0的模板，其他目标的模板可以很容易地获得<img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/2.%E5%9F%BA%E4%BA%8E%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6VEP%E7%9A%84%E9%AB%98%E9%80%9FBCI/image-20210311110915610-1615775581553.png" title="园移 Principle of equivalent neighbors" alt="image-20210311110915610"></li>
+<li>在获得所有目标的模板后，可以采用模板匹配的方法进行目标识别，通过选择相关系数最大的目标来确定固定目标</li>
+<li>多通道处理，由于双极通道。实验分为训练阶段和测试阶段。在训练阶段，要求被试者固定在参考目标上约200个刺激周期。训练阶段的数据用于离线分析，以计算空间滤波权重和在线使用的参考模板.在测试阶段，每个受试者被要求输入一个64个字符的序列。 在测试阶段，每个受试者都被要求输入64个字符序列，在线准确率和相应的ITR用于评估系统性能。 在计算ITR时，每次选择的时间成本为2.1s(包括两个刺激期，一个用于数据采集，一个用于目标识别、反馈展示和凝视)。</li>
+</ol>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>本文对高速c-VEP BCI系统的基本原理和实现方法进行了详细的介绍,提出的c-VEP BCI具有108±12.0比特/分钟-1的高ITR,超过了以往基于脑电图的BCI的记录。</p>
+<h2 id="notes">6. Notes</h2>
+<h2 id="references">References</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>VEP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A Novel c-VEP BCI Paradigm for Increasing the Number of Stimulus T argets Based on Grouping Modulation With Different Codes</title>
+    <url>/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<h2 id="研究目标">1. 研究目标</h2>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<h2 id="研究方法">3. 研究方法</h2>
+<h2 id="评估实验">4. 评估，实验</h2>
+<h2 id="结论">5. 结论</h2>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>c-VEP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Transfer Learning for EEG-Based Brain-Computer Interfaces; A Review of Progress Made Since 2016</title>
+    <url>/2021/03/13/Paper/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><span id="more"></span>
+<p><strong>脑机接口</strong>(BCI)使用户能够使用大脑信号直接与计算机通信。</p>
+<p><strong>脑电</strong>(EEG)是最常见的非侵入性脑机接口(BCI)，对噪声/伪影敏感，且存在受试者/受试者内部的非平稳性。很难建立一个通用的模式识别模型。</p>
+<p><strong>迁移学习</strong>用于减少校准工作量。</p>
+<p>本文讨论了<strong>运动想象</strong>、<strong>事件相关电位</strong>、<strong>稳态视觉诱发电位</strong>、<strong>情感脑机接口</strong>、<strong>回归问题</strong>和<strong>对抗性攻击</strong>等六种范式及其应用。</p>
+<p>索引-<strong>脑机接口</strong>、<strong>脑电图</strong>、<strong>迁移学习</strong>、<strong>领域适应</strong>、<strong>情感脑机接口</strong>、<strong>对抗性攻击</strong></p>
+<h2 id="i.introduction">I.Introduction</h2>
+<p>脑机接口应用：游戏、情绪识别、精神疲劳评估、警觉评估。etc</p>
+<p>BCI类型：<strong>Non-invasive BCIs</strong>；Invasive BCIs；Partially invasive (semi-invasive) BCIs</p>
+<p>本文研究非侵入式BCIs，safety, low cost, and convenience. most popular</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/13/Paper/%E5%9F%BA%E4%BA%8E%E8%84%91%E7%94%B5%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A2016%E5%B9%B4%E4%BB%A5%E6%9D%A5%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95%E7%BB%BC%E8%BF%B0/image-20210215113147980.png"></p>
+<ol type="1">
+<li><p>Signal acquisition ： Used：wired connections and gel 。Currently, wireless connections and dry electrodes</p></li>
+<li><p>Signal processing ： temporal filtering and spatial filtering.</p></li>
+</ol>
+<p>常用的空间滤波器包括公共空间模式(CSP)、独立分量分析(ICA)、盲源分离、xDAWN等。</p>
+<p>3）Feature extraction：时域、频域、时频域、黎曼空间和/或功能性大脑连通性特征</p>
+<ol start="4" type="1">
+<li><p>Pattern recognition：分类；回归</p></li>
+<li><p>Controller：其输出命令以控制外部设备</p></li>
+</ol>
+<p>当使用深度学习时，特征提取和模式识别可以集成到单个神经网络中，并且这两个组件同时自动优化。</p>
+<p>基于EEG的BCI中有三种经典的分类范型：Motor imagery (MI)；Event-related potentials (ERP)；Steady-state visual evoked potentials (SSVEP)</p>
+<h2 id="ii.迁移学习概念和场景">II.迁移学习概念和场景</h2>
+<p>定义1：</p>
+<h2 id="iii.tl-in-mi-based-bcis">III.TL in MI-Based BCIs</h2>
+<p><strong>嵌入流形的知识转移</strong>(MEKT)方法:1.协方差矩阵质心对齐(CA)2.切线空间特征提取。3.映射矩阵识别。</p>
+<p><strong>EEGNet</strong>。它可以应用于不同的脑机接口范例，用非常有限的数据进行训练，并产生神经生理学上可解释的特征。EEGNet在错误信息系统和事件相关事件的学科内和跨学科分类方面都取得了强劲的成果。</p>
+<h2 id="iv.-tl-in-erp-based-bcis">IV. TL IN ERP-BASED BCIs</h2>
+<p>SAN GAN</p>
+<p>数据对齐：<strong>Euclidean Alignment (EA)方法</strong>，完全无监督，运算代价低，适用于传统机器学习和深度学习</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>脑电</tag>
+        <tag>迁移学习</tag>
+        <tag>综述</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A multi-target brain-computer interface based on code modulated visual evoked potentials</title>
+    <url>/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<h2 id="研究目标">1. 研究目标</h2>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<h3 id="bci研究">2.1 BCI研究</h3>
+<ol type="1">
+<li>提出了一种新的频率-相位联合调制方法，用0.5s的闪烁信号标记40个目标，并开发了一种使用单个校准数据的特定用户目标识别算法</li>
+<li>Edelman等人。分别和同时使用具有感觉运动节律的二维光标控制任务和具有稳态视觉诱发电位(SSVEP)的视觉注意任务来研究认知灵活性的概念。他们发现，单独和联合执行这两项任务的精确度没有显著差异</li>
+<li>Ortner等人的研究成果。应用异步SSVEP脑机接口进行矫形器控制。6名未经训练的受试者表现出良好的控制性，阳性预测值(PPV)在60%以上，所有受试者的总体PPV高达78%[5]。</li>
+<li>Pfurtscheller等人的研究成果。进行了基于脑机接口的混合式矫形器的自定步操作的研究，其中有无基于图像的大脑开关，仅在需要控制时才激活基于SSVEP的四步矫形器，并在休息期间停用SSVEP脑机接口。这两种心理策略的结合显示，与单独使用SSVEP脑机接口相比，静息期的假阳性率要低得多。</li>
+<li>孟等人。研究了使用非侵入性脑-机接口控制机械臂来完成抓取任务，发现受试者可以高精度地控制机械臂来执行需要多个自由度的任务[7]。</li>
+<li>Xu等人。提出了一种创新的基于微型事件相关电位的脑-机接口范式，它使用了一种空码分多址(SCDMA)方案来减少视觉疲劳[8]。</li>
+</ol>
+<h3 id="vep">2.2 VEP</h3>
+<p>基于VEP的BCI具有用户训练少和ITR高的特点</p>
+<p>根据调制方法可分为：</p>
+<ul>
+<li>t-VEP</li>
+<li>f-VEP</li>
+<li>c-VEP</li>
+<li>s-VEP</li>
+</ul>
+<p>其中f-VEP和c-VEP有更高的ITR，应用潜力大，但是c-VEP相对于f-VEP研究还不够深入</p>
+<h3 id="c-vep">2.3 c-VEP</h3>
+<p>现有c-VEP范例将所有刺激目标打包为一组，用原始伪随机二进制码及其循环移位码 或 相同长度的不同伪随机二进制码调制。前者只需训练一个目标来创建所有目标的模板。后者需要创建所有目标的模板。通常采用第一种以减少训练时间。</p>
+<p>可利用的目标数目收调制码长的限制。例如，如果两个相邻刺激之间的时延为2比特，则63比特的M序列可以循环右移31次，并且最多提供32个刺激。</p>
+<p>另一方面，影响ITR的主要因素之一是可选择目标的数量。高性能的脑机接口通常有大量的目标。因此，如何增加目标数目是c-VEP脑机接口的关键问题。</p>
+<h2 id="研究方法">3. 研究方法</h2>
+<p>在<a href="\2021\04\15\Paper\A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes">另一篇论文</a>的研究中，通过将现有的第一种目标调制方法与第二种基于视觉刺激分组调制的方法相结合，构建了一个48个目标的c-VEP BCI。在不显著增加训练时间的情况下，大幅增加刺激目标的数量和由此产生的ITR。</p>
+<p>在本研究中，将目标群体的数量从三个扩展到四个，将目标排列的方法从<code>等效邻居原则</code>调整为<code>分开放置</code>，并应用了四种不同的数据预处理方法来分析c-VEP系统。每个目标组有16个刺激目标，共64个目标。对8个被试的实验数据的分类结果验证了该范式在增加刺激靶数和ITR方面的可行性和有效性。</p>
+<h2 id="评估实验">4. 评估，实验</h2>
+<h3 id="visual-stimulator">3.1 Visual stimulator</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415114951381.png"></p>
+<p>如图，有64给刺激分为四组，每组4x4块，每个刺激大小为<span class="math inline">\(140 \times 100\)</span>像素。水平距离10像素，垂直距离30像素。每组刺激由不同的伪随机二进制码(原始码)及其循环移位码调制。所有编码应正交或近似正交</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415123752379.png"></p>
+<p>当受试者凝视感兴趣的目标时，大脑的枕叶会产生c-VEP信号。</p>
+<h3 id="experimental-setup">3.2 Experimental setup</h3>
+<p>8名被试。</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415133134554.png" alt="image-20210415133134554"><figcaption aria-hidden="true">image-20210415133134554</figcaption>
+</figure>
+<h3 id="target-recognition">3.3 Target recognition</h3>
+<h4 id="cca">1 CCA</h4>
+<p>提取更多与目标识别相关的信息</p>
+<h4 id="spatial-filter-estimation.">2 Spatial filter estimation.</h4>
+<p>在c-VEP脑机接口系统中，用于目标识别的数据长度是一个完整的刺激周期，即单次试验的数据长度。</p>
+<p>利用从每个目标组中的参考目标导出的训练数据来估计空间滤波器</p>
+<p>本实验中，<span class="math inline">\(X(t)\)</span>是滤波后的<span class="math inline">\(2-40Hz\)</span>时间信号。<span class="math inline">\(X^n(t),n=1,2...N\)</span> 是单次实验数据。<span class="math inline">\(X^n(t) \in R^{C\times L}\)</span> ,L为数据长度（采样点），C是电极。<span class="math inline">\(L=floor(lc/fr.fs)=1066\)</span> .lc(编码长度=64bit)，fr(屏幕刷新率60Hz) ，fs（采样率1000Hz)</p>
+<p>ERP均值为 <span class="math display">\[
+{\over{S}}_{(t)} = \frac{1}{N}\sum_{n=1}^{N}X^n(t)
+\]</span> 通过复制<span class="math inline">\(\hat{S}_r(t)\)</span> N 此得到 ERP成分 <span class="math inline">\(S_r(t)=[\hat{S}_r(t),\hat{S}_r(t)..\hat{S}_r(t)]\)</span></p>
+<p>为了估计空间滤波器，将以单次试验为中心的数据<span class="math inline">\(X_r^n(t)\)</span>连接成连续数据<span class="math inline">\(X_r(t)= [X_r^1(t),X_r^2(t)...X_r^N(t)]\)</span></p>
+<p><span class="math inline">\(S_r(t)和X_r(t) \in R^{C\times(N.L)}\)</span> ,将其作为CCA输入可得到第 i 组空间滤波器 <span class="math inline">\(w_{xi} \in R^{C\times 1}\)</span></p>
+<h4 id="template-creating">3 Template creating</h4>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415161311177.png"></p>
+<ol type="1">
+<li>对第i个目标组，用空间滤波器对来自参考目标的多通道ERP信号进行滤波，得到以为参考模板<span class="math inline">\(T_{ir}(t)\)</span></li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415161629115.png"></p>
+<ol start="2" type="1">
+<li>计算时延</li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415161952699.png"></p>
+<ol start="3" type="1">
+<li>循环移位生成所有模板</li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415162030028.png"></p>
+<h4 id="template-matching.">4 Template matching.</h4>
+<p>通过测试信号和单个目标组中的所有模板之间的模板匹配，选取四个组的最佳结果。</p>
+<p>度量方法有<code>normalized cross correlation (NCC),`` sum of absolute difference (SAD),</code> <code>sum of square difference (SSD)</code>, etc.本文采用相关方法</p>
+<p>测试信号<span class="math inline">\(Y(t)\in R^{C\times L}\)</span> 先在<span class="math inline">\(2-40Hz\)</span> 进行时间滤波 ，然后用四个空间滤波器<span class="math inline">\(w_{xi}\)</span>进行空间滤波，生成4个一维向量<span class="math inline">\(y_i(t)=w_{xi}^TY(t)\)</span> ,<span class="math inline">\(y_i(t)\in R^{1\times L}\)</span></p>
+<p>对于每一个组，<span class="math inline">\(y_i(t)\)</span> 与16个模板<span class="math inline">\(T_{ik}\)</span> 计算得到相关系数<span class="math inline">\(\rho_{ik}\)</span></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415163603936.png"></p>
+<p>第i组的最大值 <span class="math display">\[
+\rho_{imax}= \max _k \rho_{ik}
+\]</span></p>
+<p>将四个最大系数的最大值确定为关注目标 <span class="math display">\[
+ST=\max _i \rho_{imax}
+\]</span></p>
+<h3 id="performance-evaluation">3.4 Performance evaluation</h3>
+<h4 id="itr">1 ITR</h4>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415164550190.png"></p>
+<p>M是目标数，P是分类精度，T是一次选择的平均时间，包括视线转移时间和视觉刺激时间</p>
+<h4 id="snr">2 SNR</h4>
+<p>与f-VEP分析不同的是，到目前为止还没有一种确定c-VEP信号信噪比的方法。</p>
+<p>本文采用 相似指数 （SMI）</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415164952928.png"></p>
+<p><span class="math inline">\(\hat X\)</span> 是所有试次的均值，<span class="math inline">\(x_i\)</span> 是第 i 此测试实验。 <span class="math inline">\(S=\frac{\hat{X}^Tx_i}{X^T\hat{X}}X^T\)</span> ,<span class="math inline">\(N=x_i-\hat{X}\)</span></p>
+<h4 id="statistical-analysis">3 Statistical analysis</h4>
+<p>针对系统性能指标非正态分布的特点，采用Wilcoxon符号秩检验对中值差值显著性进行统计分析，研究了不同目标数和不同数据预处理方法对系统性能的影响。配对测试是在95%的置信水平下进行的。</p>
+<h2 id="结论">5. 结论</h2>
+<h3 id="auto--and-cross-correlation-of-c-vep-signals">1 Auto- and cross-correlation of c-VEP signals</h3>
+<p>虽然c-VEP BCI中的视觉刺激作为二进制信号都是不相关的，但这并不能保证对这些刺激的反应也是不相关的，因为大脑是一个非线性动态系统。因此，刺激目标的可分性实际上取决于刺激响应(即，c-VEP信号)的正交性，而不是编码</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415170258948.png"></p>
+<p>四个自相关函数中的每一个在时滞0处都有一个尖锐的中心峰值，在其他地方都有一个低旁瓣。中心峰值与最大旁瓣的比值足够大，可以保证在同一组中准确区分不同的目标。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415170351280.png"></p>
+<p>互相关函数在所有时间滞后时都具有较小的值。这意味着也很容易区分不同组中的目标。</p>
+<h3 id="amplitude-spectrum-and-snr">2 Amplitude spectrum and SNR</h3>
+<p>频谱分析是为了找出c-VEP信号的主要功率集中在哪个频段。主要能量基本上位于2-40 Hz的频率范围内。因此，在时间上对频率中的原始c-VEP信号进行滤波以降低噪声提高信噪比</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415171557406.png"></p>
+<p>为了评估c-VEP信号的信噪比，探索了四种不同的数据预处理方法，即：</p>
+<p>1)M1：未经时间滤波的原始单通道(Oz)信号；</p>
+<p>2)M2：带时间滤波的单通道(Oz)信号；</p>
+<p>3)M3：未经空间滤波的原始多通道信号；</p>
+<p>4)M4：同时进行时间和空间滤波的多通道信号。</p>
+<p>M4为c-VEP脑机接口系统中使用的方法。使用来自每个参考目标的训练信号来评估SMI，并且SNR是从四个参考目标导出的四个SMI的平均值。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415172029255.png"></p>
+<p><strong>(M4)时间滤波和空间滤波组合的信噪比改善效果最好。</strong></p>
+<h3 id="correlation-coefficient">3 Correlation coefficient</h3>
+<p><span class="math inline">\(CC_T\)</span> 匹配系数</p>
+<p><span class="math inline">\(CC_M\)</span> 失配系数</p>
+<p>M4得到的CCT和CCT与CCM之间的距离都是所有目标中最大的，这表明时间和空间滤波相结合的方法可以获得最好的检测精度。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415184118296.png"></p>
+<h3 id="classification-accuracy-and-itr">4 Classification accuracy and ITR</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/image-20210415184321563.png"></p>
+<h2 id="笔记">6. 笔记</h2>
+<p>ITR由三个参数决定，即分类精度、目标数量和检测时间。高ITR要求第一个参数高，第二个参数大，第三个参数短。然而，这三个参数并不是独立的，而是相互作用的，这使得脑-机接口系统的设计成为一项复杂的任务。</p>
+<p>高的ITR主要归因于以下几个因素：</p>
+<p>1)较多的刺激目标，</p>
+<p>2)具有良好的自相关和互相关特性的四种不同的调制码，</p>
+<p>3)结合时间和空间滤波的有效信号处理算法</p>
+<p>4)用于目标识别的短数据段。</p>
+<p>改进：</p>
+<p>在本系统中，64个刺激目标被呈现在尺寸为24英寸(1920×1080像素)的面积受限的LCD监视器上，使得每个刺激目标的大小为140×100像素，这对于VEP BCI来说是次优的。以前的研究建议，对于尺寸为1920×1080像素的显示器，最佳刺激尺寸至少为170×170像素(视角为3.8˚)。因此，增加每个刺激目标的大小将提高检测精度和由此产生的ITR。考虑到个体的差异，选择特定于受试者的参数，例如通道位置、滤波器频带和训练试验的次数，对于提高个体的表现也是有用的。</p>
+<p>用于目标识别的数据长度是一个刺激周期，即对于60 Hz的屏幕刷新率为1.066秒。使用<code>固定停止(FS)</code>策略的缺点是它没有考虑被试在BCI容量上的个体差异。最好使用不同的数据长度对目标进行分类，即采用<code>动态停止(DS)</code>策略，该长度由脑电特征的质量和每次试验的分类置信度确定。DS策略不仅可以提高分类精度，而且可以缩短目标识别的整体时间。最近的一项研究表明，即使对于高速SSVEP BCI，DS策略也可以进一步提高它们的性能[39]。因此，将DS策略纳入64个目标的c-VEP BCI将是未来研究的一个方向</p>
+<h2 id="文章传送">文章传送：</h2>
+<ol type="1">
+<li><a href="\2021\04\15\通信\正交编码与伪随机序列">正交编码与伪随机序列</a></li>
+<li><a href="\2021\04\15\Paper\A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes">另一篇论文</a></li>
+<li><a href="\2021\04\15\Paper\Incorporation-of-dynamic-stopping-strategy-into-the-high-speed-SSVEP-based-BCIs">DS策略</a></li>
+</ol>
+<h2 id="参考文献">参考文献</h2>
+<ol type="1">
+<li><a href="https://ieeexplore.ieee.org/document/8360166/">A Novel c-VEP BCI Paradigm for Increasing the Number of Stimulus T argets Based on Grouping Modulation With Different Codes</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>c-VEP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Transfer Learning for Motor Imagery Based Brain-Computer Interfaces - A Complete Pipeline</title>
+    <url>/2021/04/14/Paper/%E5%9F%BA%E4%BA%8E%E8%BF%90%E5%8A%A8%E6%83%B3%E8%B1%A1%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%AE%8C%E6%95%B4%E7%9A%84%E7%AE%A1%E9%81%93/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<h2 id="研究目标">1. 研究目标</h2>
+<p>本文提出在基于MI的BCI的所有三个组成部分(空间滤波、特征工程和分类)中都可以考虑TL。此外，在空间过滤之前专门添加数据对齐组件，以使来自不同主题的数据更加一致，从而促进后续的TL。</p>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<h2 id="研究方法">3. 研究方法</h2>
+<h2 id="评估实验">4. 评估，实验</h2>
+<h2 id="结论">5. 结论</h2>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>迁移学习</tag>
+        <tag>运动想象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Incorporation of dynamic stopping strategy into the high-speed SSVEP-based BCIs</title>
+    <url>/2021/04/15/Paper/Incorporation-of-dynamic-stopping-strategy-into-the-high-speed-SSVEP-based-BCIs/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<h2 id="研究目标">1. 研究目标</h2>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<h2 id="研究方法">3. 研究方法</h2>
+<h2 id="评估实验">4. 评估，实验</h2>
+<h2 id="结论">5. 结论</h2>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Visual and Auditory Brain–Computer Interfaces</title>
+    <url>/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<p>本综述旨在为探索新的范式和方法以改进当前的视觉和听觉脑-机接口技术提供有用的指导。</p>
+<h2 id="研究目标">1. 研究目标</h2>
+<p>本文涉及的v-BCI和a-BCI系统仅包括基于大脑对<code>外源性</code>视觉或听觉刺激的反应的BCI[例如稳态视觉诱发电位(SSVEP)和听觉稳态反应(ASSR)]以及与视觉或听觉刺激相关的内源性电位(例如视觉和听觉P300事件相关电位(ERPs))。</p>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<p>V-BCI和a-BCI可分为凝视依赖系统和凝视非依赖系统。视线相关的v-BCI系统利用了脑电记录的高信噪比(SNR)和高信息传输率(ITR)。不依赖凝视的v-BCI和a-BCI系统可以为不能使用凝视依赖的BCI的闭锁患者提供相对较高的系统性能。由于高BCI性能依赖于可靠、可重复和可区分的脑信号，因此v-BCI和a-BCI系统可以提供稳健的系统性能。</p>
+<p>当前的v-BCI和a-BCI系统缺乏统一的系统框架，部分原因是它们从概念开始就被分开研究。</p>
+<p>本综述将集中于v-BCI和a-BCI系统的现状和未来挑战。为了将各种v-BCI和a-BCI系统统一在一个框架内，我们从电信系统中借用了<code>信号调制和多址</code>(MA)方法的概念</p>
+<h2 id="脑信号">2.1 脑信号</h2>
+<p>大脑信号可以受到外源性刺激或内源性心理活动的调节。如图1所示，v-BCI和a-BCI系统中的外源性刺激是视觉和听觉刺激，而内源性刺激可能是由用户的隐性注意或心理任务引起的。这些大脑反应可能发生在感觉、感知或认知层面。感觉是感觉系统对外界刺激信号的处理。视觉和听觉刺激产生的诱发电位(EP)反映了典型的感觉过程。知觉涉及到感官信息的组织、识别和解释。意识水平的感官知觉使个体能够感觉到他们周围的环境。认知过程包括注意、学习、推理、决策等。在脑-机接口系统中，上述三个阶段的大脑反应可以通过被试的自愿注意进行调制，从而可以对所传达的信息进行编码。调制的脑信号中的特征可以在时域、频域或空间域中提取。不同领域的特征组合可以显著提高分类精度，从而提高BCI性能。</p>
+<h2 id="v-bci和a-bci的脑信号">2.2 V-BCI和a-BCI的脑信号</h2>
+<h3 id="受外部刺激调制的大脑信号">1 受外部刺激调制的大脑信号：</h3>
+<p>a)视觉诱发电位，VEP(瞬时VEP，SSVEP，运动VEP，编码调制VEP)；</p>
+<p>b)听觉稳态反应(ASSR)</p>
+<p>视觉诱发电位是大脑对视觉刺激的反应，可以在头皮的枕部区域以最大幅度记录下来</p>
+<h3 id="内源性调制的大脑信号">2 内源性调制的大脑信号：</h3>
+<p>​ a) response to oddball stimulus (auditory mismatch negativ-ity (MMN) [42], N200 and P300 [43]);</p>
+<p>​ b) response to mental tasks [late positive components (LPC)];</p>
+<p>​ c) response inhibition (No-Go N2) [45];</p>
+<p>​ d) semantic processing (N400) [46];</p>
+<p>​ e) attention-modulated brain signals (SSVEP , ASSR)</p>
+<h2 id="研究方法">3. 研究方法</h2>
+<h2 id="v-bci和a-bci中的多目标编码">3.1 V-BCI和A-BCI中的多目标编码</h2>
+<h3 id="v-bci和a-bci中的信息流">1 V-BCI和a-BCI中的信息流</h3>
+<p><code>通信系统</code>中的技术可以启发脑机接口设计的新思路。从本质上讲，BCI中的信息流与电信系统非常相似。为了表达不同的意图，大脑信号必须以某种方式进行调制，以便将意图嵌入的EEG信号解调成原始信息。同时，为了避免相互<code>干扰</code>，不同意图的调制脑信号应相互<code>正交</code>或接近正交。为此，调制的大脑信号可以按<code>时间/频率/代码/空间</code>分区排列。该策略类似于在电信系统中允许多个用户以最小的性能降级同时<code>共享带宽</code>的MA技术</p>
+<p>有四种基本的移动接入方案：时分多址(TDMA)、频分多址(FDMA)、码分多址(CDMA)和空分多址(SDMA)。</p>
+<p>在TDMA中，用户被分配到不同的时隙，在此期间他们拥有整个信道带宽。</p>
+<p>在FDMA中，整个带宽被分成多个部分频带，并在用户之间分配。</p>
+<p>在CDMA中，用户被分配单独的代码来调制他们的信号，这使得他们彼此不同。</p>
+<p>SDMA将地理空间划分为更小的空间，并根据用户的空间位置区分用户。</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210413145334099.png" alt="image-20210413145334099"><figcaption aria-hidden="true">image-20210413145334099</figcaption>
+</figure>
+<p>表I描述了BCI中使用的多目标接入方法的基本原理。在大多数基于ERP的BCI中，遵循TDMA原则，多个目标出现在不同的时隙。基于SSVEP的脑机接口是一种典型的<code>频分多址</code>系统，每个目标占用自己的频带，没有重叠。基于伪随机码调制的VEP的BCI以类似于CDMA方法的方式工作。SDMA方法已被应用于v-BCI的设计中，在v-BCI中，脑电信号被视场中的不同目标位置调制。此外，混合多址(HMA)方法最近被用于v-BCI研究以提高系统性能。</p>
+<h3 id="v-bci和a-bci的分类">2 V-BCI和a-BCI的分类</h3>
+<p>对所有v-BCI和a-BCI系统进行全面系统的分类(见表一)</p>
+<p>v-BCI和a-BCI系统可以分为以下五组：</p>
+<ol type="1">
+<li><p>TDMA、</p></li>
+<li><p>FDMA、</p></li>
+<li><p>CDMA、</p></li>
+<li><p>SDMA</p></li>
+<li><p>HMA</p></li>
+</ol>
+<p>优点：</p>
+<ol type="1">
+<li>这种分类有三个主要优点。首先，它简化了对v-BCI和a-BCI系统设计和实现的理解，使BCI研究人员更容易将传统通信中的现有技术融入到这些系统中。</li>
+<li>便于在v-BCI和a-BCI之间以及在使用不同EEG信号的系统之间进行比较</li>
+<li>帮助转移通信系统中的现有方法和技术，以提高当前v-BCI和a-BCI系统的系统性能</li>
+</ol>
+<h2 id="挑战">4. 挑战</h2>
+<p><strong>nonlinearity</strong> and <strong>nonstationarity</strong> 带来的影响</p>
+<h2 id="解决脑机接口相关的电生理问题">4.1 解决脑机接口相关的电生理问题</h2>
+<h3 id="脑电中的非线性">1 脑电中的非线性</h3>
+<p>大脑是一个非线性系统，在这个系统中可以观察到神经集合的群体动力学。它的活动，如脑电信号，可以用非线性动态方法比线性方法更好地描述。</p>
+<h3 id="脑电中的非平稳性">2 脑电中的非平稳性</h3>
+<p>随着时间的推移，与不同精神和行为状态相关的大脑活动的非平稳性持续发生.</p>
+<p>为了解决这个问题，已经开发了能够在在线BCI操作期间自动更新分类器的自适应分类方法。</p>
+<p>零训练方法旨在通过整合多个会话或主题的信息来解决特征提取和分类中的非平稳性问题。</p>
+<p>在较小的时间尺度内的另一个挑战是EEG信号的试验间非平稳性。试验之间的可变性可能导致单次试验EEG信号的SNR变化</p>
+<p>使用先进的数据分析方法可以缓解非平稳问题。</p>
+<h2 id="提高itr">4.2 提高ITR</h2>
+<p>发展v-bci和a-bci技术的主要挑战之一是<code>性能瓶颈</code>，这在很大程度上归因于脑电信号的低信噪比(<span class="math inline">\(SNR\)</span>)。</p>
+<p>度量（metric）：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/13/Paper/%E8%A7%86%E8%A7%89%E5%92%8C%E5%90%AC%E8%A7%89-%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210413172426338.png"></p>
+<p>M是选择的数量，P是目标检测的准确性，T(秒/选择)是选择的平均时间。</p>
+<p>提高ITR的方法可以分别考虑M、P和T。</p>
+<h3 id="提高目标检测精度">1.提高目标检测精度</h3>
+<p>a 提高任务相关脑电信号的信噪比</p>
+<p>b 最大化多个类的可分性。</p>
+<p>为实现这些目标，应增加任务相关EEG信号中的特征的<code>幅度</code>和<code>维数</code>。</p>
+<p>此外，先进的数据分析技术，如信号处理和机器学习方法，也被广泛应用于当前的脑-机接口系统中</p>
+<h4 id="信噪比">1.1.信噪比</h4>
+<p>a 先进的信号处理方法</p>
+<p>b 空间滤波可以将多通道脑电信号投影到低维空间子空间，消除任务无关成分，提高任务相关脑电信号的信噪比 <span class="math inline">\(CCA\)</span>最大化SSVEP信号和预定义参考信号之间的相关性 <span class="math inline">\(ICA\)</span>将与任务相关的EEG分量与与任务无关的EEG分量和伪像分量分开</p>
+<p>c 通过激发增强任务相关的EEG信号，在刺激设计中可以采用认知任务来产生更强的ERP信号</p>
+<h4 id="多类的可分性">1.2 多类的可分性</h4>
+<p>目标检测精度取决于多类的可分性。</p>
+<p>在脑-机接口系统中，<code>机器学习技术</code>已被广泛用于提高目标检测精度。当前BCI中使用的技术包括用于<code>特征选择</code>、<code>特征组合</code>和<code>分类</code>的各种方法。在系统设计中，可以通过增加任务相关脑电信号中信息<code>特征的维数</code>来提高多类的可分性。</p>
+<p>另一种有效的方法是在系统设计中采用<code>码分多址</code>(<span class="math inline">\(CDMA\)</span>)技术等复合编码方法。基于编码调制的视觉诱发电位的脑-机接口使用正交序列来产生可以通过互相关分析容易区分的视觉诱发电位信号</p>
+<h3 id="增加分类数量">2.增加分类数量</h3>
+<p>ITR高的BCI有大量的类，与其他BCI相比，v-BCI和a-BCI系统更能提供大量的类来实现复杂的应用</p>
+<p>P300脑机接口系统通常使用TDMA方法对目标刺激进行编码</p>
+<p>基于视觉诱发电位的脑机接口系统采用了频分多址(FDMA)和码分多址(CDMA)等多种激励编码方法</p>
+<p>频率编码是SSVEP脑机接口中应用最广泛的方法。还使用多频编码方法来增加类别的数量</p>
+<h3 id="缩短目标检测时间">3.缩短目标检测时间</h3>
+<p>减少目标检测时间：</p>
+<p>1 单次试验分类比试验平均效率高得多 （基于机器学习的单次试验分析）</p>
+<p>2 自适应方法可以减少目标检测时间</p>
+<p>3 优化的刺激呈现可以减少目标检测时间</p>
+<p>​ 一种直接的方法是减少刺激呈现中两次闪光之间的ISI持续时间</p>
+<p>​ 另一种方法是优化刺激编码方法</p>
+<h2 id="实际应用">4.3 实际应用</h2>
+<p>在实际的脑-机接口系统中需要解决以下问题：</p>
+<ol type="1">
+<li>易用性</li>
+<li>低成本的硬件和软件</li>
+<li>稳健的系统性能</li>
+</ol>
+<p>与其他不需要外界刺激的脑机接口相比，v-BCI和a-BCI系统在系统设计和实现方面提出了更大的挑战。</p>
+<ol type="1">
+<li><p>移动BCI平台的开发；</p></li>
+<li><p>减少疲劳的方法；</p></li>
+<li><p>异步系统控制的设计。</p></li>
+</ol>
+<p>总结了v-BCI和a-BCI系统的潜在应用。</p>
+<h3 id="移动系统设计">1 移动系统设计</h3>
+<p>移动脑-机接口平台技术可以在现实环境中实现和促进大量的脑-机接口应用。</p>
+<p>三个主要挑战：</p>
+<ol type="1">
+<li>移动脑机接口需要针对脑电设备、数据处理平台和刺激设备的移动硬件解决方案</li>
+<li>减少电极的数量</li>
+<li>系统需要能够解决EEG信号中的伪影问题 （新兴的移动脑成像(MOBI)技术可以帮助解决这个问题。）</li>
+</ol>
+<h3 id="减少疲劳">2 减少疲劳</h3>
+<p><code>精神疲劳</code>指的是由于长时间的认知活动而导致的暂时无法保持最佳认知表现。精神疲劳会导致不适和注意力下降，从而降低脑电信号的幅度</p>
+<p>目前，视觉疲劳是v-BCI系统的最大缺点之一，严重阻碍了其在现实生活中的应用。例如，已经提出了不同类型的刺激模式，例如高频刺激、高占空比刺激和基于图像的刺激，用于在基于SSVEP的BCI中保持稳健性能的同时减少视觉疲劳</p>
+<p>在另一项研究中，Honget 分别使用<span class="math inline">\(N200\)</span>(即运动开始VEP)和视觉<span class="math inline">\(P300\)</span>研究了两种v-BCI系统的疲劳效应。研究发现，<span class="math inline">\(N200\)</span>对重复试验引起的疲劳不敏感，而视觉<span class="math inline">\(P300\)</span>则表现出与视觉疲劳相关的显著波幅降低</p>
+<h3 id="异步系统设计">3 异步系统设计</h3>
+<p>大多数当前的<span class="math inline">\(v-BCI\)</span>和<span class="math inline">\(a-BCI\)</span>使用同步控制协议，其中控制周期由系统启动。然而，异步控制协议(其中用户对何时开始或停止使用系统做出自定进度的决定)更加灵活和自然.</p>
+<p>异步控制中的一个重要问题是检测空闲状态。解决方法：</p>
+<p>​ 首先，通过在刺激设计中加入额外的EEG特征，可以改善对空闲状态的检测。</p>
+<p>​ 然后 可以用于有效地检测非控制状态</p>
+<p>​ 其次，通过开发有效的计算方法来区分空闲和控制状态下的EEG信号，也可以改进空闲状态检测</p>
+<h3 id="临床应用">4 临床应用</h3>
+<p>由于具有ITR高、用户培训少等优点，v-BCI和a-BCI系统已被应用于许多临床应用，以帮助运动障碍患者与他们的环境进行沟通</p>
+<p>在系统使用过程中，大多数v-BCI系统依靠眼睛的肌肉控制来凝视目标。对于能够移动眼睛的患者(例如，脊髓损伤患者)，这些依赖凝视的系统为传统辅助设备(如眼球跟踪系统)提供了另一种解决方案。尽管目前依赖凝视的BCI显示出比眼球跟踪系统更低的通信速度，但它们有一些独特的特性，使它们对用户具有吸引力。<code>例如</code>，基于SSVEP的BCI可以有大量的类别，可以完全免校准</p>
+<p>对于完全闭锁的患者，只有独立的脑机接口系统才能满足他们的需求。典型的独立<span class="math inline">\(v-BCI\)</span>和<span class="math inline">\(a-BCI\)</span>系统包括使用选择性视觉注意的<span class="math inline">\(v-BCI\)</span>系统和使用选择性收听的<span class="math inline">\(a-BCI\)</span>系统。</p>
+<p>目前，有几个原因限制了v-BCI和a-BCI在临床上的应用。首先，传统的辅助技术，如眼球跟踪系统，可以提供比视线相关的BCI更有效的控制。第二，基于SCP和运动图像的与凝视无关的脑机接口为闭锁患者提供了另一种脑机接口解决方案。第三，完全闭锁的患者通常在学习如何使用脑机接口系统方面有困难。研究人员和临床医生需要共同努力，以促进v-BCI和a-BCI的发展，使其更适用于临床。</p>
+<h3 id="其它应用">5 其它应用</h3>
+<p>V-BCI和a-BCI系统在许多非临床应用中也有潜力。最近，几项研究证明了利用脑-机接口来改善人类行为的概念。</p>
+<p>例如，使用快速串行视觉呈现(RSVP)范式的P300BCI被用来改善人类在目标检测中的表现。其他非临床应用包括精神状态监测和视频游戏。通过解决上述挑战，v-BCI和a-BCI技术可以使更多的人群受益，无论他们是不是残疾患者。</p>
+<h2 id="结论">5. 结论</h2>
+<p>在建立和研究脑-机接口技术时，缺乏对潜在神经机制的知识仍然是一个挑战。</p>
+<p>在BCI技术能够有效、可靠和负担得起，使大量的人在日常生活中受益之前，还有很长的路要走。</p>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>综述</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>选择脑电图独立成分进行矫正的实用指南</title>
+    <url>/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.researchgate.net/publication/273779893_A_Practical_Guide_to_the_Selection_of_Independent_Components_of_the_Electroencephalogram_for_Artifact_Correction">论文链接</a></p>
+<h2 id="summary">0. Summary</h2>
+<p>本文综述了<span class="math inline">\(ICA\)</span>分离出的五种典型的脑电伪影(眨眼、眼跳、肌肉噪声、不良通道和罕见事件)，以及目前自动化方法提供的几种检测这些伪影的方法。</p>
+<span id="more"></span>
+<h2 id="research-objectives">1. Research Objective(s)</h2>
+<p>脑电信号中独立成分的选择；</p>
+<h2 id="background-problem-statement">2. Background / Problem Statement</h2>
+<h3 id="方法">2.1 方法</h3>
+<p>用 ICA 分离和减去独立的成分；这种分量减法被广泛用于从EEG记录中去除诸如眨眼或肌肉活动之类的伪影</p>
+<h3 id="常见伪影特征的特征说明">2.2 常见伪影特征的特征说明；</h3>
+<ol type="1">
+<li><p><strong>眼睛成分</strong></p>
+<p>特点：</p>
+<ol type="1">
+<li>最容易识别</li>
+<li>地形基本上平坦</li>
+<li>排在前十几成分中</li>
+</ol>
+<p><code>眨眼</code></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330101333947.png" alt="image-20210330101333947"></p>
+<p><code>水平眼动</code></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330105247161.png" alt="image-20210330105247161"><figcaption aria-hidden="true">image-20210330105247161</figcaption>
+</figure>
+<p><code>误认眼动</code></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330105259247.png" alt="image-20210330105259247"><figcaption aria-hidden="true">image-20210330105259247</figcaption>
+</figure></li>
+<li><p><strong>肌肉成分</strong></p>
+<p>​ 来自颈部、颌部和面部肌肉的强直性肌肉活动在电极帽边缘的电极上产生一种固定的活动。虽然受试者通常被要求坐着不动放松，但由于打哈欠或吞咽等原因导致的无法控制的姿势活动以及肌肉活动可能会发生，并被记录在脑电图中。</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330110627420.png" alt="image-20210330110627420"><figcaption aria-hidden="true">image-20210330110627420</figcaption>
+</figure></li>
+<li><p><strong>坏通道</strong></p></li>
+</ol>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330110923783.png" alt="image-20210330110923783"><figcaption aria-hidden="true">image-20210330110923783</figcaption>
+</figure>
+<ol start="4" type="1">
+<li><p><strong>罕见事件</strong></p>
+<p>B：事件发生在单个电极上</p>
+<p>C: 事件发生在多个电极上</p></li>
+</ol>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/28/Paper/%E9%80%89%E6%8B%A9%E8%84%91%E7%94%B5%E5%9B%BE%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E8%BF%9B%E8%A1%8C%E7%9F%AB%E6%AD%A3%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/image-20210330120331346.png" alt="image-20210330120331346"><figcaption aria-hidden="true">image-20210330120331346</figcaption>
+</figure>
+<ol start="5" type="1">
+<li><strong>模棱两可的成分</strong></li>
+</ol>
+<p>有的成分不能明确区分，反映信号的混合，应小心处理。见1-3最后图像。</p>
+<h3 id="sasica插件">2.3 SASICA插件</h3>
+<p><a href="https://github.com/dnacombo/SASICA">插件地址</a></p>
+<p>用于伪像校正的脑电图独立分量的半自动选择</p>
+<p><a href="https://sccn.ucsd.edu/wiki/EEGLAB_Plugins">使用说明</a></p>
+<h3 id="其他插件">2.4 其他插件</h3>
+<ol type="1">
+<li>FETHER(全自动统计阈值脑电伪影剔除）</li>
+<li>ADJUST(基于时空特征联合使用的脑电伪迹自动检测）</li>
+<li>MARA(多重伪像去除算法)</li>
+<li>CORRMAP：专门设计用于通过使用IC地图和用户选择的模板地图之间的相关程度来检测眼睛和心脏伪影的工具</li>
+</ol>
+<h2 id="methods">3. Method(s)</h2>
+<h3 id="数据集预处理程序">3.1 数据集预处理程序：</h3>
+<ol type="1">
+<li>目测原始信号以排除数据的不良部分，</li>
+<li>如表2所述的重新参考、下采样和滤波，</li>
+<li>历元，</li>
+<li>前刺激基线去除，</li>
+<li>使用扩展Infomax算法(来自EEGLAB)的ICA。</li>
+</ol>
+<h3 id="任务和测量">3.2 任务和测量</h3>
+<ul>
+<li><p>Tools&gt;Select Components by MAP</p></li>
+<li><p>检查每个组件以决定是否应该拒绝它</p></li>
+<li><p>丢弃给定组件的“理由”：</p>
+<p>“眨眼”、“扫视”、“肌肉”、“孤立通道”、“少数试验”(用于识别罕见事件)或“其他”中的任何一个。</p></li>
+<li><p>三个专家们独立对所有训练数据集进行评级后，一起修改评级，直到达成共识。无法达成共识的组成部分被归类为“其他”。</p></li>
+<li><p>两位专家(包括作者MC)使用相同的程序检查了13个测试数据集的920个组成部分，并一致将其分类</p></li>
+</ul>
+<h2 id="evaluation">4. Evaluation</h2>
+<h2 id="conclusion">5. Conclusion</h2>
+<p>到目前为止，ICA并不是唯一可用于校正伪迹的方法。许多其他方法允许在丢弃伪迹的同时潜在地保留神经信号。这些方法包括<code>低通滤波</code>、<code>回归方法</code>、<code>主成分分析</code>(Ille等人，2002；McMenamin等人，2009；Wallstrom等人，2004)、<code>信号空间投影</code>(Uusitalo和Ilmoniemi，1997)或<code>典型相关分析</code>(Clercq等人，2006)。但是ICA是一种强大的方法，它允许同时校正几种类型的伪迹。它用于去除EEG中的伪影，也用于去除脑磁图(MEG)数据中的伪影(Barbati等人，2004年；Parra等人，2005年)，以及伴随的功能性磁共振成像在EEG中产生的强伪影(Mantini等人，2007年)。</p>
+<p>事实证明，它在矫正<code>眼部</code>(Jung等人，2000b)、<code>心脏</code>(Campos Viola等人，2009年)、<code>肌肉</code>(Creso-Garcia等人，2008年；McMenamin等人，2010年；Olbrich等人，2011年)或<code>发作性伪影</code>(Urrestarazu等人，2004年)方面是有用的。</p>
+<p>ICA的也有缺陷。因此，如何正确地对伪迹进行分类是很重要的。</p>
+<h2 id="notes">6. Notes</h2>
+<ol type="1">
+<li>EEG信号伪迹去除时发生的 I型和II型错误
+<ul>
+<li>I 丢失待检测的伪迹</li>
+<li>II 错误分类非伪迹成分</li>
+</ul></li>
+</ol>
+<h2 id="references">References</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>伪迹</tag>
       </tags>
   </entry>
   <entry>
@@ -1242,19 +1445,6 @@ GFP = \sqrt{\sum_{i=1}^{N} (u_i - \hat{u})^2/N}
       </tags>
   </entry>
   <entry>
-    <title>Day6source analysis</title>
-    <url>/2021/03/22/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day6source-analysis/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>脑电信号的溯源分析</p>
-<p><span id="more"></span></p>
-]]></content>
-      <categories>
-        <category>脑电</category>
-      </categories>
-      <tags>
-        <tag>source-analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Day5night</title>
     <url>/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>关于傅里叶变换，短时傅里叶变换，小波变换的优缺点及应用，</p>
@@ -1334,6 +1524,33 @@ GFP = \sqrt{\sum_{i=1}^{N} (u_i - \hat{u})^2/N}
       </categories>
       <tags>
         <tag>tensorflow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Day6source analysis</title>
+    <url>/2021/03/22/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day6source-analysis/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>脑电信号的溯源分析</p>
+<p><span id="more"></span></p>
+]]></content>
+      <categories>
+        <category>脑电</category>
+      </categories>
+      <tags>
+        <tag>source-analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>T检验</title>
+    <url>/2021/03/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/T%E6%A3%80%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="什么是t检验">什么是T检验？</h2>
+<p>T检验是假设检验的一种，又叫student t检验（Student’s t test），主要用于样本含量较小（例如n&lt;30），总体标准差σ未知的正态分布资料。 T检验用于检验两个总体的均值差异是否显著。</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>数理统计</category>
+      </categories>
+      <tags>
+        <tag>检验</tag>
       </tags>
   </entry>
   <entry>
@@ -1432,20 +1649,6 @@ S_{YY}^{-1}S_{YX}S_{XX}^{-1}S_{XY}b=\lambda^2b
       </categories>
       <tags>
         <tag>降维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>T检验</title>
-    <url>/2021/03/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/T%E6%A3%80%E9%AA%8C/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="什么是t检验">什么是T检验？</h2>
-<p>T检验是假设检验的一种，又叫student t检验（Student’s t test），主要用于样本含量较小（例如n&lt;30），总体标准差σ未知的正态分布资料。 T检验用于检验两个总体的均值差异是否显著。</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>数理统计</category>
-      </categories>
-      <tags>
-        <tag>检验</tag>
       </tags>
   </entry>
   <entry>
@@ -1674,298 +1877,10 @@ p(w|D) = \frac{p(D|w)p(w)}{p(D)}
       </tags>
   </entry>
   <entry>
-    <title>基于黎曼几何的新一代脑机接口</title>
-    <url>/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
-<p>通用<span class="math inline">\(MDM\)</span>距离。用黎曼平均代替算术平均。用黎曼距离代替算术距离，更好的处理<span class="math inline">\(SPD\)</span>矩阵。</p>
-<span id="more"></span>
-<h2 id="研究目的">1. 研究目的</h2>
-<p>提出新一代基于黎曼几何的脑机接口处理框架</p>
-<h2 id="背景与问题说明">2. 背景与问题说明</h2>
-<h2 id="背景">2.1背景</h2>
-<ul>
-<li>脑电信号的处理和分类算法，主要是<code>脑电逆解</code>与<code>对角化方法</code>,比如：<span class="math inline">\(CSP\)</span>，<span class="math inline">\(CCA\)</span>,<span class="math inline">\(ICA\)</span>，以及变种和组合。基于这些工具的新方法只能带来适度的改进，并不能显著提高可靠性。</li>
-<li>目前三种主要的脑-机接口模式，即运动图像(MI)、稳态诱发电位(<span class="math inline">\(SSEP\)</span>),<span class="math inline">\(P300\)</span>中的每一种都被专用的预处理、信号处理和分类工具处理。</li>
-<li>现有的范式分为两类：一类遵循“硬机器学习(<span class="math inline">\(hard machine-learning\)</span>)”方法，另一类使用“空间滤波”来提高信噪比，然后使用简单的分类算法。
-<ul>
-<li>硬机器学习,泛化能力好，但是需要大量数据以及计算复杂</li>
-<li>空间过滤的情况正好相反，其糟糕的泛化能力可以通过快速训练和较低的计算成本来弥补。</li>
-</ul></li>
-<li>因此，有人建议将预处理、特征提取和分类不作为独立的过程，而是一个整体</li>
-</ul>
-<h2 id="脑-机接口处理和分类应具备特点">2.2 脑-机接口处理和分类应具备特点：</h2>
-<p>精确、可靠、泛化、快速学习、通用、算法简单、计算效率高、多用户、</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405162412788.png"></p>
-<p>​ 新一代脑机接口的概念</p>
-<h2 id="方法">3. 方法</h2>
-<p>假设：$x(t)R^N $ 是N个电极的零均值脑电时间向量</p>
-<p>​ <span class="math inline">\(X_z\in R^{N.T}\)</span> 是T个样本组成的实验，带通滤波后也被认为是零均值的</p>
-<p>​ 属于类z的样本协方差矩阵为 <span class="math display">\[
-C_z=1/(T-1)(X_zX_z^T)
-\]</span> ​ 假设为多元高斯分布，则Wishart矩阵Σ是数据分布的唯一参数，假设每个类别都是唯一的，如下所示</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405165117009.png"></p>
-<h2 id="分类框架">3.1 分类框架</h2>
-<p>在脑-机接口操作中，我们有许多带标签的训练数据，属于类z <span class="math inline">\(\in\)</span> {1-Z}。分类就是将无标签的实验x分配给z中的一类。通过计算该样本与z类的每一个平均样本协方差<span class="math inline">\(M_1,M_2,...M_Z\)</span> ,将被标记的样本分给 平均值最接近的类。</p>
-<p>因此需要一个适当的度量来估计基于已标记试验的类别均值，并评估未标记试验与均值之间的距离</p>
-<hr>
-<p><span class="math display">\[Universal MDM BCI Classifier (3) \]</span></p>
-<ol type="1">
-<li><p>给定每个类<span class="math inline">\(z\in{1…Z}\)</span>多个训练试验<span class="math inline">\(X_z\)</span>进行适当的预处理，估计适当形式的协方差矩阵<span class="math inline">\(C_z\)</span>，并估计其<span class="math inline">\(Z\)</span>类均值<span class="math inline">\(M_1...M_Z.\)</span></p></li>
-<li><p>对于未知试验X进行相同的预处理，估计相同形式的协方差矩阵C，并根据</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405170848138.png"> （3）</p>
-<p>将其分配给类别k。即通过距离<span class="math inline">\(\delta_R\)</span>确定最接近的协方差矩阵。</p></li>
-</ol>
-<hr>
-<p>最小平均距离分类器</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405171634755.png"></p>
-<p>以2x2 的协方差矩阵为例，2x2协方差矩阵有三个非冗余元素，即两个过程<span class="math inline">\(x_1(t)\)</span>和<span class="math inline">\(x_2(t)\)</span>的方差及其协方差。每个协方差矩阵表示为3D空间中的一个点。A类的训练(标记)试验用球体表示，B类用金字塔表示。集合平均值分别为<span class="math inline">\(M_A\)</span>和<span class="math inline">\(M_B\)</span> ,未分类的协方差矩阵<span class="math inline">\(C\)</span>。通过<span class="math inline">\(\delta_R\)</span>将其分给距离最近的类。</p>
-<p><code>将平均值定义为算术平均值，将距离定义为欧几里得距离会产生非常差的分类精度</code></p>
-<p>黎曼几何提供了处理对称正定矩阵(<span class="math inline">\(SPD\)</span>)的自然框架，结构化协方差矩阵就是这种类型。根据数据定义适当的嵌入相关信息的<span class="math inline">\(SPD\)</span>矩阵是我们的工作，将电生理学知识与数学形式联系起来。</p>
-<h2 id="智能初始化跨被试和跨会话泛化">3.2 智能初始化(跨被试和跨会话泛化)</h2>
-<p>脑-机接口处理链应该既具有快速的自适应能力，又具有良好的跨会话和跨主题的泛化能力。与最先进的方法相比，这就是黎曼框架被证明具有优势的地方。</p>
-<p>如何在第一次会话之后以最佳方式混合跨主题和跨会话初始化，以及应该使用数据库的哪一部分来初始化给定用户的分类器，这些在很大程度上都是未探索的主题，例如，两个权重之和为1。换句话说，将这两个分类器组合起来产生一个新的分类器。通用分类器在会话开始时的权重为1，并且随着会话的进行，权重越来越小。对于天真的用户，单个分类器在会话开始时的权重为零。对于可以获得来自先前会话的数据的用户，初始权重可以与训练数据量成比例地提高。在任何情况下，单个分类器的权重都会随着会话的进行而上升，并在会话结束时接近1。无论有没有监督，这两个平行的分类器应该如何随着时间的推移而进化，这是一个有趣而不是微不足道的研究课题。</p>
-<h2 id="自适应">3.3 自适应</h2>
-<p>在给定初始值的情况下，我们希望学习单个分类参数，以达到最佳性能，并适应环境变化、心理状态变化和任何其他可能影响分类性能的中间条件。我们也希望尽快做到这一点。为了做到这一点，我们实际上建立了两个并行分类<span class="math inline">\(MDM\)</span>算法，一个是通用的，唯一基于迁移学习(即数据库)，另一个是个体的，后者是有监督的或无监督的。我们这里考虑的是有监督的情况。分类器输出将由两个分类器的加权和给出。</p>
-<p>因此，与其他类型的分类器不同的是，多个<span class="math inline">\(MDM\)</span>分类器可以通过组合多个距离方便地组合在一起，保证了分类输出的稳定性和一致性。</p>
-<h2 id="运动想象的分类">3.4 运动想象的分类</h2>
-<p>如(1)中定义的样本协方差矩阵仅包含空间信息。对角线元素保持每个电极上信号的方差，而非对角线元素保持所有电极对之间的协方差。</p>
-<p>因此，对运动想象(MI)试验进行分类就足够了，因为不同类别的MI试验确实产生了不同的(头皮)空间模式，这种模式完全嵌入到样本协方差矩阵的结构中。</p>
-<p>对于MI，我们<code>不需要扩展数据的定义</code>，只需设置 <span class="math display">\[
-X_z^{MI}=X_z              \\    (4)
-\]</span> 在基于MI的脑机接口的情况下，有和运动想象任务一样多的class(包括相关的训练试验)。如果需要，可以添加无运动图像类。唯一预处理步骤是对运动图像进行带通滤波 (例如，8-30 Hz)。然后，<span class="math inline">\(MDM\)</span>算法(3)使用按照(1)的协方差矩阵的规则形式来应用。</p>
-<p>广泛的测试已经证明，<span class="math inline">\(MDM\)</span>方法对于运动图像数据是可靠、稳健和准确的。</p>
-<h2 id="事件相关电位的分类">3.5 事件相关电位的分类</h2>
-<p>对于基于事件相关电位的脑-机接口，由于事件相关电位的特征幅度比背景脑电信号小得多，所以标准样本协方差矩阵的效率不高，因此单个试验的协方差矩阵所包含的空间结构<code>不能提供足够</code>的分类信息。事实上，协方差矩阵根本<code>不包含任何时间信息</code>，如果我们考虑随机洗牌试验<span class="math inline">\(X_z\)</span>的样本，样本协方差矩阵(1)不变，这是很容易实现的.</p>
-<p>然而，<span class="math inline">\(ERP\)</span>有一个特定的<code>时间特征</code>；正是这个特征将一个<span class="math inline">\(ERP\)</span>与另一个<span class="math inline">\(ERP\)</span>区分开来，或者将ERP与没有<span class="math inline">\(ERP\)</span>区分开来，所以这是我们需要提取并嵌入到“协方差矩阵”中的信息。为此，让我们再次考虑一系列实验<span class="math inline">\(X_z\)</span>，z属于类{1...Z}。在这种情况下，每个类对应一个不同的<span class="math inline">\(ERP\)</span>，并且通常添加一个非<span class="math inline">\(ERP\)</span>类。例如，在基于<span class="math inline">\(P300\)</span>的<span class="math inline">\(BCI\)</span>中，一个类是包含<span class="math inline">\(P300\)</span>的目标类，另一个是非目标类(Z=2)。现在让我们来构建超级实验</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406095159507.png"></p>
-<p>其中，<span class="math inline">\(\hat{X}_{}(1)...\hat{X}_{}(Z)\)</span>是在训练数据、用户的先前会话或甚至在每个类的其他用户的数据库(迁移学习)上获得的总平均<span class="math inline">\(ERP\)</span>；我们将这些超平均<span class="math inline">\(ERP\)</span>称为时间原型。我们为每个类指定一个原型。请注意，我们在括号中引入了索引(Z)，以突出显示与实验<span class="math inline">\(X_z\)</span>的第Z个训练的不同之处。现在，对于训练试验<span class="math inline">\(X_z\)</span>，超级试验的协方差矩阵具有以下块结构：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406101436853.png"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406101447299.png"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406101459427.png"></p>
-<p>(7)中的<span class="math inline">\(N*N\)</span>对角块对于分类都没有用处，因为它们基于固定的原型，不会在一次又一次的试验中改变</p>
-<p><span class="math inline">\(X_zX_z^T\)</span>该矩阵包含试验的空间信息，如我们所说，它对分类没有什么用处。</p>
-<p>(6)中的试验和Z原型之间的交叉协方差，即这些块包含时间协方差。请注意，现在调整试验样本确实会扰乱这些协方差。<code>这些块包含用于分类的相关信息</code>，因为只有在试验类别与原型类别重合的块中，交叉协方差才会很大。根据(6)在训练数据上构造的“超”协方差矩阵<span class="math inline">\(C_z\)</span>的平均值，我们用<span class="math inline">\(M_1 ...M_z\)</span>表示，具有与<span class="math inline">\(C_z\)</span>相同的结构。然后，对于未标记的试验<span class="math inline">\(X\)</span>，我们根据(5)构造超级试验，并且根据(6)构造相应的协方差矩阵<span class="math inline">\(C\)</span>，其中在两个试验中X替换<span class="math inline">\(X_z\)</span>。然后，像以前一样使用<span class="math inline">\(MDM\)</span>(3)进行分类。唯一需要的<code>预处理</code>是过滤包含<span class="math inline">\(ERP\)</span>的频带通区中的数据，通常为<span class="math inline">\(1-16 Hz\)</span>。通带区域的准确选择并不是<span class="math inline">\(ERP\)</span>分类的关键。我们实验室的广泛测试表明，<code>该方法是可靠和健壮的，比最新的跨被试和跨会话的方法具有更好的通用性，并且易于快速适应。</code></p>
-<p>值得一提的是，我们通常只处理<span class="math inline">\(ERP\)</span>的存在和不存在，就像基于<span class="math inline">\(P300\)</span>的BCI的情况一样，其中只有两类，目标类(<span class="math inline">\(P300\)</span>存在)和非目标类(<span class="math inline">\(P300\)</span>非存在)。在这种情况下，可以使用由下式给出的SuperTrial(5)的简化版本</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406104149833.png"></p>
-<p>其中<span class="math inline">\({\over{X}}_{(+)}^{T}\)</span>是P300(目标类)的时间原型，其中“+”表示目标类，“-”表示非目标类。对于训练试验<span class="math inline">\(X_z\)</span>，超级试验的协方差矩阵现在具有更简单的块结构：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406104837860.png"></p>
-<p>同理 <span class="math inline">\(X_zX_z^T\)</span> 和 <span class="math inline">\({\over{X}}_{(+)}^{}{\over{X}}_{(+)}^{T}\)</span> 对分类无用。</p>
-<p>如果试验与目标有关，原型和试验<span class="math inline">\({\hat{X}}_{(+)}^{} X_z^T\)</span>之间的时间协方差将很大，如果不与目标有关，则时间协方差较小，因此(10)足以有效地对目标试验和非目标试验进行分类。</p>
-<p>最后，请注意，在基于<span class="math inline">\(P300\)</span>的<span class="math inline">\(BCI\)</span>中，我们在几次<span class="math inline">\(P300\)</span>试验之后进行分类，也就是说，在所有元素重复几次闪烁之后,分类要么基于重复的累积距离和，要么基于通过重复计算的平均试验获得的单个距离，这两种方法是等价的。</p>
-<h2 id="稳态诱发电位的分类">3.6 稳态诱发电位的分类</h2>
-<p>同样的<span class="math inline">\(MDM\)</span>方法也可以用于<span class="math inline">\(SSEP\)</span>数据分类。这里我们以稳态视觉诱发电位(<span class="math inline">\(SSVEP\)</span>)为例。这里的Z类代表F个不同的闪烁频率，如果需要，还可以添加一个无闪烁类。在这种情况下，相关的信息是在视觉皮层中产生振荡的频率的多样性，而不同频率的空间模式可能是相同的。为了更好地利用频率分集，我们构造了超级实验。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406112949621.png"></p>
-<p>其中，<span class="math inline">\(X_(f)^T\)</span>是在带通区中针对闪烁频率 f<span class="math inline">\(\in\)</span> {1，…F}滤波的试验。更简单地说，人们可以使用傅里叶共谱(Bloomfield，2000)来获得准确的闪烁频率。超试(11)的协方差矩阵具有如下块结构：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406113726132.png"></p>
-<p>N×N对角线块保存F个频率的协方差矩阵。当将未标记的试验与不同类别的平均值进行比较时，只有以与试验的频率相对应的频率为索引的块的平均值才会具有较大的值。因此，<code>对角块将对分类有用</code>。另一方面，非对角线块保留了频率之间的交叉协方差，因此意义不是很大。我们可以将它们归零，因为生成的矩阵</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406114606970.png"></p>
-<p>仍然是对称正定的。给定训练数据，我们估计类均值<span class="math inline">\(M_1,...M_z\)</span>。对于未标记的轨迹<span class="math inline">\(X\)</span>，我们使用(11)计算超级轨迹，其中<span class="math inline">\(X\)</span>替换<span class="math inline">\(X_z\)</span>，然后使用(13)计算协方差 矩阵<span class="math inline">\(C\)</span>。最后，我们再次使用算法(3)来分配无标签试验。所需的<code>唯一预处理</code>是对对应于<span class="math inline">\(SSVEP\)</span>闪烁频率的频率中的数据进行滤波，或者等效地估计<span class="math inline">\(F\)</span>个闪烁频率处的傅立叶共谱。请注意，如果<span class="math inline">\(SSVEP\)</span>的相位是已知的，这要归功于精确的数据标记，就像Jia等人所做的那样。(2011)，或者使用编码调制(Bin等人，2011)，人们可以利用频率和时间信息，构建一个超级试验，混合这里用于<span class="math inline">\(ERP\)</span>(5)和<span class="math inline">\(SSVEP\)</span>(11)的策略。</p>
-<h2 id="多用户设置中的分类">3.7 多用户设置中的分类</h2>
-<p>多用户环境中的分类最后，让我们看看所提出的框架如何容易地扩展到多用户的情况。在多用户<span class="math inline">\(BCI\)</span>中，多个用户同时使用同一界面进行交互(Bonnet、Lotte和Lécuyer；袁等人，2013年；Schultze-Kraft等人，2013年)。这种设置的有趣之处在于，在理论上，如果有足够的受试者数量，我们可以在单次试验中获得100%准确率的<span class="math inline">\(BCI\)</span>；我们可以在单个试验的受试者之间做同样的事情，而不是对所有试验的数据或分类分数进行平均。我们实际上可以走得更远，不仅可以利用众多的试验，还可以利用它们在受试者之间预期的同步性。让我们以基于<span class="math inline">\(P300\)</span>的<span class="math inline">\(BCI\)</span>为例。其他模式的发展与此类似。正如我们已经看到的，对于使用基于<span class="math inline">\(P300\)</span>的脑-机接口的单个受试者，超级试验有形式(9)。对于多用户(<span class="math inline">\(MU\)</span>)情况，z <span class="math inline">\(\in\)</span> {+，-}(其中+是目标类，-是非目标类)的试验由下式给出</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406144824536.png"></p>
-<p>其中M是受试者的数量，N是EEG传感器的数量。请注意，对于(9)中的单用户情况，时间原型仍然只是一个，因为它同样适用于所有用户。示例情况M=2的(14)的协方差矩阵具有形式</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406144904066.png"></p>
-<p>块<span class="math inline">\(\hat{X}_{(+)}\hat{X}_{(+)}^T\in R^{N \times N}\)</span> 是时间原型的协方差矩阵。这在不同的试验中不会改变，没有分类的价值。</p>
-<p>非对角线块<span class="math inline">\(X_{1z}\hat{X}_{(+)}^T\)</span>和<span class="math inline">\(X_{2z}\hat{X}_{(+)}^T\)</span>(或它们的转置)保持了受试者的试验和原型之间的协方差，并与(6)中的分类相关；唯一的区别是，不是只有一个这样的协方差，现在我们<code>有两个协方差，相应地增加了分类能力</code>。</p>
-<p>此外，现在考虑非对角线区块<span class="math inline">\(X_{2z}X_{(1z)}^T\)</span>。(或它的转置<span class="math inline">\(X_{1z}X_{(2z)}^T\)</span>)保持了两个受试者试验之间的协方差；由于<span class="math inline">\(P300\)</span>反应是同步的，所以这个协方差只对目标试验是大的，因此它持有一些对<code>分类有用</code>的信息。</p>
-<p>请注意，基于(15)的分类并不等同于简单地将每个人的数据相加或组合。这就是我们将(15)的<span class="math inline">\(X_{1z}X_{(2z)}^T\)</span>和<span class="math inline">\(X_{2z}X_{(1z)}^T\)</span>的非对角线块归零所得到的结果。在这里，我们实际上还利用了<span class="math inline">\(ERP\)</span>响应的同步性和两个受试者的同步响应的协方差。这同样适用于两个以上的用户，其中所有成对的跨主题协方差都可以被利用。因此，目前的<span class="math inline">\(Riamannian\)</span>框架是一种真正的多用户方法，类似于联合盲源分离(Anderson等人，2012年；Congedo等人，2012年；Li等人，2009年；Vía等人，2011年)。</p>
-<h2 id="评价">4. 评价</h2>
-<h2 id="运动图像脑机接口数据">4.1 运动图像脑机接口数据</h2>
-<p>我们已经将MDM方法应用于格拉茨理工大学知识发现研究所(脑机接口实验室)提供的<span class="math inline">\(BCI\)</span>竞赛IV(2008)的数据集2a。该数据集包括9名受试者，这些受试者参与了一个四类(Z=4)的基于两次运动想象的脑-机接口实验。这四门课分别是右手、左手、脚、舌头。脑电数据由集中在感觉运动区及其周围的22个电极采集。试验在8-30 Hz范围内进行带通滤波。每项试验中的两秒钟数据用于分析。我们既考虑了每个类别相对于其他类别的二进制分类-这是最先进的公共空间模式(<span class="math inline">\(CSP\)</span>)做得更好的地方(Lotte等人，2007年)-也考虑了真正的多类别情况，其中四个类别被一起处理。<span class="math inline">\(MDM\)</span>处理二进制和多类情况的方式都一样好。</p>
-<p>我们展示了离线分析的结果，以将<span class="math inline">\(MDM\)</span>与最先进的竞争对手进行比较。对于<code>二值分类</code>，我们比较了<span class="math inline">\(MDM\)</span>和<span class="math inline">\(CSP+LDA\)</span>(线性判别分析)分类算法(Lotte and Guan，2011)2.保留了三对<span class="math inline">\(CSP\)</span>滤波器。这是使用此方法设置的唯一参数。对于<code>多类分类</code>，我们将<span class="math inline">\(MDM\)</span>与Grosse-Wentrup和Buss(2008)提出的<span class="math inline">\(BSS\)</span>方法进行了比较。他们的方法包括四类协方差矩阵的近似联合对角化(<span class="math inline">\(AJD\)</span>)、使用互信息准则选择八个最佳滤波器和稀疏<span class="math inline">\(Logistic\)</span>回归(LR)分类器。对于这种方法，还必须设置过滤器的数量。另一方面，<span class="math inline">\(MDM\)</span>方法是完全自动的。结果与跨会话性能有关，即算法在一个会话上进行训练，在另一个会话上进行测试。与同一会话中的交叉验证相比，这是一个更困难的试验台。</p>
-<p>结果根据所有受试者的准确率(正确分类试验的百分比)，两次会话，一次对另一次，所有方法的结果如表1所示。机会水平为25%。我们统计比较了<span class="math inline">\(MDM\)</span>和最新竞争对手在正确率分类试验(准确率)方面的平均表现。对于多类别分类，与<span class="math inline">\(bss+LR\)</span>方法(配对t检验(17)=1.9p=0.074，双尾)相比，<span class="math inline">\(MDM\)</span>被证明在18个会话的平均值上略微领先。对于所有二分类的平均值，<span class="math inline">\(MDM\)</span>和<span class="math inline">\(CSP+LDA\)</span>方法之间没有差异。</p>
-<p>在Gouy-Pailler等人中。(2010)在试验过程中，我们利用<span class="math inline">\(ERD/ERS\)</span>的非平稳性，开发了一种用于运动图像分类的盲源分离(<span class="math inline">\(BSS\)</span>)方法。Grosse-Wentrup和Buss(2008)提出的方法是我们研究的起点。Gouy-Pailler等人发展的非平稳性推广。(2010)得到的是估计试验内连续时间间隔中的几个协方差矩阵，并同时对角化所有类别的所有这些矩阵。结果表明，该方法优于Grosse-Wentrup和Buss(2008)的方法。Gouy-Pailler等人获得的平均值(SD)。(2010)的交叉精确度为63.8(12.28)。这一平均值与表1中报告的平均值直接相当，并不明显优于<span class="math inline">\(MDM\)</span>多分类。我们的结论是，<span class="math inline">\(MI\)</span>数据的<span class="math inline">\(MDM\)</span>的性能与文献中发现的最复杂的方法一样好，但它是完全自动的(不需要设置参数)，并且尊重下一代<span class="math inline">\(BCI\)</span>的要求。</p>
-<p><code>MDM方法的性能对于表现良好的受试者或多或少是相等的，而对于表现较差的受试者则更好(参见图表下角的点的位置)。这种行为源于黎曼度量的健壮性(附录A)。</code></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406151240842.png"></p>
-<h2 id="p300-bci数据">4.2 P300 BCI数据</h2>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406153008264.png"></p>
-<h2 id="离线结果经典训练-测试模式">4.3 离线结果：“经典”训练-测试模式</h2>
-<p>配对t检验表明，<span class="math inline">\(MDM\)</span>法测得的平均<span class="math inline">\(AUC\)</span>值明显优于<span class="math inline">\(SWLDA\)</span>法(t(55)=3.377，p=0.001)，与XDAWN法测得的平均AUC值相当。</p>
-<h2 id="离线结果跨主体初始化">4.4 离线结果：跨主体初始化</h2>
-<p>结果表明，<span class="math inline">\(MDM\)</span>获得的平均<span class="math inline">\(AUC\)</span>值略高于<span class="math inline">\(SWLDA\)</span>(t(55)=1.676，p=0.099)和<span class="math inline">\(XDAWN\)</span>(t(55)=1.755，p=0.085)的平均<span class="math inline">\(AUC\)</span>值。</p>
-<h2 id="离线结果跨会话初始化">4.5 离线结果：跨会话初始化</h2>
-<p>!(4.基于黎曼几何的新一代脑机接口/image-20210406152700662.png)</p>
-<h2 id="在线结果适应">4.6 在线结果：适应</h2>
-<p>这些结果表明，我们的自适应系统在没有校准的情况下，性能相当于传统第一次会话上的有校准的系统。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406152625863.png"></p>
-<h2 id="稳态视觉诱发电位数据">4.7 稳态视觉诱发电位数据</h2>
-<p>我们使用8次交叉验证程序应用MDM，并使用1s、2s、3s、4s、5s和6s作为数据段持续时间。从1s到6s的平均分类正确率分别为：53.125%、75%、87.5%、93.75%、100%、100%。</p>
-<h2 id="结论">5. 结论</h2>
-<p>基于这些结果，我们得出结论：<span class="math inline">\(MDM\)</span>分类算法确实普遍具有<code>快速学习</code>能力，并且易于<code>转移学习</code>。此外，我们已经测试的自适应分类方案在第一次大脑入侵者(游戏）的几个级别之后已经被证明是有效的；然后，平均不到两次重复就足以摧毁目标(图7)，与最先进的技术相比，这是一个显著的结果。应该记住，这一结果在完全适应模式下是可能的，这要归功于大脑入侵者的监督操作模式。即使将这种自适应链直接转换到<span class="math inline">\(p300\)</span>拼写器上也是可能的，但仍有一些困难需要解决。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406152017995.png"></p>
-<p>不管协方差矩阵是如何定义的，我们使用黎曼框架提出的分类算法对于我们所考虑的<code>所有三种BCI模态都是相同的</code>。此外，它仍然非常<code>简单</code>。请注意，在任何时候都没有要调优的参数；它都是<code>确定</code>性的，完全没有参数。这与复杂的机器学习方法(如支持向量机)形成对比，在支持向量机中，一个或多个参数必须例如通过交叉验证来学习(Lotte等人，2007年)。出于这个原因，我们声称我们所描绘的战略是真正普遍的。事实上<code>，MDM分类的简单性、快速学习的能力(几乎不需要训练数据)以及良好的跨学科和跨会话的泛化，使这一策略成为构建新一代BCI的非常好的候选者。</code></p>
-<p>这样的BCI将使用远程海量数据库进行智能初始化，并将在使用的第一分钟快速而有效地适应用户。它们将是可靠的，坚固的，并将保持良好的性能。在分析和尝试了文献中可以找到的几种策略之后，我们认为黎曼框架是一个很好的候选者，因为它是唯一具有我们在引言中列出的所有必要性质(A)-h)的策略。</p>
-<p>在Barachant等人中。(2012A)我们已经证明，使用黎曼框架映射切线空间中的协方差矩阵，并在切线空间中应用特征选择+<span class="math inline">\(LDA\)</span>，运动图像分类可以比表1中所示的结果有显著改善。在Barachant等人中。(2012B)使用嵌入黎曼核的支持向量机。这两种方法的性能优于最先进的方法，但它们需要调整参数。在Barachant等人中。(2010b)我们映射了切线空间中的协方差矩阵，应用了点的监督投影(带自动正则化的正则化<span class="math inline">\(LDA\)</span>)以增加类可分性，然后将数据重新映射到<span class="math inline">\(MDM\)</span>应用的黎曼流形中。这种方法不需要调优参数，但与简单的MDM相比，它仍然更加复杂。因此，在黎曼框架中使用更复杂的分类方法，可能会找到一种超越现有技术的方法，但只能以牺牲BCI的人体工程学要求为代价。类似的结果也适用于其他脑机接口模式。在我们看来，简单的<span class="math inline">\(MDM\)</span>方法是准确性、稳健性和人体工程学之间的一种很好的折衷，因此可以考虑作为一个新的标准的起点，以便建立一个适合大范围脑-机接口应用的新标准。进一步的研究将在基于黎曼几何的分类方法的复杂性和该方法在实际在线操作中的有效性/可用性之间找到最佳的权衡。选择成为<span class="math inline">\(BCI\)</span>数据基准的方法不需要像<span class="math inline">\(MDM\)</span>那样调整参数，并且应该保持快速学习和良好的转移学习能力。</p>
-<p>请注意，我们在(5)和(9)中定义的时间原型可以以任何合理的方式定义，也就是说，它们可以由模型、期望、猜测等给出。这种构造嵌入空间和时间信息的协方差矩阵的方法非常灵活，因此我们相信它将在其他应用和其他研究领域中有用。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406153248039.png"></p>
-<p>形式(13)的协方差矩阵的图像。对执行<span class="math inline">\(SSVEP\)</span>实验的对象计算协方差矩阵。数据采集在6个电极上。矩阵的每个对角块是数据的6x6协方差矩阵，该矩阵围绕用于刺激的三个闪烁频率(12、15和20 Hz)进行大幅带通滤波。图中表示的四个矩阵是“休息”类(无闪烁)和具有三个闪烁频率的试验的总平均值。请注意，对于每个类别，只有与实际闪烁频率相对应的块具有较高的值。对于非<span class="math inline">\(SSVEP\)</span>(<span class="math inline">\(REST\)</span>)数据，没有一个区块具有高值；这足以对属于四类中的任何一类的油井试验进行分类。</p>
-<h2 id="notes">6. Notes</h2>
-<h2 id="references">References</h2>
+    <title>正交编码与伪随机序列</title>
+    <url>/2021/04/15/%E9%80%9A%E4%BF%A1/%E6%AD%A3%E4%BA%A4%E7%BC%96%E7%A0%81%E4%B8%8E%E4%BC%AA%E9%9A%8F%E6%9C%BA%E5%BA%8F%E5%88%97/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>
 ]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>黎曼几何</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>训练还是不训练？基于SSVEP的脑机接口特征提取方法训练研究综述</title>
-    <url>/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
-<span id="more"></span>
-<h2 id="研究目标">1. 研究目标</h2>
-<p>本文综述了各种最新的SSVEP特征提取方法</p>
-<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
-<p>脑机接口(BCI)允许通过大脑信号直接控制应用程序，消除了对外围神经系统的依赖，为运动能力受限的人(如老年人或身体残疾的人)提供了可访问性，并为健康的人提供了替代的访问方法。基于与外部刺激相关的诱发电位的BCI，例如稳态视觉诱发电位(SSVEP)，与依赖于感觉运动节奏的自愿调制的BCI相比，不需要密集的用户训练。</p>
-<p>因此，基于SSVEP的脑机接口的大部分研究都集中在通过提出新的特征提取和分类方法来提高系统性能。</p>
-<p>通过基于训练的特征提取算法从标注的数据中提取具有脑模式个性化特征的脑电特征，以优化用户的系统性能。讨论这些不同特征提取方法的训练要求的比较</p>
-<p><strong>SSVEP是对以特定频率闪烁的重复视觉刺激做出反应而诱发的电位。</strong>这种神经反应由视觉刺激的基频和谐波的振荡活动组成，在大脑的<strong>枕区</strong>表现突出。基于SSVEP的BCI通过唯一地将闪烁的视觉刺激(每个具有不同频率)与特定命令相关联来利用该响应。这些刺激被呈现给用户，<strong>用户可以通过关注相应的刺激来选择命令</strong>。BCI<strong>识别</strong>EEG信号中的SSVEP响应，并生成特定命令以<strong>控制</strong>软件应用程序或外部设备。基于SSVEP的异步BCI还必须能够区分预期控制状态或无控制状态，以允许用户独立于任何提示以自定步调方式控制BCI，其中无控制状态，也称为非刺激、空闲或休息状态，是用户不打算执行任何BCI命令的时段。</p>
-<p>存在各种不需要任何训练的SSVEP检测技术，例如功率谱密度分析(<code>PSDA</code>)、最小能量组合(<code>MEC</code>)和典型相关分析(<code>CCA</code>)。然而，鉴于潜在神经活动的复杂性，EEG信号是<strong>高度特定于受试者</strong>的，不仅在不同的个体之间，而且由于视觉疲劳、实验用户界面和环境的变化以及电极的移动等因素，在个体的同一会话中也有相当大的<strong>差异</strong>。为了减少自发背景EEG活动对SSVEP响应的干扰，结合专门表征用户SSVEP响应的用户训练数据显著提高检测性能。通过训练发现的特定于受试者的参数，如最佳电极位置和刺激频率，也被证明在系统性能方面是有益的。然而，特定学科系统中的这些优化技术可能会导致长时间和疲惫的培训课程，从而降低BCI的实用性，特别是对长期用户而言。为此，最近引入了利用转移学习方法的与对象无关的系统，其中由来自几个对象的SSVEP数据训练的方法被转移到新的对象，从而减少或消除了对每个用户长时间训练的需要。</p>
-<p><strong>CCA列表</strong></p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408095615027.png" alt="特征提取方法列表"><figcaption aria-hidden="true">特征提取方法列表</figcaption>
-</figure>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408100657180.png" alt="image-20210408100657180"><figcaption aria-hidden="true">image-20210408100657180</figcaption>
-</figure>
-<ul>
-<li>无需培训的方法。不需要任何训练数据，以便新用户可以立即开始使用BCI</li>
-<li>针对特定被试的训练方法。需要来自特定用户的训练数据来搜索最佳特定于被试的特征。</li>
-<li>独立于被试的训练方法。需要来自不同被试的训练数据来定义适合一般用户的固定系统参数</li>
-</ul>
-<p>本文的主要贡献是：</p>
-<p>(I)详细的总结，包括每个特征提取算法的简要数学描述，为文献中发现的基于SSVEP的BCI的最新技术的基本概念提供指南；</p>
-<p>(Ii)将基于SSVEP的方法的训练要求分类为上述三类；</p>
-<p>(Iii)对SSVEP特征提取方法的训练要求进行比较回顾，</p>
-<h2 id="研究方法">3. 研究方法</h2>
-<h2 id="ssvep特征提取模型">3.1 SSVEP特征提取模型</h2>
-<p>本文讨论的所有特征提取方法在表2中被分类为<strong>免训练的</strong>、<strong>特定于被试</strong>的或<strong>独立于被试</strong>的。根据SSVEP特征是从单个还是多个EEG通道中提取出来，这些方法也被分为两类；其中，基于单通道的方法可以分别<strong>从每个通道提取一个特征</strong>，而基于多通道的方法需要<strong>多个通道来提取最有效的特征</strong>。此外，基于模型的方法与数据驱动的方法是不同的；其中基于模型的特征提取方法假定SSVEP信号的<strong>特定数学模型</strong>，而数据驱动的方法仅通过分析BCI系统的<strong>EEG数据</strong>来提取特征</p>
-<p><strong>SSVEP模型</strong> <span class="math display">\[
-y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
-\]</span> <span class="math inline">\(y_n(t)\)</span> 是第<span class="math inline">\(n\)</span>个电极与参考电极之间的电压差在时间<span class="math inline">\(t\)</span>上的信号</p>
-<p>该线性模型由两个分量组成，分别对应于SSVEP<strong>响应信号</strong>和噪声信号。诱发的SSVEP响应信号由频率为刺激频率<span class="math inline">\(f\)</span>的倍数的正弦的总和组成，</p>
-<p><span class="math inline">\(H\)</span>表示所考虑的谐波频率的数目，并且每个正弦由其振幅<span class="math inline">\(a_{n,h}\)</span>和相移<span class="math inline">\(b_{n,h}\)</span>来定义。</p>
-<p>噪声信号<span class="math inline">\(e_{n}(t)\)</span>表示与SSVEP响应无关的所有信息，诸如环境噪声、例如来自肌肉和眼睛伪影的自然物理干扰，以及除刺激锁定的基波和谐波之外的任何其他大脑活动。</p>
-<p>以采样频率<span class="math inline">\(F_s\)</span>采样的<span class="math inline">\(T\)</span>个样本的时间段的EEG信号的模型以<strong>矢量形式</strong>表示如下 <span class="math display">\[
-\mathbf{y}_n = \mathbf{X}_f\mathbf{g}_n+\mathbf{e}_n
-\]</span> <span class="math inline">\(\mathbf{y}_n=[y_n(1)...y_n(T)]^T\)</span> 是包含一个时间段中<strong>第n个</strong>电极的EEG信号的<span class="math inline">\(T\times 1\)</span> 向量，<span class="math inline">\(\mathbf{e}_n\)</span> 是相同形状的噪音。</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408104145550.png" alt="image-20210408104145550"><figcaption aria-hidden="true">image-20210408104145550</figcaption>
-</figure>
-<p><span class="math inline">\(\mathbf{X}_f\)</span>是<span class="math inline">\(T\times 2H\)</span> 的信息矩阵，<span class="math inline">\(\mathbf{g}_n\)</span> 是包含振幅<span class="math inline">\(a_{n,h}\)</span>和相位<span class="math inline">\(b_{n,h}\)</span> 的 <span class="math inline">\(2T \times 1\)</span> 矩阵</p>
-<blockquote>
-<p>此处矩阵维度应有问题？？？？[T,2H] @[2T ,1] ？？</p>
-</blockquote>
-<p>对于从<strong>多个电极N记录的一组EEG信号</strong>，模型定义为： <span class="math display">\[
-\mathbf{Y}=\mathbf{X}_f\mathbf{G}+\mathbf{E}
-\]</span> <span class="math inline">\(\mathbf{G}\)</span> 是包含振幅和相位 <span class="math inline">\(2T \times N\)</span> 矩阵,<span class="math inline">\(\mathbf{Y}=[y_1...y_N]^T\)</span> 是包含一个时间段中n个电极的EEG信号的<span class="math inline">\(T\times N\)</span> 矩阵，<span class="math inline">\(\mathbf{e}_n\)</span> 是相同形状的噪音。</p>
-<h2 id="免训练方法">3.2 免训练方法</h2>
-<p>不利用任何训练数据来提取SSVEP特征的方法</p>
-<p>当使用基于SSVEP的脑-机接口系统时，预测用户关注的目标的预测频率<span class="math inline">\(f^*\)</span>满足如下特征提取函数</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408110159149.png" alt="image-20210408110159149"><figcaption aria-hidden="true">image-20210408110159149</figcaption>
-</figure>
-<p><span class="math inline">\(f_i\)</span>表示刺激i的频率，F表示刺激数量</p>
-<h3 id="基于单通道的方法">3.2.1 基于单通道的方法</h3>
-<p>从一组或一对电极获得的单个EEG通道提取SSVEP信息。例如：<strong>单极组合</strong>，其中测量来自单个电极的电压；<strong>双极组合</strong>，其中测量两个紧密放置的电极之间的电压差；以及<strong>平均组合</strong>，其中测量多个电极信号的平均值。</p>
-<h4 id="功率谱密度分析psda">1.功率谱密度分析(PSDA)</h4>
-<p>基于脑电信号频谱分析的PSDA是SSVEP检测中应用<strong>最广泛</strong>的特征提取方法之一。这种基于模型的技术使用傅立叶变换将EEG信号从<strong>时域变换到频域</strong>，并从得到的频谱内容中提取特定的SSVEP特征。<strong>功率谱密度表示不同频率分量的总功率分布</strong>。在与刺激的基频及其谐波相对应的频率分量处，预计会有较大的功率振幅，代表SSVEP响应。</p>
-<p>基于傅立叶变换的方法，如离散傅立叶变换(<code>DFT</code>)、快速傅立叶变换(<code>FFT</code>)和小波变换(<code>WT</code>)已被用于估计感兴趣频率处的功率值以进行SSVEP检测。可以从PSD估计信噪比(SNR)，以进一步增强SSVEP活动的功率，同时降低背景EEG噪声分量，从而允许更清楚地识别SSVEP响应。</p>
-<p>有各种方法用于在不需要训练数据的情况下估计噪声功率，例如，估计非目标刺激时的功率，或者拟合自回归(AR)模型以在SSVEP频率中内插噪声功率。根据闪烁刺激对应的基频和谐波的PSD或SNR值构造特征向量。经常使用谐波和判决(HSD)方法，其中计算每个刺激的谐波功率值之和并用于构造SSVEP特征向量。</p>
-<h4 id="希尔伯特-黄变换hht">2.希尔伯特-黄变换(HHT)</h4>
-<p>HHT包括<strong>经验模式分解</strong>(EMD)和<strong>希尔伯特变换</strong>(HT)的应用，<strong>用于从非线性和非静态脑电信号中提取SSVEP特征</strong>。</p>
-<p>EMD试图通过迭代地进行移位过程来将EEG信号分解成有限数量的<strong>固有模式函数</strong>(IMF)。包含SSVEP响应的EEG信号y被分解成不同的IMF。每个IMF是数据驱动函数，其表示具有随时间变化的振幅和频率的振荡函数可以表示非平稳信号的局部特征。计算所有与SSVP相关的IMF中的瞬时频率分量，并且该瞬时频率分量可以用作识别目标闪烁刺激的特征。在HHT中，对每个IMF分量应用希尔伯特变换以获得希尔伯特谱[25]。每个频带的能量可以从该频谱中获得，并用作检测SSVEP响应的特征。</p>
-<h3 id="多通道空间滤波方法">3.2.2 多通道空间滤波方法</h3>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408111930995.png" alt="image-20210408111930995"><figcaption aria-hidden="true">image-20210408111930995</figcaption>
-</figure>
-<p>下面讨论几种从多通道脑电信号中提取SSVEP信息的空间滤波方法。图1说明了这些方法的SSVEP检测过程，它们都采用SSVEP模型。每种特征提取方法的目的都是为了找到最佳的特征值<span class="math inline">\(Ψ(Y，X_F)\)</span>，以优化目标刺激频率的预测精度。</p>
-<h4 id="最小能量组合mec和最大对比度组合mcc">1.最小能量组合(MEC)和最大对比度组合(MCC)</h4>
-<p>==未完==</p>
-<p>这两种方法不需要训练数据来进行特征选择或噪声估计。都找到了一种组合多电极信号的最优空间滤波器来增强脑电信号中的SSVEP信息。具体地说，由s表示的信道数据矢量被定义为<span class="math inline">\(Y_n\)</span>的线性组合，如下所示： <span class="math display">\[
-\mathbf{s}=\sum_{n=1}^Nw_n\mathbf{y}_n=\mathbf{Yw}
-\]</span> 多个通道S表示为： <span class="math display">\[
-\mathbf{S=YW},\mathbf{S}=[s_1,...s_C]
-\]</span> C是通道数量，W是<span class="math inline">\(N\times C\)</span>的权重矩阵</p>
-<p>一旦从脑电信号和参考信号的组合构造空间滤波的通道，就估计每个通道中的SSVEP信号功率，并将其用作SSVEP特征，如图1中的<span class="math inline">\(Ψ(Y，X_F)\)</span>所示。</p>
-<p>权重矩阵W的选择取决于所使用的具体多通道检测方法，下面将对其进行描述</p>
-<p><strong>MEC方法以在增强SSVEP信息的同时最小化干扰信号的方式组合多个信号</strong>。该方法基于识别高方差信号分量的主成分分析(PCA)。MEC假设刺激频率<span class="math inline">\(X_f\)</span>是目标刺激，并试图消除任何其他干扰信号以获得更强的SNR用于SSVEP检测。这是通过首先从所有采集的电极信号Y中移除由具有频率f的刺激产生的任何潜在SSVEP活动来实现的，具体而言是通过将它们投影到SSVEP模型矩阵XF的正交补码上：</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411124439551.png" alt="image-20210411124439551"><figcaption aria-hidden="true">image-20210411124439551</figcaption>
-</figure>
-<h4 id="典型相关分析cca">2.典型相关分析CCA</h4>
-<p>CCA是一种多变量统计方法，用于发现两组数据之间的潜在相关性。</p>
-<p>设<span class="math inline">\(Y\)</span>和<span class="math inline">\(X\)</span>是分别表示多通道EEG信号和SSVEP参考信号的两个多维变量。CCA找到它们的线性组合<span class="math inline">\(y=Y^TW_y\)</span>和<span class="math inline">\(x=X^TW_x\)</span>，使得两个正则变量<span class="math inline">\(y\)</span>和<span class="math inline">\(x\)</span>之间的相关性最大化。权重向量<span class="math inline">\(W_y\)</span>和<span class="math inline">\(W_x\)</span>通过求解以下优化问题来找到：</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411124946620.png" alt="image-20210411124946620"><figcaption aria-hidden="true">image-20210411124946620</figcaption>
-</figure>
-<h4 id="多变量同步指数msi">3.多变量同步指数(MSI)</h4>
-<p>多通道EEG信号与由刺激频率定义的一组参考信号之间的同步估计被用作用于检测目标频率的指标。所使用的同步指标，称为<code>S-估计器</code>，是基于多变量信号的相关矩阵的归一化特征值的熵的非线性同步度量。该方法要求目标刺激的参考信号与混合脑电记录同步。最大的同步索引表示具有最高相关性的两组信号。然后，选择产生该相关性的参考信号的刺激频率作为目标刺激。</p>
-<p>首先将EEG信号<span class="math inline">\(Y\)</span>和参考信号<span class="math inline">\(X_f\)</span>的矩阵归一化为具有零均值和单位方差，并且相关矩阵估计如下</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411131845938.png"></p>
-<p>其中<span class="math inline">\(C_{YY}=\frac{1}{T}YY^T\)</span>,<span class="math inline">\(C_{X_fX_f}=\frac{1}{T}X_fX_f^T\)</span>,<span class="math inline">\(C_{YX_f}=C_{X_fY}=\frac{1}{T}YX_f^T\)</span>.</p>
-<p>为了减小自相关对同步度量的影响，应用了以下线性变换</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412111947874.png"></p>
-<p>抵消自相关后，变换后的相关矩阵由下式给出：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412112037070.png"></p>
-<p>设<span class="math inline">\(\lambda_1,\lambda_2,...\lambda_P\)</span> 为矩阵<span class="math inline">\(C_{}^{&#39;}\)</span> 的特征值</p>
-<p>计算两组信号之间的同步指数SI为：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412112537599.png"></p>
-<p><span class="math inline">\(\lambda_i&#39;\)</span>的<span class="math inline">\(C&#39;\)</span>第i个归一化特征值。对于两组不相关的信号，<span class="math inline">\(C_{YX_f}=C_{X_fY}=0\)</span>，当两组信号完全相关时，SI=1，因为<span class="math inline">\(C’\)</span>在主对角线上会有1，在其他地方会有0。对于后一种情况，只有一个归一化特征值是1，而其他特征值是零。估计来自多个脑电信号Y的信号与每个参考信号<span class="math inline">\(X_f\)</span>之间的同步指数，并将其用于计算图1中的SSVEP特征<span class="math inline">\(Ψ(Y，X_f)\)</span>。</p>
-<h4 id="似然比检验lrt">4.似然比检验(LRT)</h4>
-<p>LRT方法找出两组多元变量的独立性。</p>
-<h4 id="双偏最小二乘法d-pls">5.双偏最小二乘法(D-PLS)</h4>
-<p>偏最小二乘(PLS)是一种用于SSVEP检测的多元线性回归方法，它直接计算多维因变量对多维自变量的回归。该模型估计了两个信号之间复杂的因果关系，并在非正态分布和小样本条件下提取相关性最大的潜在变量。</p>
-<h2 id="关于免训法的探讨">3.3 关于免训法的探讨</h2>
-<h3 id="基于单通道的免培训方法">1.基于单通道的免培训方法</h3>
-<p>基于PSDA的最简单的检测方法操作在单个EEG通道的组合上，这些通道必须事先选择和配置。在几项研究中发现，由于消除了常见的滋扰信号，双极方法在两个脑电图电极上取得了不同的效果。这是可行的，因为设计BCI只需要两个电极，但是不同用户的最佳配对可能不同。此外，在实践中，同一用户的电极的确切位置在不同的会话中也可能略有不同。因此，所有用户的固定双极组合可能会显著影响PSDA的性能，因此可能缺乏稳健性。这些单通道方法对噪声敏感，可能需要更多的数据用于SSVEP识别，并且计算时间较长，特别是在HHT的情况下，这可能限制基于SSVEP的BCI的实时性能。</p>
-<h3 id="多通道免培训方式">2.多通道免培训方式</h3>
-<p>多通道检测方法受益于多个信号的优化组合，从而克服了这些限制。对于这些方法，不需要信道选择过程，并且实现了对噪声的更强的鲁棒性</p>
-<h3 id="两种免训方法的比较">3.两种免训方法的比较</h3>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412115210598.png"></p>
-<h2 id="针对特定被试的培训方法">3.4 针对特定被试的培训方法</h2>
-<p>介绍需要特定用户培训数据的SSVEP检测最常用的技术</p>
-<h3 id="平均最大对比度组合amcc">1.平均最大对比度组合(AMCC)</h3>
-<h3 id="cca扩展">2.CCA扩展</h3>
-<h4 id="相位约束典型相关分析p-cca">2.1 相位约束典型相关分析(p-CCA)</h4>
-<h4 id="基于个体模板的典型相关分析it-cca">2.2 基于个体模板的典型相关分析(IT-CCA)</h4>
-<h4 id="组合典型相关分析combinedcca">2.3 组合典型相关分析(CombinedCCA)</h4>
-<h4 id="多向典型相关分析mwaycca和l1正则化多向典型相关分析l1-mcca">2.4 多向典型相关分析(MwayCCA)和L1正则化多向典型相关分析(L1-MCCA)</h4>
-<h4 id="多集典型相关分析msetcca">2.5 多集典型相关分析(MsetCCA)</h4>
-<h4 id="多层相关最大化mcm">2.6 多层相关最大化(MCM)</h4>
-<h3 id="公共特征分析cfa">3.公共特征分析(CFA)</h3>
-<h3 id="多元线性回归mlr">4.多元线性回归(MLR)</h3>
-<h3 id="公共空间模式分析acsp">5.公共空间模式分析(ACSP)</h3>
-<h3 id="task相关成分分析trca">6.TASK相关成分分析(TRCA)</h3>
-<h3 id="关于特定用户训练方法的探讨">7.关于特定用户训练方法的探讨</h3>
-<h4 id="特定用户的训练时间">7.1 特定用户的训练时间</h4>
-<h4 id="针对分类的特定用户训练">7.2 针对分类的特定用户训练</h4>
-<h4 id="特征提取的特定用户训练cca扩展">7.3 特征提取的特定用户训练：CCA扩展</h4>
-<h4 id="特征提取的特定用户训练其他方法">7.4 特征提取的特定用户训练：其他方法</h4>
-<h4 id="特定用户训练方法的比较">7.5 特定用户训练方法的比较</h4>
-<h2 id="独立于用户的培训方法">3.5 独立于用户的培训方法</h2>
-<h3 id="最小绝对收缩和选择操作lasso">5.1 最小绝对收缩和选择操作(LASSO)</h3>
-<h3 id="滤波器组典型相关分析fbcca">5.2 滤波器组典型相关分析(FBCCA)</h3>
-<h3 id="基于转移模板的典型相关分析tt-cca和基于转移的组合典型相关分析combated-tcca">5.3 基于转移模板的典型相关分析(TT-CCA)和基于转移的组合典型相关分析(Combated-TCCA)</h3>
-<h3 id="关于独立用户训练方法的探讨">5.4 关于独立用户训练方法的探讨</h3>
-<h4 id="模型参数由独立于对象的训练数据定义">1 模型参数由独立于对象的训练数据定义。</h4>
-<h4 id="迁移学习方法">2 迁移学习方法</h4>
-<h4 id="独立用户训练方法的比较">3 独立用户训练方法的比较</h4>
-<h2 id="评估实验">4. 评估，实验</h2>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412121019420.png"></p>
-<h2 id="结论">5. 结论</h2>
-<p>本文为基于SSVEP的脑机接口中使用的特征提取算法的基本概念和训练要求提供了参考。很明显，就BCI的实用性而言，不需要个人用户进行任何培训的方法是最好的选择。然而，就BCI性能而言，包含训练数据的特征提取方法的性能优于无训练的方法。</p>
-<h2 id="笔记">6. 笔记</h2>
-<h2 id="参考文献">参考文献</h2>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>SSVEP</tag>
-        <tag>特征提取</tag>
-      </tags>
   </entry>
   <entry>
     <title>Day3职工管理系统</title>
@@ -2424,6 +2339,300 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
       </categories>
       <tags>
         <tag>C++实战</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A New Generation of Brain-Computer Interface Based on Riemannian Geometry</title>
+    <url>/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<p>通用<span class="math inline">\(MDM\)</span>距离。用黎曼平均代替算术平均。用黎曼距离代替算术距离，更好的处理<span class="math inline">\(SPD\)</span>矩阵。</p>
+<span id="more"></span>
+<h2 id="研究目的">1. 研究目的</h2>
+<p>提出新一代基于黎曼几何的脑机接口处理框架</p>
+<h2 id="背景与问题说明">2. 背景与问题说明</h2>
+<h2 id="背景">2.1背景</h2>
+<ul>
+<li>脑电信号的处理和分类算法，主要是<code>脑电逆解</code>与<code>对角化方法</code>,比如：<span class="math inline">\(CSP\)</span>，<span class="math inline">\(CCA\)</span>,<span class="math inline">\(ICA\)</span>，以及变种和组合。基于这些工具的新方法只能带来适度的改进，并不能显著提高可靠性。</li>
+<li>目前三种主要的脑-机接口模式，即运动图像(MI)、稳态诱发电位(<span class="math inline">\(SSEP\)</span>),<span class="math inline">\(P300\)</span>中的每一种都被专用的预处理、信号处理和分类工具处理。</li>
+<li>现有的范式分为两类：一类遵循“硬机器学习(<span class="math inline">\(hard machine-learning\)</span>)”方法，另一类使用“空间滤波”来提高信噪比，然后使用简单的分类算法。
+<ul>
+<li>硬机器学习,泛化能力好，但是需要大量数据以及计算复杂</li>
+<li>空间过滤的情况正好相反，其糟糕的泛化能力可以通过快速训练和较低的计算成本来弥补。</li>
+</ul></li>
+<li>因此，有人建议将预处理、特征提取和分类不作为独立的过程，而是一个整体</li>
+</ul>
+<h2 id="脑-机接口处理和分类应具备特点">2.2 脑-机接口处理和分类应具备特点：</h2>
+<p>精确、可靠、泛化、快速学习、通用、算法简单、计算效率高、多用户、</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405162412788.png"></p>
+<p>​ 新一代脑机接口的概念</p>
+<h2 id="方法">3. 方法</h2>
+<p>假设：$x(t)R^N $ 是N个电极的零均值脑电时间向量</p>
+<p>​ <span class="math inline">\(X_z\in R^{N.T}\)</span> 是T个样本组成的实验，带通滤波后也被认为是零均值的</p>
+<p>​ 属于类z的样本协方差矩阵为 <span class="math display">\[
+C_z=1/(T-1)(X_zX_z^T)
+\]</span> ​ 假设为多元高斯分布，则Wishart矩阵Σ是数据分布的唯一参数，假设每个类别都是唯一的，如下所示</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405165117009.png"></p>
+<h2 id="分类框架">3.1 分类框架</h2>
+<p>在脑-机接口操作中，我们有许多带标签的训练数据，属于类z <span class="math inline">\(\in\)</span> {1-Z}。分类就是将无标签的实验x分配给z中的一类。通过计算该样本与z类的每一个平均样本协方差<span class="math inline">\(M_1,M_2,...M_Z\)</span> ,将被标记的样本分给 平均值最接近的类。</p>
+<p>因此需要一个适当的度量来估计基于已标记试验的类别均值，并评估未标记试验与均值之间的距离</p>
+<hr>
+<p><span class="math display">\[Universal MDM BCI Classifier (3) \]</span></p>
+<ol type="1">
+<li><p>给定每个类<span class="math inline">\(z\in{1…Z}\)</span>多个训练试验<span class="math inline">\(X_z\)</span>进行适当的预处理，估计适当形式的协方差矩阵<span class="math inline">\(C_z\)</span>，并估计其<span class="math inline">\(Z\)</span>类均值<span class="math inline">\(M_1...M_Z.\)</span></p></li>
+<li><p>对于未知试验X进行相同的预处理，估计相同形式的协方差矩阵C，并根据</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405170848138.png"> （3）</p>
+<p>将其分配给类别k。即通过距离<span class="math inline">\(\delta_R\)</span>确定最接近的协方差矩阵。</p></li>
+</ol>
+<hr>
+<p>最小平均距离分类器</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210405171634755.png"></p>
+<p>以2x2 的协方差矩阵为例，2x2协方差矩阵有三个非冗余元素，即两个过程<span class="math inline">\(x_1(t)\)</span>和<span class="math inline">\(x_2(t)\)</span>的方差及其协方差。每个协方差矩阵表示为3D空间中的一个点。A类的训练(标记)试验用球体表示，B类用金字塔表示。集合平均值分别为<span class="math inline">\(M_A\)</span>和<span class="math inline">\(M_B\)</span> ,未分类的协方差矩阵<span class="math inline">\(C\)</span>。通过<span class="math inline">\(\delta_R\)</span>将其分给距离最近的类。</p>
+<p><code>将平均值定义为算术平均值，将距离定义为欧几里得距离会产生非常差的分类精度</code></p>
+<p>黎曼几何提供了处理对称正定矩阵(<span class="math inline">\(SPD\)</span>)的自然框架，结构化协方差矩阵就是这种类型。根据数据定义适当的嵌入相关信息的<span class="math inline">\(SPD\)</span>矩阵是我们的工作，将电生理学知识与数学形式联系起来。</p>
+<h2 id="智能初始化跨被试和跨会话泛化">3.2 智能初始化(跨被试和跨会话泛化)</h2>
+<p>脑-机接口处理链应该既具有快速的自适应能力，又具有良好的跨会话和跨主题的泛化能力。与最先进的方法相比，这就是黎曼框架被证明具有优势的地方。</p>
+<p>如何在第一次会话之后以最佳方式混合跨主题和跨会话初始化，以及应该使用数据库的哪一部分来初始化给定用户的分类器，这些在很大程度上都是未探索的主题，例如，两个权重之和为1。换句话说，将这两个分类器组合起来产生一个新的分类器。通用分类器在会话开始时的权重为1，并且随着会话的进行，权重越来越小。对于天真的用户，单个分类器在会话开始时的权重为零。对于可以获得来自先前会话的数据的用户，初始权重可以与训练数据量成比例地提高。在任何情况下，单个分类器的权重都会随着会话的进行而上升，并在会话结束时接近1。无论有没有监督，这两个平行的分类器应该如何随着时间的推移而进化，这是一个有趣而不是微不足道的研究课题。</p>
+<h2 id="自适应">3.3 自适应</h2>
+<p>在给定初始值的情况下，我们希望学习单个分类参数，以达到最佳性能，并适应环境变化、心理状态变化和任何其他可能影响分类性能的中间条件。我们也希望尽快做到这一点。为了做到这一点，我们实际上建立了两个并行分类<span class="math inline">\(MDM\)</span>算法，一个是通用的，唯一基于迁移学习(即数据库)，另一个是个体的，后者是有监督的或无监督的。我们这里考虑的是有监督的情况。分类器输出将由两个分类器的加权和给出。</p>
+<p>因此，与其他类型的分类器不同的是，多个<span class="math inline">\(MDM\)</span>分类器可以通过组合多个距离方便地组合在一起，保证了分类输出的稳定性和一致性。</p>
+<h2 id="运动想象的分类">3.4 运动想象的分类</h2>
+<p>如(1)中定义的样本协方差矩阵仅包含空间信息。对角线元素保持每个电极上信号的方差，而非对角线元素保持所有电极对之间的协方差。</p>
+<p>因此，对运动想象(MI)试验进行分类就足够了，因为不同类别的MI试验确实产生了不同的(头皮)空间模式，这种模式完全嵌入到样本协方差矩阵的结构中。</p>
+<p>对于MI，我们<code>不需要扩展数据的定义</code>，只需设置 <span class="math display">\[
+X_z^{MI}=X_z              \\    (4)
+\]</span> 在基于MI的脑机接口的情况下，有和运动想象任务一样多的class(包括相关的训练试验)。如果需要，可以添加无运动图像类。唯一预处理步骤是对运动图像进行带通滤波 (例如，8-30 Hz)。然后，<span class="math inline">\(MDM\)</span>算法(3)使用按照(1)的协方差矩阵的规则形式来应用。</p>
+<p>广泛的测试已经证明，<span class="math inline">\(MDM\)</span>方法对于运动图像数据是可靠、稳健和准确的。</p>
+<h2 id="事件相关电位的分类">3.5 事件相关电位的分类</h2>
+<p>对于基于事件相关电位的脑-机接口，由于事件相关电位的特征幅度比背景脑电信号小得多，所以标准样本协方差矩阵的效率不高，因此单个试验的协方差矩阵所包含的空间结构<code>不能提供足够</code>的分类信息。事实上，协方差矩阵根本<code>不包含任何时间信息</code>，如果我们考虑随机洗牌试验<span class="math inline">\(X_z\)</span>的样本，样本协方差矩阵(1)不变，这是很容易实现的.</p>
+<p>然而，<span class="math inline">\(ERP\)</span>有一个特定的<code>时间特征</code>；正是这个特征将一个<span class="math inline">\(ERP\)</span>与另一个<span class="math inline">\(ERP\)</span>区分开来，或者将ERP与没有<span class="math inline">\(ERP\)</span>区分开来，所以这是我们需要提取并嵌入到“协方差矩阵”中的信息。为此，让我们再次考虑一系列实验<span class="math inline">\(X_z\)</span>，z属于类{1...Z}。在这种情况下，每个类对应一个不同的<span class="math inline">\(ERP\)</span>，并且通常添加一个非<span class="math inline">\(ERP\)</span>类。例如，在基于<span class="math inline">\(P300\)</span>的<span class="math inline">\(BCI\)</span>中，一个类是包含<span class="math inline">\(P300\)</span>的目标类，另一个是非目标类(Z=2)。现在让我们来构建超级实验</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406095159507.png"></p>
+<p>其中，<span class="math inline">\(\hat{X}_{}(1)...\hat{X}_{}(Z)\)</span>是在训练数据、用户的先前会话或甚至在每个类的其他用户的数据库(迁移学习)上获得的总平均<span class="math inline">\(ERP\)</span>；我们将这些超平均<span class="math inline">\(ERP\)</span>称为时间原型。我们为每个类指定一个原型。请注意，我们在括号中引入了索引(Z)，以突出显示与实验<span class="math inline">\(X_z\)</span>的第Z个训练的不同之处。现在，对于训练试验<span class="math inline">\(X_z\)</span>，超级试验的协方差矩阵具有以下块结构：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406101436853.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406101447299.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406101459427.png"></p>
+<p>(7)中的<span class="math inline">\(N*N\)</span>对角块对于分类都没有用处，因为它们基于固定的原型，不会在一次又一次的试验中改变</p>
+<p><span class="math inline">\(X_zX_z^T\)</span>该矩阵包含试验的空间信息，如我们所说，它对分类没有什么用处。</p>
+<p>(6)中的试验和Z原型之间的交叉协方差，即这些块包含时间协方差。请注意，现在调整试验样本确实会扰乱这些协方差。<code>这些块包含用于分类的相关信息</code>，因为只有在试验类别与原型类别重合的块中，交叉协方差才会很大。根据(6)在训练数据上构造的“超”协方差矩阵<span class="math inline">\(C_z\)</span>的平均值，我们用<span class="math inline">\(M_1 ...M_z\)</span>表示，具有与<span class="math inline">\(C_z\)</span>相同的结构。然后，对于未标记的试验<span class="math inline">\(X\)</span>，我们根据(5)构造超级试验，并且根据(6)构造相应的协方差矩阵<span class="math inline">\(C\)</span>，其中在两个试验中X替换<span class="math inline">\(X_z\)</span>。然后，像以前一样使用<span class="math inline">\(MDM\)</span>(3)进行分类。唯一需要的<code>预处理</code>是过滤包含<span class="math inline">\(ERP\)</span>的频带通区中的数据，通常为<span class="math inline">\(1-16 Hz\)</span>。通带区域的准确选择并不是<span class="math inline">\(ERP\)</span>分类的关键。我们实验室的广泛测试表明，<code>该方法是可靠和健壮的，比最新的跨被试和跨会话的方法具有更好的通用性，并且易于快速适应。</code></p>
+<p>值得一提的是，我们通常只处理<span class="math inline">\(ERP\)</span>的存在和不存在，就像基于<span class="math inline">\(P300\)</span>的BCI的情况一样，其中只有两类，目标类(<span class="math inline">\(P300\)</span>存在)和非目标类(<span class="math inline">\(P300\)</span>非存在)。在这种情况下，可以使用由下式给出的SuperTrial(5)的简化版本</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406104149833.png"></p>
+<p>其中<span class="math inline">\({\over{X}}_{(+)}^{T}\)</span>是P300(目标类)的时间原型，其中“+”表示目标类，“-”表示非目标类。对于训练试验<span class="math inline">\(X_z\)</span>，超级试验的协方差矩阵现在具有更简单的块结构：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406104837860.png"></p>
+<p>同理 <span class="math inline">\(X_zX_z^T\)</span> 和 <span class="math inline">\({\over{X}}_{(+)}^{}{\over{X}}_{(+)}^{T}\)</span> 对分类无用。</p>
+<p>如果试验与目标有关，原型和试验<span class="math inline">\({\hat{X}}_{(+)}^{} X_z^T\)</span>之间的时间协方差将很大，如果不与目标有关，则时间协方差较小，因此(10)足以有效地对目标试验和非目标试验进行分类。</p>
+<p>最后，请注意，在基于<span class="math inline">\(P300\)</span>的<span class="math inline">\(BCI\)</span>中，我们在几次<span class="math inline">\(P300\)</span>试验之后进行分类，也就是说，在所有元素重复几次闪烁之后,分类要么基于重复的累积距离和，要么基于通过重复计算的平均试验获得的单个距离，这两种方法是等价的。</p>
+<h2 id="稳态诱发电位的分类">3.6 稳态诱发电位的分类</h2>
+<p>同样的<span class="math inline">\(MDM\)</span>方法也可以用于<span class="math inline">\(SSEP\)</span>数据分类。这里我们以稳态视觉诱发电位(<span class="math inline">\(SSVEP\)</span>)为例。这里的Z类代表F个不同的闪烁频率，如果需要，还可以添加一个无闪烁类。在这种情况下，相关的信息是在视觉皮层中产生振荡的频率的多样性，而不同频率的空间模式可能是相同的。为了更好地利用频率分集，我们构造了超级实验。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406112949621.png"></p>
+<p>其中，<span class="math inline">\(X_(f)^T\)</span>是在带通区中针对闪烁频率 f<span class="math inline">\(\in\)</span> {1，…F}滤波的试验。更简单地说，人们可以使用傅里叶共谱(Bloomfield，2000)来获得准确的闪烁频率。超试(11)的协方差矩阵具有如下块结构：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406113726132.png"></p>
+<p>N×N对角线块保存F个频率的协方差矩阵。当将未标记的试验与不同类别的平均值进行比较时，只有以与试验的频率相对应的频率为索引的块的平均值才会具有较大的值。因此，<code>对角块将对分类有用</code>。另一方面，非对角线块保留了频率之间的交叉协方差，因此意义不是很大。我们可以将它们归零，因为生成的矩阵</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406114606970.png"></p>
+<p>仍然是对称正定的。给定训练数据，我们估计类均值<span class="math inline">\(M_1,...M_z\)</span>。对于未标记的轨迹<span class="math inline">\(X\)</span>，我们使用(11)计算超级轨迹，其中<span class="math inline">\(X\)</span>替换<span class="math inline">\(X_z\)</span>，然后使用(13)计算协方差 矩阵<span class="math inline">\(C\)</span>。最后，我们再次使用算法(3)来分配无标签试验。所需的<code>唯一预处理</code>是对对应于<span class="math inline">\(SSVEP\)</span>闪烁频率的频率中的数据进行滤波，或者等效地估计<span class="math inline">\(F\)</span>个闪烁频率处的傅立叶共谱。请注意，如果<span class="math inline">\(SSVEP\)</span>的相位是已知的，这要归功于精确的数据标记，就像Jia等人所做的那样。(2011)，或者使用编码调制(Bin等人，2011)，人们可以利用频率和时间信息，构建一个超级试验，混合这里用于<span class="math inline">\(ERP\)</span>(5)和<span class="math inline">\(SSVEP\)</span>(11)的策略。</p>
+<h2 id="多用户设置中的分类">3.7 多用户设置中的分类</h2>
+<p>多用户环境中的分类最后，让我们看看所提出的框架如何容易地扩展到多用户的情况。在多用户<span class="math inline">\(BCI\)</span>中，多个用户同时使用同一界面进行交互(Bonnet、Lotte和Lécuyer；袁等人，2013年；Schultze-Kraft等人，2013年)。这种设置的有趣之处在于，在理论上，如果有足够的受试者数量，我们可以在单次试验中获得100%准确率的<span class="math inline">\(BCI\)</span>；我们可以在单个试验的受试者之间做同样的事情，而不是对所有试验的数据或分类分数进行平均。我们实际上可以走得更远，不仅可以利用众多的试验，还可以利用它们在受试者之间预期的同步性。让我们以基于<span class="math inline">\(P300\)</span>的<span class="math inline">\(BCI\)</span>为例。其他模式的发展与此类似。正如我们已经看到的，对于使用基于<span class="math inline">\(P300\)</span>的脑-机接口的单个受试者，超级试验有形式(9)。对于多用户(<span class="math inline">\(MU\)</span>)情况，z <span class="math inline">\(\in\)</span> {+，-}(其中+是目标类，-是非目标类)的试验由下式给出</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406144824536.png"></p>
+<p>其中M是受试者的数量，N是EEG传感器的数量。请注意，对于(9)中的单用户情况，时间原型仍然只是一个，因为它同样适用于所有用户。示例情况M=2的(14)的协方差矩阵具有形式</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406144904066.png"></p>
+<p>块<span class="math inline">\(\hat{X}_{(+)}\hat{X}_{(+)}^T\in R^{N \times N}\)</span> 是时间原型的协方差矩阵。这在不同的试验中不会改变，没有分类的价值。</p>
+<p>非对角线块<span class="math inline">\(X_{1z}\hat{X}_{(+)}^T\)</span>和<span class="math inline">\(X_{2z}\hat{X}_{(+)}^T\)</span>(或它们的转置)保持了受试者的试验和原型之间的协方差，并与(6)中的分类相关；唯一的区别是，不是只有一个这样的协方差，现在我们<code>有两个协方差，相应地增加了分类能力</code>。</p>
+<p>此外，现在考虑非对角线区块<span class="math inline">\(X_{2z}X_{(1z)}^T\)</span>。(或它的转置<span class="math inline">\(X_{1z}X_{(2z)}^T\)</span>)保持了两个受试者试验之间的协方差；由于<span class="math inline">\(P300\)</span>反应是同步的，所以这个协方差只对目标试验是大的，因此它持有一些对<code>分类有用</code>的信息。</p>
+<p>请注意，基于(15)的分类并不等同于简单地将每个人的数据相加或组合。这就是我们将(15)的<span class="math inline">\(X_{1z}X_{(2z)}^T\)</span>和<span class="math inline">\(X_{2z}X_{(1z)}^T\)</span>的非对角线块归零所得到的结果。在这里，我们实际上还利用了<span class="math inline">\(ERP\)</span>响应的同步性和两个受试者的同步响应的协方差。这同样适用于两个以上的用户，其中所有成对的跨主题协方差都可以被利用。因此，目前的<span class="math inline">\(Riamannian\)</span>框架是一种真正的多用户方法，类似于联合盲源分离(Anderson等人，2012年；Congedo等人，2012年；Li等人，2009年；Vía等人，2011年)。</p>
+<h2 id="评价">4. 评价</h2>
+<h2 id="运动图像脑机接口数据">4.1 运动图像脑机接口数据</h2>
+<p>我们已经将MDM方法应用于格拉茨理工大学知识发现研究所(脑机接口实验室)提供的<span class="math inline">\(BCI\)</span>竞赛IV(2008)的数据集2a。该数据集包括9名受试者，这些受试者参与了一个四类(Z=4)的基于两次运动想象的脑-机接口实验。这四门课分别是右手、左手、脚、舌头。脑电数据由集中在感觉运动区及其周围的22个电极采集。试验在8-30 Hz范围内进行带通滤波。每项试验中的两秒钟数据用于分析。我们既考虑了每个类别相对于其他类别的二进制分类-这是最先进的公共空间模式(<span class="math inline">\(CSP\)</span>)做得更好的地方(Lotte等人，2007年)-也考虑了真正的多类别情况，其中四个类别被一起处理。<span class="math inline">\(MDM\)</span>处理二进制和多类情况的方式都一样好。</p>
+<p>我们展示了离线分析的结果，以将<span class="math inline">\(MDM\)</span>与最先进的竞争对手进行比较。对于<code>二值分类</code>，我们比较了<span class="math inline">\(MDM\)</span>和<span class="math inline">\(CSP+LDA\)</span>(线性判别分析)分类算法(Lotte and Guan，2011)2.保留了三对<span class="math inline">\(CSP\)</span>滤波器。这是使用此方法设置的唯一参数。对于<code>多类分类</code>，我们将<span class="math inline">\(MDM\)</span>与Grosse-Wentrup和Buss(2008)提出的<span class="math inline">\(BSS\)</span>方法进行了比较。他们的方法包括四类协方差矩阵的近似联合对角化(<span class="math inline">\(AJD\)</span>)、使用互信息准则选择八个最佳滤波器和稀疏<span class="math inline">\(Logistic\)</span>回归(LR)分类器。对于这种方法，还必须设置过滤器的数量。另一方面，<span class="math inline">\(MDM\)</span>方法是完全自动的。结果与跨会话性能有关，即算法在一个会话上进行训练，在另一个会话上进行测试。与同一会话中的交叉验证相比，这是一个更困难的试验台。</p>
+<p>结果根据所有受试者的准确率(正确分类试验的百分比)，两次会话，一次对另一次，所有方法的结果如表1所示。机会水平为25%。我们统计比较了<span class="math inline">\(MDM\)</span>和最新竞争对手在正确率分类试验(准确率)方面的平均表现。对于多类别分类，与<span class="math inline">\(bss+LR\)</span>方法(配对t检验(17)=1.9p=0.074，双尾)相比，<span class="math inline">\(MDM\)</span>被证明在18个会话的平均值上略微领先。对于所有二分类的平均值，<span class="math inline">\(MDM\)</span>和<span class="math inline">\(CSP+LDA\)</span>方法之间没有差异。</p>
+<p>在Gouy-Pailler等人中。(2010)在试验过程中，我们利用<span class="math inline">\(ERD/ERS\)</span>的非平稳性，开发了一种用于运动图像分类的盲源分离(<span class="math inline">\(BSS\)</span>)方法。Grosse-Wentrup和Buss(2008)提出的方法是我们研究的起点。Gouy-Pailler等人发展的非平稳性推广。(2010)得到的是估计试验内连续时间间隔中的几个协方差矩阵，并同时对角化所有类别的所有这些矩阵。结果表明，该方法优于Grosse-Wentrup和Buss(2008)的方法。Gouy-Pailler等人获得的平均值(SD)。(2010)的交叉精确度为63.8(12.28)。这一平均值与表1中报告的平均值直接相当，并不明显优于<span class="math inline">\(MDM\)</span>多分类。我们的结论是，<span class="math inline">\(MI\)</span>数据的<span class="math inline">\(MDM\)</span>的性能与文献中发现的最复杂的方法一样好，但它是完全自动的(不需要设置参数)，并且尊重下一代<span class="math inline">\(BCI\)</span>的要求。</p>
+<p><code>MDM方法的性能对于表现良好的受试者或多或少是相等的，而对于表现较差的受试者则更好(参见图表下角的点的位置)。这种行为源于黎曼度量的健壮性(附录A)。</code></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406151240842.png"></p>
+<h2 id="p300-bci数据">4.2 P300 BCI数据</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406153008264.png"></p>
+<h2 id="离线结果经典训练-测试模式">4.3 离线结果：“经典”训练-测试模式</h2>
+<p>配对t检验表明，<span class="math inline">\(MDM\)</span>法测得的平均<span class="math inline">\(AUC\)</span>值明显优于<span class="math inline">\(SWLDA\)</span>法(t(55)=3.377，p=0.001)，与XDAWN法测得的平均AUC值相当。</p>
+<h2 id="离线结果跨主体初始化">4.4 离线结果：跨主体初始化</h2>
+<p>结果表明，<span class="math inline">\(MDM\)</span>获得的平均<span class="math inline">\(AUC\)</span>值略高于<span class="math inline">\(SWLDA\)</span>(t(55)=1.676，p=0.099)和<span class="math inline">\(XDAWN\)</span>(t(55)=1.755，p=0.085)的平均<span class="math inline">\(AUC\)</span>值。</p>
+<h2 id="离线结果跨会话初始化">4.5 离线结果：跨会话初始化</h2>
+<p>!(4.基于黎曼几何的新一代脑机接口/image-20210406152700662.png)</p>
+<h2 id="在线结果适应">4.6 在线结果：适应</h2>
+<p>这些结果表明，我们的自适应系统在没有校准的情况下，性能相当于传统第一次会话上的有校准的系统。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406152625863.png"></p>
+<h2 id="稳态视觉诱发电位数据">4.7 稳态视觉诱发电位数据</h2>
+<p>我们使用8次交叉验证程序应用MDM，并使用1s、2s、3s、4s、5s和6s作为数据段持续时间。从1s到6s的平均分类正确率分别为：53.125%、75%、87.5%、93.75%、100%、100%。</p>
+<h2 id="结论">5. 结论</h2>
+<p>基于这些结果，我们得出结论：<span class="math inline">\(MDM\)</span>分类算法确实普遍具有<code>快速学习</code>能力，并且易于<code>转移学习</code>。此外，我们已经测试的自适应分类方案在第一次大脑入侵者(游戏）的几个级别之后已经被证明是有效的；然后，平均不到两次重复就足以摧毁目标(图7)，与最先进的技术相比，这是一个显著的结果。应该记住，这一结果在完全适应模式下是可能的，这要归功于大脑入侵者的监督操作模式。即使将这种自适应链直接转换到<span class="math inline">\(p300\)</span>拼写器上也是可能的，但仍有一些困难需要解决。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406152017995.png"></p>
+<p>不管协方差矩阵是如何定义的，我们使用黎曼框架提出的分类算法对于我们所考虑的<code>所有三种BCI模态都是相同的</code>。此外，它仍然非常<code>简单</code>。请注意，在任何时候都没有要调优的参数；它都是<code>确定</code>性的，完全没有参数。这与复杂的机器学习方法(如支持向量机)形成对比，在支持向量机中，一个或多个参数必须例如通过交叉验证来学习(Lotte等人，2007年)。出于这个原因，我们声称我们所描绘的战略是真正普遍的。事实上<code>，MDM分类的简单性、快速学习的能力(几乎不需要训练数据)以及良好的跨学科和跨会话的泛化，使这一策略成为构建新一代BCI的非常好的候选者。</code></p>
+<p>这样的BCI将使用远程海量数据库进行智能初始化，并将在使用的第一分钟快速而有效地适应用户。它们将是可靠的，坚固的，并将保持良好的性能。在分析和尝试了文献中可以找到的几种策略之后，我们认为黎曼框架是一个很好的候选者，因为它是唯一具有我们在引言中列出的所有必要性质(A)-h)的策略。</p>
+<p>在Barachant等人中。(2012A)我们已经证明，使用黎曼框架映射切线空间中的协方差矩阵，并在切线空间中应用特征选择+<span class="math inline">\(LDA\)</span>，运动图像分类可以比表1中所示的结果有显著改善。在Barachant等人中。(2012B)使用嵌入黎曼核的支持向量机。这两种方法的性能优于最先进的方法，但它们需要调整参数。在Barachant等人中。(2010b)我们映射了切线空间中的协方差矩阵，应用了点的监督投影(带自动正则化的正则化<span class="math inline">\(LDA\)</span>)以增加类可分性，然后将数据重新映射到<span class="math inline">\(MDM\)</span>应用的黎曼流形中。这种方法不需要调优参数，但与简单的MDM相比，它仍然更加复杂。因此，在黎曼框架中使用更复杂的分类方法，可能会找到一种超越现有技术的方法，但只能以牺牲BCI的人体工程学要求为代价。类似的结果也适用于其他脑机接口模式。在我们看来，简单的<span class="math inline">\(MDM\)</span>方法是准确性、稳健性和人体工程学之间的一种很好的折衷，因此可以考虑作为一个新的标准的起点，以便建立一个适合大范围脑-机接口应用的新标准。进一步的研究将在基于黎曼几何的分类方法的复杂性和该方法在实际在线操作中的有效性/可用性之间找到最佳的权衡。选择成为<span class="math inline">\(BCI\)</span>数据基准的方法不需要像<span class="math inline">\(MDM\)</span>那样调整参数，并且应该保持快速学习和良好的转移学习能力。</p>
+<p>请注意，我们在(5)和(9)中定义的时间原型可以以任何合理的方式定义，也就是说，它们可以由模型、期望、猜测等给出。这种构造嵌入空间和时间信息的协方差矩阵的方法非常灵活，因此我们相信它将在其他应用和其他研究领域中有用。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/15/Paper/4.%E5%9F%BA%E4%BA%8E%E9%BB%8E%E6%9B%BC%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B0%E4%B8%80%E4%BB%A3%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/image-20210406153248039.png"></p>
+<p>形式(13)的协方差矩阵的图像。对执行<span class="math inline">\(SSVEP\)</span>实验的对象计算协方差矩阵。数据采集在6个电极上。矩阵的每个对角块是数据的6x6协方差矩阵，该矩阵围绕用于刺激的三个闪烁频率(12、15和20 Hz)进行大幅带通滤波。图中表示的四个矩阵是“休息”类(无闪烁)和具有三个闪烁频率的试验的总平均值。请注意，对于每个类别，只有与实际闪烁频率相对应的块具有较高的值。对于非<span class="math inline">\(SSVEP\)</span>(<span class="math inline">\(REST\)</span>)数据，没有一个区块具有高值；这足以对属于四类中的任何一类的油井试验进行分类。</p>
+<h2 id="notes">6. Notes</h2>
+<h2 id="references">References</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>黎曼几何</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>To train or not to train? A survey on training of feature extraction methods for SSVEP-based BCIs</title>
+    <url>/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<p>基于SSVEP的脑机接口特征提取方法以及训练或不训练的比较</p>
+<h2 id="研究目标">1. 研究目标</h2>
+<p>本文综述了各种最新的SSVEP特征提取方法</p>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<p>脑机接口(BCI)允许通过大脑信号直接控制应用程序，消除了对外围神经系统的依赖，为运动能力受限的人(如老年人或身体残疾的人)提供了可访问性，并为健康的人提供了替代的访问方法。基于与外部刺激相关的诱发电位的BCI，例如稳态视觉诱发电位(SSVEP)，与依赖于感觉运动节奏的自愿调制的BCI相比，不需要密集的用户训练。</p>
+<p>因此，基于SSVEP的脑机接口的大部分研究都集中在通过提出新的特征提取和分类方法来提高系统性能。</p>
+<p>通过基于训练的特征提取算法从标注的数据中提取具有脑模式个性化特征的脑电特征，以优化用户的系统性能。讨论这些不同特征提取方法的训练要求的比较</p>
+<p><strong>SSVEP是对以特定频率闪烁的重复视觉刺激做出反应而诱发的电位。</strong>这种神经反应由视觉刺激的基频和谐波的振荡活动组成，在大脑的<strong>枕区</strong>表现突出。基于SSVEP的BCI通过唯一地将闪烁的视觉刺激(每个具有不同频率)与特定命令相关联来利用该响应。这些刺激被呈现给用户，<strong>用户可以通过关注相应的刺激来选择命令</strong>。BCI<strong>识别</strong>EEG信号中的SSVEP响应，并生成特定命令以<strong>控制</strong>软件应用程序或外部设备。基于SSVEP的异步BCI还必须能够区分预期控制状态或无控制状态，以允许用户独立于任何提示以自定步调方式控制BCI，其中无控制状态，也称为非刺激、空闲或休息状态，是用户不打算执行任何BCI命令的时段。</p>
+<p>存在各种不需要任何训练的SSVEP检测技术，例如功率谱密度分析(<code>PSDA</code>)、最小能量组合(<code>MEC</code>)和典型相关分析(<code>CCA</code>)。然而，鉴于潜在神经活动的复杂性，EEG信号是<strong>高度特定于受试者</strong>的，不仅在不同的个体之间，而且由于视觉疲劳、实验用户界面和环境的变化以及电极的移动等因素，在个体的同一会话中也有相当大的<strong>差异</strong>。为了减少自发背景EEG活动对SSVEP响应的干扰，结合专门表征用户SSVEP响应的用户训练数据显著提高检测性能。通过训练发现的特定于受试者的参数，如最佳电极位置和刺激频率，也被证明在系统性能方面是有益的。然而，特定学科系统中的这些优化技术可能会导致长时间和疲惫的培训课程，从而降低BCI的实用性，特别是对长期用户而言。为此，最近引入了利用转移学习方法的与对象无关的系统，其中由来自几个对象的SSVEP数据训练的方法被转移到新的对象，从而减少或消除了对每个用户长时间训练的需要。</p>
+<p><strong>CCA列表</strong></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408095615027.png" alt="特征提取方法列表"><figcaption aria-hidden="true">特征提取方法列表</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408100657180.png" alt="image-20210408100657180"><figcaption aria-hidden="true">image-20210408100657180</figcaption>
+</figure>
+<ul>
+<li>无需培训的方法。不需要任何训练数据，以便新用户可以立即开始使用BCI</li>
+<li>针对特定被试的训练方法。需要来自特定用户的训练数据来搜索最佳特定于被试的特征。</li>
+<li>独立于被试的训练方法。需要来自不同被试的训练数据来定义适合一般用户的固定系统参数</li>
+</ul>
+<p>本文的主要贡献是：</p>
+<p>(I)详细的总结，包括每个特征提取算法的简要数学描述，为文献中发现的基于SSVEP的BCI的最新技术的基本概念提供指南；</p>
+<p>(Ii)将基于SSVEP的方法的训练要求分类为上述三类；</p>
+<p>(Iii)对SSVEP特征提取方法的训练要求进行比较回顾，</p>
+<h2 id="研究方法">3. 研究方法</h2>
+<h2 id="ssvep特征提取模型">3.1 SSVEP特征提取模型</h2>
+<p>本文讨论的所有特征提取方法在表2中被分类为<strong>免训练的</strong>、<strong>特定于被试</strong>的或<strong>独立于被试</strong>的。根据SSVEP特征是从单个还是多个EEG通道中提取出来，这些方法也被分为两类；其中，基于单通道的方法可以分别<strong>从每个通道提取一个特征</strong>，而基于多通道的方法需要<strong>多个通道来提取最有效的特征</strong>。此外，基于模型的方法与数据驱动的方法是不同的；其中基于模型的特征提取方法假定SSVEP信号的<strong>特定数学模型</strong>，而数据驱动的方法仅通过分析BCI系统的<strong>EEG数据</strong>来提取特征</p>
+<p><strong>SSVEP模型</strong> <span class="math display">\[
+y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
+\]</span> <span class="math inline">\(y_n(t)\)</span> 是第<span class="math inline">\(n\)</span>个电极与参考电极之间的电压差在时间<span class="math inline">\(t\)</span>上的信号</p>
+<p>该线性模型由两个分量组成，分别对应于SSVEP<strong>响应信号</strong>和噪声信号。诱发的SSVEP响应信号由频率为刺激频率<span class="math inline">\(f\)</span>的倍数的正弦的总和组成，</p>
+<p><span class="math inline">\(H\)</span>表示所考虑的谐波频率的数目，并且每个正弦由其振幅<span class="math inline">\(a_{n,h}\)</span>和相移<span class="math inline">\(b_{n,h}\)</span>来定义。</p>
+<p>噪声信号<span class="math inline">\(e_{n}(t)\)</span>表示与SSVEP响应无关的所有信息，诸如环境噪声、例如来自肌肉和眼睛伪影的自然物理干扰，以及除刺激锁定的基波和谐波之外的任何其他大脑活动。</p>
+<p>以采样频率<span class="math inline">\(F_s\)</span>采样的<span class="math inline">\(T\)</span>个样本的时间段的EEG信号的模型以<strong>矢量形式</strong>表示如下 <span class="math display">\[
+\mathbf{y}_n = \mathbf{X}_f\mathbf{g}_n+\mathbf{e}_n
+\]</span> <span class="math inline">\(\mathbf{y}_n=[y_n(1)...y_n(T)]^T\)</span> 是包含一个时间段中<strong>第n个</strong>电极的EEG信号的<span class="math inline">\(T\times 1\)</span> 向量，<span class="math inline">\(\mathbf{e}_n\)</span> 是相同形状的噪音。</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408104145550.png" alt="image-20210408104145550"><figcaption aria-hidden="true">image-20210408104145550</figcaption>
+</figure>
+<p><span class="math inline">\(\mathbf{X}_f\)</span>是<span class="math inline">\(T\times 2H\)</span> 的信息矩阵，<span class="math inline">\(\mathbf{g}_n\)</span> 是包含振幅<span class="math inline">\(a_{n,h}\)</span>和相位<span class="math inline">\(b_{n,h}\)</span> 的 <span class="math inline">\(2T \times 1\)</span> 矩阵</p>
+<blockquote>
+<p>此处矩阵维度应有问题？？？？[T,2H] @[2T ,1] ？？</p>
+</blockquote>
+<p>对于从<strong>多个电极N记录的一组EEG信号</strong>，模型定义为： <span class="math display">\[
+\mathbf{Y}=\mathbf{X}_f\mathbf{G}+\mathbf{E}
+\]</span> <span class="math inline">\(\mathbf{G}\)</span> 是包含振幅和相位 <span class="math inline">\(2T \times N\)</span> 矩阵,<span class="math inline">\(\mathbf{Y}=[y_1...y_N]^T\)</span> 是包含一个时间段中n个电极的EEG信号的<span class="math inline">\(T\times N\)</span> 矩阵，<span class="math inline">\(\mathbf{e}_n\)</span> 是相同形状的噪音。</p>
+<h2 id="免训练方法">3.2 免训练方法</h2>
+<p>不利用任何训练数据来提取SSVEP特征的方法</p>
+<p>当使用基于SSVEP的脑-机接口系统时，预测用户关注的目标的预测频率<span class="math inline">\(f^*\)</span>满足如下特征提取函数</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408110159149.png" alt="image-20210408110159149"><figcaption aria-hidden="true">image-20210408110159149</figcaption>
+</figure>
+<p><span class="math inline">\(f_i\)</span>表示刺激i的频率，F表示刺激数量</p>
+<h3 id="基于单通道的方法">3.2.1 基于单通道的方法</h3>
+<p>从一组或一对电极获得的单个EEG通道提取SSVEP信息。例如：<strong>单极组合</strong>，其中测量来自单个电极的电压；<strong>双极组合</strong>，其中测量两个紧密放置的电极之间的电压差；以及<strong>平均组合</strong>，其中测量多个电极信号的平均值。</p>
+<h4 id="功率谱密度分析psda">1.功率谱密度分析(PSDA)</h4>
+<p>基于脑电信号频谱分析的PSDA是SSVEP检测中应用<strong>最广泛</strong>的特征提取方法之一。这种基于模型的技术使用傅立叶变换将EEG信号从<strong>时域变换到频域</strong>，并从得到的频谱内容中提取特定的SSVEP特征。<strong>功率谱密度表示不同频率分量的总功率分布</strong>。在与刺激的基频及其谐波相对应的频率分量处，预计会有较大的功率振幅，代表SSVEP响应。</p>
+<p>基于傅立叶变换的方法，如离散傅立叶变换(<code>DFT</code>)、快速傅立叶变换(<code>FFT</code>)和小波变换(<code>WT</code>)已被用于估计感兴趣频率处的功率值以进行SSVEP检测。可以从PSD估计信噪比(SNR)，以进一步增强SSVEP活动的功率，同时降低背景EEG噪声分量，从而允许更清楚地识别SSVEP响应。</p>
+<p>有各种方法用于在不需要训练数据的情况下估计噪声功率，例如，估计非目标刺激时的功率，或者拟合自回归(AR)模型以在SSVEP频率中内插噪声功率。根据闪烁刺激对应的基频和谐波的PSD或SNR值构造特征向量。经常使用谐波和判决(HSD)方法，其中计算每个刺激的谐波功率值之和并用于构造SSVEP特征向量。</p>
+<h4 id="希尔伯特-黄变换hht">2.希尔伯特-黄变换(HHT)</h4>
+<p>HHT包括<strong>经验模式分解</strong>(EMD)和<strong>希尔伯特变换</strong>(HT)的应用，<strong>用于从非线性和非静态脑电信号中提取SSVEP特征</strong>。</p>
+<p>EMD试图通过迭代地进行移位过程来将EEG信号分解成有限数量的<strong>固有模式函数</strong>(IMF)。包含SSVEP响应的EEG信号y被分解成不同的IMF。每个IMF是数据驱动函数，其表示具有随时间变化的振幅和频率的振荡函数可以表示非平稳信号的局部特征。计算所有与SSVP相关的IMF中的瞬时频率分量，并且该瞬时频率分量可以用作识别目标闪烁刺激的特征。在HHT中，对每个IMF分量应用希尔伯特变换以获得希尔伯特谱[25]。每个频带的能量可以从该频谱中获得，并用作检测SSVEP响应的特征。</p>
+<h3 id="多通道空间滤波方法">3.2.2 多通道空间滤波方法</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210408111930995.png" alt="image-20210408111930995"><figcaption aria-hidden="true">image-20210408111930995</figcaption>
+</figure>
+<p>下面讨论几种从多通道脑电信号中提取SSVEP信息的空间滤波方法。图1说明了这些方法的SSVEP检测过程，它们都采用SSVEP模型。每种特征提取方法的目的都是为了找到最佳的特征值<span class="math inline">\(Ψ(Y，X_F)\)</span>，以优化目标刺激频率的预测精度。</p>
+<h4 id="最小能量组合mec和最大对比度组合mcc">1.最小能量组合(MEC)和最大对比度组合(MCC)</h4>
+<p>==未完==</p>
+<p>这两种方法不需要训练数据来进行特征选择或噪声估计。都找到了一种组合多电极信号的最优空间滤波器来增强脑电信号中的SSVEP信息。具体地说，由s表示的信道数据矢量被定义为<span class="math inline">\(Y_n\)</span>的线性组合，如下所示： <span class="math display">\[
+\mathbf{s}=\sum_{n=1}^Nw_n\mathbf{y}_n=\mathbf{Yw}
+\]</span> 多个通道S表示为： <span class="math display">\[
+\mathbf{S=YW},\mathbf{S}=[s_1,...s_C]
+\]</span> C是通道数量，W是<span class="math inline">\(N\times C\)</span>的权重矩阵</p>
+<p>一旦从脑电信号和参考信号的组合构造空间滤波的通道，就估计每个通道中的SSVEP信号功率，并将其用作SSVEP特征，如图1中的<span class="math inline">\(Ψ(Y，X_F)\)</span>所示。</p>
+<p>权重矩阵W的选择取决于所使用的具体多通道检测方法，下面将对其进行描述</p>
+<p><strong>MEC方法以在增强SSVEP信息的同时最小化干扰信号的方式组合多个信号</strong>。该方法基于识别高方差信号分量的主成分分析(PCA)。MEC假设刺激频率<span class="math inline">\(X_f\)</span>是目标刺激，并试图消除任何其他干扰信号以获得更强的SNR用于SSVEP检测。这是通过首先从所有采集的电极信号Y中移除由具有频率f的刺激产生的任何潜在SSVEP活动来实现的，具体而言是通过将它们投影到SSVEP模型矩阵XF的正交补码上：</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411124439551.png" alt="image-20210411124439551"><figcaption aria-hidden="true">image-20210411124439551</figcaption>
+</figure>
+<h4 id="典型相关分析cca">2.典型相关分析CCA</h4>
+<p>CCA是一种多变量统计方法，用于发现两组数据之间的潜在相关性。</p>
+<p>设<span class="math inline">\(Y\)</span>和<span class="math inline">\(X\)</span>是分别表示多通道EEG信号和SSVEP参考信号的两个多维变量。CCA找到它们的线性组合<span class="math inline">\(y=Y^TW_y\)</span>和<span class="math inline">\(x=X^TW_x\)</span>，使得两个正则变量<span class="math inline">\(y\)</span>和<span class="math inline">\(x\)</span>之间的相关性最大化。权重向量<span class="math inline">\(W_y\)</span>和<span class="math inline">\(W_x\)</span>通过求解以下优化问题来找到：</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411124946620.png" alt="image-20210411124946620"><figcaption aria-hidden="true">image-20210411124946620</figcaption>
+</figure>
+<h4 id="多变量同步指数msi">3.多变量同步指数(MSI)</h4>
+<p>多通道EEG信号与由刺激频率定义的一组参考信号之间的同步估计被用作用于检测目标频率的指标。所使用的同步指标，称为<code>S-估计器</code>，是基于多变量信号的相关矩阵的归一化特征值的熵的非线性同步度量。该方法要求目标刺激的参考信号与混合脑电记录同步。最大的同步索引表示具有最高相关性的两组信号。然后，选择产生该相关性的参考信号的刺激频率作为目标刺激。</p>
+<p>首先将EEG信号<span class="math inline">\(Y\)</span>和参考信号<span class="math inline">\(X_f\)</span>的矩阵归一化为具有零均值和单位方差，并且相关矩阵估计如下</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210411131845938.png"></p>
+<p>其中<span class="math inline">\(C_{YY}=\frac{1}{T}YY^T\)</span>,<span class="math inline">\(C_{X_fX_f}=\frac{1}{T}X_fX_f^T\)</span>,<span class="math inline">\(C_{YX_f}=C_{X_fY}=\frac{1}{T}YX_f^T\)</span>.</p>
+<p>为了减小自相关对同步度量的影响，应用了以下线性变换</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412111947874.png"></p>
+<p>抵消自相关后，变换后的相关矩阵由下式给出：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412112037070.png"></p>
+<p>设<span class="math inline">\(\lambda_1,\lambda_2,...\lambda_P\)</span> 为矩阵<span class="math inline">\(C_{}^{&#39;}\)</span> 的特征值</p>
+<p>计算两组信号之间的同步指数SI为：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412112537599.png"></p>
+<p><span class="math inline">\(\lambda_i&#39;\)</span>的<span class="math inline">\(C&#39;\)</span>第i个归一化特征值。对于两组不相关的信号，<span class="math inline">\(C_{YX_f}=C_{X_fY}=0\)</span>，当两组信号完全相关时，SI=1，因为<span class="math inline">\(C’\)</span>在主对角线上会有1，在其他地方会有0。对于后一种情况，只有一个归一化特征值是1，而其他特征值是零。估计来自多个脑电信号Y的信号与每个参考信号<span class="math inline">\(X_f\)</span>之间的同步指数，并将其用于计算图1中的SSVEP特征<span class="math inline">\(Ψ(Y，X_f)\)</span>。</p>
+<h4 id="似然比检验lrt">4.似然比检验(LRT)</h4>
+<p>LRT方法找出两组多元变量的独立性。</p>
+<h4 id="双偏最小二乘法d-pls">5.双偏最小二乘法(D-PLS)</h4>
+<p>偏最小二乘(PLS)是一种用于SSVEP检测的多元线性回归方法，它直接计算多维因变量对多维自变量的回归。该模型估计了两个信号之间复杂的因果关系，并在非正态分布和小样本条件下提取相关性最大的潜在变量。</p>
+<h2 id="关于免训法的探讨">3.3 关于免训法的探讨</h2>
+<h3 id="基于单通道的免培训方法">1.基于单通道的免培训方法</h3>
+<p>基于PSDA的最简单的检测方法操作在单个EEG通道的组合上，这些通道必须事先选择和配置。在几项研究中发现，由于消除了常见的滋扰信号，双极方法在两个脑电图电极上取得了不同的效果。这是可行的，因为设计BCI只需要两个电极，但是不同用户的最佳配对可能不同。此外，在实践中，同一用户的电极的确切位置在不同的会话中也可能略有不同。因此，所有用户的固定双极组合可能会显著影响PSDA的性能，因此可能缺乏稳健性。这些单通道方法对噪声敏感，可能需要更多的数据用于SSVEP识别，并且计算时间较长，特别是在HHT的情况下，这可能限制基于SSVEP的BCI的实时性能。</p>
+<h3 id="多通道免培训方式">2.多通道免培训方式</h3>
+<p>多通道检测方法受益于多个信号的优化组合，从而克服了这些限制。对于这些方法，不需要信道选择过程，并且实现了对噪声的更强的鲁棒性</p>
+<h3 id="两种免训方法的比较">3.两种免训方法的比较</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412115210598.png"></p>
+<h2 id="针对特定被试的培训方法">3.4 针对特定被试的培训方法</h2>
+<p>介绍需要特定用户培训数据的SSVEP检测最常用的技术</p>
+<h3 id="平均最大对比度组合amcc">1.平均最大对比度组合(AMCC)</h3>
+<h3 id="cca扩展">2.CCA扩展</h3>
+<h4 id="相位约束典型相关分析p-cca">2.1 相位约束典型相关分析(p-CCA)</h4>
+<h4 id="基于个体模板的典型相关分析it-cca">2.2 基于个体模板的典型相关分析(IT-CCA)</h4>
+<h4 id="组合典型相关分析combinedcca">2.3 组合典型相关分析(CombinedCCA)</h4>
+<h4 id="多向典型相关分析mwaycca和l1正则化多向典型相关分析l1-mcca">2.4 多向典型相关分析(MwayCCA)和L1正则化多向典型相关分析(L1-MCCA)</h4>
+<h4 id="多集典型相关分析msetcca">2.5 多集典型相关分析(MsetCCA)</h4>
+<h4 id="多层相关最大化mcm">2.6 多层相关最大化(MCM)</h4>
+<h3 id="公共特征分析cfa">3.公共特征分析(CFA)</h3>
+<h3 id="多元线性回归mlr">4.多元线性回归(MLR)</h3>
+<h3 id="公共空间模式分析acsp">5.公共空间模式分析(ACSP)</h3>
+<h3 id="task相关成分分析trca">6.TASK相关成分分析(TRCA)</h3>
+<h3 id="关于特定用户训练方法的探讨">7.关于特定用户训练方法的探讨</h3>
+<h4 id="特定用户的训练时间">7.1 特定用户的训练时间</h4>
+<h4 id="针对分类的特定用户训练">7.2 针对分类的特定用户训练</h4>
+<h4 id="特征提取的特定用户训练cca扩展">7.3 特征提取的特定用户训练：CCA扩展</h4>
+<h4 id="特征提取的特定用户训练其他方法">7.4 特征提取的特定用户训练：其他方法</h4>
+<h4 id="特定用户训练方法的比较">7.5 特定用户训练方法的比较</h4>
+<h2 id="独立于用户的培训方法">3.5 独立于用户的培训方法</h2>
+<h3 id="最小绝对收缩和选择操作lasso">5.1 最小绝对收缩和选择操作(LASSO)</h3>
+<h3 id="滤波器组典型相关分析fbcca">5.2 滤波器组典型相关分析(FBCCA)</h3>
+<h3 id="基于转移模板的典型相关分析tt-cca和基于转移的组合典型相关分析combated-tcca">5.3 基于转移模板的典型相关分析(TT-CCA)和基于转移的组合典型相关分析(Combated-TCCA)</h3>
+<h3 id="关于独立用户训练方法的探讨">5.4 关于独立用户训练方法的探讨</h3>
+<h4 id="模型参数由独立于对象的训练数据定义">1 模型参数由独立于对象的训练数据定义。</h4>
+<h4 id="迁移学习方法">2 迁移学习方法</h4>
+<h4 id="独立用户训练方法的比较">3 独立用户训练方法的比较</h4>
+<h2 id="评估实验">4. 评估，实验</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/08/Paper/%E8%AE%AD%E7%BB%83%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AE%AD%E7%BB%83%EF%BC%9F%E5%9F%BA%E4%BA%8ESSVEP%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E8%AE%AD%E7%BB%83%E7%A0%94%E7%A9%B6%E7%BB%BC%E8%BF%B0/image-20210412121019420.png"></p>
+<h2 id="结论">5. 结论</h2>
+<p>本文为基于SSVEP的脑机接口中使用的特征提取算法的基本概念和训练要求提供了参考。很明显，就BCI的实用性而言，不需要个人用户进行任何培训的方法是最好的选择。然而，就BCI性能而言，包含训练数据的特征提取方法的性能优于无训练的方法。</p>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>SSVEP</tag>
+        <tag>特征提取</tag>
       </tags>
   </entry>
   <entry>
@@ -5005,13 +5214,9 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
 <li>隐私：DL所需的数据可能包含大量隐私信息，隐私问题对智能家居和城市等领域至关重要</li>
 </ul>
 <p>由于边缘比云更接近用户，边缘计算有望解决其中的许多问题。事实上，边缘计算正逐渐与人工智能(AI)相结合，在实现边缘智能和智能边缘方面互惠互利，如图1所示，边缘智能和智能边缘并不是相互独立的。边缘智能是目标，智能边缘中的DL服务也是边缘智能的一部分。反过来，智能边缘可以为边缘智能提供更高的服务吞吐量和资源利用率。</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/11/Paper/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%9E%8D%E5%90%88/image-20210407123006452.png" alt="image-20210407123006452"><figcaption aria-hidden="true">image-20210407123006452</figcaption>
-</figure>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/11/Paper/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%9E%8D%E5%90%88/image-20210407123006452.png"></p>
 <p>具体地说，一方面，边缘智能有望将DL计算从云端尽可能推向边缘，从而实现各种分布式、低时延、可靠的智能服务。如图2所示，优点包括：1)DL服务部署在请求用户附近，云只在需要额外处理时才参与[12]，从而显著降低了将数据发送到云进行处理的时延和成本；2)由于DL服务所需的原始数据本地存储在边缘或用户设备本身，而不是云上，因此增强了对用户隐私的保护；3)分层计算架构提供了更可靠的DL计算；2)由于DL服务所需的原始数据本地存储在边缘或用户设备本身而不是云上，因此增强了对用户隐私的保护；3)分层计算架构提供了更可靠的DL计算；4)凭借更丰富的数据和应用场景，边缘计算可以推动DL的普及应用，实现“随时随地为每个人、每个组织提供AI”的前景[13]；5)多样化、有价值的DL服务可以拓宽边缘计算的商业价值，加速其部署和增长。</p>
-<figure>
-<img src= "/img/loading.gif" data-lazy-src="/2021/04/11/Paper/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%9E%8D%E5%90%88/image-20210407123019240.png" alt="image-20210407123019240"><figcaption aria-hidden="true">image-20210407123019240</figcaption>
-</figure>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/11/Paper/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%9E%8D%E5%90%88/image-20210407123019240.png"></p>
 <p>另一方面，智能边缘的目标是将DL合并到边缘中，以实现动态、自适应的边缘维护和管理。随着通信技术的发展，网络接入方式越来越多样化。同时，边缘计算基础设施充当中间媒介，使无处不在的终端设备和云之间的连接更加可靠和持久[14]。因此，终端设备、边缘和云正逐渐融合为一个共享资源社区。然而，维护和管理如此庞大而复杂的整体架构(社区)，涉及无线通信、网络、计算、存储等，是一个重大挑战[15]。典型的网络优化方法依赖于固定的数学模型，但是很难对快速变化的边缘网络环境和系统进行精确建模。DL有望解决这个问题：当面对复杂繁琐的网络信息时，DL可以依靠其强大的学习和推理能力，从数据中提取有价值的信息并做出自适应决策，从而实现智能维护和管理。</p>
 <p>因此，考虑到边缘智能和智能边缘，即Edge DL，在多个方面共同面临着一些相同的挑战和现实问题，我们确定了以下五项对Edge DL至关重要的技术：</p>
 <ol type="1">
