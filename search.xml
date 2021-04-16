@@ -1242,66 +1242,67 @@ ST=\max _i \rho_{imax}</script><h3 id="3-4-Performance-evaluation"><a href="#3-4
   <entry>
     <title>A Novel c-VEP BCI Paradigm for Increasing the Number of Stimulus T argets Based on Grouping Modulation With Different Codes</title>
     <url>/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="0-总结"><a href="#0-总结" class="headerlink" title="0. 总结"></a>0. 总结</h2><h2 id="1-研究目标"><a href="#1-研究目标" class="headerlink" title="1. 研究目标"></a>1. 研究目标</h2><p>提出了一种新型c-VEP范式：分组编码调制</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<h2 id="研究目标">1. 研究目标</h2>
+<p>提出了一种新型c-VEP范式：分组编码调制</p>
 <p>效果：增加了target和ITR</p>
-<p>实现： </p>
-<ol>
+<p>实现：</p>
+<ol type="1">
 <li>每个target用二进制伪随机码和循环移位码编码</li>
 <li>对每组的所有target使用CCA进行空间滤波和产生模板</li>
 <li>对每一组进行模板匹配找到相关系数最大的模板进行匹配</li>
 </ol>
 <p>实验设置：</p>
-<p>​    48个target分成3组</p>
+<p>​ 48个target分成3组</p>
 <p>结论：</p>
-<p>​    尽管三个组的平均准确率低于单个组（91.67% vs 94.9%） 但ITR高于后者（181 bit/min vs 135.6 bit/min)</p>
-<h2 id="2-研究背景及问题陈述"><a href="#2-研究背景及问题陈述" class="headerlink" title="2. 研究背景及问题陈述"></a>2. 研究背景及问题陈述</h2><p>EEG由于非侵入性收到关注</p>
+<p>​ 尽管三个组的平均准确率低于单个组（91.67% vs 94.9%） 但ITR高于后者（181 bit/min vs 135.6 bit/min)</p>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<p>EEG由于非侵入性收到关注</p>
 <p>基于VEP的BCI可以检测枕区和顶叶的信号。</p>
-<p>根据调制方法分为 ： <code>t-VEP</code> ,<code>f-VEP</code> ,<code>c-VEP</code> </p>
+<p>根据调制方法分为 ： <code>t-VEP</code> ,<code>f-VEP</code> ,<code>c-VEP</code></p>
 <p>f-VEP 和 c-VEP有较高ITR ，更有潜力</p>
 <p>然而 c-VEP 研究不多</p>
 <blockquote>
 <p>现有c-VEP BCI 系统中，有两种<code>目标调制方法</code>：</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>比较</th>
-<th style="text-align:left">一个源伪随机码和他的循环移位码</th>
+<th style="text-align: left;">一个源伪随机码和他的循环移位码</th>
 <th>不同的伪随机码</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>相同点</td>
-<td style="text-align:left">都将目标打包成一组呈现</td>
+<td style="text-align: left;">都将目标打包成一组呈现</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td>优点</td>
-<td style="text-align:left">只需要训练一个目标（参考目标），创建模板训练时间短</td>
+<td style="text-align: left;">只需要训练一个目标（参考目标），创建模板训练时间短</td>
 <td>目标数不受编码长度限制</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>缺点</td>
-<td style="text-align:left">可用目标数受到编码长度的影响</td>
+<td style="text-align: left;">可用目标数受到编码长度的影响</td>
 <td>需要为每个目标创建模板，训练时间长</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>对于64bit码长，时间延迟为2bit，只能循环移位31次，只能编码32个target</p>
 <blockquote>
 <p>目标数目是影响BCI性能的一个重要参数。</p>
 </blockquote>
-<ol>
+<ol type="1">
 <li>一个高性能BCI通常以大量target</li>
 <li>一些复杂应用(单词输入器)需要大量target</li>
 </ol>
 <blockquote>
-<p>对$f-VEP$,有许多方法提高目标数，</p>
+<p>对<span class="math inline">\(f-VEP\)</span>,有许多方法提高目标数，</p>
 </blockquote>
-<ol>
+<ol type="1">
 <li>frequency and phase mixed coding</li>
 <li>dual-frequency stimulation</li>
 <li>multiple frequencies sequential coding</li>
@@ -1310,11 +1311,13 @@ ST=\max _i \rho_{imax}</script><h3 id="3-4-Performance-evaluation"><a href="#3-4
 <p>对于c-VEP,本文提出了一个 <code>分组分码调制方法</code>,所有刺激目标被打包为几个组中，并且每个组用不同的伪随机码和循环移位码调制。每组只需训练一个目标，大大减少训练时间。</p>
 </blockquote>
 <p>本文将48个target分为三组，结果显示本范式有助于<code>提高target数量和ITR</code></p>
-<h2 id="3-研究方法"><a href="#3-研究方法" class="headerlink" title="3. 研究方法"></a>3. 研究方法</h2><h3 id="3-1-目标调制"><a href="#3-1-目标调制" class="headerlink" title="3.1 目标调制"></a>3.1 目标调制</h3><p>视觉刺激器如下：</p>
+<h2 id="研究方法">3. 研究方法</h2>
+<h3 id="目标调制">3.1 目标调制</h3>
+<p>视觉刺激器如下：</p>
 <p>每组16个刺激为灰色，周围20个互补的非目标刺激。采用<code>等效邻域原则</code>.</p>
 <p><strong>这些非目标刺激的目的是确保目标刺激在左，右，上，下和对角线的方向上具有相等的邻居</strong></p>
 <p>分组是target增多，使用第一种方法训练较少训练时间</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416111052828.png" alt></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416111052828.png"></p>
 <p>为了更好区分不同编码，编码之间应正交或近似正交。</p>
 <p>三组需要三个伪随机码，每组一个。拥有良好的自相关性，每组16个目标近似正交</p>
 <p>不同原始码互相关，不同组之间近似正交</p>
@@ -1325,50 +1328,53 @@ ST=\max _i \rho_{imax}</script><h3 id="3-4-Performance-evaluation"><a href="#3-4
 <p>伪随机M序列具有良好的自相关特性，这使得可以创建相同M序列的一组循环移位。因此，一组循环移位序列表现出良好的互相关特性，并且可以用于调制单个刺激组。</p>
 <p>然而，不同的M序列不能保证良好的互相关性，因此它们的循环移位序列也没有。因此，它们不能用于调节多组刺激。</p>
 <p>本文采用一对<code>Golay互补序列</code>和 <code>几乎完美自相关序列(APA)</code>作为三组刺激的源调制编码。他们有优秀的自相关和互相关性。原则上确保了由三个调制码及其循环移位码激励的不同目标的刺激信号之间的正交性。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416153704652.png" alt></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416153704652.png"></p>
 <p>屏幕刷新率60Hz，码长64bit，刺激周期64/60=1.066s。</p>
-<h3 id="3-2-目标识别"><a href="#3-2-目标识别" class="headerlink" title="3.2 目标识别"></a>3.2 目标识别</h3><p>目标识别分为训练阶段和测试阶段，训练阶段用于创建模板，测试阶段将测试信号与三组的模板计算，选择相关系数最大的为目标。</p>
+<h3 id="目标识别">3.2 目标识别</h3>
+<p>目标识别分为训练阶段和测试阶段，训练阶段用于创建模板，测试阶段将测试信号与三组的模板计算，选择相关系数最大的为目标。</p>
 <p>为了提取更多信息，通常记录多个通道脑电数据。然而模板匹配是两个一维向量的比较。所以需要空域滤波将多维信号压缩到一维。</p>
 <p>本研究使用CCA方法。</p>
 <blockquote>
-<p><a href="/2021/03/14/深度学习/典型相关分析(CCA">典型相关分析 CCA</a>/)</p>
+<p><a href="/2021/03/14/深度学习/典型相关分析(CCA)">典型相关分析 CCA</a></p>
 </blockquote>
 <p>CCA是一种多变量相关性分析方法，可发现两个多维数据集之间的潜在相关性。它为两个数据集创建一对线性组合，从而使两个组合之间的相关性最大化</p>
-<p>X,Y为两个多维信号，x,y为canonical 变量。  $x=X^TW_x$, $y=Y^TW_y$</p>
-<p>$W_x,W_y$ 可通过最大化x,y的相关系数$\rho$ 计算：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416153640465.png" alt></p>
+<p>X,Y为两个多维信号，x,y为canonical 变量。 <span class="math inline">\(x=X^TW_x\)</span>, <span class="math inline">\(y=Y^TW_y\)</span></p>
+<p><span class="math inline">\(W_x,W_y\)</span> 可通过最大化x,y的相关系数<span class="math inline">\(\rho\)</span> 计算：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416153640465.png"></p>
 <blockquote>
 <p>模板创建</p>
 </blockquote>
 <p>对第i组，选取目标r作为参考，被试通过注意参考目标N个刺激周期，获得原始数据。</p>
-<p>该数据采集C个电极信息。先对2-30Hz信号时域滤波。然后分段（周期）减去均值确定中心。得到数据$X_r^n(t),,n=1,2,…N$.$X_r^n(t)\in R^{C\times L}$.L是采样点。</p>
-<p>本文中，$r=11$,    $C=9$,    $N=200$.    码长$lc=64bits$,    屏幕刷新率$fr=60Hz$,    采样率$fs=1000Hz$,</p>
-<p>所以$L=floor(lc/fr.fs)=1066$.</p>
-<p>通过平均$X_r^n(t)$ 得到模板$\overline{S}_r(t)\in R^{C\times L}$ </p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416160806928.png" alt></p>
-<p>$S_r(t)=[\overline{S}_r(t),\overline{S}_r(t),…,\overline{S}_r(t)]$,  复制N次</p>
-<p>$X_r(t)=[X_r^1(t),X_r^1(t),…X_r^1(t)]$,  拼接N个周期数据</p>
-<p>$S_r(t)和X_r(t)$都是$C\times (N.L)$ 矩阵。</p>
-<p>作为CCA输入，得到第i组的$C\times 1$ 的空间滤波器$w_{xi}$</p>
-<p>然后通过$T_{ir}(t)=w_{xi}^T.\overline{S}_r(t)$得到一维模板矢量</p>
-<p>所有目标的模板可通过循环移位获得</p>
-<script type="math/tex; mode=display">
-T_{ik}(t)=T_{ir}(t-b_s(\tau_k-\tau_r))  ,k=1,2,...16</script><p>其中 k是目标数，$b_s=4$ 是移位比特数。</p>
-<p>$\tau_k-\tau_r=(k-r).fs/fr$</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416163334043.png" alt></p>
+<p>该数据采集C个电极信息。先对2-30Hz信号时域滤波。然后分段（周期）减去均值确定中心。得到数据<span class="math inline">\(X_r^n(t),,n=1,2,...N\)</span>.<span class="math inline">\(X_r^n(t)\in R^{C\times L}\)</span>.L是采样点。</p>
+<p>本文中，<span class="math inline">\(r=11\)</span>, <span class="math inline">\(C=9\)</span>, <span class="math inline">\(N=200\)</span>. 码长<span class="math inline">\(lc=64bits\)</span>, 屏幕刷新率<span class="math inline">\(fr=60Hz\)</span>, 采样率<span class="math inline">\(fs=1000Hz\)</span>,</p>
+<p>所以<span class="math inline">\(L=floor(lc/fr.fs)=1066\)</span>.</p>
+<p>通过平均<span class="math inline">\(X_r^n(t)\)</span> 得到模板<span class="math inline">\(\overline{S}_r(t)\in R^{C\times L}\)</span></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416160806928.png"></p>
+<p><span class="math inline">\(S_r(t)=[\overline{S}_r(t),\overline{S}_r(t),...,\overline{S}_r(t)]\)</span>, 复制N次</p>
+<p><span class="math inline">\(X_r(t)=[X_r^1(t),X_r^1(t),...X_r^1(t)]\)</span>, 拼接N个周期数据</p>
+<p><span class="math inline">\(S_r(t)和X_r(t)\)</span>都是<span class="math inline">\(C\times (N.L)\)</span> 矩阵。</p>
+<p>作为CCA输入，得到第i组的<span class="math inline">\(C\times 1\)</span> 的空间滤波器<span class="math inline">\(w_{xi}\)</span></p>
+<p>然后通过<span class="math inline">\(T_{ir}(t)=w_{xi}^T.\overline{S}_r(t)\)</span>得到一维模板矢量</p>
+<p>所有目标的模板可通过循环移位获得 <span class="math display">\[
+T_{ik}(t)=T_{ir}(t-b_s(\tau_k-\tau_r))  ,k=1,2,...16
+\]</span> 其中 k是目标数，<span class="math inline">\(b_s=4\)</span> 是移位比特数。</p>
+<p><span class="math inline">\(\tau_k-\tau_r=(k-r).fs/fr\)</span></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416163334043.png"></p>
 <blockquote>
 <p>模板匹配</p>
 </blockquote>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416163523150.png" alt></p>
-<p>与训练阶段相同，滤波，中心化，CCA得到$y_i(t)=w_{xi}^T.Y(t)$ .</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416163523150.png"></p>
+<p>与训练阶段相同，滤波，中心化，CCA得到<span class="math inline">\(y_i(t)=w_{xi}^T.Y(t)\)</span> .</p>
 <p>计算皮尔逊相关</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416163936203.png" alt></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416163936203.png"></p>
 <p>选取每组的最大值</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416164006759.png" alt></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416164006759.png"></p>
 <p>三个最大值中的最大值几位注视目标</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416164053461.png" alt></p>
-<h2 id="4-评估，实验"><a href="#4-评估，实验" class="headerlink" title="4. 评估，实验"></a>4. 评估，实验</h2><h3 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h3><p>分类准确度</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416165155231.png" alt></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416164053461.png"></p>
+<h2 id="评估实验">4. 评估，实验</h2>
+<h3 id="数据获取">数据获取</h3>
+<p>分类准确度</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416165155231.png"></p>
 <blockquote>
 <p>离线实验</p>
 </blockquote>
@@ -1376,32 +1382,41 @@ T_{ik}(t)=T_{ir}(t-b_s(\tau_k-\tau_r))  ,k=1,2,...16</script><p>其中 k是目�
 <blockquote>
 <p>模拟在线实验</p>
 </blockquote>
-<h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h2><h3 id="1-c-VEP信号的自相关和互相关"><a href="#1-c-VEP信号的自相关和互相关" class="headerlink" title="1 c-VEP信号的自相关和互相关"></a>1 c-VEP信号的自相关和互相关</h3><p>三个参考模板的自相关和互相关图</p>
+<h2 id="结论">5. 结论</h2>
+<h3 id="c-vep信号的自相关和互相关">1 c-VEP信号的自相关和互相关</h3>
+<p>三个参考模板的自相关和互相关图</p>
 <p>第一行自相关函数，中心峰与最大旁瓣之比足够大，可以确保在单个组中准确区分不同目标</p>
 <p>第二行互相关函数，与自相关函数相比有短暂的时延，可以区分不同目标</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416165754847.png" alt></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416165754847.png"></p>
 <p><strong>注意</strong>，尽管目标刺激都作为二进制信号不相关，但这并不意味着对这些刺激的响应也不相关，因为大脑是一个非线性的动力系统。</p>
-<h3 id="2-分类准确率"><a href="#2-分类准确率" class="headerlink" title="2 分类准确率"></a>2 分类准确率</h3><p>见表II</p>
-<h3 id="3-混淆矩阵"><a href="#3-混淆矩阵" class="headerlink" title="3 混淆矩阵"></a>3 混淆矩阵</h3><p>可以看出，这些目标的分类精度较高，并且这些目标之间的准确性没有明显差异。<br>从矩阵中可以看出，目标6最经常与目标7混淆。但是，大多数目标与周围目标（包括四个边和四个对角线的目标）混淆了（见图1）。这种现象可能源于附近刺激物对目标刺激物的干扰。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416175115623.png" alt></p>
+<h3 id="分类准确率">2 分类准确率</h3>
+<p>见表II</p>
+<h3 id="混淆矩阵">3 混淆矩阵</h3>
+<p>可以看出，这些目标的分类精度较高，并且这些目标之间的准确性没有明显差异。 从矩阵中可以看出，目标6最经常与目标7混淆。但是，大多数目标与周围目标（包括四个边和四个对角线的目标）混淆了（见图1）。这种现象可能源于附近刺激物对目标刺激物的干扰。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416175115623.png"></p>
 <p>图b显示了单组受试者之间目标识别的平均混淆矩阵。</p>
 <p>显然，每组的分类准确性很高，并且各组之间的准确性几乎没有差异。</p>
 <p>组之间精度的良好平衡可能归因于三个调制序列的良好自相关和互相关特性。</p>
 <p>每个组最常与相邻的组混淆。这种现象也可能是由于<code>附近群体的刺激干扰目标所致</code></p>
-<h3 id="4-目标识别的数据长度"><a href="#4-目标识别的数据长度" class="headerlink" title="4 目标识别的数据长度"></a>4 目标识别的数据长度</h3><p>分类精度和ITR用来评估该范式的性能</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416181053928.png" alt></p>
+<h3 id="目标识别的数据长度">4 目标识别的数据长度</h3>
+<p>分类精度和ITR用来评估该范式的性能</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416181053928.png"></p>
 <p>M是目标数，P是检测精度，T是目标选择时间</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416181254026.png" alt="**图5.平均精确度和平均ITR**"></p>
-<h3 id="5-训练次数"><a href="#5-训练次数" class="headerlink" title="5 训练次数"></a>5 训练次数</h3><p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416182129371.png" alt></p>
-<h3 id="6-模拟在线实验"><a href="#6-模拟在线实验" class="headerlink" title="6 模拟在线实验"></a>6 模拟在线实验</h3><p>刺激数量有16提速到48，准确率小幅下降的同时，大大提高了ITRs</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416182417845.png" alt></p>
-<h2 id="6-笔记"><a href="#6-笔记" class="headerlink" title="6. 笔记"></a>6. 笔记</h2><ol>
-<li><p>伪随机M序列具有良好的自相关特性，这使得可以创建相同M序列的一组循环移位。<br>因此，一组循环移位序列表现出良好的互相关特性，并且可以用于调制单个刺激组。<br>然而，不同的M序列不能保证良好的互相关性，因此它们的循环移位序列也没有。<br>因此，它们不能用于调节多组刺激。<br>为了解决该问题，选择了一对Golay互补序列和几乎完美的自相关序列，以调制c-VEP BCI范式中的三组刺激。<br>它们表现出良好的自相关和良好的互相关，并且原则上确保了由三个调制码及其循环移位码激励的不同目标的刺激信号之间的正交性</p>
-</li>
-<li><p>为了将所有48个刺激目标在有限的区域内排列在监视器上，使用等效邻居的原理来设计视觉刺激器。<br>单个组中的十六个刺激紧密放置在一起以节省屏幕空间。<br>有了互补的非目标刺激，每个目标刺激和所有邻居都会保持固定时滞的关系。<br>由于中央凹视野之外的刺激也可能有助于VEP ，因此该原理利用了对目标及其邻居的诱发反应。<br>但这是在以下基础上建立的：<code>从人眼到所有目标的中心点的视角是相同的，并且等于在训练阶段用于模板数据获取的从人眼到参考目标的中心点的视角</code>。<br>在实践中，很难做到这一点，特别是对于具有大量目标刺激的视觉刺激器而言。<br><code>结果</code>，由邻近刺激引起的诱发反应并不是一种有用的信号，而是一种噪声干扰。</p>
-</li>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416181254026.png" alt="图5.平均精确度和平均ITR"><figcaption aria-hidden="true"><strong>图5.平均精确度和平均ITR</strong></figcaption>
+</figure>
+<h3 id="训练次数">5 训练次数</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416182129371.png"></p>
+<h3 id="模拟在线实验">6 模拟在线实验</h3>
+<p>刺激数量有16提速到48，准确率小幅下降的同时，大大提高了ITRs</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/image-20210416182417845.png"></p>
+<h2 id="笔记">6. 笔记</h2>
+<ol type="1">
+<li><p>伪随机M序列具有良好的自相关特性，这使得可以创建相同M序列的一组循环移位。 因此，一组循环移位序列表现出良好的互相关特性，并且可以用于调制单个刺激组。 然而，不同的M序列不能保证良好的互相关性，因此它们的循环移位序列也没有。 因此，它们不能用于调节多组刺激。 为了解决该问题，选择了一对Golay互补序列和几乎完美的自相关序列，以调制c-VEP BCI范式中的三组刺激。 它们表现出良好的自相关和良好的互相关，并且原则上确保了由三个调制码及其循环移位码激励的不同目标的刺激信号之间的正交性</p></li>
+<li><p>为了将所有48个刺激目标在有限的区域内排列在监视器上，使用等效邻居的原理来设计视觉刺激器。 单个组中的十六个刺激紧密放置在一起以节省屏幕空间。 有了互补的非目标刺激，每个目标刺激和所有邻居都会保持固定时滞的关系。 由于中央凹视野之外的刺激也可能有助于VEP ，因此该原理利用了对目标及其邻居的诱发反应。 但这是在以下基础上建立的：<code>从人眼到所有目标的中心点的视角是相同的，并且等于在训练阶段用于模板数据获取的从人眼到参考目标的中心点的视角</code>。 在实践中，很难做到这一点，特别是对于具有大量目标刺激的视觉刺激器而言。 <code>结果</code>，由邻近刺激引起的诱发反应并不是一种有用的信号，而是一种噪声干扰。</p></li>
 </ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
       <categories>
         <category>论文</category>
       </categories>
