@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Day5MicroState analysis | Mr.Liu</title><meta name="keywords" content="MicroState-analysis"><meta name="author" content="刘 可"><meta name="copyright" content="刘 可"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Basic Knowledge电极数量&gt;18  Global Field Power (GFP): 某个时间点地形图所有电极电压值的标准差，用于描述某个地形图电场的强度   GFP &#x3D; \sqrt{\sum_{i&#x3D;1}^{N} (u_i - \hat{u})^2&#x2F;N}">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Day5MicroState analysis | Mr.Liu</title><meta name="keywords" content="MicroState-analysis"><meta name="author" content="刘 可"><meta name="copyright" content="刘 可"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Basic Knowledge 电极数量&gt;18  Global Field Power (GFP): 某个时间点地形图所有电极电压值的标准差，用于描述某个地形图电场的强度  \[ GFP &#x3D; \sqrt{\sum_{i&#x3D;1}^{N} (u_i - \hat{u})^2&#x2F;N} \]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day5MicroState analysis">
 <meta property="og:url" content="https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/index.html">
 <meta property="og:site_name" content="Mr.Liu">
-<meta property="og:description" content="Basic Knowledge电极数量&gt;18  Global Field Power (GFP): 某个时间点地形图所有电极电压值的标准差，用于描述某个地形图电场的强度   GFP &#x3D; \sqrt{\sum_{i&#x3D;1}^{N} (u_i - \hat{u})^2&#x2F;N}">
+<meta property="og:description" content="Basic Knowledge 电极数量&gt;18  Global Field Power (GFP): 某个时间点地形图所有电极电压值的标准差，用于描述某个地形图电场的强度  \[ GFP &#x3D; \sqrt{\sum_{i&#x3D;1}^{N} (u_i - \hat{u})^2&#x2F;N} \]">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://1iuke.github.io/img/1.jpg">
+<meta property="og:image" content="https://1iuke.github.io/img/001.jpg">
 <meta property="article:published_time" content="2021-03-21T01:09:27.000Z">
 <meta property="article:modified_time" content="2021-04-01T04:13:27.795Z">
 <meta property="article:author" content="刘 可">
 <meta property="article:tag" content="MicroState-analysis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://1iuke.github.io/img/1.jpg"><link rel="shortcut icon" href="/img/avatar.gif"><link rel="canonical" href="https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="googlef811cf3092b9435a.html"/><meta name="baidu-site-verification" content="aaf92e4e610457deeceb4dbda4f59545"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+<meta name="twitter:image" content="https://1iuke.github.io/img/001.jpg"><link rel="shortcut icon" href="/img/avatar.gif"><link rel="canonical" href="https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="googlef811cf3092b9435a.html"/><meta name="baidu-site-verification" content="aaf92e4e610457deeceb4dbda4f59545"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?0ac6151ecf5087238476b9c52c29f00e";
@@ -43,8 +43,8 @@
     month: '个月前'
   },
   copyright: {"limitCount":50,"languages":{"author":"作者: 刘 可","link":"链接: ","source":"来源: Mr.Liu","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-center"},
+  lightbox: 'null',
+  Snackbar: undefined,
   source: {
     jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
     justifiedGallery: {
@@ -56,9 +56,9 @@
       css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
     }
   },
-  isPhotoFigcaption: false,
+  isPhotoFigcaption: true,
   islazyload: true,
-  isanchor: false
+  isanchor: true
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
   isPost: true,
   isHome: false,
@@ -151,102 +151,121 @@
     if (fontSizeVal !== undefined) {
       document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
     }
-    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/self/Kimbiedark.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Mr.Liu" type="application/atom+xml">
-</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Mr.Liu</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Day5MicroState analysis</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-21T01:09:27.000Z" title="发表于 2021-03-21 09:09:27">2021-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-01T04:13:27.795Z" title="更新于 2021-04-01 12:13:27">2021-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%84%91%E7%94%B5/">脑电</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Day5MicroState analysis"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Basic-Knowledge"><a href="#Basic-Knowledge" class="headerlink" title="Basic Knowledge"></a>Basic Knowledge</h1><p>电极数量&gt;18</p>
-<ol>
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><link rel="stylesheet" href="/self/Kimbiedark.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Mr.Liu" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fas fa-messageboard"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/timeline"><i class="fa-fw fas fa-timeline"></i><span> 日志</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/001.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Mr.Liu</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fas fa-messageboard"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/timeline"><i class="fa-fw fas fa-timeline"></i><span> 日志</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Day5MicroState analysis</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-21T01:09:27.000Z" title="发表于 2021-03-21 09:09:27">2021-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-01T04:13:27.795Z" title="更新于 2021-04-01 12:13:27">2021-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%84%91%E7%94%B5/">脑电</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Day5MicroState analysis"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="basic-knowledge">Basic Knowledge</h1>
+<p>电极数量&gt;18</p>
+<ol type="1">
 <li>Global Field Power (GFP): 某个<strong>时间点</strong>地形图<strong>所有电极</strong>电压值的<strong>标准差</strong>，用于描述某个地形图电场的<strong>强度</strong></li>
 </ol>
-<script type="math/tex; mode=display">
-GFP = \sqrt{\sum_{i=1}^{N} (u_i - \hat{u})^2/N}</script><span id="more"></span>
+<p><span class="math display">\[
+GFP = \sqrt{\sum_{i=1}^{N} (u_i - \hat{u})^2/N}
+\]</span></p>
+<span id="more"></span>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">% 计算ERP的GFP  由于相对单个被试而言，总平均的ERP波形信噪比高</span><br><span class="hljs-comment">%故对总平均ERP波形计算GFP</span><br><br><span class="hljs-comment">% step1 使用pop_loadset 载入所有20个数据</span><br><br><span class="hljs-comment">% step2  使用Edit 》 Append dataset  拼接20 个数据</span><br>  <br>ERPdata = <span class="hljs-built_in">mean</span>(EEG.data,<span class="hljs-number">3</span>);  <span class="hljs-comment">%59  3000  </span><br>GFPdata = std(ERPdata,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>);  <span class="hljs-comment">%1   3000</span><br><br><span class="hljs-comment">% 绘制</span><br><span class="hljs-built_in">figure</span>;<br>subplot(<span class="hljs-number">121</span>);<span class="hljs-built_in">plot</span>(EEG.times,ERPdata);<br>subplot(<span class="hljs-number">122</span>);<span class="hljs-built_in">plot</span>(EEG.times,GFPdata);<br></code></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/EEG_GFP.png" alt="EEG_GFP"></p>
-<p>峰处  信噪比高</p>
-<p>谷处  信噪比低</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321095828890.png" alt="image-20210321095828890"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/EEG_GFP.png" alt="EEG_GFP"><figcaption aria-hidden="true">EEG_GFP</figcaption>
+</figure>
+<p>峰处 信噪比高</p>
+<p>谷处 信噪比低</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321095828890.png" alt="image-20210321095828890"><figcaption aria-hidden="true">image-20210321095828890</figcaption>
+</figure>
 <ul>
 <li>谷”意味着一种地形图向另一种地 形图过渡</li>
 <li>比较两个地形图相似度之前，将两个地形图分别除以其GFP， 得到<strong>标准化</strong>的地形图</li>
 </ul>
 <p><strong>K-mean</strong></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321110743530.png" alt="image-20210321110743530"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321113419585.png" alt="image-20210321113419585"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321115239769.png" alt="image-20210321115239769"></p>
-<p>静息态EEG的Microstate分析与ERP的Microstate分析有哪些差异？ </p>
-<ol>
-<li>地形图的极性 </li>
-<li>选取所有时刻点的地形图？GFP峰处的地形图 </li>
-<li>Microstate class的数目及其意义 </li>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321110743530.png" alt="image-20210321110743530"><figcaption aria-hidden="true">image-20210321110743530</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321113419585.png" alt="image-20210321113419585"><figcaption aria-hidden="true">image-20210321113419585</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/image-20210321115239769.png" alt="image-20210321115239769"><figcaption aria-hidden="true">image-20210321115239769</figcaption>
+</figure>
+<p>静息态EEG的Microstate分析与ERP的Microstate分析有哪些差异？</p>
+<ol type="1">
+<li>地形图的极性</li>
+<li>选取所有时刻点的地形图？GFP峰处的地形图</li>
+<li>Microstate class的数目及其意义</li>
 <li>可提供的指标的差异</li>
 </ol>
 <p>EEG 微状态分析</p>
-<ol>
+<ol type="1">
 <li>电极数目一样</li>
 <li>顺序一样</li>
 <li>对应空间坐标</li>
 <li>采样率一致</li>
 </ol>
-<p>静息态EEG分析：<br>示例数据为cleaned_rest_data<br>使用的Microstate0.3插件（仅适用于静息态微状态分析，不适用ERP微状态分析）<br>使用的脚本是EEG_microstate_analysis.m</p>
+<p>静息态EEG分析： 示例数据为cleaned_rest_data 使用的Microstate0.3插件（仅适用于静息态微状态分析，不适用ERP微状态分析） 使用的脚本是EEG_microstate_analysis.m</p>
 <p>Microstate0.3插件的安装：将Microstate0.3文件夹复制到eeglab的plugins文件夹中，并通过set path加入路径</p>
-<p>在使用上述插件和脚本处理数据前：<br>（1）数据做好常规的预处理操作，分段不分段均可。在静息态EEG  microstate分析中，需要在做完常规的预处理后，进而两个额外的预处理操作：第一个是全脑平均参考；第二个是带通滤波1~40 Hz或 2~20 Hz（居多）。在脚本EEG_microstate_analysis.m中包括上述两个操作（全脑平均参考和2~20 Hz滤波），因此这两个操作你自己不需要去做；<br>（2）如示例数据那样组织好数据，每个条件或每个组别下的所有被试各一个文件夹   如group1和group2各一个文件夹<br>（3）反复检查预处理后的数据的质量，特别是不能有坏电极、将采集非脑信号的电极如眼电乳突删掉</p>
+<p>在使用上述插件和脚本处理数据前： （1）数据做好常规的预处理操作，分段不分段均可。在静息态EEG microstate分析中，需要在做完常规的预处理后，进而两个额外的预处理操作：第一个是全脑平均参考；第二个是带通滤波1~40 Hz或 2~20 Hz（居多）。在脚本EEG_microstate_analysis.m中包括上述两个操作（全脑平均参考和2~20 Hz滤波），因此这两个操作你自己不需要去做； （2）如示例数据那样组织好数据，每个条件或每个组别下的所有被试各一个文件夹 如group1和group2各一个文件夹 （3）反复检查预处理后的数据的质量，特别是不能有坏电极、将采集非脑信号的电极如眼电乳突删掉</p>
 <p><strong>运行步骤：</strong></p>
-<ol>
-<li><p>将EEG_microstate_analysis.m所在的路径设置为current folder</p>
-</li>
-<li><p>运行上述脚本  把该脚本拖进command window<br>窗口1：指定某个条件或组别的数据所在的文件夹  如group1<br>窗口2：该数据所属的条件名称  本例EC<br>窗口3：指定数据所属的组别 如group1<br>窗口4：microstate分析生成的结果保存的路径  注意：该路径不要与脑电数据的路径相同也就是不要与窗口1路径相同<br>窗口5：是否需要删掉某些电极 是1否0   输入1会后续要求你输入哪些电极   本例输入0</p>
+<ol type="1">
+<li><p>将EEG_microstate_analysis.m所在的路径设置为current folder</p></li>
+<li><p>运行上述脚本 把该脚本拖进command window 窗口1：指定某个条件或组别的数据所在的文件夹 如group1 窗口2：该数据所属的条件名称 本例EC 窗口3：指定数据所属的组别 如group1 窗口4：microstate分析生成的结果保存的路径 注意：该路径不要与脑电数据的路径相同也就是不要与窗口1路径相同 窗口5：是否需要删掉某些电极 是1否0 输入1会后续要求你输入哪些电极 本例输入0</p>
 <p>窗口5后载入数据并进行额外处理：平均参考、带通滤波2~20 Hz</p>
-<p>窗口6：是否从GFP峰处选取原始图 是1否0  本例输入1（一般建议）<br>窗口7：是否忽略地形图极性 是1否0  本例输入1<br>窗口8：使用何种方法进行聚类 AAHC输入1 k-mean输入0  本例输入1<br>窗口9：选择k-means的话需要指定重新开始的数目，比如100   选择AAHC的话，这里输入1 </p>
+<p>窗口6：是否从GFP峰处选取原始图 是1否0 本例输入1（一般建议） 窗口7：是否忽略地形图极性 是1否0 本例输入1 窗口8：使用何种方法进行聚类 AAHC输入1 k-mean输入0 本例输入1 窗口9：选择k-means的话需要指定重新开始的数目，比如100 选择AAHC的话，这里输入1</p>
 <p>microstate0.3插件默认分为4类</p>
-<p>​    窗口9后对group1下的15个人的数据进行聚类，弹出组平均水平的4个map，此处需要指定4个地形图的顺序<br>顺序需要跟经典文献里面的顺序相一致<br>点man. sort  输入顺序 比如3 1 2 4<br>调整好顺序后，点close<br>接着要求我们指定是不是按照上述地形图的顺序，对每个人的4个地形图也重新排序，点yes</p>
-<p>窗口10：判断每个时间点地形图属于哪一类的时候，是否是依据GFP峰处地形图还是每个时间点的地形图<br>一般是选择GFP峰处   本例可输入1</p>
-</li>
+<p>​ 窗口9后对group1下的15个人的数据进行聚类，弹出组平均水平的4个map，此处需要指定4个地形图的顺序 顺序需要跟经典文献里面的顺序相一致 点man. sort 输入顺序 比如3 1 2 4 调整好顺序后，点close 接着要求我们指定是不是按照上述地形图的顺序，对每个人的4个地形图也重新排序，点yes</p>
+<p>窗口10：判断每个时间点地形图属于哪一类的时候，是否是依据GFP峰处地形图还是每个时间点的地形图 一般是选择GFP峰处 本例可输入1</p></li>
 </ol>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%%绘制单个被试的4个map</span><br>EEG = pop_loadset(<span class="hljs-string">&#x27;filename&#x27;</span>,<span class="hljs-string">&#x27;sub01.set&#x27;</span>,<span class="hljs-string">&#x27;filepath&#x27;</span>,<span class="hljs-string">&#x27;C:\Users\admin\Desktop\21EEG_day5\1EEGmicrostate\&#x27;);</span><br><span class="hljs-string">maps = EEG.msinfo.MSMaps(4).Maps;</span><br><span class="hljs-string">maps(3,:) = maps(3,:) * (-1); % 因为该被试map3的极性与经典文献里面的极性相反</span><br><span class="hljs-string"></span><br><span class="hljs-string">figure;</span><br><span class="hljs-string">for i = 1:4</span><br><span class="hljs-string">    subplot(2,2,i);</span><br><span class="hljs-string">    topoplot(maps(i,:), EEG.chanlocs);</span><br><span class="hljs-string">end</span><br><span class="hljs-string"></span><br><span class="hljs-string">%% 绘制组平均水平的4个 map</span><br><span class="hljs-string">EEG = pop_loadset(&#x27;</span>filename&#x27;,<span class="hljs-string">&#x27;GrandMeanECgroup1.set&#x27;</span>,<span class="hljs-string">&#x27;filepath&#x27;</span>,<span class="hljs-string">&#x27;C:\Users\admin\Desktop\24EEG_day5\1EEGmicrostate\&#x27;);</span><br><span class="hljs-string">maps_group = EEG.msinfo.MSMaps(4).Maps;</span><br><span class="hljs-string">maps_group(3,:) = maps_group(3,:) * (-1); % 因为组水平map3的极性与经典文献里面的极性相反</span><br><span class="hljs-string"></span><br><span class="hljs-string">figure;</span><br><span class="hljs-string">for i = 1:4</span><br><span class="hljs-string">    subplot(2,2,i);</span><br><span class="hljs-string">    topoplot(maps_group(i,:), EEG.chanlocs);</span><br><span class="hljs-string">end</span><br></code></pre></td></tr></table></figure>
 <p>个体</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/个体.png" alt="个体"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/个体.png" alt="个体"><figcaption aria-hidden="true">个体</figcaption>
+</figure>
 <p>组平均</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/组平均.png" alt="组平均"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/组平均.png" alt="组平均"><figcaption aria-hidden="true">组平均</figcaption>
+</figure>
 <p><strong>文件</strong></p>
 <ul>
-<li><p>ResultsFromGrandGrandMeanTemplate.csv：判断每个时刻点地形图属于哪一类的时候，依据组平均水平的4个图</p>
-</li>
+<li><p>ResultsFromGrandGrandMeanTemplate.csv：判断每个时刻点地形图属于哪一类的时候，依据组平均水平的4个图</p></li>
 <li><p>ResultsFromIndividualTemplates.csv：判断每个时刻点地形图属于哪一类的时候，依据单个被试的4个图</p>
-</li>
-</ul>
-<p>  上述两个文件中的内容，文章中均可以用  用一个就行</p>
-<p>  <strong>指标</strong></p>
-<ul>
-<li><p>ExpVar：将数据分为4类时，四类地形图解释的方差比例  一般应70%~80%左右‘’</p>
-</li>
-<li><p>Duration_1~Duration_4：四个微状态类别的平均持续时间  单位秒</p>
-</li>
-<li><p>MeanDuration：上述四个指标的平均数</p>
-</li>
-<li><p>Occurrence_1~Occurrence_4：四个微状态类别单位时间内出现的次数  单位：次/秒</p>
-</li>
-<li><p>MeanOccurrence：上述四个的加和</p>
-</li>
-<li><p>Contribution_1~Contribution_4：四个微状态类别涵盖的时间百分比</p>
-</li>
-<li><p>OrgTM:4个微状态类别之间相互转换的概率 12个概率值</p>
-</li>
-<li><p>DeltaTM: 消除了各个微状态类别Occurrence不一样 对转换概率的影响，等于OrgTM和ExpTM 的差值<br>统计分析中，OrgTM和ExpTM均可</p>
-</li>
+<p>上述两个文件中的内容，文章中均可以用 用一个就行</p>
+<p><strong>指标</strong></p></li>
+<li><p>ExpVar：将数据分为4类时，四类地形图解释的方差比例 一般应70%~80%左右‘’</p></li>
+<li><p>Duration_1~Duration_4：四个微状态类别的平均持续时间 单位秒</p></li>
+<li><p>MeanDuration：上述四个指标的平均数</p></li>
+<li><p>Occurrence_1~Occurrence_4：四个微状态类别单位时间内出现的次数 单位：次/秒</p></li>
+<li><p>MeanOccurrence：上述四个的加和</p></li>
+<li><p>Contribution_1~Contribution_4：四个微状态类别涵盖的时间百分比</p></li>
+<li><p>OrgTM:4个微状态类别之间相互转换的概率 12个概率值</p></li>
+<li><p>DeltaTM: 消除了各个微状态类别Occurrence不一样 对转换概率的影响，等于OrgTM和ExpTM 的差值 统计分析中，OrgTM和ExpTM均可</p></li>
 </ul>
 <p><strong>上述指标的统计分析思路：</strong></p>
-<ol>
-<li><p>ExpVar指标文章里面报告被试间的均值和标准差、取值范围即可  不需要统计</p>
-</li>
-<li><p>Duration_1— Duration_4、Occurrence_1— Occurrence_4、Contribution_1~Contribution_4<br>统计分析时，需要将微状态类别作为自变量（组内）<br>假如是单因素2水平的组间实验设计，进行2（组别，两组人）*4（微状态类别，4个类别）方差分析<br> MeanDuration、MeanOccurrence不需要进行统计分析</p>
-</li>
-<li><p>OrgTM 或 DeltaTM 12个概率<br>假如是单因素2水平的组间实验设计，进行12个独立样本 t 检验，接着需要使用FDR等方法进行多重比较校正</p>
-</li>
+<ol type="1">
+<li><p>ExpVar指标文章里面报告被试间的均值和标准差、取值范围即可 不需要统计</p></li>
+<li><p>Duration_1— Duration_4、Occurrence_1— Occurrence_4、Contribution_1~Contribution_4 统计分析时，需要将微状态类别作为自变量（组内） 假如是单因素2水平的组间实验设计，进行2（组别，两组人）*4（微状态类别，4个类别）方差分析 MeanDuration、MeanOccurrence不需要进行统计分析</p></li>
+<li><p>OrgTM 或 DeltaTM 12个概率<br>
+假如是单因素2水平的组间实验设计，进行12个独立样本 t 检验，接着需要使用FDR等方法进行多重比较校正</p>
+<p><strong>ERP的微状态分析：</strong> CARTOOL软件可对静息态EEG也可以对ERP进行微状态分析，且可鉴别最佳的类别数目 上述eeglab插件仅适用于静息态EEG，且不能鉴别最佳类别数目（强制分为4类）</p>
+<p>CARTOOL软件：不好用、难学、数据大一些会崩溃（降低采样率到125 Hz或250 Hz、电极数目降低）、运行慢</p>
+<p>CARTOOL软件不能识别 eeglab格式的数据，需要把数据转存为brain vison(BP)格式 File &gt;&gt; Export &gt;&gt; Write Brain Vis. exchange format file brain vison(BP)格式每个数据有三个文件：dat文件 vhdr文件和 vmrk文件</p>
+<p>Cartool 软件：Tools &gt;&gt; EEG and tracks &gt;&gt; Segmentation of EEG files</p>
+<p>ep文件为一个微状态类别数目*电极的二维矩阵，可用于绘制每个微状态类别的地形图（借助eeglab中的topoplot函数绘制） seg文件：第三列存储的是每个时间点属于什么微状态类别 0表示什么类别都不属于</p></li>
 </ol>
-<p>   <strong>ERP的微状态分析：</strong><br>   CARTOOL软件可对静息态EEG也可以对ERP进行微状态分析，且可鉴别最佳的类别数目<br>   上述eeglab插件仅适用于静息态EEG，且不能鉴别最佳类别数目（强制分为4类）</p>
-<p>   CARTOOL软件：不好用、难学、数据大一些会崩溃（降低采样率到125 Hz或250 Hz、电极数目降低）、运行慢</p>
-<p>   CARTOOL软件不能识别 eeglab格式的数据，需要把数据转存为brain vison(BP)格式<br>   File &gt;&gt; Export &gt;&gt; Write Brain Vis. exchange format file<br>   brain vison(BP)格式每个数据有三个文件：dat文件   vhdr文件和 vmrk文件</p>
-<p>   Cartool 软件：Tools &gt;&gt; EEG and tracks &gt;&gt; Segmentation of EEG files</p>
-<p>   ep文件为一个微状态类别数目*电极的二维矩阵，可用于绘制每个微状态类别的地形图（借助eeglab中的topoplot函数绘制）<br>   seg文件：第三列存储的是每个时间点属于什么微状态类别  0表示什么类别都不属于</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">刘 可</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/">https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1iuke.github.io" target="_blank">Mr.Liu</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MicroState-analysis/">MicroState-analysis</a></div><div class="post_share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/"><img class="prev-cover" data-lazy-src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Day5night</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day4%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5/"><img class="next-cover" data-lazy-src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Day4功能连接</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">刘 可</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/1iuke.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/1iuke" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Basic-Knowledge"><span class="toc-text">Basic Knowledge</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/15/Paper/Incorporation-of-dynamic-stopping-strategy-into-the-high-speed-SSVEP-based-BCIs/" title="Incorporation of dynamic stopping strategy into the high-speed SSVEP-based BCIs">Incorporation of dynamic stopping strategy into the high-speed SSVEP-based BCIs</a><time datetime="2021-04-15T10:59:30.000Z" title="发表于 2021-04-15 18:59:30">2021-04-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/15/Paper/A%20Novel%20c-VEP%20BCI%20Paradigm%20for%20Increasing%20the%20Number%20of%20Stimulus%20T%20argets%20Based%20on%20Grouping%20Modulation%20With%20Different%20Codes/" title="A Novel c-VEP BCI Paradigm for Increasing the Number of Stimulus T argets Based on Grouping Modulation With Different Codes">A Novel c-VEP BCI Paradigm for Increasing the Number of Stimulus T argets Based on Grouping Modulation With Different Codes</a><time datetime="2021-04-15T07:19:13.000Z" title="发表于 2021-04-15 15:19:13">2021-04-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/15/%E9%80%9A%E4%BF%A1/%E6%AD%A3%E4%BA%A4%E7%BC%96%E7%A0%81%E4%B8%8E%E4%BC%AA%E9%9A%8F%E6%9C%BA%E5%BA%8F%E5%88%97/" title="正交编码与伪随机序列">正交编码与伪随机序列</a><time datetime="2021-04-15T05:08:37.000Z" title="发表于 2021-04-15 13:08:37">2021-04-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/15/Paper/A%20multi-target%20brain-computer%20interface%20based%20on%20code%20modulated%20visual%20evoked%20potentials/" title="A multi-target brain-computer interface based on code modulated visual evoked potentials">A multi-target brain-computer interface based on code modulated visual evoked potentials</a><time datetime="2021-04-15T02:06:57.000Z" title="发表于 2021-04-15 10:06:57">2021-04-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/14/Paper/%E5%9F%BA%E4%BA%8E%E8%BF%90%E5%8A%A8%E6%83%B3%E8%B1%A1%E7%9A%84%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%AE%8C%E6%95%B4%E7%9A%84%E7%AE%A1%E9%81%93/" title="Transfer Learning for Motor Imagery Based Brain-Computer Interfaces - A Complete Pipeline">Transfer Learning for Motor Imagery Based Brain-Computer Interfaces - A Complete Pipeline</a><time datetime="2021-04-14T13:22:50.000Z" title="发表于 2021-04-14 21:22:50">2021-04-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 刘 可</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://1iuke.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">刘 可</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/">https://1iuke.github.io/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5MicroState-analysis/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1iuke.github.io" target="_blank">Mr.Liu</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MicroState-analysis/">MicroState-analysis</a></div><div class="post_share"><div class="social-share" data-image="/img/001.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day5night/"><img class="prev-cover" data-lazy-src="/img/005.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Day5night</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day4%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5/"><img class="next-cover" data-lazy-src="/img/002.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Day4功能连接</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#basic-knowledge"><span class="toc-text">Basic Knowledge</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/img/001.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 刘 可</div><div class="footer_custom_text">Hi, welcome to my <a href="https://1iuke.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
   endLoading: () => {
     document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded")
@@ -302,6 +321,17 @@ window.addEventListener('load',preloader.endLoading())</script><div class="js-pj
   MathJax.startup.document.state(0)
   MathJax.texReset()
   MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
 }</script><script>function loadValine () {
   function initValine () {
     const valine = new Valine(Object.assign({
@@ -383,4 +413,4 @@ if ('Valine' === 'Gitalk' || !false) {
   function loadOtherComment () {
     loadGitalk()
   }
-}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haru01.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body></html>
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
