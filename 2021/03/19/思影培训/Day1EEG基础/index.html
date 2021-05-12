@@ -5,13 +5,13 @@
 <meta property="og:site_name" content="Mr.Liu">
 <meta property="og:description" content="关于脑电信号和脑电信号预处理">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/bloglk/image/raw/master/image/010.jpg">
+<meta property="og:image" content="https://gitee.com/bloglk/image/raw/master/image/035.png">
 <meta property="article:published_time" content="2021-03-19T10:26:42.000Z">
 <meta property="article:modified_time" content="2021-04-01T04:28:45.985Z">
 <meta property="article:author" content="刘 可">
 <meta property="article:tag" content="EEGLAB">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/bloglk/image/raw/master/image/010.jpg"><link rel="shortcut icon" href="https://gitee.com/bloglk/image/raw/master/image/avatar.gif"><link rel="canonical" href="https://1iuke.github.io/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="googlef811cf3092b9435a.html"/><meta name="baidu-site-verification" content="aaf92e4e610457deeceb4dbda4f59545"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+<meta name="twitter:image" content="https://gitee.com/bloglk/image/raw/master/image/035.png"><link rel="shortcut icon" href="https://gitee.com/bloglk/image/raw/master/image/avatar.gif"><link rel="canonical" href="https://1iuke.github.io/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="googlef811cf3092b9435a.html"/><meta name="baidu-site-verification" content="aaf92e4e610457deeceb4dbda4f59545"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?0ac6151ecf5087238476b9c52c29f00e";
@@ -152,246 +152,224 @@
       document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
     }
     })(window)</script><link rel="stylesheet" href="/css/mycss.css"><link rel="stylesheet" href="/self/Kimbiedark.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Mr.Liu" type="application/atom+xml">
-</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/avatar.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fa-commenting-o"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/bloglk/image/raw/master/image/010.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Mr.Liu</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fa-commenting-o"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Day1EEG基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-19T10:26:42.000Z" title="发表于 2021-03-19 18:26:42">2021-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-01T04:28:45.985Z" title="更新于 2021-04-01 12:28:45">2021-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%84%91%E7%94%B5/">脑电</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Day1EEG基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>关于脑电信号和脑电信号预处理</p>
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/avatar.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fa-commenting-o"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/bloglk/image/raw/master/image/035.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Mr.Liu</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fa-commenting-o"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Day1EEG基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-19T10:26:42.000Z" title="发表于 2021-03-19 18:26:42">2021-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-01T04:28:45.985Z" title="更新于 2021-04-01 12:28:45">2021-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%84%91%E7%94%B5/">脑电</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Day1EEG基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>关于脑电信号和脑电信号预处理</p>
 <span id="more"></span>
-<h2 id="1-什么是脑电eeg"><a class="markdownIt-Anchor" href="#1-什么是脑电eeg"></a> 1 什么是脑电(EEG)?</h2>
+<h2 id="什么是脑电eeg">1 什么是脑电(EEG)?</h2>
 <ul>
 <li>EEG is the electrical activity, which is normally recorded at the scalp of human brain, generated by the firing of neurons within the brain.</li>
 </ul>
 <p>脑细胞无时无刻不在进行自发性、 节律性、 综合性的电活动。 将这种 电活动 的电位作为纵轴， 时间为横轴， 记录下来的电位与时间相互关系的 平面图即为脑电图（ electroencephalograph， EEG）。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B1%8A%E8%84%91%E7%94%B5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%AD%E7%BA%A7%E7%8F%ADPPT-1615949013950.jpg" alt="第二十五届脑电数据处理中级班PPT"></p>
-<h2 id="2-数据预处理"><a class="markdownIt-Anchor" href="#2-数据预处理"></a> 2 数据预处理</h2>
-<h3 id="0-eeglab启动"><a class="markdownIt-Anchor" href="#0-eeglab启动"></a> 0 eeglab启动</h3>
-<h3 id="1-数据格式转化"><a class="markdownIt-Anchor" href="#1-数据格式转化"></a> 1 数据格式转化</h3>
-<p>导入原始数据并转化为set格式文件<br>
-file --&gt; import data --&gt;using eeglab functions and plugins –&gt;  from Brain Vis,Rec…vhdr file<br>
-找到对应的厂家以及文件格式信息<br>
-如果没有你的厂家或者格式信息：<br>
-1）可以找厂家要<br>
-2）自行下载extensions 导入更多厂家的数据<br>
-<a target="_blank" rel="noopener" href="https://sccn.ucsd.edu/wiki/Plugin_list_import">https://sccn.ucsd.edu/wiki/Plugin_list_import</a></p>
-<p>导入已经存好的set文件：<br>
-file --&gt; load existing dataset</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317150558774.png" alt="image-20210317150558774"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317220023613.png" alt="image-20210317220023613"></p>
-<h3 id="2-通道定位"><a class="markdownIt-Anchor" href="#2-通道定位"></a> 2 通道定位</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/第二十五届脑电数据处理中级班PPT-1615949013950.jpg" alt="第二十五届脑电数据处理中级班PPT"><figcaption aria-hidden="true">第二十五届脑电数据处理中级班PPT</figcaption>
+</figure>
+<h2 id="数据预处理">2 数据预处理</h2>
+<h3 id="eeglab启动">0 eeglab启动</h3>
+<h3 id="数据格式转化">1 数据格式转化</h3>
+<p>导入原始数据并转化为set格式文件 file --&gt; import data --&gt;using eeglab functions and plugins –&gt; from Brain Vis,Rec..vhdr file 找到对应的厂家以及文件格式信息 如果没有你的厂家或者格式信息： 1）可以找厂家要 2）自行下载extensions 导入更多厂家的数据 https://sccn.ucsd.edu/wiki/Plugin_list_import</p>
+<p>导入已经存好的set文件： file --&gt; load existing dataset</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317150558774.png" alt="image-20210317150558774"><figcaption aria-hidden="true">image-20210317150558774</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317220023613.png" alt="image-20210317220023613"><figcaption aria-hidden="true">image-20210317220023613</figcaption>
+</figure>
+<h3 id="通道定位">2 通道定位</h3>
 <ul>
-<li>
-<p>对于标准名称的电极 可以直接定位：<br>
-<strong>Edit – channel location</strong><br>
-如果电极名称不标准<br>
-1  如果电极位于标准位置 ,只是名称不标准，可以将名字改为标准名称再进行定位 <strong>–&gt;look up locs</strong></p>
+<li><p>对于标准名称的电极 可以直接定位： <strong>Edit -- channel location</strong> 如果电极名称不标准 1 如果电极位于标准位置 ,只是名称不标准，可以将名字改为标准名称再进行定位 <strong>--&gt;look up locs</strong></p>
 <blockquote>
-<p>HEO  标准名称为  HEOG</p>
+<p>HEO 标准名称为 HEOG</p>
 </blockquote>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317220624969.png" alt="image-20210317220624969"></p>
-<p>2 如果名字不标准 位置也不标准，<br>
-2.1 如果只是极个别电极是这种情况，而这些电极又不是你关系的电极。eg: CB1 CB2 ，可以当做无用电极去掉<br>
-2.2 如果大多数电极都是这种情况，可以找厂家要坐标文件，自行导入定位。 <strong>–&gt; look up locs</strong></p>
-</li>
-<li>
-<p>查看电极名称与序号之间的关系<br>
-1）<strong>plot --&gt; channel locations - -&gt;by name/by number</strong> 电极名称或者序号 可以转换<br>
-2）点击workspace中的EEG<br>
-点开之后 再点击 chanlocs  查看电极点对应名称</p>
-</li>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317220624969.png" alt="image-20210317220624969"><figcaption aria-hidden="true">image-20210317220624969</figcaption>
+</figure>
+<p>2 如果名字不标准 位置也不标准， 2.1 如果只是极个别电极是这种情况，而这些电极又不是你关系的电极。eg: CB1 CB2 ，可以当做无用电极去掉 2.2 如果大多数电极都是这种情况，可以找厂家要坐标文件，自行导入定位。 <strong>--&gt; look up locs</strong></p></li>
+<li><p>查看电极名称与序号之间的关系 1）<strong>plot --&gt; channel locations - -&gt;by name/by number</strong> 电极名称或者序号 可以转换 2）点击workspace中的EEG 点开之后 再点击 chanlocs 查看电极点对应名称</p></li>
 </ul>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317222512799.png" alt="image-20210317222512799"></p>
-<h3 id="3-去除无用电极选"><a class="markdownIt-Anchor" href="#3-去除无用电极选"></a> 3 去除无用电极（选）</h3>
-<p><strong>Edit --&gt; select data --&gt; channel range</strong> 中选择不要的电极<br>
-<strong>on -&gt;remove these</strong> 勾选是上</p>
-<p>去除63 HEO    64 VEO</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317221423555.png" alt="image-20210317221423555"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317222512799.png" alt="image-20210317222512799"><figcaption aria-hidden="true">image-20210317222512799</figcaption>
+</figure>
+<h3 id="去除无用电极选">3 去除无用电极（选）</h3>
+<p><strong>Edit --&gt; select data --&gt; channel range</strong> 中选择不要的电极 <strong>on -&gt;remove these</strong> 勾选是上</p>
+<p>去除63 HEO 64 VEO</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317221423555.png" alt="image-20210317221423555"><figcaption aria-hidden="true">image-20210317221423555</figcaption>
+</figure>
 <p>此时电极数为62个</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317221516935.png" alt="image-20210317221516935"></p>
-<h3 id="4-滤波"><a class="markdownIt-Anchor" href="#4-滤波"></a> 4 滤波</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317221516935.png" alt="image-20210317221516935"><figcaption aria-hidden="true">image-20210317221516935</figcaption>
+</figure>
+<h3 id="滤波">4 滤波</h3>
 <p><strong>Tools --&gt; Filter the data --&gt; Basic FIR filter</strong></p>
 <ul>
-<li>
-<p>低通 low pass    high edge</p>
-</li>
-<li>
-<p>高通 high pass    lower edge</p>
-</li>
-<li>
-<p>带通  一次滤波效果优于低通+高通</p>
-</li>
+<li><p>低通 low pass high edge</p></li>
+<li><p>高通 high pass lower edge</p></li>
+<li><p>带通 一次滤波效果优于低通+高通</p></li>
 </ul>
 <p>4.1 带通</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317150348697.png" alt="image-20210317150348697"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317150348697.png" alt="image-20210317150348697"><figcaption aria-hidden="true">image-20210317150348697</figcaption>
+</figure>
 <p>滤波器：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317221718548.png" alt></p>
-<ol start="4">
-<li>
-<p>2 去50Hz工频干扰：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317151350782.png" alt="image-20210317151350782"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317221718548.png"></p>
+<ol start="4" type="1">
+<li><p>2 去50Hz工频干扰：</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317151350782.png" alt="image-20210317151350782"><figcaption aria-hidden="true">image-20210317151350782</figcaption>
+</figure>
 <p>滤波器：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223040234.png" alt="image-20210317223040234"></p>
-</li>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223040234.png" alt="image-20210317223040234"><figcaption aria-hidden="true">image-20210317223040234</figcaption>
+</figure></li>
 </ol>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223128561.png" alt="image-20210317223128561"></p>
-<h3 id="5-降采样"><a class="markdownIt-Anchor" href="#5-降采样"></a> 5 降采样</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223128561.png" alt="image-20210317223128561"><figcaption aria-hidden="true">image-20210317223128561</figcaption>
+</figure>
+<h3 id="降采样">5 降采样</h3>
 <p><strong>Tools-&gt;Change sampling rate</strong></p>
 <p>常用1000Hz</p>
 <p>缺点：降低了时间分辨率，</p>
 <p>优点：降低多重比较次数</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317152013696.png" alt="image-20210317152013696"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223246491.png" alt="image-20210317223246491"></p>
-<h3 id="6-分段"><a class="markdownIt-Anchor" href="#6-分段"></a> 6 分段</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317152013696.png" alt="image-20210317152013696"><figcaption aria-hidden="true">image-20210317152013696</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223246491.png" alt="image-20210317223246491"><figcaption aria-hidden="true">image-20210317223246491</figcaption>
+</figure>
+<h3 id="分段">6 分段</h3>
 <p><strong>Tools-&gt;extract epochs</strong></p>
 <p>6.1 提取信号前1s后2s的数据</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317153048902.png" alt="image-20210317153048902"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317153048902.png" alt="image-20210317153048902"><figcaption aria-hidden="true">image-20210317153048902</figcaption>
+</figure>
 <p>6.2 减去baseline的平均值</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223425020.png" alt="image-20210317223425020"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317153357592.png" alt="image-20210317153357592"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317192737305.png" alt="image-20210317192737305"></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317224014659.png" alt="image-20210317224014659"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317223425020.png" alt="image-20210317223425020"><figcaption aria-hidden="true">image-20210317223425020</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317153357592.png" alt="image-20210317153357592"><figcaption aria-hidden="true">image-20210317153357592</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317192737305.png" alt="image-20210317192737305"><figcaption aria-hidden="true">image-20210317192737305</figcaption>
+</figure>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317224014659.png" alt="image-20210317224014659"><figcaption aria-hidden="true">image-20210317224014659</figcaption>
+</figure>
 <p><strong>4 5 6的顺序：分段导致时间过短；</strong></p>
-<pre><code>					**降采样丢失信息**
-</code></pre>
-<h3 id="7-去除坏电极替换坏导去除坏段"><a class="markdownIt-Anchor" href="#7-去除坏电极替换坏导去除坏段"></a> 7 去除坏电极，替换坏导，去除坏段，</h3>
-<p>7.1  去除</p>
-<p><strong>Edit    -&gt;  Select data</strong> 同2</p>
+<pre><code>                    **降采样丢失信息**</code></pre>
+<h3 id="去除坏电极替换坏导去除坏段">7 去除坏电极，替换坏导，去除坏段，</h3>
+<p>7.1 去除</p>
+<p><strong>Edit -&gt; Select data</strong> 同2</p>
 <p>7.2 插补</p>
 <p><strong>Tools --&gt; Interpolate electrodes</strong></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317160732429.png" alt="image-20210317160732429"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317160732429.png" alt="image-20210317160732429"><figcaption aria-hidden="true">image-20210317160732429</figcaption>
+</figure>
 <p><strong>有效trials应超过60%</strong></p>
 <p>7.3 去除坏段</p>
 <p><strong>Plot–&gt;Channel data –&gt; Reject</strong></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317162107819.png" alt="image-20210317162107819"></p>
-<h3 id="8-ica"><a class="markdownIt-Anchor" href="#8-ica"></a> 8 ICA</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317162107819.png" alt="image-20210317162107819"><figcaption aria-hidden="true">image-20210317162107819</figcaption>
+</figure>
+<h3 id="ica">8 ICA</h3>
 <p><strong>Tools --&gt; Run ICA</strong></p>
-<p>如果没有进行坏电极插补 直接点击ok即可<br>
-如果进行坏电极插补，则需要在’extended’, 1后面加东西<br>
-<strong>’extended’, 1, ‘pca’, m-n</strong><br>
-m为当前电极数量，n为插补的电极数量</p>
-<p>数据通道太少 不建议跑ICA 可以手动去伪迹 效果不好<br>
-数据大于64个通道 例如 128导 256导 ICA通常跑64个即可</p>
+<p>如果没有进行坏电极插补 直接点击ok即可 如果进行坏电极插补，则需要在'extended', 1后面加东西 <strong>'extended', 1, 'pca', m-n</strong> m为当前电极数量，n为插补的电极数量</p>
+<p>数据通道太少 不建议跑ICA 可以手动去伪迹 效果不好 数据大于64个通道 例如 128导 256导 ICA通常跑64个即可</p>
 <p><strong>ICA过程</strong></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317225334493.png" alt="image-20210317225334493"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317225334493.png" alt="image-20210317225334493"><figcaption aria-hidden="true">image-20210317225334493</figcaption>
+</figure>
 <p><strong>绘制ICA成分</strong></p>
 <p><strong>Plot --&gt; Component properties</strong></p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317165436899.png" alt></p>
-<h3 id="9-剔除眼动"><a class="markdownIt-Anchor" href="#9-剔除眼动"></a> 9 剔除眼动</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317165436899.png"></p>
+<h3 id="剔除眼动">9 剔除眼动</h3>
 <p><strong>Tool --&gt; Reject data using ICA --&gt; Reject components by map</strong></p>
-<h4 id="91-经典成分-眨眼"><a class="markdownIt-Anchor" href="#91-经典成分-眨眼"></a> 9.1 经典成分-眨眼</h4>
+<h4 id="经典成分-眨眼">9.1 经典成分-眨眼</h4>
 <ul>
 <li>判断依据：</li>
 </ul>
-<ol>
-<li>
-<p>前端分布</p>
-</li>
-<li>
-<p>小方块</p>
-</li>
-<li>
-<p>随机分布</p>
-</li>
-<li>
-<p>低频能量高</p>
-</li>
-<li>
-<p>成分排序靠前</p>
-</li>
+<ol type="1">
+<li><p>前端分布</p></li>
+<li><p>小方块</p></li>
+<li><p>随机分布</p></li>
+<li><p>低频能量高</p></li>
+<li><p>成分排序靠前</p></li>
 </ol>
 <ul>
 <li>注意：颜色的深浅有意义， 但是红蓝无所谓，大红大蓝 都可以。</li>
 </ul>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318184633943.png" alt="image-20210318184633943"></p>
-<h4 id="92-经典成分-眼漂"><a class="markdownIt-Anchor" href="#92-经典成分-眼漂"></a> 9.2 经典成分-眼漂</h4>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318184633943.png" alt="image-20210318184633943"><figcaption aria-hidden="true">image-20210318184633943</figcaption>
+</figure>
+<h4 id="经典成分-眼漂">9.2 经典成分-眼漂</h4>
 <ul>
 <li>判断依据：</li>
 </ul>
-<ol>
-<li>
-<p>前端两侧分布， 红蓝相对</p>
-</li>
-<li>
-<p>长条状，红蓝相 间</p>
-</li>
-<li>
-<p>随机分布</p>
-</li>
-<li>
-<p>低频能量高</p>
-</li>
-<li>
-<p>成分排序靠前， 但一般排在眨眼 后面</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318184919137.png" alt="image-20210318184919137"></p>
-</li>
+<ol type="1">
+<li><p>前端两侧分布， 红蓝相对</p></li>
+<li><p>长条状，红蓝相 间</p></li>
+<li><p>随机分布</p></li>
+<li><p>低频能量高</p></li>
+<li><p>成分排序靠前， 但一般排在眨眼 后面</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318184919137.png" alt="image-20210318184919137"><figcaption aria-hidden="true">image-20210318184919137</figcaption>
+</figure></li>
 </ol>
-<h4 id="93-经典成分头动"><a class="markdownIt-Anchor" href="#93-经典成分头动"></a> 9.3 经典成分：头动</h4>
+<h4 id="经典成分头动">9.3 经典成分：头动</h4>
 <ul>
 <li>判断依据</li>
 </ul>
-<ol>
-<li>
-<p>周围分布</p>
-</li>
-<li>
-<p>长条状</p>
-</li>
-<li>
-<p>随机分布</p>
-</li>
-<li>
-<p>在单个trial里有 非常明显的漂移</p>
-</li>
+<ol type="1">
+<li><p>周围分布</p></li>
+<li><p>长条状</p></li>
+<li><p>随机分布</p></li>
+<li><p>在单个trial里有 非常明显的漂移</p></li>
 </ol>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318185015606.png" alt="image-20210318185015606"></p>
-<h4 id="94-其他成分-工频干扰"><a class="markdownIt-Anchor" href="#94-其他成分-工频干扰"></a> 9.4 其他成分： 工频干扰</h4>
-<ol>
-<li>
-<p>分布在地线 周围</p>
-</li>
-<li>
-<p>单个Trial上 的分布非常 有规律</p>
-</li>
-<li>
-<p>50Hz左右能 量最高</p>
-</li>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318185015606.png" alt="image-20210318185015606"><figcaption aria-hidden="true">image-20210318185015606</figcaption>
+</figure>
+<h4 id="其他成分-工频干扰">9.4 其他成分： 工频干扰</h4>
+<ol type="1">
+<li><p>分布在地线 周围</p></li>
+<li><p>单个Trial上 的分布非常 有规律</p></li>
+<li><p>50Hz左右能 量最高</p></li>
 </ol>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318185434043.png" alt="image-20210318185434043"></p>
-<h4 id="95-其他成分-心电"><a class="markdownIt-Anchor" href="#95-其他成分-心电"></a> 9.5 其他成分 • 心电</h4>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318185434043.png" alt="image-20210318185434043"><figcaption aria-hidden="true">image-20210318185434043</figcaption>
+</figure>
+<h4 id="其他成分-心电">9.5 其他成分 • 心电</h4>
 <p>• 呈雨点般散落状。</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318185517456.png" alt="image-20210318185517456"></p>
-<h4 id="96-保存数据-图片"><a class="markdownIt-Anchor" href="#96-保存数据-图片"></a> 9.6 保存数据、图片</h4>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210318185517456.png" alt="image-20210318185517456"><figcaption aria-hidden="true">image-20210318185517456</figcaption>
+</figure>
+<h4 id="保存数据图片">9.6 保存数据、图片</h4>
 <p>保存数据： File -&gt; save current dataset</p>
 <p>保存图片：</p>
 <ul>
-<li>
-<p>Plot   Channel   ERP image</p>
-</li>
-<li>
-<p>Plot   Channel ERPs   With scalp maps</p>
-</li>
-<li>
-<p>Plot   Channel ERPs   In scalp/rect. Array</p>
-</li>
-<li>
-<p>Plot   ERP map series    2D</p>
-</li>
+<li><p>Plot Channel ERP image</p></li>
+<li><p>Plot Channel ERPs With scalp maps</p></li>
+<li><p>Plot Channel ERPs In scalp/rect. Array</p></li>
+<li><p>Plot ERP map series 2D</p></li>
 </ul>
 <p><strong>不确定就不去除</strong></p>
-<h3 id="10-极端值去伪迹"><a class="markdownIt-Anchor" href="#10-极端值去伪迹"></a> 10 极端值去伪迹</h3>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317173206003.png" alt="image-20210317173206003"></p>
-<p>100  yes</p>
+<h3 id="极端值去伪迹">10 极端值去伪迹</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317173206003.png" alt="image-20210317173206003"><figcaption aria-hidden="true">image-20210317173206003</figcaption>
+</figure>
+<p>100 yes</p>
 <p>70/80</p>
-<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317173330602.png" alt="image-20210317173330602"></p>
-<h3 id="11-重参考"><a class="markdownIt-Anchor" href="#11-重参考"></a> 11 重参考</h3>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/image-20210317173330602.png" alt="image-20210317173330602"><figcaption aria-hidden="true">image-20210317173330602</figcaption>
+</figure>
+<h3 id="重参考">11 重参考</h3>
 <p><strong>Tools --&gt; re-reference</strong></p>
-<p>去除 TP9  TP10</p>
+<p>去除 TP9 TP10</p>
 <p>选取平均参考</p>
-<h3 id="12-手动浏览数据-查看是否还有伪迹"><a class="markdownIt-Anchor" href="#12-手动浏览数据-查看是否还有伪迹"></a> 12 手动浏览数据 查看是否还有伪迹</h3>
-<h3 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充：</h3>
-<p>12.1 只保留正确反应的分段<br>
-<strong>edit --&gt;select epochs or events</strong><br>
-在type里面选上正确反映的marker</p>
-<p>12.2 二次滤波只需要做低通滤波 做完记得基线校正<br>
-<strong>tools – remove baseline</strong></p>
+<h3 id="手动浏览数据-查看是否还有伪迹">12 手动浏览数据 查看是否还有伪迹</h3>
+<h3 id="补充">补充：</h3>
+<p>12.1 只保留正确反应的分段 <strong>edit --&gt;select epochs or events</strong> 在type里面选上正确反映的marker</p>
+<p>12.2 二次滤波只需要做低通滤波 做完记得基线校正 <strong>tools -- remove baseline</strong></p>
 <p>12.3 二次分段 也需要基线校正</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">刘 可</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1iuke.github.io/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/">https://1iuke.github.io/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1iuke.github.io" target="_blank">Mr.Liu</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/EEGLAB/">EEGLAB</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/bloglk/image/raw/master/image/010.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day4%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5/"><img class="prev-cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/012.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Day4功能连接</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day2EEGLAB%E8%84%9A%E6%9C%AC/"><img class="next-cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/037.png" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Day2EEGLAB脚本</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/03/19/思影培训/Day2EEGLAB脚本/" title="Day2EEGLAB脚本"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/037.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-19</div><div class="title">Day2EEGLAB脚本</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%84%91%E7%94%B5eeg"><span class="toc-text"> 1 什么是脑电(EEG)?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text"> 2 数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-eeglab%E5%90%AF%E5%8A%A8"><span class="toc-text"> 0 eeglab启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E5%8C%96"><span class="toc-text"> 1 数据格式转化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%9A%E9%81%93%E5%AE%9A%E4%BD%8D"><span class="toc-text"> 2 通道定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8E%BB%E9%99%A4%E6%97%A0%E7%94%A8%E7%94%B5%E6%9E%81%E9%80%89"><span class="toc-text"> 3 去除无用电极（选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%BB%A4%E6%B3%A2"><span class="toc-text"> 4 滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%99%8D%E9%87%87%E6%A0%B7"><span class="toc-text"> 5 降采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%86%E6%AE%B5"><span class="toc-text"> 6 分段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%8E%BB%E9%99%A4%E5%9D%8F%E7%94%B5%E6%9E%81%E6%9B%BF%E6%8D%A2%E5%9D%8F%E5%AF%BC%E5%8E%BB%E9%99%A4%E5%9D%8F%E6%AE%B5"><span class="toc-text"> 7 去除坏电极，替换坏导，去除坏段，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-ica"><span class="toc-text"> 8 ICA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E5%89%94%E9%99%A4%E7%9C%BC%E5%8A%A8"><span class="toc-text"> 9 剔除眼动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#91-%E7%BB%8F%E5%85%B8%E6%88%90%E5%88%86-%E7%9C%A8%E7%9C%BC"><span class="toc-text"> 9.1 经典成分-眨眼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#92-%E7%BB%8F%E5%85%B8%E6%88%90%E5%88%86-%E7%9C%BC%E6%BC%82"><span class="toc-text"> 9.2 经典成分-眼漂</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#93-%E7%BB%8F%E5%85%B8%E6%88%90%E5%88%86%E5%A4%B4%E5%8A%A8"><span class="toc-text"> 9.3 经典成分：头动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#94-%E5%85%B6%E4%BB%96%E6%88%90%E5%88%86-%E5%B7%A5%E9%A2%91%E5%B9%B2%E6%89%B0"><span class="toc-text"> 9.4 其他成分： 工频干扰</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#95-%E5%85%B6%E4%BB%96%E6%88%90%E5%88%86-%E5%BF%83%E7%94%B5"><span class="toc-text"> 9.5 其他成分 • 心电</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#96-%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE-%E5%9B%BE%E7%89%87"><span class="toc-text"> 9.6 保存数据、图片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%9E%81%E7%AB%AF%E5%80%BC%E5%8E%BB%E4%BC%AA%E8%BF%B9"><span class="toc-text"> 10 极端值去伪迹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E9%87%8D%E5%8F%82%E8%80%83"><span class="toc-text"> 11 重参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E6%89%8B%E5%8A%A8%E6%B5%8F%E8%A7%88%E6%95%B0%E6%8D%AE-%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E8%BF%98%E6%9C%89%E4%BC%AA%E8%BF%B9"><span class="toc-text"> 12 手动浏览数据 查看是否还有伪迹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text"> 补充：</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://gitee.com/bloglk/image/raw/master/image/010.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 刘 可</div><div class="footer_custom_text">Hi, welcome to my <a href="https://1iuke.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">刘 可</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1iuke.github.io/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/">https://1iuke.github.io/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day1EEG%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1iuke.github.io" target="_blank">Mr.Liu</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/EEGLAB/">EEGLAB</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/bloglk/image/raw/master/image/035.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/21/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day4%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5/"><img class="prev-cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/024.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Day4功能连接</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/19/%E6%80%9D%E5%BD%B1%E5%9F%B9%E8%AE%AD/Day2EEGLAB%E8%84%9A%E6%9C%AC/"><img class="next-cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/019.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Day2EEGLAB脚本</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/03/19/思影培训/Day2EEGLAB脚本/" title="Day2EEGLAB脚本"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/019.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-19</div><div class="title">Day2EEGLAB脚本</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%84%91%E7%94%B5eeg"><span class="toc-text">1 什么是脑电(EEG)?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">2 数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#eeglab%E5%90%AF%E5%8A%A8"><span class="toc-text">0 eeglab启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E5%8C%96"><span class="toc-text">1 数据格式转化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E9%81%93%E5%AE%9A%E4%BD%8D"><span class="toc-text">2 通道定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E6%97%A0%E7%94%A8%E7%94%B5%E6%9E%81%E9%80%89"><span class="toc-text">3 去除无用电极（选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2"><span class="toc-text">4 滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%8D%E9%87%87%E6%A0%B7"><span class="toc-text">5 降采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%AE%B5"><span class="toc-text">6 分段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E5%9D%8F%E7%94%B5%E6%9E%81%E6%9B%BF%E6%8D%A2%E5%9D%8F%E5%AF%BC%E5%8E%BB%E9%99%A4%E5%9D%8F%E6%AE%B5"><span class="toc-text">7 去除坏电极，替换坏导，去除坏段，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ica"><span class="toc-text">8 ICA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%94%E9%99%A4%E7%9C%BC%E5%8A%A8"><span class="toc-text">9 剔除眼动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%88%90%E5%88%86-%E7%9C%A8%E7%9C%BC"><span class="toc-text">9.1 经典成分-眨眼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%88%90%E5%88%86-%E7%9C%BC%E6%BC%82"><span class="toc-text">9.2 经典成分-眼漂</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%88%90%E5%88%86%E5%A4%B4%E5%8A%A8"><span class="toc-text">9.3 经典成分：头动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%88%90%E5%88%86-%E5%B7%A5%E9%A2%91%E5%B9%B2%E6%89%B0"><span class="toc-text">9.4 其他成分： 工频干扰</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%88%90%E5%88%86-%E5%BF%83%E7%94%B5"><span class="toc-text">9.5 其他成分 • 心电</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE%E5%9B%BE%E7%89%87"><span class="toc-text">9.6 保存数据、图片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E7%AB%AF%E5%80%BC%E5%8E%BB%E4%BC%AA%E8%BF%B9"><span class="toc-text">10 极端值去伪迹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%8F%82%E8%80%83"><span class="toc-text">11 重参考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%B5%8F%E8%A7%88%E6%95%B0%E6%8D%AE-%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E8%BF%98%E6%9C%89%E4%BC%AA%E8%BF%B9"><span class="toc-text">12 手动浏览数据 查看是否还有伪迹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text">补充：</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://gitee.com/bloglk/image/raw/master/image/035.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 刘 可</div><div class="footer_custom_text">Hi, welcome to my <a href="https://1iuke.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
