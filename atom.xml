@@ -6,7 +6,7 @@
   <link href="https://1iuke.github.io/atom.xml" rel="self"/>
   
   <link href="https://1iuke.github.io/"/>
-  <updated>2021-05-18T07:12:30.612Z</updated>
+  <updated>2021-06-07T02:51:20.907Z</updated>
   <id>https://1iuke.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用典型相关分析检测fMRI中的神经活动</title>
+    <link href="https://1iuke.github.io/2021/06/07/Paper/%E4%BD%BF%E7%94%A8%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%A3%80%E6%B5%8BfMRI%E4%B8%AD%E7%9A%84%E7%A5%9E%E7%BB%8F%E6%B4%BB%E5%8A%A8/"/>
+    <id>https://1iuke.github.io/2021/06/07/Paper/%E4%BD%BF%E7%94%A8%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%A3%80%E6%B5%8BfMRI%E4%B8%AD%E7%9A%84%E7%A5%9E%E7%BB%8F%E6%B4%BB%E5%8A%A8/</id>
+    <published>2021-06-07T02:38:34.000Z</published>
+    <updated>2021-06-07T02:51:20.907Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2><p>介绍了一种在功能磁共振成像 (fMRI) 数据中检测神经活动的新方法。它基于典型相关分析 (CCA)，是 fMRI 中广泛使用的单变量相关分析的多变量扩展。</p><p>为了检测活动的同质区域，该方法结合了血液动力学响应的子空间建模和空间关系的使用。当使用 t 检验、F 检验和普通相关分析等单变量方法时，fMR 图像中无疑存在的空间相关性被完全忽略。由于这个原因，此类方法对噪声非常敏感，导致难以检测激活和错误激活的重要贡献。</p><p>此外，所提出的 CCA 方法还可以检测激活的大脑区域，不仅基于<strong>相关系数</strong>的阈值化，而且还基于生理参数，例如<strong>时间形状</strong>和血液动力学响应的<strong>延迟</strong>。</p><h2 id="研究目标">1. 研究目标</h2><h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2><ol type="1"><li><p>fMRI根据不同区域血氧浓度不同</p></li><li><p>t-test检测确定，已知信号，高斯白噪声效果最好。实际上信号是未知的，也不是高斯分布的白噪声</p></li></ol><h2 id="研究方法">3. 研究方法</h2><ol type="1"><li><p>CCA计算最相关的系数</p></li><li><p>相似度计算<span class="math inline">\(angle \ \ \alpha=arccos \ r^Tr_0/(||r||_2||r_0||_2)\)</span></p><p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210607104904569.png"></p></li><li><p>时间延迟</p><p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210607104930215.png"></p></li></ol><h2 id="结果">4. 结果</h2><p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210607105019293.png"></p><p>用三种不同的方法分析了三个图像切片。从顶部开始：t 检验、F 检验和本工作中底行描述的 CCA 方法。</p><p>图例表示 t-、F- 和相关值的颜色映射。与 t 和 F 检验相比，CCA 方法检测没有明显虚假激活的同质活动区域。</p><p>特别是最左侧的切片，其中 CCA 方法清楚地检测到两个不同的活动区域。</p><h2 id="讨论">5. 讨论</h2><h2 id="笔记">6. 笔记</h2><h2 id="参考文献">参考文献</h2>]]></content>
+    
+    
+    <summary type="html">Detection of Neural Activity in Functional MRI Using Canonical Correlation Analysis</summary>
+    
+    
+    
+    <category term="论文" scheme="https://1iuke.github.io/categories/%E8%AE%BA%E6%96%87/"/>
+    
+    
+    <category term="CCA" scheme="https://1iuke.github.io/tags/CCA/"/>
+    
+  </entry>
   
   <entry>
     <title>人机交互中c-VEP脑机接口迁移学习的综合研究</title>
@@ -156,28 +177,6 @@
     
     
     <category term="BCI" scheme="https://1iuke.github.io/tags/BCI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用典范相关分析检测功能性MRI中的神经活动</title>
-    <link href="https://1iuke.github.io/2021/04/23/Paper/%E4%BD%BF%E7%94%A8%E5%85%B8%E8%8C%83%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E6%80%A7MRI%E4%B8%AD%E7%9A%84%E7%A5%9E%E7%BB%8F%E6%B4%BB%E5%8A%A8/"/>
-    <id>https://1iuke.github.io/2021/04/23/Paper/%E4%BD%BF%E7%94%A8%E5%85%B8%E8%8C%83%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E6%80%A7MRI%E4%B8%AD%E7%9A%84%E7%A5%9E%E7%BB%8F%E6%B4%BB%E5%8A%A8/</id>
-    <published>2021-04-23T02:02:45.000Z</published>
-    <updated>2021-05-13T01:58:41.684Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2><h2 id="研究目标">1. 研究目标</h2><h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2><h2 id="研究方法">3. 研究方法</h2><h2 id="结果">4. 结果</h2><h2 id="讨论">5. 讨论</h2><h2 id="笔记">6. 笔记</h2><h2 id="参考文献">参考文献</h2>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    <category term="论文" scheme="https://1iuke.github.io/categories/%E8%AE%BA%E6%96%87/"/>
-    
     
   </entry>
   
