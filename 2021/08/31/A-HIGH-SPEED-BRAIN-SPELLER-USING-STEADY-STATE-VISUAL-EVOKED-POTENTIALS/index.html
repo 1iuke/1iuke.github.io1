@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基于SSVEP的高速脑机接口拼写器 | Mr.Liu</title><meta name="keywords" content="SSVEP,JFPM,extend-CCA"><meta name="author" content="刘 可"><meta name="copyright" content="刘 可"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="A HIGH-SPEED BRAIN SPELLER USING STEADY-STATE VISUAL EVOKED POTENTIALS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于SSVEP的高速脑机接口拼写器">
+<meta property="og:url" content="https://1iuke.github.io/2021/08/31/A-HIGH-SPEED-BRAIN-SPELLER-USING-STEADY-STATE-VISUAL-EVOKED-POTENTIALS/index.html">
+<meta property="og:site_name" content="Mr.Liu">
+<meta property="og:description" content="A HIGH-SPEED BRAIN SPELLER USING STEADY-STATE VISUAL EVOKED POTENTIALS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/bloglk/image/raw/master/image/027.jpg">
+<meta property="article:published_time" content="2021-08-31T15:06:37.000Z">
+<meta property="article:modified_time" content="2021-08-31T15:15:56.898Z">
+<meta property="article:author" content="刘 可">
+<meta property="article:tag" content="SSVEP">
+<meta property="article:tag" content="JFPM">
+<meta property="article:tag" content="extend-CCA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/bloglk/image/raw/master/image/027.jpg"><link rel="shortcut icon" href="https://gitee.com/bloglk/image/raw/master/image/avatar.gif"><link rel="canonical" href="https://1iuke.github.io/2021/08/31/A-HIGH-SPEED-BRAIN-SPELLER-USING-STEADY-STATE-VISUAL-EVOKED-POTENTIALS/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="googlef811cf3092b9435a.html"/><meta name="baidu-site-verification" content="aaf92e4e610457deeceb4dbda4f59545"/><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0ac6151ecf5087238476b9c52c29f00e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 刘 可","link":"链接: ","source":"来源: Mr.Liu","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-31 23:15:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><link rel="stylesheet" href="/self/Kimbiedark.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Mr.Liu" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/avatar.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fa-commenting-o"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/bloglk/image/raw/master/image/027.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Mr.Liu</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard"><i class="fa-fw fa-commenting-o"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于SSVEP的高速脑机接口拼写器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-31T15:06:37.000Z" title="发表于 2021-08-31 23:06:37">2021-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-08-31T15:15:56.898Z" title="更新于 2021-08-31 23:15:56">2021-08-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87/">论文</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">439</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基于SSVEP的高速脑机接口拼写器"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="总结">0. 总结</h2>
+<h2 id="研究目标">1. 研究目标</h2>
+<p>本研究旨在探讨基于ssvep的BCI的通信速度限制</p>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<p>基于SSVE的BCI性能取决于：</p>
+<ul>
+<li>刺激呈现
+<ul>
+<li>屏幕刷新率限制
+<ul>
+<li>通过在刺激周期中以可变帧数近似频率，可以产生一个灵活频率的视觉闪烁</li>
+</ul></li>
+</ul></li>
+<li>多目标编码</li>
+<li>目标识别</li>
+</ul>
+<h2 id="研究方法">3. 研究方法</h2>
+<h3 id="贡献">贡献</h3>
+<p>(1)一种频率和相位近似方法，用于绘制视觉闪烁，使用常规的监视器刷新率</p>
+<p>(2)使用混合频率和相位编码方案的32目标拼写器设计;</p>
+<p>(3)使用CCA与来自单个SSVEP训练数据的参考信号进行目标识别。</p>
+<h2 id="信号特征分析">信号特征分析</h2>
+<p>幅度</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231334826.png"></p>
+<p>相位</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231340874.png"></p>
+<p>相位差</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231350534.png"></p>
+<p>响应延迟</p>
+<p>通过测量相位作为刺激频率的函数来估计曲线的斜率</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231357740.png"></p>
+<h2 id="目标识别算法">目标识别算法</h2>
+<h3 id="cca">1 CCA</h3>
+<h3 id="cca-with-ssvep-training-data">2 CCA with SSVEP training data</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231404966.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231413710.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231420894.png"></p>
+<p>比较五种方法的性能</p>
+<ol type="1">
+<li>标准CCA</li>
+<li>测试集与训练参考的相关</li>
+<li>测试集与正余弦参考的相关</li>
+<li>训练参考与正余弦参考的相关</li>
+<li>集成方法，结合1.2.3.4</li>
+</ol>
+<h2 id="实验">实验</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231428818.png"></p>
+<p>刺激：8到15间隔1Hz,相位90 180 270 360</p>
+<p>latency 取120ms</p>
+<p>谐波数N = 3</p>
+<p>为避免过拟合，选取枕区8个电极</p>
+<p>使用Oz电极的信号进行相位检测</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231436733.png"></p>
+<p>M: 目标数</p>
+<p>P: 准确率</p>
+<p>T: 选择时间（注视时间加转移时间）</p>
+<h2 id="结果">4. 结果</h2>
+<h2 id="幅度相位潜伏期">幅度，相位，潜伏期</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231454674.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231502944.png"></p>
+<p>所有的频率相位模型曲线拟合为线性，说明潜伏期是一致的，平均在140ms</p>
+<h2 id="离线分析">离线分析</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231509912.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231518329.png"></p>
+<p>平均ITR 166.91±18.50 bits/min</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210831231527894.png"></p>
+<p>增加训练数据的trial的影响</p>
+<h2 id="讨论">5. 讨论</h2>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">刘 可</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1iuke.github.io/2021/08/31/A-HIGH-SPEED-BRAIN-SPELLER-USING-STEADY-STATE-VISUAL-EVOKED-POTENTIALS/">https://1iuke.github.io/2021/08/31/A-HIGH-SPEED-BRAIN-SPELLER-USING-STEADY-STATE-VISUAL-EVOKED-POTENTIALS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1iuke.github.io" target="_blank">Mr.Liu</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/SSVEP/">SSVEP</a><a class="post-meta__tags" href="/tags/JFPM/">JFPM</a><a class="post-meta__tags" href="/tags/extend-CCA/">extend-CCA</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/bloglk/image/raw/master/image/027.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/08/31/%E9%AB%98%E9%A2%91%E5%88%BA%E6%BF%80SSVEP/"><img class="next-cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/029.jpg" onerror="onerror=null;src='https://gitee.com/bloglk/image/raw/master/image/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">高频刺激SSVEP</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/08/28/Paper/SSVEP/使用非侵入性脑机接口进行高速拼写/" title="使用非侵入性脑机接口进行高速拼写"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/031.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-28</div><div class="title">使用非侵入性脑机接口进行高速拼写</div></div></a></div><div><a href="/2021/08/21/Paper/SSVEP/IISMC/" title="IISMC"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/016.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-21</div><div class="title">IISMC</div></div></a></div><div><a href="/2021/08/26/Paper/SSVEP/FBCCA/" title="Filter bank canonical correlation analysis for implementing a high-speed SSVEP-based brain–computer interface"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/029.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-26</div><div class="title">Filter bank canonical correlation analysis for implementing a high-speed SSVEP-based brain–computer interface</div></div></a></div><div><a href="/2021/04/22/Paper/SSVEP/基于CCA的SSVEP的在线多通道脑机接口/" title="An online multi-channel SSVEP-based brain–computer interface using a canonical correlation analysis method"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/023.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-22</div><div class="title">An online multi-channel SSVEP-based brain–computer interface using a canonical correlation analysis method</div></div></a></div><div><a href="/2021/04/08/Paper/SSVEP/训练还是不训练？研究综述/" title="To train or not to train? A survey on training of feature extraction methods for SSVEP-based BCIs"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/015.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-08</div><div class="title">To train or not to train? A survey on training of feature extraction methods for SSVEP-based BCIs</div></div></a></div><div><a href="/2021/08/31/高频刺激SSVEP/" title="高频刺激SSVEP"><img class="cover" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/029.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-31</div><div class="title">高频刺激SSVEP</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Gitalk</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">0. 总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%9B%AE%E6%A0%87"><span class="toc-text">1. 研究目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF%E5%8F%8A%E9%97%AE%E9%A2%98%E9%99%88%E8%BF%B0"><span class="toc-text">2. 研究背景及问题陈述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95"><span class="toc-text">3. 研究方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A1%E7%8C%AE"><span class="toc-text">贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90"><span class="toc-text">信号特征分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB%E7%AE%97%E6%B3%95"><span class="toc-text">目标识别算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cca"><span class="toc-text">1 CCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cca-with-ssvep-training-data"><span class="toc-text">2 CCA with SSVEP training data</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-text">实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C"><span class="toc-text">4. 结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%85%E5%BA%A6%E7%9B%B8%E4%BD%8D%E6%BD%9C%E4%BC%8F%E6%9C%9F"><span class="toc-text">幅度，相位，潜伏期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E7%BA%BF%E5%88%86%E6%9E%90"><span class="toc-text">离线分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A8%E8%AE%BA"><span class="toc-text">5. 讨论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0"><span class="toc-text">6. 笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://gitee.com/bloglk/image/raw/master/image/027.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 刘 可</div><div class="footer_custom_text">Hi, welcome to my <a href="https://1iuke.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'vSfujIpDJKrOca7sGb77ez1y-gzGzoHsz',
+      appKey: 'hUDhnXVije6ovDERpjufGzhX',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '5da5e921d00d1718f27c',
+      clientSecret: 'b329b24239d9a62af13002241e771e8493e2c497',
+      repo: '1iuke.github.io',
+      owner: '1iuke',
+      admin: ['1iuke'],
+      id: 'ed643d32a8b65e7fdde98290cb45de17',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Valine' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
