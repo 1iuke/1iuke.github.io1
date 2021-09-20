@@ -2737,78 +2737,6 @@ p(w|D) = \frac{p(D|w)p(w)}{p(D)}
       </categories>
   </entry>
   <entry>
-    <title>使用非侵入性脑机接口进行高速拼写</title>
-    <url>/2021/08/28/Paper/SSVEP/%E4%BD%BF%E7%94%A8%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%9B%E8%A1%8C%E9%AB%98%E9%80%9F%E6%8B%BC%E5%86%99/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
-<p>本研究基于单次稳态视觉诱发电位对频率和相位的极高精度编码，提出了一种新的频率相位联合<span class="math inline">\((JFPM)\)</span>调制方法和特定于用户的解码算法，实现了脑电的同步调制解调。获得了高达每分钟60个字符(∼，12个单词)的拼写速度。</p>
-<p>目标字符可以通过基于单次SSVEP和单个SSVEP模板之间的相关性的解码算法来确定</p>
-<h2 id="研究目标">1. 研究目标</h2>
-<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
-<p>通信速度慢仍然是BCI拼写器实际应用的主要障碍</p>
-<p>这项研究假设单次试验SSVEP的视觉潜伏期在试验期间非常稳定。然而，由于自发脑电活动的干扰，对于持续时间如此短(即0.5s)的单次SSVEP，其视觉潜伏期很难测量</p>
-<h2 id="研究方法">3. 研究方法</h2>
-<h3 id="系统模型">1 系统模型</h3>
-<p>40个目标，频率[8:0.2:15.8] 相位间隔0.35<span class="math inline">\(\pi\)</span></p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828084646577.png"></p>
-<p>响应滞后刺激 <span class="math inline">\(\tau\)</span> = 140ms</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828084808150.png"></p>
-<h4 id="刺激信号与诱发的ssvep">2 刺激信号与诱发的SSVEP</h4>
-<p>采样正弦刺激方法在产生SSVEP调频和调相刺激信号时的鲁棒性,SSVEP在不同的频率上表现出几乎恒定的潜伏期，这与先前的研究是一致的。因此，可以使用同步解调方法来实现SSVEP的检测</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828090148033.png"></p>
-<h4 id="ssvep的基波分量和谐波分量">3 SSVEP的基波分量和谐波分量</h4>
-<p>采用滤波器组分析方法，从基波和谐波SSVEP分量中提取频率和相位信息</p>
-<p>A 13.8频谱 C SNR</p>
-<p>B D 刺激频率与响应频率的比</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828090254120.png"></p>
-<h4 id="jfpm">4 JFPM</h4>
-<p>12.4Hz与相邻频率 响应与刺激信号的 相关性比较</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828093151146.png"></p>
-<h4 id="相位间隔和刺激持续时间的优化">5 相位间隔和刺激持续时间的优化</h4>
-<p>刺激时间0.5s 相位0.35</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828093412244.png"></p>
-<h4 id="在线拼写性能">6 在线拼写性能</h4>
-<p>0.5s刺激，0.5s注视转移</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828093553939.png"></p>
-<h2 id="结果">4. 结果</h2>
-<p>据报道，基于眼动的拼写器的打字速度通常在每分钟5到10个单词之间。本研究开发的脑机接口拼写器的拼写速度达到每分钟60cpm(即∼每分钟12个单词)。因此，本研究表明，脑-机接口的通信速度可以与眼动跟踪系统相媲美，为视线跟踪提供了另一种方式。</p>
-<h2 id="讨论">5. 讨论</h2>
-<ol type="1">
-<li>每秒1个字符的拼写速度似乎接近人类凝视控制的速度极限。0.5s的试验间隔包括视觉潜伏期(∼140ms)、在线计算时间(∼80ms)和凝视转换所需的时间</li>
-<li>提高分类性能，可缩短刺激时间
-<ol type="1">
-<li>个体优化</li>
-<li>增加子带数</li>
-<li>增加训练数据</li>
-<li>减少视觉潜伏期变化</li>
-</ol></li>
-<li>编解码改进
-<ol type="1">
-<li>使用不固定的频率和相位间隔</li>
-</ol></li>
-<li>证明SSVEP的视觉潜伏期是稳定的，为将同步调制解调技术从电信引入BCI提供了神经生理学基础。</li>
-<li>为了减少脑力负荷，可以通过
-<ol type="1">
-<li>增加刺激持续时间和凝视转换时间来调整拼写频率。</li>
-<li>使用更舒适的刺激参数[例如，40 Hz以上的<strong>高频刺激</strong>]来减少视觉疲劳。</li>
-<li>使用迁移学习，减少训练数据校准时间</li>
-</ol></li>
-</ol>
-<h2 id="笔记">6. 笔记</h2>
-<h2 id="参考文献">参考文献</h2>
-<ol type="1">
-<li>Sakurada T, Kawase T, Komatsu T, Kansaku K (2015) Use of high-frequency visual stimuli above the critical flicker frequency in a SSVEP-based BMI.Clin Neurophysiol126(10): 1972–1978.</li>
-</ol>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>SSVEP</tag>
-        <tag>滤波器组</tag>
-        <tag>JFPM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>An online multi-channel SSVEP-based brain–computer interface using a canonical correlation analysis method</title>
     <url>/2021/04/22/Paper/SSVEP/%E5%9F%BA%E4%BA%8ECCA%E7%9A%84SSVEP%E7%9A%84%E5%9C%A8%E7%BA%BF%E5%A4%9A%E9%80%9A%E9%81%93%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
@@ -8058,8 +7986,48 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
       </tags>
   </entry>
   <entry>
+    <title>算法总结</title>
+    <url>/2021/09/01/BCI/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><p>无训练</p>
+<ul>
+<li>MEC</li>
+<li>CCA</li>
+<li>MSI</li>
+<li>FBCCA</li>
+<li>CVARS</li>
+</ul></li>
+<li><p>有训练</p>
+<ul>
+<li><p>TRCA (Nakanishi et al., 2018)</p></li>
+<li><p>ms-eTRCA (Wong et al., 2020a)</p></li>
+<li><p>extended-CCA</p></li>
+<li><p>m-Extended CCA</p></li>
+<li><p>L1MCCA</p></li>
+<li><p>ITCCA</p></li>
+<li><p>TDCA</p></li>
+<li><p>TSTRCA</p></li>
+</ul></li>
+</ul>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/202109202208987.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/202109202209325.png"></p>
+]]></content>
+      <categories>
+        <category>脑机接口</category>
+      </categories>
+      <tags>
+        <tag>CCA</tag>
+        <tag>TRCA</tag>
+        <tag>SSVEP</tag>
+        <tag>滤波器组</tag>
+        <tag>JFPM</tag>
+        <tag>TDCA</tag>
+        <tag>extended-CCA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于SSVEP的高速脑机接口拼写器</title>
-    <url>/2021/08/31/A-HIGH-SPEED-BRAIN-SPELLER-USING-STEADY-STATE-VISUAL-EVOKED-POTENTIALS/</url>
+    <url>/2021/08/31/Paper/SSVEP/A-HIGH-SPEED-BRAIN-SPELLER-USING-STEADY-STATE-VISUAL-EVOKED-POTENTIALS/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
 <h2 id="研究目标">1. 研究目标</h2>
 <p>本研究旨在探讨基于ssvep的BCI的通信速度限制</p>
@@ -8137,12 +8105,12 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
       <tags>
         <tag>SSVEP</tag>
         <tag>JFPM</tag>
-        <tag>extend-CCA</tag>
+        <tag>extended-CCA</tag>
       </tags>
   </entry>
   <entry>
     <title>高频刺激SSVEP</title>
-    <url>/2021/08/31/%E9%AB%98%E9%A2%91%E5%88%BA%E6%BF%80SSVEP/</url>
+    <url>/2021/08/31/Paper/SSVEP/%E9%AB%98%E9%A2%91%E5%88%BA%E6%BF%80SSVEP/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
 <h2 id="研究目标">1. 研究目标</h2>
 <p>验证高频SSVEP系统可以实现与低频系统一样高的BCI精度，同时减少视觉不适</p>
@@ -8178,6 +8146,153 @@ y_n(t)=\sum_{h=1}^{H}a_{n,h}sin(2\pi hft +b_{n,h})+e_n(t)
         <tag>SSVEP</tag>
         <tag>高频</tag>
         <tag>LED</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用非侵入性脑机接口进行高速拼写</title>
+    <url>/2021/08/28/Paper/SSVEP/%E4%BD%BF%E7%94%A8%E9%9D%9E%E4%BE%B5%E5%85%A5%E6%80%A7%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E8%BF%9B%E8%A1%8C%E9%AB%98%E9%80%9F%E6%8B%BC%E5%86%99/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<p>本研究基于单次稳态视觉诱发电位对频率和相位的极高精度编码，提出了一种新的频率相位联合<span class="math inline">\((JFPM)\)</span>调制方法和特定于用户的解码算法，实现了脑电的同步调制解调。获得了高达每分钟60个字符(∼，12个单词)的拼写速度。</p>
+<p>目标字符可以通过基于单次SSVEP和单个SSVEP模板之间的相关性的解码算法来确定</p>
+<h2 id="研究目标">1. 研究目标</h2>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<p>通信速度慢仍然是BCI拼写器实际应用的主要障碍</p>
+<p>这项研究假设单次试验SSVEP的视觉潜伏期在试验期间非常稳定。然而，由于自发脑电活动的干扰，对于持续时间如此短(即0.5s)的单次SSVEP，其视觉潜伏期很难测量</p>
+<h2 id="研究方法">3. 研究方法</h2>
+<h3 id="系统模型">1 系统模型</h3>
+<p>40个目标，频率[8:0.2:15.8] 相位间隔0.35<span class="math inline">\(\pi\)</span></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828084646577.png"></p>
+<p>响应滞后刺激 <span class="math inline">\(\tau\)</span> = 140ms</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828084808150.png"></p>
+<h4 id="刺激信号与诱发的ssvep">2 刺激信号与诱发的SSVEP</h4>
+<p>采样正弦刺激方法在产生SSVEP调频和调相刺激信号时的鲁棒性,SSVEP在不同的频率上表现出几乎恒定的潜伏期，这与先前的研究是一致的。因此，可以使用同步解调方法来实现SSVEP的检测</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828090148033.png"></p>
+<h4 id="ssvep的基波分量和谐波分量">3 SSVEP的基波分量和谐波分量</h4>
+<p>采用滤波器组分析方法，从基波和谐波SSVEP分量中提取频率和相位信息</p>
+<p>A 13.8频谱 C SNR</p>
+<p>B D 刺激频率与响应频率的比</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828090254120.png"></p>
+<h4 id="jfpm">4 JFPM</h4>
+<p>12.4Hz与相邻频率 响应与刺激信号的 相关性比较</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828093151146.png"></p>
+<h4 id="相位间隔和刺激持续时间的优化">5 相位间隔和刺激持续时间的优化</h4>
+<p>刺激时间0.5s 相位0.35</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828093412244.png"></p>
+<h4 id="在线拼写性能">6 在线拼写性能</h4>
+<p>0.5s刺激，0.5s注视转移</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210828093553939.png"></p>
+<h2 id="结果">4. 结果</h2>
+<p>据报道，基于眼动的拼写器的打字速度通常在每分钟5到10个单词之间。本研究开发的脑机接口拼写器的拼写速度达到每分钟60cpm(即∼每分钟12个单词)。因此，本研究表明，脑-机接口的通信速度可以与眼动跟踪系统相媲美，为视线跟踪提供了另一种方式。</p>
+<h2 id="讨论">5. 讨论</h2>
+<ol type="1">
+<li>每秒1个字符的拼写速度似乎接近人类凝视控制的速度极限。0.5s的试验间隔包括视觉潜伏期(∼140ms)、在线计算时间(∼80ms)和凝视转换所需的时间</li>
+<li>提高分类性能，可缩短刺激时间
+<ol type="1">
+<li>个体优化</li>
+<li>增加子带数</li>
+<li>增加训练数据</li>
+<li>减少视觉潜伏期变化</li>
+</ol></li>
+<li>编解码改进
+<ol type="1">
+<li>使用不固定的频率和相位间隔</li>
+</ol></li>
+<li>证明SSVEP的视觉潜伏期是稳定的，为将同步调制解调技术从电信引入BCI提供了神经生理学基础。</li>
+<li>为了减少脑力负荷，可以通过
+<ol type="1">
+<li>增加刺激持续时间和凝视转换时间来调整拼写频率。</li>
+<li>使用更舒适的刺激参数[例如，40 Hz以上的<strong>高频刺激</strong>]来减少视觉疲劳。</li>
+<li>使用迁移学习，减少训练数据校准时间</li>
+</ol></li>
+</ol>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+<ol type="1">
+<li>Sakurada T, Kawase T, Komatsu T, Kansaku K (2015) Use of high-frequency visual stimuli above the critical flicker frequency in a SSVEP-based BMI.Clin Neurophysiol126(10): 1972–1978.</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>SSVEP</tag>
+        <tag>滤波器组</tag>
+        <tag>JFPM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用任务相关成分分析增强对高速脑拼写器的 SSVEP 检测</title>
+    <url>/2021/09/01/Paper/SSVEP/TRCA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="总结">0. 总结</h2>
+<p>CovMax的计算要用到已有的trial数据，表明了TRCA需要受试者训练数据。我们利用受试者某一刺激n的训练数据，通过TRCA得到对应的空间滤波器<span class="math inline">\(W_n\)</span>；利用分<span class="math inline">\(W_n\)</span>别对test trial X和训练集平均信号<span class="math inline">\(\bar X\)</span>进行空间滤波；然后计算两者的皮尔逊相关系数；最后找到最大相关系数对应的刺激频率即可。多说一句，目前类别数较多时，SSVEP的识别主要是根据相关系数来的，各方法的改进之处在于如何找到一个更好的空间滤波器<span class="math inline">\(W_n\)</span>。</p>
+<h2 id="研究目标">1. 研究目标</h2>
+<p>提高SSVEP的检测性能</p>
+<ul>
+<li>提高刺激数 (120目标cVEP) （JFPM）</li>
+<li>改进算法性能
+<ul>
+<li>PSDA 单通道</li>
+<li>CCA 提高SNR</li>
+<li>CCA-based 使用个体校正数据减少自发背景脑电的影响
+<ul>
+<li>MwayCCA</li>
+<li>L1-MCCA</li>
+<li>MsetCCA</li>
+<li>extended-CCA</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="研究背景及问题陈述">2. 研究背景及问题陈述</h2>
+<p>皮层脑电是多个电极的头皮 EEG 信号的加权线性总和</p>
+<p>通过最大化跨试验的时间锁定活动的可重复性，TRCA 方法在提取任务相关组件方面表现出良好的性能。</p>
+<h2 id="研究方法">3. 研究方法</h2>
+<h3 id="extended-cca">1 extended-CCA</h3>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901102237074.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901102311025.png"></p>
+<h3 id="trca">2 TRCA</h3>
+<p>一个多通道EEG信号的线性生成模型</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901102444745.png"></p>
+<p>其中 <span class="math inline">\(s(t)\)</span> 是任务相关成分，<span class="math inline">\(n(t)\)</span>是任务无关成分，<span class="math inline">\(j\)</span>是通道</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/20200418221837926.png"></p>
+<p>不同trial中，<span class="math inline">\(s(t)\)</span>之间的协方差为正常数，<span class="math inline">\(n(t)\)</span>之间的协方差为0</p>
+<p>问题是从观察信号 <span class="math inline">\(x(t)\)</span>的线性和中恢复与任务相关的组件<span class="math inline">\(s(t)\)</span></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901103118943.png"></p>
+<p>为了使<span class="math inline">\(y(t)=x(t)\)</span>,则 <span class="math display">\[
+\sum_{j=1}^{Nc}w_{j}a_{1,j}=1
+\]</span></p>
+<p><span class="math display">\[
+\sum_{j=1}^{Nc}w_{j}a_{2,j}=0
+\]</span></p>
+<p>试次间协方差</p>
+<p>两个trial</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901103819045.png"></p>
+<p>所有trial</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901103853511.png"></p>
+<p><span class="math inline">\(S\)</span> 表示为</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901103954600.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901103914544.png"></p>
+<p>为了获得有限解，<span class="math inline">\(y(t)\)</span> 的方差被约束为</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901104132650.png"></p>
+<p>约束优化问题可以求解为：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901104214145.png"></p>
+<p>根据Rayleigh–Ritz理论:</p>
+<p>​ 可以通过 <span class="math inline">\(Q^{-1}S\)</span>特征分解得到w</p>
+<p>TRCA 使用最大特征值对应 的特征向量</p>
+<p>Ensemble TRCA 使用所有的特征向量</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901104512647.png"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901101032700.png"></p>
+<h2 id="结果">4. 结果</h2>
+<p><img src= "/img/loading.gif" data-lazy-src="https://gitee.com/bloglk/image/raw/master/image/image-20210901112249147.png"></p>
+<h2 id="讨论">5. 讨论</h2>
+<h2 id="笔记">6. 笔记</h2>
+<h2 id="参考文献">参考文献</h2>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>TRCA</tag>
+        <tag>SSVEP</tag>
       </tags>
   </entry>
 </search>
